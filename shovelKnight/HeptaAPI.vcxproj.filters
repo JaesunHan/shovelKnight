@@ -55,6 +55,39 @@
     <Filter Include="2DGameFramework\action">
       <UniqueIdentifier>{b3e765fe-3f62-4682-9f1a-6ee96401a17c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\titleScene">
+      <UniqueIdentifier>{c70d71a2-5e76-4321-933a-88bd503eb239}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\gamePlayScene">
+      <UniqueIdentifier>{389b6ef0-60b0-4dc7-99ef-e4de7c879f18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\gamePlayScene\player">
+      <UniqueIdentifier>{c90adfc4-c926-44c1-9b07-a625aff6ba1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\gamePlayScene\enemy">
+      <UniqueIdentifier>{4bee8f1d-a5d4-4174-b4bf-38c639da71c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\gamePlayScene\skill">
+      <UniqueIdentifier>{975f0b05-5754-416d-acfc-1a11d206bd8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\gamePlayScene\npc">
+      <UniqueIdentifier>{56dd8e94-02fb-425e-8128-04c76446db9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\gamePlayScene\gameObject">
+      <UniqueIdentifier>{fc873b2c-4004-44a2-b595-1a796971b79b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\gamePlayScene\item">
+      <UniqueIdentifier>{609807eb-42ee-4226-a274-87d6ba362ce1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\gamePlayScene\gameCollision">
+      <UniqueIdentifier>{e7a27bfc-66b1-4e23-8e25-165acd2ec5c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Function">
+      <UniqueIdentifier>{3cf29cad-0ebe-42c6-a470-90f4c1ebe432}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\gamePlayScene\backGround">
+      <UniqueIdentifier>{c076fc54-8fae-4eb3-a84d-ae19174c932d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -69,9 +102,6 @@
     <ClInclude Include="Resource.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="commonMacroFunction.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="singletonBase.h">
       <Filter>2DGameFramework\SingletonBase</Filter>
     </ClInclude>
@@ -83,9 +113,6 @@
     </ClInclude>
     <ClInclude Include="keyManager.h">
       <Filter>2DGameFramework\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="randomFunction.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="utils.h">
       <Filter>2DGameFramework\utils</Filter>
@@ -140,6 +167,84 @@
     </ClInclude>
     <ClInclude Include="keyAniManager.h">
       <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy1.h">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="enemyBase.h">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="enemyManager.h">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="player1.h">
+      <Filter>playGround\gamePlayScene\player</Filter>
+    </ClInclude>
+    <ClInclude Include="playerBase.h">
+      <Filter>playGround\gamePlayScene\player</Filter>
+    </ClInclude>
+    <ClInclude Include="playerManager.h">
+      <Filter>playGround\gamePlayScene\player</Filter>
+    </ClInclude>
+    <ClInclude Include="skill1.h">
+      <Filter>playGround\gamePlayScene\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="skillBase.h">
+      <Filter>playGround\gamePlayScene\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="skillManager.h">
+      <Filter>playGround\gamePlayScene\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="npcManager.h">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+    </ClInclude>
+    <ClInclude Include="npc1.h">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+    </ClInclude>
+    <ClInclude Include="npcBase.h">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+    </ClInclude>
+    <ClInclude Include="gameObject1.h">
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="gameObjectBase.h">
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="gameObjectManager.h">
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="itemManager.h">
+      <Filter>playGround\gamePlayScene\item</Filter>
+    </ClInclude>
+    <ClInclude Include="item1.h">
+      <Filter>playGround\gamePlayScene\item</Filter>
+    </ClInclude>
+    <ClInclude Include="itemBase.h">
+      <Filter>playGround\gamePlayScene\item</Filter>
+    </ClInclude>
+    <ClInclude Include="gamePlayScene.h">
+      <Filter>playGround\gamePlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="gameCollision.h">
+      <Filter>playGround\gamePlayScene\gameCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="randomFunction.h">
+      <Filter>헤더 파일\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="commonMacroFunction.h">
+      <Filter>헤더 파일\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="bgBase.h">
+      <Filter>playGround\gamePlayScene\backGround</Filter>
+    </ClInclude>
+    <ClInclude Include="bg1.h">
+      <Filter>playGround\gamePlayScene\backGround</Filter>
+    </ClInclude>
+    <ClInclude Include="bgManager.h">
+      <Filter>playGround\gamePlayScene\backGround</Filter>
+    </ClInclude>
+    <ClInclude Include="motherAction.h">
+      <Filter>playGround</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +316,78 @@
     </ClCompile>
     <ClCompile Include="keyAniManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy1.cpp">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="enemyBase.cpp">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="enemyManager.cpp">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="player1.cpp">
+      <Filter>playGround\gamePlayScene\player</Filter>
+    </ClCompile>
+    <ClCompile Include="playerBase.cpp">
+      <Filter>playGround\gamePlayScene\player</Filter>
+    </ClCompile>
+    <ClCompile Include="playerManager.cpp">
+      <Filter>playGround\gamePlayScene\player</Filter>
+    </ClCompile>
+    <ClCompile Include="skill1.cpp">
+      <Filter>playGround\gamePlayScene\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="skillBase.cpp">
+      <Filter>playGround\gamePlayScene\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="skillManager.cpp">
+      <Filter>playGround\gamePlayScene\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="npcManager.cpp">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+    </ClCompile>
+    <ClCompile Include="npcBase.cpp">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+    </ClCompile>
+    <ClCompile Include="npc1.cpp">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+    </ClCompile>
+    <ClCompile Include="gameObject1.cpp">
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="gameObjectBase.cpp">
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="gameObjectManager.cpp">
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="itemManager.cpp">
+      <Filter>playGround\gamePlayScene\item</Filter>
+    </ClCompile>
+    <ClCompile Include="itemBase.cpp">
+      <Filter>playGround\gamePlayScene\item</Filter>
+    </ClCompile>
+    <ClCompile Include="item1.cpp">
+      <Filter>playGround\gamePlayScene\item</Filter>
+    </ClCompile>
+    <ClCompile Include="gamePlayScene.cpp">
+      <Filter>playGround\gamePlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="gameCollision.cpp">
+      <Filter>playGround\gamePlayScene\gameCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="bgBase.cpp">
+      <Filter>playGround\gamePlayScene\backGround</Filter>
+    </ClCompile>
+    <ClCompile Include="bg1.cpp">
+      <Filter>playGround\gamePlayScene\backGround</Filter>
+    </ClCompile>
+    <ClCompile Include="bgManager.cpp">
+      <Filter>playGround\gamePlayScene\backGround</Filter>
+    </ClCompile>
+    <ClCompile Include="motherAction.cpp">
+      <Filter>playGround</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
