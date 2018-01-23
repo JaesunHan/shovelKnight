@@ -1,12 +1,21 @@
 #pragma once
 #define GRAVITY	0.9f
 
+//에너미의 상태는 이 부분 맡은 사람이 만들기!
+enum ENEMYSTATUS
+{
+
+};
+
 class enemyBase
 {
 protected:
 	image * _img;			//사용할 이미지
 	animation* _anim;		//사용할 애니메이션
 	string _imgKeyString;	//이미지 매니저에 등록할 이미지 키값
+
+	ENEMYSTATUS _status;	//에너미 상태
+
 	char* _imgFileName;		//이미지 파일 이름(경로 포함)
 	float _x, _y;			//적의 중점좌표
 	float _jumpPower;		//점프 파워
