@@ -219,9 +219,6 @@
     <ClInclude Include="item1.h">
       <Filter>playGround\gamePlayScene\item</Filter>
     </ClInclude>
-    <ClInclude Include="itemBase.h">
-      <Filter>playGround\gamePlayScene\item</Filter>
-    </ClInclude>
     <ClInclude Include="gamePlayScene.h">
       <Filter>playGround\gamePlayScene</Filter>
     </ClInclude>
@@ -245,6 +242,9 @@
     </ClInclude>
     <ClInclude Include="motherAction.h">
       <Filter>playGround</Filter>
+    </ClInclude>
+    <ClInclude Include="itemBase.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -365,9 +365,6 @@
     <ClCompile Include="itemManager.cpp">
       <Filter>playGround\gamePlayScene\item</Filter>
     </ClCompile>
-    <ClCompile Include="itemBase.cpp">
-      <Filter>playGround\gamePlayScene\item</Filter>
-    </ClCompile>
     <ClCompile Include="item1.cpp">
       <Filter>playGround\gamePlayScene\item</Filter>
     </ClCompile>
@@ -388,6 +385,9 @@
     </ClCompile>
     <ClCompile Include="motherAction.cpp">
       <Filter>playGround</Filter>
+    </ClCompile>
+    <ClCompile Include="itemBase.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
