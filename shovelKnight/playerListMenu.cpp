@@ -16,6 +16,8 @@ HRESULT playerListMenu::init()
 {
 	//menuBase::init("playerListMenu", "./image/")
 
+
+
 	return S_OK;
 }
 void playerListMenu::update() 

@@ -16,6 +16,8 @@ public:
 	virtual void render();
 	virtual void draw(HDC hdc);
 
+
+
 	menuBase();
 	~menuBase();
 };

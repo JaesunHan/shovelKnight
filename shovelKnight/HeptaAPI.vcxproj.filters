@@ -55,9 +55,6 @@
     <Filter Include="2DGameFramework\action">
       <UniqueIdentifier>{b3e765fe-3f62-4682-9f1a-6ee96401a17c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\titleScene">
-      <UniqueIdentifier>{c70d71a2-5e76-4321-933a-88bd503eb239}</UniqueIdentifier>
-    </Filter>
     <Filter Include="playGround\gamePlayScene">
       <UniqueIdentifier>{389b6ef0-60b0-4dc7-99ef-e4de7c879f18}</UniqueIdentifier>
     </Filter>
@@ -96,6 +93,12 @@
     </Filter>
     <Filter Include="playGround\gameMenuScene\menu">
       <UniqueIdentifier>{8482c4d0-b8d2-4c08-ad51-8a586374dda4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\gameTitleScene">
+      <UniqueIdentifier>{c70d71a2-5e76-4321-933a-88bd503eb239}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\gameTitleScene\menu">
+      <UniqueIdentifier>{f19e8f84-79db-4d2f-b5fa-140713335105}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -276,6 +279,15 @@
     <ClInclude Include="selectNickNameMenu.h">
       <Filter>playGround\gameMenuScene\menu</Filter>
     </ClInclude>
+    <ClInclude Include="gameTitleScene.h">
+      <Filter>playGround\gameTitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="optionMenu.h">
+      <Filter>playGround\gameTitleScene\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="soundMenu.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -439,6 +451,15 @@
     </ClCompile>
     <ClCompile Include="selectNickNameMenu.cpp">
       <Filter>playGround\gameMenuScene\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="gameTitleScene.cpp">
+      <Filter>playGround\gameTitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="optionMenu.cpp">
+      <Filter>playGround\gameTitleScene\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="soundMenu.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
