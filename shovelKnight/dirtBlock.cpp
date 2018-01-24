@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "gameObject1.h"
+#include "dirtBlock.h"
 
 
 dirtBlock::dirtBlock()

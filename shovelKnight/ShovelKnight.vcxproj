@@ -112,7 +112,7 @@
     <ClInclude Include="motherAction.h" />
     <ClInclude Include="npcBase.h" />
     <ClInclude Include="npcManager.h" />
-    <ClInclude Include="gameObject1.h" />
+    <ClInclude Include="dirtBlock.h" />
     <ClInclude Include="gameObjectBase.h" />
     <ClInclude Include="gameObjectManager.h" />
     <ClInclude Include="optionMenu.h" />
@@ -177,7 +177,7 @@
     <ClCompile Include="motherAction.cpp" />
     <ClCompile Include="npcBase.cpp" />
     <ClCompile Include="npcManager.cpp" />
-    <ClCompile Include="gameObject1.cpp" />
+    <ClCompile Include="dirtBlock.cpp" />
     <ClCompile Include="gameObjectBase.cpp" />
     <ClCompile Include="gameObjectManager.cpp" />
     <ClCompile Include="optionMenu.cpp" />
