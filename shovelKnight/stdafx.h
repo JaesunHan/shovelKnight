@@ -27,6 +27,7 @@
 #include "collision.h"
 #include "txtData.h"
 #include "database.h"
+#include "cameraManager.h"
 
 using namespace std;
 using namespace HEPTA_UTIL;
@@ -36,8 +37,8 @@ using namespace HEPTA_UTIL;
 //=======================================================
 
 #define WINNAME		(LPTSTR)TEXT("SHOVEL KNIGHT")
-#define WINSTARTX	2000	//윈도우 시작좌표 X
-#define WINSTARTY	50		//윈도우 시작좌표 Y
+#define WINSTARTX	0		//윈도우 시작좌표 X
+#define WINSTARTY	100		//윈도우 시작좌표 Y
 #define WINSIZEX	800		//윈도우 가로크기
 #define WINSIZEY	800		//윈도우 세로크기
 #define WINSTYLE	WS_CAPTION | WS_SYSMENU
@@ -53,6 +54,7 @@ using namespace HEPTA_UTIL;
 #define TXTDATA			txtData::getSingleton()
 #define INIDATA			iniDataManager::getSingleton()
 #define DATABASE		database::getSingleton()
+#define CAMERAMANAGER	cameraManager::getSingleton()
 
 //=======================================================
 // ## 매크로 ## 2017.11.15 ##
