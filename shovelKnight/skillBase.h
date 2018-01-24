@@ -1,4 +1,6 @@
 #pragma once
+#include "gameNode.h"
+
 class skillBase
 {
 public:

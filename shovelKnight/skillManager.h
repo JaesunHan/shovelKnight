@@ -1,5 +1,14 @@
 #pragma once
-#include "skill1.h"
+#include "skill_darkKnight_fireBall.h"
+#include "skill_dirtBlockFx.h"
+#include "skill_fireBall.h"
+#include "skill_bubble.h"
+
+enum SKILL
+{
+	SKILL_DARKKNIGHT_FIREBALL,
+
+};
 
 class skillManager
 {
