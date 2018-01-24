@@ -22,10 +22,10 @@ void gameCollision::release()
 
 void gameCollision::update()
 {
-	//RECT temp;
-	//RECT player;
-	//RECT enemy;
-	////플레이어와 적의 충돌
+	RECT temp;
+	RECT player;
+	RECT enemy;
+	//플레이어와 적의 충돌
 	//for (int i = 0; i != enemy.size(); ++i)
 	//{
 	//	for (int j = 0; j != player.size(); ++j)
@@ -35,7 +35,7 @@ void gameCollision::update()
 	//
 	//
 	//
-	//			player[j]->Reaction(DAMAGE_MAX);
+	//			player			[j]->Reaction(DAMAGE_MAX);
 	//			enemy[i]->Reaction(2);
 	//		}
 	//	}

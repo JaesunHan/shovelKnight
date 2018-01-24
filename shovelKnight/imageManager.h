@@ -18,11 +18,11 @@ public:
 	void release(void);
 
 	image* addImage(string strKey, int width, int height);
-	image* addImage(string strKey, const char* fileName, int width, int height, bool trans, COLORREF transColor);
-	image* addImage(string strKey, const char* fileName, float x, float y, int width, int height, bool trans, COLORREF transColor);
+	image* addImage(string strKey, const char* fileName, int width, int height, bool trans, COLORREF transColor, BOOL alphablend = FALSE);
+	image* addImage(string strKey, const char* fileName, float x, float y, int width, int height, bool trans, COLORREF transColor, BOOL alphablend = FALSE);
 
-	image* addFrameImage(string strKey, const char* fileName, float x, float y, int width, int height, int frameX, int frameY, bool trans, COLORREF transColor);
-	image* addFrameImage(string strKey, const char* fileName, int width, int height, int frameX, int frameY, bool trans, COLORREF transColor);
+	image* addFrameImage(string strKey, const char* fileName, float x, float y, int width, int height, int frameX, int frameY, bool trans, COLORREF transColor, BOOL alphablend = FALSE);
+	image* addFrameImage(string strKey, const char* fileName, int width, int height, int frameX, int frameY, bool trans, COLORREF transColor, BOOL alphablend = FALSE);
 
 	image* findImage(string strKey);
 

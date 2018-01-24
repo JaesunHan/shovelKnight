@@ -288,6 +288,9 @@
     <ClInclude Include="soundMenu.h">
       <Filter>playGround\allMenu</Filter>
     </ClInclude>
+    <ClInclude Include="TTUtils.h">
+      <Filter>2DGameFramework\utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -466,6 +469,9 @@
     </ClCompile>
     <ClCompile Include="soundMenu.cpp">
       <Filter>playGround\allMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="TTUtils.cpp">
+      <Filter>2DGameFramework\utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
