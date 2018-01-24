@@ -88,6 +88,9 @@
     <Filter Include="playGround\gamePlayScene\backGround">
       <UniqueIdentifier>{c076fc54-8fae-4eb3-a84d-ae19174c932d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\selectScene">
+      <UniqueIdentifier>{bd8fff6b-bcce-4932-b5a3-459b46b732c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -246,17 +249,11 @@
     <ClInclude Include="movement.h">
       <Filter>playGround\gamePlayScene\player</Filter>
     </ClInclude>
-    <ClInclude Include="selectScene.h">
+    <ClInclude Include="npc1.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="MagicGirl.h">
-      <Filter>playGround\gamePlayScene\npc</Filter>
-    </ClInclude>
-    <ClInclude Include="HealtyGuy.h">
-      <Filter>playGround\gamePlayScene\npc</Filter>
-    </ClInclude>
-    <ClInclude Include="BardKnight.h">
-      <Filter>playGround\gamePlayScene\npc</Filter>
+    <ClInclude Include="selectScene.h">
+      <Filter>playGround\selectScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -401,17 +398,11 @@
     <ClCompile Include="movement.cpp">
       <Filter>playGround\gamePlayScene\player</Filter>
     </ClCompile>
-    <ClCompile Include="selectScene.cpp">
+    <ClCompile Include="npc1.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="MagicGirl.cpp">
-      <Filter>playGround\gamePlayScene\npc</Filter>
-    </ClCompile>
-    <ClCompile Include="HealtyGuy.cpp">
-      <Filter>playGround\gamePlayScene\npc</Filter>
-    </ClCompile>
-    <ClCompile Include="BardKnight.cpp">
-      <Filter>playGround\gamePlayScene\npc</Filter>
+    <ClCompile Include="selectScene.cpp">
+      <Filter>playGround\selectScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
