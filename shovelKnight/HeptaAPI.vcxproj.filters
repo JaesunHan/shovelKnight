@@ -198,9 +198,6 @@
     <ClInclude Include="npcManager.h">
       <Filter>playGround\gamePlayScene\npc</Filter>
     </ClInclude>
-    <ClInclude Include="npc1.h">
-      <Filter>playGround\gamePlayScene\npc</Filter>
-    </ClInclude>
     <ClInclude Include="npcBase.h">
       <Filter>playGround\gamePlayScene\npc</Filter>
     </ClInclude>
@@ -245,6 +242,15 @@
     </ClInclude>
     <ClInclude Include="itemBase.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicGirl.h">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+    </ClInclude>
+    <ClInclude Include="HealtyGuy.h">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+    </ClInclude>
+    <ClInclude Include="BardKnight.h">
+      <Filter>playGround\gamePlayScene\npc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -350,9 +356,6 @@
     <ClCompile Include="npcBase.cpp">
       <Filter>playGround\gamePlayScene\npc</Filter>
     </ClCompile>
-    <ClCompile Include="npc1.cpp">
-      <Filter>playGround\gamePlayScene\npc</Filter>
-    </ClCompile>
     <ClCompile Include="gameObject1.cpp">
       <Filter>playGround\gamePlayScene\gameObject</Filter>
     </ClCompile>
@@ -388,6 +391,15 @@
     </ClCompile>
     <ClCompile Include="itemBase.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicGirl.cpp">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+    </ClCompile>
+    <ClCompile Include="HealtyGuy.cpp">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+    </ClCompile>
+    <ClCompile Include="BardKnight.cpp">
+      <Filter>playGround\gamePlayScene\npc</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
