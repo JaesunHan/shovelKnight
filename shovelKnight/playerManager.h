@@ -3,6 +3,10 @@
 
 class playerManager
 {
+private : 
+	playerBase* _p1;
+
+
 public:
 	playerManager();
 	~playerManager();

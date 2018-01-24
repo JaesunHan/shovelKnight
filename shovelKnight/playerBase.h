@@ -1,15 +1,18 @@
 #pragma once
+#include "gameNode.h"
 #define HIT_BOX_WIDTH 12
 #define HIT_BOX_HEIGHT 25
 #define ATTACK_DAMAGE_BOX_WIDTH 10
 #define ATTACK_DAMAGE_BOX_HEIGHT 6
 #define DOWNATTACK_DAMAGE_BOX_WIDTH 6
 #define	DOWNATTACK_DAMAGE_BOX_HEIGHT 10
+#define SPEED 4.0f
+#define GRAVITY 0.2f
 
 enum PLAYERDIRECTION
 {
-	RIGHT,
-	LEFT
+	RIGHT = 1,
+	LEFT = -1
 };
 
 enum PLAYERSTATE
@@ -40,7 +43,7 @@ enum COLLISION_PLAYER
 
 
 
-class playerBase
+class playerBase : public gameNode
 {
 protected : 
 	image*				_image;					//플레이어 이미지
@@ -62,6 +65,7 @@ protected :
 	float				_x, _y;					//이동좌표	
 	float				_jumpPower;				//점프파워
 	float				_gravity;				//중력값
+	float				_moveSpeed;				//이동속도
 	bool				_rtBlock;				//오른쪽 막힘
 	bool				_ltBlock;				//왼쪽막힘
 	bool				_isDamaged;				//맞았는지
@@ -79,7 +83,7 @@ public:
 
 	void hitReAction(int num);
 	void attack(float fireX, float fireY, bool skillUsed);
-
+	void move();
 
 
 	inline int	getMaxHP() { return _maxHP; }

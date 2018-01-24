@@ -2,11 +2,11 @@
 #include "gameObject1.h"
 
 
-gameObject1::gameObject1()
+dirtBlock::dirtBlock()
 {
 }
 
 
-gameObject1::~gameObject1()
+dirtBlock::~dirtBlock()
 {
 }
