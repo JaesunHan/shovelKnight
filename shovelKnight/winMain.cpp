@@ -11,7 +11,7 @@ HWND		_hWnd;			//핸들
 //포인트 구조체
 POINT _ptMouse;
 
-LPTSTR _lpszClass = TEXT("Hepta Window API");
+LPTSTR _lpszClass = TEXT("SHOVEL KNIGHT");
 
 //정적 바인딩
 playGround _pg;
