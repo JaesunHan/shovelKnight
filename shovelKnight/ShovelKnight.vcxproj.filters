@@ -55,9 +55,6 @@
     <Filter Include="2DGameFramework\action">
       <UniqueIdentifier>{b3e765fe-3f62-4682-9f1a-6ee96401a17c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\titleScene">
-      <UniqueIdentifier>{c70d71a2-5e76-4321-933a-88bd503eb239}</UniqueIdentifier>
-    </Filter>
     <Filter Include="playGround\gamePlayScene">
       <UniqueIdentifier>{389b6ef0-60b0-4dc7-99ef-e4de7c879f18}</UniqueIdentifier>
     </Filter>
@@ -87,6 +84,12 @@
     </Filter>
     <Filter Include="playGround\gamePlayScene\backGround">
       <UniqueIdentifier>{c076fc54-8fae-4eb3-a84d-ae19174c932d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\gameTitleScene">
+      <UniqueIdentifier>{c70d71a2-5e76-4321-933a-88bd503eb239}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\gameTitleScene\menu">
+      <UniqueIdentifier>{8a968a73-1043-45d8-8c89-d98e98f37bc4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -264,6 +267,15 @@
     <ClInclude Include="skill_bubble.h">
       <Filter>playGround\gamePlayScene\skill</Filter>
     </ClInclude>
+    <ClInclude Include="gameTitleScene.h">
+      <Filter>playGround\gameTitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="optionMenu.h">
+      <Filter>playGround\gameTitleScene\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="soundMenu.h">
+      <Filter>playGround\gameTitleScene\menu</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -424,6 +436,15 @@
     </ClCompile>
     <ClCompile Include="skill_bubble.cpp">
       <Filter>playGround\gamePlayScene\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="gameTitleScene.cpp">
+      <Filter>playGround\gameTitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="optionMenu.cpp">
+      <Filter>playGround\gameTitleScene\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="soundMenu.cpp">
+      <Filter>playGround\gameTitleScene\menu</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

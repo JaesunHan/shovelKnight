@@ -17,6 +17,7 @@ HRESULT optionMenu::init()
 {
 	//이미지 초기화 
 	//menuBase::init("optionMenu", "./image/")
+
 	return S_OK;
 }
 void optionMenu::update() 
