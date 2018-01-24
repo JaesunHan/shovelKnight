@@ -91,6 +91,12 @@
     <Filter Include="playGround\selectScene">
       <UniqueIdentifier>{bd8fff6b-bcce-4932-b5a3-459b46b732c1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\gameMenuScene">
+      <UniqueIdentifier>{3181be2c-e868-4e72-9251-66715e3b80ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\gameMenuScene\menu">
+      <UniqueIdentifier>{8482c4d0-b8d2-4c08-ad51-8a586374dda4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -255,6 +261,21 @@
     <ClInclude Include="selectScene.h">
       <Filter>playGround\selectScene</Filter>
     </ClInclude>
+    <ClInclude Include="gameMenuScene.h">
+      <Filter>playGround\gameMenuScene</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterSelectMenu.h">
+      <Filter>playGround\gameMenuScene\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="menuBase.h">
+      <Filter>playGround\gameMenuScene\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="playerListMenu.h">
+      <Filter>playGround\gameMenuScene\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="selectNickNameMenu.h">
+      <Filter>playGround\gameMenuScene\menu</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -403,6 +424,21 @@
     </ClCompile>
     <ClCompile Include="selectScene.cpp">
       <Filter>playGround\selectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="gameMenuScene.cpp">
+      <Filter>playGround\gameMenuScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterSelectMenu.cpp">
+      <Filter>playGround\gameMenuScene\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="menuBase.cpp">
+      <Filter>playGround\gameMenuScene\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="playerListMenu.cpp">
+      <Filter>playGround\gameMenuScene\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="selectNickNameMenu.cpp">
+      <Filter>playGround\gameMenuScene\menu</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
