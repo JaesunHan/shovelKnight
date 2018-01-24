@@ -153,6 +153,7 @@ private:
 
 private:
 	vEnemy _vEnemy;
+
 	RETURN_ENEMY _return;
 
 public:
@@ -212,10 +213,18 @@ HRESULT enemyManager::init()
 
 void enemyManager::release()
 {
+	if(_vMinion.size())
+	{
+		_vMinion[0].release();
+	}
 }
 
 void enemyManager::update()
 {
+	if(_vMinion.size())
+	{
+		_vMinion[0].release();
+	}
 }
 
 void enemyManager::render()

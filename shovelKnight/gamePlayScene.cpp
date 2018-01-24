@@ -71,11 +71,11 @@ void gamePlayScene::update()
 void gamePlayScene::render()
 {
 	_bg->render();
+	_player->render();
 	_enemy->render();
 	_gameObject->render();
 	_item->render();
 	_npc->render();
 	_skill->render();
-	_player->render();
 	_gameCollision->render();
 }
