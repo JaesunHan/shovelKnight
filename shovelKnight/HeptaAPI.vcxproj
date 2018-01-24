@@ -15,7 +15,6 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>HeptaAPI</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
-    <ProjectName>ShovelKnight</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -104,6 +103,7 @@
     <ClInclude Include="keyAniManager.h" />
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="motherAction.h" />
+    <ClInclude Include="movement.h" />
     <ClInclude Include="npc1.h" />
     <ClInclude Include="npcBase.h" />
     <ClInclude Include="npcManager.h" />
@@ -118,6 +118,7 @@
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="sceneManager.h" />
+    <ClInclude Include="selectScene.h" />
     <ClInclude Include="singletonBase.h" />
     <ClInclude Include="skill1.h" />
     <ClInclude Include="skillBase.h" />
@@ -156,6 +157,7 @@
     <ClCompile Include="keyAniManager.cpp" />
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="motherAction.cpp" />
+    <ClCompile Include="movement.cpp" />
     <ClCompile Include="npc1.cpp" />
     <ClCompile Include="npcBase.cpp" />
     <ClCompile Include="npcManager.cpp" />
@@ -168,6 +170,7 @@
     <ClCompile Include="playGround.cpp" />
     <ClCompile Include="progressBar.cpp" />
     <ClCompile Include="sceneManager.cpp" />
+    <ClCompile Include="selectScene.cpp" />
     <ClCompile Include="skill1.cpp" />
     <ClCompile Include="skillBase.cpp" />
     <ClCompile Include="skillManager.cpp" />
