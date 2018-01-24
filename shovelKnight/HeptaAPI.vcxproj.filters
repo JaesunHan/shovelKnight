@@ -279,6 +279,7 @@
     <ClInclude Include="selectNickNameMenu.h">
       <Filter>playGround\gameMenuScene\menu</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="gameTitleScene.h">
       <Filter>playGround\gameTitleScene</Filter>
     </ClInclude>
@@ -287,6 +288,16 @@
     </ClInclude>
     <ClInclude Include="soundMenu.h">
       <Filter>헤더 파일</Filter>
+=======
+    <ClInclude Include="BardKnight.h">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicGirl.h">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+    </ClInclude>
+    <ClInclude Include="HealtyGuy.h">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+>>>>>>> 0742222e1d0a485bbe070621727c4a1f8019fb4f
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -452,6 +463,7 @@
     <ClCompile Include="selectNickNameMenu.cpp">
       <Filter>playGround\gameMenuScene\menu</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="gameTitleScene.cpp">
       <Filter>playGround\gameTitleScene</Filter>
     </ClCompile>
@@ -460,6 +472,16 @@
     </ClCompile>
     <ClCompile Include="soundMenu.cpp">
       <Filter>소스 파일</Filter>
+=======
+    <ClCompile Include="BardKnight.cpp">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicGirl.cpp">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+    </ClCompile>
+    <ClCompile Include="HealtyGuy.cpp">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+>>>>>>> 0742222e1d0a485bbe070621727c4a1f8019fb4f
     </ClCompile>
   </ItemGroup>
 </Project>
