@@ -85,6 +85,7 @@
     <ClInclude Include="bg1.h" />
     <ClInclude Include="bgManager.h" />
     <ClInclude Include="button.h" />
+    <ClInclude Include="cameraManager.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="database.h" />
@@ -140,6 +141,7 @@
     <ClCompile Include="bg1.cpp" />
     <ClCompile Include="bgManager.cpp" />
     <ClCompile Include="button.cpp" />
+    <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="database.cpp" />
     <ClCompile Include="effect.cpp" />
