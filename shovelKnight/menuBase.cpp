@@ -42,7 +42,7 @@ void menuBase::release()
 }
 void menuBase::render()	
 {
-	draw();
+	//draw();
 }
 void menuBase::draw(HDC hdc)	
 {
