@@ -23,7 +23,7 @@ HRESULT itemBase::init(string imgKeyString, char* imgFileName, float x, float y,
 	_width = _img->getFrameWidth();
 	_height = _img->getFrameHeight();
 
-
+	return S_OK;
 }
 void itemBase::update()	
 {

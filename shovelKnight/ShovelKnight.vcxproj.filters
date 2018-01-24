@@ -174,9 +174,6 @@
     <ClInclude Include="keyAniManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="enemy1.h">
-      <Filter>playGround\gamePlayScene\enemy</Filter>
-    </ClInclude>
     <ClInclude Include="enemyBase.h">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClInclude>
@@ -232,9 +229,6 @@
       <Filter>헤더 파일\Function</Filter>
     </ClInclude>
     <ClInclude Include="bgBase.h">
-      <Filter>playGround\gamePlayScene\backGround</Filter>
-    </ClInclude>
-    <ClInclude Include="bg1.h">
       <Filter>playGround\gamePlayScene\backGround</Filter>
     </ClInclude>
     <ClInclude Include="bgManager.h">
@@ -365,9 +359,6 @@
     <ClCompile Include="keyAniManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="enemy1.cpp">
-      <Filter>playGround\gamePlayScene\enemy</Filter>
-    </ClCompile>
     <ClCompile Include="enemyBase.cpp">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClCompile>
@@ -417,9 +408,6 @@
       <Filter>playGround\gamePlayScene\gameCollision</Filter>
     </ClCompile>
     <ClCompile Include="bgBase.cpp">
-      <Filter>playGround\gamePlayScene\backGround</Filter>
-    </ClCompile>
-    <ClCompile Include="bg1.cpp">
       <Filter>playGround\gamePlayScene\backGround</Filter>
     </ClCompile>
     <ClCompile Include="bgManager.cpp">

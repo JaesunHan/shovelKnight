@@ -15,10 +15,12 @@ playGround::~playGround()
 HRESULT playGround::init()
 {
 	gameNode::init(true);
+
+	_GTS = new gameTitleScene;
+	_gtsStr = "GameTitleScene";
+	SCENEMANAGER->addScene(_gtsStr, _GTS);
+	SCENEMANAGER->changeScene(_gtsStr);
 	
-	//SCENEMANAGER->addScene("", new );
-	
-	SCENEMANAGER->changeScene("");
 
 
 	
