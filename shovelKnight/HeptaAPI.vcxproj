@@ -14,7 +14,7 @@
     <ProjectGuid>{76E0A8FC-8B8B-4E7F-9DA3-6398D34A8AD4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>HeptaAPI</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -80,6 +80,7 @@
   <ItemGroup>
     <ClInclude Include="action.h" />
     <ClInclude Include="animation.h" />
+    <ClInclude Include="BardKnight.h" />
     <ClInclude Include="bg1.h" />
     <ClInclude Include="bgManager.h" />
     <ClInclude Include="button.h" />
@@ -96,6 +97,7 @@
     <ClInclude Include="gameMenuScene.h" />
     <ClInclude Include="gameNode.h" />
     <ClInclude Include="gamePlayScene.h" />
+    <ClInclude Include="HealtyGuy.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
     <ClInclude Include="iniDataManager.h" />
@@ -104,6 +106,7 @@
     <ClInclude Include="itemManager.h" />
     <ClInclude Include="keyAniManager.h" />
     <ClInclude Include="keyManager.h" />
+    <ClInclude Include="MagicGirl.h" />
     <ClInclude Include="menuBase.h" />
     <ClInclude Include="motherAction.h" />
     <ClInclude Include="movement.h" />
@@ -140,6 +143,7 @@
   <ItemGroup>
     <ClCompile Include="action.cpp" />
     <ClCompile Include="animation.cpp" />
+    <ClCompile Include="BardKnight.cpp" />
     <ClCompile Include="bg1.cpp" />
     <ClCompile Include="bgManager.cpp" />
     <ClCompile Include="button.cpp" />
@@ -155,6 +159,7 @@
     <ClCompile Include="gameMenuScene.cpp" />
     <ClCompile Include="gameNode.cpp" />
     <ClCompile Include="gamePlayScene.cpp" />
+    <ClCompile Include="HealtyGuy.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
     <ClCompile Include="iniDataManager.cpp" />
@@ -163,6 +168,7 @@
     <ClCompile Include="itemManager.cpp" />
     <ClCompile Include="keyAniManager.cpp" />
     <ClCompile Include="keyManager.cpp" />
+    <ClCompile Include="MagicGirl.cpp" />
     <ClCompile Include="menuBase.cpp" />
     <ClCompile Include="motherAction.cpp" />
     <ClCompile Include="movement.cpp" />

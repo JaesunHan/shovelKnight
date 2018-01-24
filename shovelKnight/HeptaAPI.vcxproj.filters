@@ -276,6 +276,15 @@
     <ClInclude Include="selectNickNameMenu.h">
       <Filter>playGround\gameMenuScene\menu</Filter>
     </ClInclude>
+    <ClInclude Include="BardKnight.h">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicGirl.h">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+    </ClInclude>
+    <ClInclude Include="HealtyGuy.h">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -439,6 +448,15 @@
     </ClCompile>
     <ClCompile Include="selectNickNameMenu.cpp">
       <Filter>playGround\gameMenuScene\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="BardKnight.cpp">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicGirl.cpp">
+      <Filter>playGround\gamePlayScene\npc</Filter>
+    </ClCompile>
+    <ClCompile Include="HealtyGuy.cpp">
+      <Filter>playGround\gamePlayScene\npc</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
