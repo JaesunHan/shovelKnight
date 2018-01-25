@@ -44,34 +44,34 @@ void enemyBase::update()
 
 	switch (_status)
 	{
-	case ENEMY_LEFT_STOP:
+		case ENEMY_LEFT_STOP:
 
 		break;
-	case ENEMY_RIGHT_STOP:
+		case ENEMY_RIGHT_STOP:
 
 		break;
-	case ENEMY_LEFT_MOVE:
+		case ENEMY_LEFT_MOVE:
 
 		break;
-	case ENEMY_RIGHT_MOVE:
+		case ENEMY_RIGHT_MOVE:
 
 		break;
-	case ENEMY_LEFT_JUMP:
+		case ENEMY_LEFT_JUMP:
 
 		break;
-	case ENEMY_RIGHT_JUMP:
+		case ENEMY_RIGHT_JUMP:
 
 		break;
-	case ENMEY_LEFT_ATTACK:
+		case ENMEY_LEFT_ATTACK:
 
 		break;
-	case ENEMY_RIGHT_ATTACK:
+		case ENEMY_RIGHT_ATTACK:
 
 		break;
-	case ENEMY_LEFT_JUMP_ATTACK:
+		case ENEMY_LEFT_JUMP_ATTACK:
 
 		break;
-	case ENEMY_RIGHT_JUMP_ATTACK:
+		case ENEMY_RIGHT_JUMP_ATTACK:
 
 		break;
 	}
