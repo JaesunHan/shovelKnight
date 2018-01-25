@@ -58,7 +58,15 @@ void skillManager::update()
 	{
 		for (iter = _vSkill.begin(); iter != _vSkill.end(); ++iter)
 		{
-			(*iter)->update();
+			if ((*iter)->getIsFire())
+			{
+				(*iter)->update();
+				++iter;
+			}
+			else
+			{
+				_vSkill.erase(iter);
+			}
 		}
 	}
 }
@@ -76,7 +84,7 @@ void skillManager::render()
 	}
 }
 
-void skillManager::Fire(SKILL skill, float x, float y)
+void skillManager::Fire(SKILL_FIRE chartype, SKILL skill, float x, float y)
 {
 	skillBase* sk;
 	switch (skill)
@@ -94,5 +102,6 @@ void skillManager::Fire(SKILL skill, float x, float y)
 		sk = new skill_fireBall;
 		break;
 	}
-	sk->fire(x, y);
+
+	sk->fire(chartype, x, y);
 }
