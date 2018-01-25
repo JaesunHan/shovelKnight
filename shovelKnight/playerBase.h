@@ -8,7 +8,7 @@
 #define	DOWNATTACK_DAMAGE_BOX_HEIGHT 10
 #define SPEED 4.0f
 #define GRAVITY 0.2f
-#define JUMPPOWER 3.0f
+#define JUMPPOWER 6.0f
 
 enum PLAYERDIRECTION
 {
@@ -39,7 +39,10 @@ enum COLLISION_PLAYER //충돌 대상
 	CP_NULL,
 	CP_OBJECT,
 	CP_ENEMY,
-	CP_GROUND
+	CP_GROUND,
+	CP_SHOVEL_OBJ,
+	CP_SHOVEL_ENEMY
+
 };
 
 enum COLLISION_TB //충돌방향(상하) ->대상기준
