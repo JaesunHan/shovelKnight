@@ -12,7 +12,7 @@ public:
 	minionBeeto();
 	~minionBeeto();
 
-	HRESULT init(string imgKeyString, char* imgFileName, float x, float y, int totalWidth, int totalHeight, int frameX, int frameY);
+	HRESULT init(float x, float y);
 	void move();
 
 

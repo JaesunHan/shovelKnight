@@ -12,14 +12,12 @@ minionBeeto::~minionBeeto()
 }
 
 
-HRESULT minionBeeto::init(string imgKeyString, char* imgFileName, float x, float y, int totalWidth, int totalHeight, int frameX, int frameY)
+HRESULT minionBeeto::init(float x, float y)
 {
-	_imgKeyString = imgKeyString;
-	_imgFileName = imgFileName;
 	_x = x;
 	_y = y;
 
-	_img = IMAGEMANAGER->addFrameImage(_imgKeyString, _imgFileName, _x, _y, totalWidth, totalHeight, frameX, frameY, true, RGB(255, 0, 255));
+	_img = IMAGEMANAGER->addFrameImage("beeto", ".//image//monster//Beeto.bmp", _x, _y, 104, 64, 4, 4, true, RGB(255, 0, 255));
 
 	_rc = RectMakeCenter(_x, _y, _img->getFrameWidth(), _img->getFrameHeight());
 
