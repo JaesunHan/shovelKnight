@@ -24,10 +24,23 @@ public:
 	MagicGirl();
 	~MagicGirl();
 
-	int _price;				//얼마에 팔건지 가격 세팅용
-	int _stock;				//몇번이나 상점에서 구매했는지 확인 변수
+
+	//==========가격 세팅 변수===========//
+	int _fireBallPrice;								//얼마에 팔건지 가격 세팅용
+	int _thunderBoltPrice;							//썬더볼트 얼마니
+	int _bubblePrice;								//버블스킬 얼마니
 	
-	bool _isSell;			//세팅한 스킬이 팔렸는지?
+	//==========팔렸는지 확인용 변수들==========//
+	int _stock;										//몇번이나 상점에서 구매했는지 확인 변수
+	bool _isSellFireBall;							//파이어볼 팔렸는지
+	bool _isSellThunderBolt;						//썬더볼트 팔렸는지
+	bool _isSellBubble;								//버블스킬 팔렸는지
+
+
+	//==========스킬 스토어 관련 함수===============//
+	void sellSkill();								//스킬 파는 함수 
+	void stockCount();								//스톡에 따라 판매하는 스킬 정리 함수
+	
 
 };
 

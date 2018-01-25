@@ -195,9 +195,6 @@
     <ClInclude Include="skillManager.h">
       <Filter>playGround\gamePlayScene\skill</Filter>
     </ClInclude>
-    <ClInclude Include="npcManager.h">
-      <Filter>playGround\gamePlayScene\npc</Filter>
-    </ClInclude>
     <ClInclude Include="npcBase.h">
       <Filter>playGround\gamePlayScene\npc</Filter>
     </ClInclude>
@@ -287,6 +284,9 @@
     </ClInclude>
     <ClInclude Include="stageManager.h">
       <Filter>playGround\gamePlayScene\stageManager</Filter>
+    </ClInclude>
+    <ClInclude Include="StoreManager.h">
+      <Filter>playGround\gamePlayScene\npc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -380,9 +380,6 @@
     <ClCompile Include="skillManager.cpp">
       <Filter>playGround\gamePlayScene\skill</Filter>
     </ClCompile>
-    <ClCompile Include="npcManager.cpp">
-      <Filter>playGround\gamePlayScene\npc</Filter>
-    </ClCompile>
     <ClCompile Include="npcBase.cpp">
       <Filter>playGround\gamePlayScene\npc</Filter>
     </ClCompile>
@@ -466,6 +463,9 @@
     </ClCompile>
     <ClCompile Include="stageManager.cpp">
       <Filter>playGround\gamePlayScene\stageManager</Filter>
+    </ClCompile>
+    <ClCompile Include="StoreManager.cpp">
+      <Filter>playGround\gamePlayScene\npc</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

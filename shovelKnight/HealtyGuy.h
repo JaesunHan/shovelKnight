@@ -20,5 +20,19 @@ class HealtyGuy :
 public:
 	HealtyGuy();
 	~HealtyGuy();
+
+	//==========가격 세팅 변수===========//
+	int _chicken;								//치킨가격
+	int _drgonTail;								//용꼬리 가격
+	//int _bubblePrice;							//버블스킬 얼마니
+
+	//==========팔렸는지 확인용 변수들==========//
+	int _stock;										//몇번이나 상점에서 구매했는지 확인 변수
+	bool _isSellChicken;							//치킨팔렸니
+	bool _isSellDragonTail;							//용꼬리 팔렸니
+
+
+	//==========스킬 스토어 관련 함수===============//
+	void sellHpItem();								//스킬 파는 함수 
 };
 
