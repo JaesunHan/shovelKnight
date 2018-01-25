@@ -39,11 +39,10 @@ public:
 	virtual void render();
 
 
-	void playerCollisionNpc();					//NPC랑 충돌검출
-	void sellPlayerSkill();						//플레이어 스킬판매
-	void SellPlayerHp();						//플레이어 최대체력 추가판매
-	void sellGameBgm();							//BGM판매
-	void sellEffectSound();						//이펙트 사운드 판매
+	void playerCollisionNpc(vector<npcBase*>::iterator temp);					//NPC랑 충돌검출
+	void sellPlayerSkill(vector<npcBase*>::iterator temp);						//플레이어 스킬판매
+	void SellPlayerHp(vector<npcBase*>::iterator temp);							//플레이어 최대체력 추가판매
+	void sellGameBgm(vector<npcBase*>::iterator temp);							//BGM판매
 
 	//스토어 매니저에서 있어야 하는 함수
 	//1. 플레이어와 NPC와의 렉트충돌이 되었는지

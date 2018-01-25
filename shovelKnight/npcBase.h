@@ -48,6 +48,7 @@ protected:
 
 	bool _isCollision;		//플레이어와 충돌했는가? true : 그렇다, false : 아니다
 
+	int _stock;				//몇번 구매했는지 확인하는 변수
 	
 
 public:
@@ -75,6 +76,10 @@ public:
 
 	//NPC타입 게터
 	inline NPCTYPE getNpcType() { return _npcType; }
+
+	//스톡변수 게터 (상점구매횟수)
+	inline int getStock() { return _stock; }
+	void setStock(int stock) { _stock = stock; }
 	//==================================== End 게터 세터 작성하기===================================
 };
 
