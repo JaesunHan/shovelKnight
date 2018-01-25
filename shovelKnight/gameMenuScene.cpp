@@ -67,6 +67,7 @@ void gameMenuScene::loadPlayerListData()
 	{
 		makePlayerListData();
 	}
+	//파일에 있는 플레이어를 벡터에 담기
 	for (int i = 0; i < MAXPLAYERLIST; ++i)
 	{
 		playerBase* p1 = new player1;
