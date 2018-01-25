@@ -48,13 +48,13 @@ void playGround::update(void)
 {
 	gameNode::update();
 
-	SCENEMANAGER->update();
 
 	if (KEYMANAGER->isOnceKeyDown('T'))
 	{
 		SCENEMANAGER->changeScene(_GPS->getSceneName());
 	}
-		
+
+	SCENEMANAGER->update();
 }
 
 //그리는거.......
