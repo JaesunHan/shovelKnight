@@ -19,8 +19,12 @@ HRESULT playGround::init()
 	_GTS = new gameTitleScene;
 	//_gtsStr = "GameTitleScene";
 	SCENEMANAGER->addScene(_GTS->getSceneName(), _GTS);
-	//_GTS->setSceneName(_gtsStr);
+	_GMS = new gameMenuScene;
+	SCENEMANAGER->addScene(_GMS->getSceneName(), _GMS);
+
+
 	SCENEMANAGER->changeScene(_GTS->getSceneName());
+	_GTS->setGameMenuSceneAddressLink(_GMS);
 	
 	return S_OK;
 }
