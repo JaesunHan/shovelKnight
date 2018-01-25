@@ -54,6 +54,8 @@ void stageManager::render()
 	IMAGEMANAGER->findImage("layer1")->loopRender(getMemDC(), &RectMake(0, 0, WINSIZEX, WINSIZEY), _loopX1, 0);
 	IMAGEMANAGER->findImage("layer2")->loopRender(getMemDC(), &RectMake(0, 0, WINSIZEX, WINSIZEY), _loopX2, 0);
 	CAMERAMANAGER->renderMap(getMemDC(), IMAGEMANAGER->findImage("bgMap"));
+	renderTiles();
+	//CAMERAMANAGER->renderTile(getMemDC(), IMAGEMANAGER->findImage("tile1"), 0, 13, 10, 14, 16);
 }
 
 void stageManager::loadData()
@@ -87,6 +89,8 @@ void stageManager::loadData()
 		wsprintf(mapImage, "mapImage");
 		GetPrivateProfileString(_T(mapImage), _T("key"), NULL, key, 255, _T(iniDir));
 		GetPrivateProfileString(_T(mapImage), _T("directory"), NULL, directory, 255, _T(iniDir));
+		_transverseTileNum = INIDATA->loadDataInterger(mapName, mapImage, "transverseNum");
+		_verticalTileNum = INIDATA->loadDataInterger(mapName, mapImage, "verticalNum");
 		IMAGEMANAGER->addImage(key, directory,
 			INIDATA->loadDataInterger(mapName, mapImage, "width"),
 			INIDATA->loadDataInterger(mapName, mapImage, "height"),
@@ -114,7 +118,23 @@ void stageManager::loadData()
 	}
 }
 
-void stageManager::renderTile()
+void stageManager::renderTiles()
 {
-
+	//for (_viTileNum = _vTileNum.begin(); _viTileNum != _vTileNum.end(); ++_viTileNum)
+	//{
+	//
+	//}
+	for (int i = 0; i < 2; ++i)						//¸Ê °¡·Î Å¸ÀÏ °¹¼ö
+	{
+		for (int j = 0; j < _verticalTileNum; ++j)	//¸Ê ¼¼·Î Å¸ÀÏ °¹¼ö
+		{
+			if (_vTileNum[(i * _verticalTileNum) + j] == 0) continue;
+			if ((_vTileNum[(i * _verticalTileNum) + j] / 10000) == 1)
+			{
+				CAMERAMANAGER->renderTile(getMemDC(), IMAGEMANAGER->findImage("tile1"), i, j,
+					(_vTileNum[(i * _verticalTileNum) + j] / 100) % 100,
+					_vTileNum[(i * _verticalTileNum) + j] % 100, 16);
+			}
+		}
+	}
 }

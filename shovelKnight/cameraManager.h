@@ -40,6 +40,7 @@ public:
 
 	void renderBackground(HDC hdc, image* img);
 	void renderBackground(HDC hdc, image* img, int camNum);
+	void renderTile(HDC hdc, image* img, float destX, float destY, float sourX, float sourY, int tileWidth);
 	void renderMap(HDC hdc, image* img);
 	void renderMap(HDC hdc, image* img, int camNum);
 	void renderObject(HDC hdc, image* img, float destX, float destY);
