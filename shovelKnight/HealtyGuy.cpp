@@ -47,3 +47,13 @@ HealtyGuy::~HealtyGuy()
 void HealtyGuy::sellHpItem()
 {
 }
+
+void HealtyGuy::render()
+{
+	draw();
+}
+
+void HealtyGuy::draw()
+{
+	_img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
+}
