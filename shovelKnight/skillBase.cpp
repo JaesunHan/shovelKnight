@@ -13,6 +13,16 @@ skillBase::~skillBase()
 
 HRESULT skillBase::init()
 {
+	_x = 0;
+	_y = 0;
+	_rc = { 0, 0, 0, 0 };
+	_img = 0;
+	_imgWidth = 0;
+	_imgHeight = 0;
+	_ani = 0;
+	_isFire = 0;
+	_isRight = 0;
+
 	return S_OK;
 }
 
