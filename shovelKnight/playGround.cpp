@@ -25,10 +25,8 @@ HRESULT playGround::init()
 	
 	SCENEMANAGER->changeScene(_GTS->getSceneName());
 	SCENEMANAGER->changeScene(_GTS->getSceneName());
-<<<<<<< HEAD
+
 	_GTS->setGameMenuSceneAddressLink(_GMS);
-=======
->>>>>>> d3529b03b378e13c92d2d19259bbf11aab3415b7
 
 	_GPS = new gamePlayScene;
 	SCENEMANAGER->addScene(_GPS->getSceneName(), _GPS);
