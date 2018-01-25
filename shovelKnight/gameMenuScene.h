@@ -1,5 +1,8 @@
 #pragma once
 #include "gameNode.h"
+#include "player1.h"
+
+#define MAXPLAYERLIST 10
 
 class gameMenuScene : public gameNode
 {
@@ -10,6 +13,9 @@ private:
 	string _menuBGImgKeyStr;		//이미지 매니저에 등록할 메뉴씬 백그라운드 이미지 키값
 	char* _menuBGImgFileName;		//메뉴 씬 백그라운드 파일
 
+	vector<playerBase*> _vPList; 
+	vector<playerBase*>::iterator _viPList;
+
 
 public:
 
@@ -19,7 +25,14 @@ public:
 	void render();
 	void draw();
 	
+	//======================= Start 게터 세터 =============================
+	string getSceneName() { return _sceneName; }
+	
+	//======================= End 게터 세터 ===============================
 
+	void makePlayerListData();
+	//플레이어 리스트가 담긴 ini 파일이 있는지 검사하여 있으면 데이터 읽어오는 기능을 하는 함수
+	void loadPlayerListData();
 
 	gameMenuScene();
 	~gameMenuScene();

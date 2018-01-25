@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "gameTitleScene.h"
+#include "gameMenuScene.h"
 
 
 gameTitleScene::gameTitleScene()
@@ -31,7 +32,7 @@ HRESULT gameTitleScene::init()
 	//각 게임 메뉴의 위치에 놓을 렉트 초기화 (게임 스타트, 공적, 옵션, 게임 종료)
 	for (int i = 0; i < MAXBTN; ++i)
 	{
-		//364, 270 시작( right, top)
+		//232, 250 시작( right, top)
 		_rcBtn[i] = RectMake(232, 250 + i * 22, 96, 22);
 	}
 
@@ -65,7 +66,7 @@ void gameTitleScene::update()
 		//게임 스타트 버튼 누름
 		if (_shovelIdx == 0)
 		{
-
+			SCENEMANAGER->changeScene(_gms->getSceneName());
 		}
 		//안쓸거임
 		else if (_shovelIdx == 1)
