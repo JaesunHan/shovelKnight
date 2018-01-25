@@ -8,6 +8,9 @@
 class gameTitleScene : public gameNode	
 {
 private : 
+
+	string _sceneName;				//씬매니저에 등록할 씬 이름
+
 	image* _backgroundImg;			//백그라운드 이미지
 	string _titleBGImgKeyStr;		//이미지 매니저에 등록할 타이틀 신 백그라운드 이미지 키값
 	char* _titleBGImgFileName;		//타이틀 신 백그라운드 파일	
@@ -34,6 +37,12 @@ public:
 	void render();
 	void draw();
 
+	void setScript();
+
+	//================================= Start 게터 세터 ============================
+	string getSceneName() { return _sceneName; }
+	void setSceneName(string sn) { _sceneName = sn; }
+	//================================= End 게터 세터 ==============================
 
 	gameTitleScene();
 	~gameTitleScene();
