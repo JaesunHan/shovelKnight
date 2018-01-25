@@ -14,7 +14,7 @@
     <ProjectGuid>{76E0A8FC-8B8B-4E7F-9DA3-6398D34A8AD4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>HeptaAPI</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
     <ProjectName>ShovelKnight</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -112,7 +112,7 @@
     <ClInclude Include="motherAction.h" />
     <ClInclude Include="npcBase.h" />
     <ClInclude Include="npcManager.h" />
-    <ClInclude Include="gameObject1.h" />
+    <ClInclude Include="dirtBlock.h" />
     <ClInclude Include="gameObjectBase.h" />
     <ClInclude Include="gameObjectManager.h" />
     <ClInclude Include="optionMenu.h" />
@@ -140,6 +140,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="timeManager.h" />
     <ClInclude Include="timer.h" />
+    <ClInclude Include="TTUtils.h" />
     <ClInclude Include="txtData.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
@@ -176,7 +177,7 @@
     <ClCompile Include="motherAction.cpp" />
     <ClCompile Include="npcBase.cpp" />
     <ClCompile Include="npcManager.cpp" />
-    <ClCompile Include="gameObject1.cpp" />
+    <ClCompile Include="dirtBlock.cpp" />
     <ClCompile Include="gameObjectBase.cpp" />
     <ClCompile Include="gameObjectManager.cpp" />
     <ClCompile Include="optionMenu.cpp" />
@@ -203,6 +204,7 @@
     </ClCompile>
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />
+    <ClCompile Include="TTUtils.cpp" />
     <ClCompile Include="txtData.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="winMain.cpp" />

@@ -13,6 +13,32 @@ skillManager::~skillManager()
 
 HRESULT skillManager::init()
 {
+	for (int i = 0; i < 4; ++i)
+	{
+		skillBase* sk;
+		switch (i)
+		{
+		case SKILL_BUBBLE:
+			sk = new skill_Bubble;
+			break;
+		case SKILL_DARKKNIGHT_FIREBALL:
+			sk = new skill_darkKnight_fireBall;
+			break;
+		case SKILL_DIRTBLOCKFX:
+			sk = new skill_dirtBlockFx;
+			break;
+		case SKILL_FIREBALL:
+			sk = new skill_fireBall;
+			break;
+		}
+		sk->init();
+	}
+
+	return S_OK;
+}
+
+void skillManager::release()
+{
 	viSkill iter;
 
 	if (_vSkill.size())
@@ -22,12 +48,6 @@ HRESULT skillManager::init()
 			(*iter)->release();
 		}
 	}
-
-	return S_OK;
-}
-
-void skillManager::release()
-{
 }
 
 void skillManager::update()
@@ -54,4 +74,25 @@ void skillManager::render()
 			(*iter)->render();
 		}
 	}
+}
+
+void skillManager::Fire(SKILL skill, float x, float y)
+{
+	skillBase* sk;
+	switch (skill)
+	{
+	case SKILL_BUBBLE:
+		sk = new skill_Bubble;
+		break;
+	case SKILL_DARKKNIGHT_FIREBALL:
+		sk = new skill_darkKnight_fireBall;
+		break;
+	case SKILL_DIRTBLOCKFX:
+		sk = new skill_dirtBlockFx;
+		break;
+	case SKILL_FIREBALL:
+		sk = new skill_fireBall;
+		break;
+	}
+	sk->fire(x, y);
 }

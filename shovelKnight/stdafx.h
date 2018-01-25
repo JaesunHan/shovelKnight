@@ -56,6 +56,9 @@ using namespace HEPTA_UTIL;
 #define DATABASE		database::getSingleton()
 #define CAMERAMANAGER	cameraManager::getSingleton()
 
+#include "TTUtils.h"
+using namespace 트윈테일쟝;
+
 //=======================================================
 // ## 매크로 ## 2017.11.15 ##
 //=======================================================

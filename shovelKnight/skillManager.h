@@ -6,8 +6,10 @@
 
 enum SKILL
 {
+	SKILL_BUBBLE,
 	SKILL_DARKKNIGHT_FIREBALL,
-
+	SKILL_DIRTBLOCKFX,
+	SKILL_FIREBALL,
 };
 
 class skillManager
@@ -27,5 +29,7 @@ public:
 	virtual void release();
 	virtual void update();
 	virtual void render();
+
+	virtual void Fire(SKILL skill, float x, float y);
 };
 

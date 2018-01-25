@@ -223,6 +223,8 @@ void enemyManager::update()
 {
 	if(_vMinion.size())
 	{
+		viMinion viMinion
+		for()
 		_vMinion[0].release();
 	}
 }

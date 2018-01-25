@@ -64,6 +64,7 @@ private:
 	BOOL			_trans;			//트랜스컬러 유무(특정 픽셀값 삭제)
 	COLORREF		_transColor;	//제거한다면 어떤 컬러?
 
+	BOOL			_alphablend;	//알파블렌드 적용 유무
 	BLENDFUNCTION	_blendFunc;		//알파블렌드에 관한 함수
 	LPIMAGE_INFO	_blendImage;	//알파블렌드 먹일 이미지
 public:
@@ -74,23 +75,24 @@ public:
 	HRESULT init(int width, int height);
 	//파일로부터 이미지 초기화
 	HRESULT init(const char* fileName, int width, int height,
-		BOOL trans = FALSE, COLORREF transColor = FALSE);
+		BOOL trans = FALSE, COLORREF transColor = FALSE, BOOL alphablend = FALSE);
 	//파일로부터 이미지 초기화           처음 시작 좌표      가로       세로
 	HRESULT init(const char* fileName, float x, float y, int width, int height,
-		BOOL trans = FALSE, COLORREF transColor = FALSE);
+		BOOL trans = FALSE, COLORREF transColor = FALSE, BOOL alphablend = FALSE);
 
 	//이미지 + 프레임초기화
 	HRESULT init(const char* fileName, float x, float y, int width, int height,
-		int frameX, int frameY, BOOL trans = FALSE, COLORREF transColor = RGB(255, 0, 255));
+		int frameX, int frameY, BOOL trans = FALSE, COLORREF transColor = RGB(255, 0, 255), BOOL alphablend = FALSE);
 
 	HRESULT init(const char* fileName, int width, int height, int frameX, int frameY, 
-		BOOL trans = FALSE, COLORREF transColor = RGB(255, 0, 255));
+		BOOL trans = FALSE, COLORREF transColor = RGB(255, 0, 255), BOOL alphablend = FALSE);
 
 	//이미지 릴리즈
 	void release(void);
 
 	//혹시 트랜스처리를 다른 픽셀값으로 바꿔야한다면
 	void setTransColor(BOOL trans, COLORREF transColor);
+	void setAlphablend(BOOL alphablend, HDC hdc);
 
 	void render(HDC hdc);
 	//렌더링함수 뿌릴DC , 뿌릴곳X(Left), 뿌릴곳Y(top)
@@ -109,7 +111,6 @@ public:
 
 	//애니메이션 렌더링 (뿌려줄 DC, 뿌려줄 위치 X, Y(left, top) 재생하고픈 애니메이션)
 	void aniRender(HDC hdc, int destX, int destY, animation* ani);
-
 
 	inline HDC getMemDC() { return _imageInfo->hMemDC; }
 
