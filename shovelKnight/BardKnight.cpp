@@ -52,3 +52,13 @@ void BardKnight::changeEffectSound()
 {
 	//fmod 에서 이펙트 사운드 바꿔주자
 }
+
+void BardKnight::render()
+{
+	draw();
+}
+
+void BardKnight::draw()
+{
+	_img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
+}

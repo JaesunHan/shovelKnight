@@ -8,12 +8,12 @@
 #define	DOWNATTACK_DAMAGE_BOX_HEIGHT 10
 #define SPEED 4.0f
 #define GRAVITY 0.2f
-#define JUMPPOWER 3.0f
+#define JUMPPOWER 6.0f
 
 enum PLAYERDIRECTION
 {
-	RIGHT = 1,
-	LEFT = -1
+	PD_RIGHT = 1,
+	PD_LEFT = -1
 };
 
 enum PLAYERSTATE
@@ -34,19 +34,30 @@ enum PLAYERACTION
 	PR_DIE
 };
 
-enum COLLISION_PLAYER
+enum COLLISION_PLAYER //충돌 대상
 {
 	CP_NULL,
-	CP_GROUND,
 	CP_OBJECT,
-	CP_OBJECT_SHOVEL_TOP,
-	CP_ENEMY_RIGHT,
-	CP_ENEMY_LEFT,
-	CP_SHOVEL_ENEMY_RIGHT,
-	CP_SHOVEL_ENEMY_LEFT
+	CP_ENEMY,
+	CP_GROUND,
+	CP_SHOVEL_OBJ,
+	CP_SHOVEL_ENEMY
+
 };
 
+enum COLLISION_TB //충돌방향(상하) ->대상기준
+{
+	TB_NULL,
+	TB_TOP,
+	TB_BOTTOM
+};
 
+enum COLLISION_LR //충돌방향(좌우) ->대상기준
+{
+	LR_NULL,
+	LR_LEFT,
+	LR_RIGHT
+};
 
 class playerBase : public gameNode
 {
@@ -55,8 +66,11 @@ protected :
 	PLAYERDIRECTION		_direction;				//플레이어 상태
 	PLAYERSTATE			_state;					//플레이어 위치
 	PLAYERACTION		_action;				//플레이어 동작
-	COLLISION_PLAYER	_cp;					//플레이어 충돌
+	COLLISION_PLAYER	_cPlayerTarget;			//플레이어 충돌
+	COLLISION_TB		_cTB;					//플레이어 충돌방향
+	COLLISION_LR		_cLR;					//플레이어 충돌방향
 	RECT				_rc;					//플레이어 렉트(충돌렉트)
+	char*				_characterName;			//캐릭터 네임
 	int					_frameCount;			//프레임카운트
 	int					_currentFrameX;			//
 	int					_currentFrameY;			//
@@ -86,7 +100,7 @@ public:
 	virtual void update();
 	virtual void render();
 
-	void hitReAction(int num);
+	void hitReAction();
 	void attack(float fireX, float fireY, bool skillUsed);
 	void move();
 
@@ -100,9 +114,13 @@ public:
 	inline void setMaxMP(int increaseMP) { _maxMP += increaseMP; }
 	inline int	getMoney() { return _money; }
 	inline void setMoney(int increaseMoney) { _money += increaseMoney; }
+	inline char* getName() { return _characterName; }
+	inline void setName(char* name) { _characterName = name; }
+
 
 
 	inline RECT getPlayerRc() { return _rc; }
-	inline COLLISION_PLAYER getCollisionPlayer() { return _cp; }
+	inline void setPlayerRc(RECT rc) { _rc = rc; }
+	inline COLLISION_PLAYER getCollisionPlayer() { return _cPlayerTarget; }
 };
 

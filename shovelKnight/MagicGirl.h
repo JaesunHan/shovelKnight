@@ -40,7 +40,8 @@ public:
 	//==========스킬 스토어 관련 함수===============//
 	void sellSkill();								//스킬 파는 함수 
 	void stockCount();								//스톡에 따라 판매하는 스킬 정리 함수
-	
+	virtual void render();
+	virtual void draw();
 
 };
 

@@ -108,6 +108,7 @@
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="MagicGirl.h" />
     <ClInclude Include="menuBase.h" />
+    <ClInclude Include="minionBeeto.h" />
     <ClInclude Include="motherAction.h" />
     <ClInclude Include="npcBase.h" />
     <ClInclude Include="StoreManager.h" />
@@ -172,6 +173,7 @@
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="MagicGirl.cpp" />
     <ClCompile Include="menuBase.cpp" />
+    <ClCompile Include="minionBeeto.cpp" />
     <ClCompile Include="motherAction.cpp" />
     <ClCompile Include="npcBase.cpp" />
     <ClCompile Include="StoreManager.cpp" />

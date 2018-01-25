@@ -288,6 +288,9 @@
     <ClInclude Include="StoreManager.h">
       <Filter>playGround\gamePlayScene\npc</Filter>
     </ClInclude>
+    <ClInclude Include="minionBeeto.h">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -466,6 +469,9 @@
     </ClCompile>
     <ClCompile Include="StoreManager.cpp">
       <Filter>playGround\gamePlayScene\npc</Filter>
+    </ClCompile>
+    <ClCompile Include="minionBeeto.cpp">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

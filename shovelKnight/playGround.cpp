@@ -18,12 +18,15 @@ HRESULT playGround::init()
 
 	_GTS = new gameTitleScene;
 	SCENEMANAGER->addScene(_GTS->getSceneName(), _GTS);
-
+	
 	_GMS = new gameMenuScene;
 	SCENEMANAGER->addScene(_GMS->getSceneName(), _GMS);
 	_GTS->setGameMenuSceneAddressLink(_GMS);
-
+	
 	SCENEMANAGER->changeScene(_GTS->getSceneName());
+	SCENEMANAGER->changeScene(_GTS->getSceneName());
+
+	_GTS->setGameMenuSceneAddressLink(_GMS);
 
 	_GPS = new gamePlayScene;
 	SCENEMANAGER->addScene(_GPS->getSceneName(), _GPS);
@@ -45,13 +48,13 @@ void playGround::update(void)
 {
 	gameNode::update();
 
-	SCENEMANAGER->update();
 
 	if (KEYMANAGER->isOnceKeyDown('T'))
 	{
 		SCENEMANAGER->changeScene(_GPS->getSceneName());
 	}
-		
+
+	SCENEMANAGER->update();
 }
 
 //그리는거.......
