@@ -16,8 +16,6 @@ private:
 	skillManager* _skill;
 	playerManager* _player;
 
-	bool _once;
-
 public:
 	gameCollision();
 	~gameCollision();
