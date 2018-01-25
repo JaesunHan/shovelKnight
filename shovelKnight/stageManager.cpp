@@ -55,6 +55,8 @@ void stageManager::render()
 	IMAGEMANAGER->findImage("layer2")->loopRender(getMemDC(), &RectMake(0, 0, WINSIZEX, WINSIZEY), _loopX2, 0);
 	CAMERAMANAGER->renderMap(getMemDC(), IMAGEMANAGER->findImage("bgMap"));
 	renderTiles();
+	//TTTextOut(getMemDC(), _ptMouse.x, _ptMouse.y - 40, "마우스X", CAMERAMANAGER->getMousePointX(_ptMouse.x) / 16, false);
+	//TTTextOut(getMemDC(), _ptMouse.x, _ptMouse.y - 20, "마우스Y", CAMERAMANAGER->getMousePointY(_ptMouse.y) / 16, false);
 	//CAMERAMANAGER->renderTile(getMemDC(), IMAGEMANAGER->findImage("tile1"), 0, 13, 10, 14, 16);
 }
 
