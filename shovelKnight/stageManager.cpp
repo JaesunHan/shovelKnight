@@ -16,8 +16,8 @@ stageManager::~stageManager()
 
 HRESULT stageManager::init()
 {
-	_x = 400;
-	_y = 400;
+	_x = 200;
+	_y = 150;
 	_mapLoaded = false;
 	_mapNum = 1;
 	_loopX1 = 0;
@@ -112,4 +112,9 @@ void stageManager::loadData()
 
 		_mapLoaded = true;
 	}
+}
+
+void stageManager::renderTile()
+{
+
 }

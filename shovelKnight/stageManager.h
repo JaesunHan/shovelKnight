@@ -23,6 +23,7 @@ public:
 	void render();
 
 	void loadData();
+	void renderTile();
 
 	stageManager();
 	~stageManager();
