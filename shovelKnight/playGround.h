@@ -1,13 +1,15 @@
 #pragma once
 #include "gameNode.h"
 #include "gameTitleScene.h"
+#include "gameMenuScene.h"
 
 class playGround : public gameNode
 {
 private:
 	gameTitleScene * _GTS;
 	string _gtsStr;
-
+	gameMenuScene * _GMS;
+	string _gmsStr;
 	
 
 public:
