@@ -7,6 +7,7 @@
 #include "npcManager.h"
 #include "skillManager.h"
 #include "playerManager.h"
+#include "stageManager.h"
 
 #include "gameCollision.h"
 
@@ -20,6 +21,7 @@ private:
 	skillManager* _skill;
 	playerManager* _player;
 	gameCollision* _gameCollision;
+	stageManager* _stage;
 
 public:
 	gamePlayScene();
