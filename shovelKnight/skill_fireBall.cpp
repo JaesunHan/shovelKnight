@@ -26,9 +26,9 @@ HRESULT skill_fireBall::init()
 	KEYANIMANAGER->addArrayFrameAnimation("skillFireBallOut", "image/skill/fireBall", fireBallOut, 6, 1, false, outFire, this);
 
 
-	_stats = SKILL_START;
-	_stats = SKILL_LOOP;
-	_stats = SKILL_OUT;
+	_stats = SKILL_STATS_START;
+	_stats = SKILL_STATS_LOOP;
+	_stats = SKILL_STATS_OUT;
 
 	_ani = KEYANIMANAGER->findAnimation("skillFireBallStart");
 	_ani = KEYANIMANAGER->findAnimation("skillFireBallLoop");
@@ -42,6 +42,7 @@ void skill_fireBall::release()
 	KEYANIMANAGER->deleteOne("skillFireBallStart");
 	KEYANIMANAGER->deleteOne("skillFireBallLoop");
 	KEYANIMANAGER->deleteOne("skillFireBallOut");
+	IMAGEMANAGER->deleteImage("image/skill/fireBall");
 }
 
 void skill_fireBall::update()
@@ -52,13 +53,14 @@ void skill_fireBall::update()
 
 	switch (_stats)
 	{
-	case SKILL_START:
+	case SKILL_STATS_START:
 		break;
-	case SKILL_LOOP:
+	case SKILL_STATS_LOOP:
 		if (_isRight) _x += speed;
 		else if (!_isRight) _x -= speed;
+		reRect();
 		break;
-	case SKILL_OUT:
+	case SKILL_STATS_OUT:
 		break;
 	}
 }
@@ -68,10 +70,10 @@ void skill_fireBall::render()
 	if (!_isFire) return;
 }
 
-void skill_fireBall::startLoopFire(void * obj)
+void skill_fireBall::startLoopFire(void* obj)
 {
 	skill_fireBall* fb = (skill_fireBall*)obj;
-	fb->setSkillStats(SKILL_LOOP);
+	fb->setSkillStats(SKILL_STATS_LOOP);
 	fb->setSkillAni(KEYANIMANAGER->findAnimation("skillFireBallLoop"));
 	fb->getSkillAni()->start();
 }

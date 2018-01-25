@@ -34,7 +34,7 @@ namespace 트윈테일쟝
 	//FPT가 원안에 들어갔는지
 	BOOL PtInEll(RECT rc, FPOINT pt);
 
-	BOOL PtinEll(RECT rc, POINT pt);
+	BOOL PtInEll(RECT rc, POINT pt);
 
 	//FPT가 네모안에 들어갔는지
 	BOOL PtInRect(RECT rc, FPOINT pt);

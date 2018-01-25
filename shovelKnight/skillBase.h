@@ -3,9 +3,19 @@
 
 enum SKILL_STATS
 {
-	SKILL_START,
-	SKILL_LOOP,
-	SKILL_OUT,
+	SKILL_STATS_START,
+	SKILL_STATS_LOOP,
+	SKILL_STATS_OUT,
+};
+
+enum SKILL_REACTION
+{
+	SKILL_REACTION_DELETE,
+};
+
+enum SKILL_FIRE
+{
+	SKILL_FIRE_TEST,
 };
 
 class skillBase
@@ -21,7 +31,7 @@ protected:
 	bool _isFire;
 	bool _isRight;
 	SKILL_STATS _stats;
-	
+
 
 public:
 	skillBase();
@@ -32,8 +42,10 @@ public:
 	virtual void update();
 	virtual void render();
 
-	virtual void fire(float x, float y);
+	virtual void fire(SKILL_FIRE charType, float x, float y);
 	virtual void reRect();
+
+	virtual bool getIsFire() { return _isFire; }
 	virtual void setIsFire(bool fire) { _isFire = fire; }
 
 	virtual SKILL_STATS getSkillStats() { return _stats; }
@@ -41,5 +53,7 @@ public:
 
 	virtual animation* getSkillAni() { return _ani; }
 	virtual void setSkillAni(animation* ani) { _ani = ani; }
+
+	virtual void reAction(SKILL_REACTION reaction);
 };
 

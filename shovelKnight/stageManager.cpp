@@ -124,7 +124,7 @@ void stageManager::renderTiles()
 	//{
 	//
 	//}
-	for (int i = 0; i < 2; ++i)						//¸Ê °¡·Î Å¸ÀÏ °¹¼ö
+	for (int i = 0; i < 3; ++i)						//¸Ê °¡·Î Å¸ÀÏ °¹¼ö
 	{
 		for (int j = 0; j < _verticalTileNum; ++j)	//¸Ê ¼¼·Î Å¸ÀÏ °¹¼ö
 		{

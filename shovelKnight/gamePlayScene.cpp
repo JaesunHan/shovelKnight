@@ -26,7 +26,7 @@ HRESULT gamePlayScene::init()
 	_gameCollision->getEmemyMemoryAdress(_enemy);
 	_gameCollision->getGameObjectMemoryAdress(_gameObject);
 	_gameCollision->getItemMemoryAdress(_item);
-	_gameCollision->getNPCMemoryAdress(_Store);
+	_gameCollision->getStoreMemoryAdress(_Store);
 	_gameCollision->getSkillMemoryAdress(_skill);
 	_gameCollision->getPlayerMemoryAdress(_player);
 
@@ -64,8 +64,8 @@ void gamePlayScene::update()
 	_player->update();
 	_Store->update();
 	_skill->update();
-	_gameCollision->update();
 	_stage->update();
+	_gameCollision->update();
 }
 
 void gamePlayScene::render()
