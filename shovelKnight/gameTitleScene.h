@@ -5,6 +5,7 @@
 
 #define MAXBTN	4
 
+class gameMenuScene;
 class gameTitleScene : public gameNode	
 {
 private : 
@@ -29,6 +30,8 @@ private :
 	bool _isOption;					//옵션을 선택하면 옵션메뉴 출력 ( true : 출력, false : 출력 안함)
 	bool _isSound;					//사운드조절 선택하면 사운드 메뉴 출력 ( true : 출력, false : 출력 안함)
 
+	gameMenuScene* _gms;
+
 public:
 
 	HRESULT init();
@@ -43,6 +46,7 @@ public:
 	string getSceneName() { return _sceneName; }
 	void setSceneName(string sn) { _sceneName = sn; }
 	//================================= End 게터 세터 ==============================
+	void setGameMenuSceneAddressLink(gameMenuScene* gms) { _gms = gms; }
 
 	gameTitleScene();
 	~gameTitleScene();

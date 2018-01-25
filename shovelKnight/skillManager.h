@@ -30,6 +30,6 @@ public:
 	virtual void update();
 	virtual void render();
 
-	virtual void Fire(SKILL skill, float x, float y);
+	virtual void Fire(SKILL_FIRE chartype, SKILL skill, float x, float y);
 };
 

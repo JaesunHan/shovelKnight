@@ -10,7 +10,6 @@ public:
 	void render();
 	void draw();
 
-
 	playerListMenu();
 	~playerListMenu();
 };

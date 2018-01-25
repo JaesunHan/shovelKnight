@@ -34,7 +34,7 @@ namespace 트윈테일쟝
 	//FPT가 원안에 들어갔는지
 	BOOL PtInEll(RECT rc, FPOINT pt);
 
-	BOOL PtinEll(RECT rc, POINT pt);
+	BOOL PtInEll(RECT rc, POINT pt);
 
 	//FPT가 네모안에 들어갔는지
 	BOOL PtInRect(RECT rc, FPOINT pt);
@@ -85,7 +85,7 @@ namespace 트윈테일쟝
 	void XYMoveAngleSpeed(float& x, float& y, float angle, float speed);
 
 	// hdc, x좌표, y좌표, 표시할텍스트"", 표시할값, 배경표시여부		":"는 자동으로 써줌
-	void TTTextOut(HDC hdc, int x, int y, string str, float num, BOOL backGround = FALSE);
+	void TTTextOut(HDC hdc, int x, int y, string str, int num, BOOL backGround = FALSE);
 
 	//콘솔용(float)
 	void TTTextOut(string stri, float f);
