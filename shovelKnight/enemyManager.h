@@ -1,19 +1,19 @@
 #pragma once
 #include "gameNode.h"
-#include "minionBeeto.h"
+#include "minion1.h"
 
 #include <vector>
 
 
-class enemyManager : public gameNode
+class enemyManager 
 {
 private:
-	typedef vector<minionBeeto*>			vMinion1;
-	typedef vector<minionBeeto*>::iterator	viMinion1;
+	typedef vector<minion1*>			vMinion1;
+	typedef vector<minion1*>::iterator	viMinion1;
 
 private:
-	vMinion1 _vBeeto;
-
+	vMinion1	_vBeeto;
+	viMinion1   _viBeeto;
 
 public:
 	enemyManager();
@@ -25,8 +25,8 @@ public:
 	virtual void render();
 
 
-	//============================ 미니언 셋팅
-	//beeto
+	//======================================== 미니언 셋팅
+	//---------------------------------beeto
 	void setMinionBeeto(void);
 	void removeMinionBeeto(int arrNum);
 };

@@ -41,7 +41,6 @@ public:
 	enemyBase();
 	~enemyBase();
 
-	virtual HRESULT init(float x, float y) = 0;
 	//					이미지매니저에 등록할 키값, 파일 이름,		출력할 초기 위치 x,y
 	virtual HRESULT init(string imgKeyString, char* imgFileName, float x, float y, int totalWidth, int totalHeight, int frameX, int frameY);
 	virtual void release();
@@ -49,7 +48,8 @@ public:
 	virtual void render();
 	virtual void draw();
 
-	virtual void move();
+	virtual HRESULT init(float x, float y) = 0;
+	virtual void move() = 0;
 	bool isPlayerFind(float playerX, float playerY, int distance);
 
 	//==================================== Start 게터 세터 작성하기===================================
