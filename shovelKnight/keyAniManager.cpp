@@ -220,3 +220,20 @@ void keyAniManager::deleteAll()
 
 	_mTotalAnimation.clear();
 }
+
+BOOL keyAniManager::deleteOne(string animationKeyName)
+{
+	iterAnimation iter = _mTotalAnimation.find(animationKeyName);
+
+	if (iter != _mTotalAnimation.end())
+	{
+		iter->second->release();
+		SAFE_DELETE(iter->second);
+		_mTotalAnimation.erase(iter);
+
+		return TRUE;
+	}
+
+	return FALSE;
+
+}
