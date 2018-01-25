@@ -4,6 +4,7 @@
 
 gamePlayScene::gamePlayScene()
 {
+	_sceneName = "gamePlayScene";
 }
 
 
@@ -20,6 +21,7 @@ HRESULT gamePlayScene::init()
 	_skill = new skillManager;
 	_player = new playerManager;
 	_gameCollision = new gameCollision;
+	_stage = new stageManager;
 
 	_gameCollision->getEmemyMemoryAdress(_enemy);
 	_gameCollision->getGameObjectMemoryAdress(_gameObject);
@@ -35,6 +37,7 @@ HRESULT gamePlayScene::init()
 	_skill->init();
 	_player->init();
 	_gameCollision->init();
+	_stage->init();
 
 
 
@@ -50,6 +53,7 @@ void gamePlayScene::release()
 	_skill->release();
 	_player->release();
 	_gameCollision->release();
+	_stage->release();
 }
 
 void gamePlayScene::update()
@@ -61,10 +65,12 @@ void gamePlayScene::update()
 	_npc->update();
 	_skill->update();
 	_gameCollision->update();
+	_stage->update();
 }
 
 void gamePlayScene::render()
 {
+	_stage->render();
 	_player->render();
 	_enemy->render();
 	_gameObject->render();

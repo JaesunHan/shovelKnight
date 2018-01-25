@@ -4,6 +4,7 @@
 
 gameTitleScene::gameTitleScene()
 {
+	_sceneName = "GameTitleScene";
 }
 
 
@@ -14,6 +15,8 @@ gameTitleScene::~gameTitleScene()
 
 HRESULT gameTitleScene::init()
 {
+	//_sceneName = "GameTitleScene";
+
 	_titleBGImgKeyStr = "titleBackgroundImg";
 	_titleBGImgFileName = "./image/title/titleMain.bmp";
 	_backgroundImg = IMAGEMANAGER->addImage(_titleBGImgKeyStr, _titleBGImgFileName, 0,0,WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
@@ -29,13 +32,18 @@ HRESULT gameTitleScene::init()
 	for (int i = 0; i < MAXBTN; ++i)
 	{
 		//364, 270 시작( right, top)
-		_rcBtn[i] = RectMake(268, 270 + i * 22, 96, 22);
+		_rcBtn[i] = RectMake(232, 250 + i * 22, 96, 22);
 	}
 
 	//처음에는 게임스타트 버튼 옆에 삽을 출력
 	//_shovelX = _rcBtn[0].left + (_rcBtn[0].right - _rcBtn[0].left) / 2;
 	//_shovelY = _rcBtn[0].top + (_rcBtn[0].bottom - _rcBtn[0].top) / 2;
 	_shovelIdx = 0;
+
+	//적 스크립트 세팅
+	setScript();
+
+
 	return S_OK;
 }
 void gameTitleScene::update() 
@@ -51,6 +59,29 @@ void gameTitleScene::update()
 		--_shovelIdx;
 		if (_shovelIdx <= 0)	_shovelIdx = 0;
 	}
+	
+	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
+	{
+		//게임 스타트 버튼 누름
+		if (_shovelIdx == 0)
+		{
+
+		}
+		//안쓸거임
+		else if (_shovelIdx == 1)
+		{		}
+		//옵션 버튼 누름
+		else if (_shovelIdx == 2)
+		{
+
+		}
+		//안쓸거임
+		else if (_shovelIdx == 3)
+		{		}
+	}
+
+
+
 }
 void gameTitleScene::release()
 {
@@ -75,6 +106,24 @@ void gameTitleScene::draw()
 	}
 	_shovelImg->render(getMemDC(), _rcBtn[_shovelIdx].left, _rcBtn[_shovelIdx].top);
 	
+}
 
+void gameTitleScene::setScript()
+{
+	//블랙나이트 
+	//black knight: I knew you'd show your face sooner or later. The cerulean coward!
+	char* enemyName = "BlackKnight";
+	char* iniFileName = "enemyScript";
+	int tmp = INIDATA->loadDataInterger(iniFileName, enemyName, "enemyNum");
+	//이미 데이터가 있으므로 ini 파일을 만들지 않는다.
+	if (tmp != NULL)
+	{
+		return;
+	}
+	//데이터가 없으므로 ini 파일을 만들자
+	INIDATA->addData(enemyName, "script", "black knight: I knew you'd show your face sooner or later. The cerulean coward!");
+	INIDATA->iniSave(iniFileName);
+	INIDATA->addData(enemyName, "enemyNum", "0");
+	INIDATA->iniSave(iniFileName);
 
 }
