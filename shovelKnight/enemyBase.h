@@ -33,6 +33,7 @@ protected:
 	float _gravity;			//적용할 중력
 	int _width, _height;	//적의 가로, 세로 크기(렉트를 만들 때 사용할 가로세로크기이다.)
 	float _playerDistance;  //플레이어와의 거리
+	float _speed;
 
 	RECT _rc;				//혹시 사용하게될지도 모를 렉트(충돌용)
 

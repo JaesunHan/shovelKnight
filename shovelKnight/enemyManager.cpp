@@ -5,11 +5,10 @@
 enemyManager::enemyManager()
 {
 }
-
-
 enemyManager::~enemyManager()
 {
 }
+
 
 HRESULT enemyManager::init()
 {
@@ -18,12 +17,27 @@ HRESULT enemyManager::init()
 
 void enemyManager::release()
 {
+
 }
 
 void enemyManager::update()
 {
+
 }
 
 void enemyManager::render()
 {
+
+}
+
+
+
+//===================================== 미니언 셋팅
+void enemyManager::setMinionBeeto(void)
+{
+
+}
+void enemyManager::removeMinionBeeto(int arrNum)
+{
+
 }

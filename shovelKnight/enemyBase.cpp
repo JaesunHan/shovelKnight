@@ -19,6 +19,7 @@ HRESULT enemyBase::init(string imgKeyString, char* imgFileName, float x, float y
 	_x = x;
 	_y = y;
 
+	_speed = 3.0f;
 	_playerDistance = 0.0f;
 
 	_img = IMAGEMANAGER->addFrameImage(_imgKeyString, _imgFileName, _x, _y, totalWidth, totalHeight, frameX, frameY, true, RGB(255, 0, 255));
@@ -51,10 +52,10 @@ void enemyBase::update()
 
 		break;
 		case ENEMY_LEFT_MOVE:
-
+			_x -= _speed;
 		break;
 		case ENEMY_RIGHT_MOVE:
-
+			_x += _speed;
 		break;
 		case ENEMY_LEFT_JUMP:
 
