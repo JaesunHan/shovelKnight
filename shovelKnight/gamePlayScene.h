@@ -17,7 +17,6 @@ private:
 	enemyManager* _enemy;
 	gameObjectManager* _gameObject;
 	itemManager* _item;
-	bgManager* _bg;
 	npcManager* _npc;
 	skillManager* _skill;
 	playerManager* _player;

@@ -16,7 +16,6 @@ HRESULT gamePlayScene::init()
 	_enemy = new enemyManager;
 	_gameObject = new gameObjectManager;
 	_item = new itemManager;
-	_bg = new bgManager;
 	_npc = new npcManager;
 	_skill = new skillManager;
 	_player = new playerManager;
@@ -25,12 +24,10 @@ HRESULT gamePlayScene::init()
 	_gameCollision->getEmemyMemoryAdress(_enemy);
 	_gameCollision->getGameObjectMemoryAdress(_gameObject);
 	_gameCollision->getItemMemoryAdress(_item);
-	_gameCollision->getBGMemoryAdress(_bg);
 	_gameCollision->getNPCMemoryAdress(_npc);
 	_gameCollision->getSkillMemoryAdress(_skill);
 	_gameCollision->getPlayerMemoryAdress(_player);
 
-	_bg->init();
 	_enemy->init();
 	_gameObject->init();
 	_item->init();
@@ -49,7 +46,6 @@ void gamePlayScene::release()
 	_enemy->release();
 	_gameObject->release();
 	_item->release();
-	_bg->release();
 	_npc->release();
 	_skill->release();
 	_player->release();
@@ -58,7 +54,6 @@ void gamePlayScene::release()
 
 void gamePlayScene::update()
 {
-	_bg->update();
 	_enemy->update();
 	_gameObject->update();
 	_item->update();
@@ -70,7 +65,6 @@ void gamePlayScene::update()
 
 void gamePlayScene::render()
 {
-	_bg->render();
 	_player->render();
 	_enemy->render();
 	_gameObject->render();

@@ -82,9 +82,6 @@
     <Filter Include="헤더 파일\Function">
       <UniqueIdentifier>{3cf29cad-0ebe-42c6-a470-90f4c1ebe432}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\gamePlayScene\backGround">
-      <UniqueIdentifier>{c076fc54-8fae-4eb3-a84d-ae19174c932d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="playGround\gameTitleScene">
       <UniqueIdentifier>{c70d71a2-5e76-4321-933a-88bd503eb239}</UniqueIdentifier>
     </Filter>
@@ -93,6 +90,9 @@
     </Filter>
     <Filter Include="playGround\allMenu">
       <UniqueIdentifier>{aaf728bd-1a66-422a-a5f5-7c2456400d62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\gamePlayScene\stageManager">
+      <UniqueIdentifier>{9ee03396-1726-4a62-bd69-29f2d3be84d2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -225,12 +225,6 @@
     <ClInclude Include="commonMacroFunction.h">
       <Filter>헤더 파일\Function</Filter>
     </ClInclude>
-    <ClInclude Include="bgBase.h">
-      <Filter>playGround\gamePlayScene\backGround</Filter>
-    </ClInclude>
-    <ClInclude Include="bgManager.h">
-      <Filter>playGround\gamePlayScene\backGround</Filter>
-    </ClInclude>
     <ClInclude Include="motherAction.h">
       <Filter>playGround</Filter>
     </ClInclude>
@@ -290,6 +284,9 @@
     </ClInclude>
     <ClInclude Include="dirtBlock.h">
       <Filter>playGround\gamePlayScene\gameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="stageManager.h">
+      <Filter>playGround\gamePlayScene\stageManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -407,12 +404,6 @@
     <ClCompile Include="gameCollision.cpp">
       <Filter>playGround\gamePlayScene\gameCollision</Filter>
     </ClCompile>
-    <ClCompile Include="bgBase.cpp">
-      <Filter>playGround\gamePlayScene\backGround</Filter>
-    </ClCompile>
-    <ClCompile Include="bgManager.cpp">
-      <Filter>playGround\gamePlayScene\backGround</Filter>
-    </ClCompile>
     <ClCompile Include="motherAction.cpp">
       <Filter>playGround</Filter>
     </ClCompile>
@@ -472,6 +463,9 @@
     </ClCompile>
     <ClCompile Include="dirtBlock.cpp">
       <Filter>playGround\gamePlayScene\gameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="stageManager.cpp">
+      <Filter>playGround\gamePlayScene\stageManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
