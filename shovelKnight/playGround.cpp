@@ -17,7 +17,6 @@ HRESULT playGround::init()
 	gameNode::init(true);
 
 	_GTS = new gameTitleScene;
-	//_gtsStr = "GameTitleScene";
 	SCENEMANAGER->addScene(_GTS->getSceneName(), _GTS);
 
 	_GMS = new gameMenuScene;
@@ -25,14 +24,9 @@ HRESULT playGround::init()
 	_GTS->setGameMenuSceneAddressLink(_GMS);
 
 	SCENEMANAGER->changeScene(_GTS->getSceneName());
-	//SCENEMANAGER->changeScene(_GTS->getSceneName());
-	//_GTS->setGameMenuSceneAddressLink(_GMS);
 
-	//_GTS->setSceneName(_gtsStr);
-	/*SCENEMANAGER->changeScene(_GTS->getSceneName());*/
-
-	//_GPS = new gamePlayScene;
-	//SCENEMANAGER->addScene(_GPS->getSceneName(), _GPS);
+	_GPS = new gamePlayScene;
+	SCENEMANAGER->addScene(_GPS->getSceneName(), _GPS);
 	//SCENEMANAGER->changeScene(_GPS->getSceneName());
 
 	
@@ -53,6 +47,10 @@ void playGround::update(void)
 
 	SCENEMANAGER->update();
 
+	if (KEYMANAGER->isOnceKeyDown('T'))
+	{
+		SCENEMANAGER->changeScene(_GPS->getSceneName());
+	}
 		
 }
 
