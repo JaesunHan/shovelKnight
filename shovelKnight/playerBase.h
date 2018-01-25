@@ -8,6 +8,7 @@
 #define	DOWNATTACK_DAMAGE_BOX_HEIGHT 10
 #define SPEED 4.0f
 #define GRAVITY 0.2f
+#define JUMPPOWER 6.0f
 
 enum PLAYERDIRECTION
 {
@@ -85,7 +86,10 @@ public:
 	void attack(float fireX, float fireY, bool skillUsed);
 	void move();
 
-
+	inline float getX() { return _x; }
+	inline void setX(float x) { _x = x; }
+	inline float getY() { return _y; }
+	inline void setY(float y) { _y = y; }
 	inline int	getMaxHP() { return _maxHP; }
 	inline void setMaxHP(int increaseHP) { _maxHP += increaseHP; }
 	inline int	getMaxMP() { return _maxMP; }
@@ -96,6 +100,5 @@ public:
 
 	inline RECT getPlayerRc() { return _rc; }
 	inline COLLISION_PLAYER getCollisionPlayer() { return _cp; }
-
 };
 

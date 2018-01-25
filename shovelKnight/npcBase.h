@@ -1,4 +1,5 @@
 #pragma once
+#include "gameNode.h"
 
 enum NPCTYPE			//NPC 타입
 {
@@ -28,13 +29,11 @@ enum NPCSTATUS			//NPC 상태
 //======magicgirl기능=======================
 //5-3. 파이어볼 스킬 -> 플레이어 스킬에서 선 작업으로 fireball 스킬 생성
 //5-4. 상점에서 파이어 볼을 구매하면 스트링값으로 fireball을 플레이어에서 연결
-
-
 //6. 이스터에그 - 엔터더건전처럼 만약 플레이어가 상인에게 공격시 3번까지 피격당하며 3회 이후에는 "삐져서 사라짐" 하고 사라지는 기능
 //7. 이걸 어떻게 구현하지.....
 
 
-class npcBase
+class npcBase : public gameNode
 {
 protected:
 	image* _img;			// NPC 이미지
@@ -45,6 +44,7 @@ protected:
 	int _width, _height;	//충돌 렉트를 만들 때 쓸 가로 세로 크기
 	
 	RECT _rc;				//상점NPC 렉트
+	NPCTYPE _npcType;		//NPC타입
 
 	bool _isCollision;		//플레이어와 충돌했는가? true : 그렇다, false : 아니다
 
@@ -54,7 +54,7 @@ public:
 	npcBase();
 	~npcBase();
 
-	virtual HRESULT init(string imgKeyString, char* imgFileNmae, float x, float y, int totalWidth, int totalHeight, int frameXx, int frameY);
+	virtual HRESULT init(string imgKeyString, char* imgFileNmae, float x, float y, int totalWidth, int totalHeight, int frameXx, int frameY, NPCTYPE npctype);
 	virtual void release();
 	virtual void update();
 	virtual void render();

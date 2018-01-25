@@ -11,6 +11,7 @@ gameObjectManager::~gameObjectManager()
 {
 }
 
+
 HRESULT gameObjectManager::init()
 {
 	return S_OK;
@@ -27,3 +28,4 @@ void gameObjectManager::update()
 void gameObjectManager::render()
 {
 }
+

@@ -20,13 +20,14 @@
 class MagicGirl :
 	public npcBase
 {
-
-
-
-
-
 public:
 	MagicGirl();
 	~MagicGirl();
+
+	int _price;				//얼마에 팔건지 가격 세팅용
+	int _stock;				//몇번이나 상점에서 구매했는지 확인 변수
+	
+	bool _isSell;			//세팅한 스킬이 팔렸는지?
+
 };
 
