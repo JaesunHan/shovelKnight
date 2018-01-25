@@ -9,7 +9,7 @@ namespace 트윈테일쟝
 		RECT ell = rcEll;
 		RECT rc = rcRect;
 
-		FPOINT ptell = PointMakeRect(ell);
+		FPOINT ptell = FPointMakeRect(ell);
 
 		if (rc.left <= ptell.x && ptell.x <= rc.right
 			|| rc.top <= ptell.y && ptell.y <= rc.bottom)
@@ -23,7 +23,7 @@ namespace 트윈테일쟝
 			temp.right = rc.right + radius;
 			temp.bottom = rc.bottom + radius;
 
-			if (PtInRc(temp, ptell)) return TRUE;
+			if (PtInRect(temp, ptell)) return TRUE;
 		}
 
 		//모서리조건
@@ -43,10 +43,10 @@ namespace 트윈테일쟝
 		float ell1Radius = getRectWidth(rcEll1) / 2;
 		float ell2Radius = getRectWidth(rcEll2) / 2;
 
-		FPOINT ell1pt = PointMakeRect(rcEll1);
-		FPOINT ell2pt = PointMakeRect(rcEll2);
+		FPOINT ell1pt = FPointMakeRect(rcEll1);
+		FPOINT ell2pt = FPointMakeRect(rcEll2);
 
-		if (ell1Radius + ell2Radius >= getDistancePoint(ell1pt, ell2pt))
+		if (ell1Radius + ell2Radius >= getDistanceFPoint(ell1pt, ell2pt))
 		{
 			return TRUE;
 		}
@@ -54,7 +54,7 @@ namespace 트윈테일쟝
 		return FALSE;
 	}
 
-	float getDistancePoint(FPOINT ptStart, FPOINT ptEnd)
+	float getDistancePoint(POINT ptStart, POINT ptEnd)
 	{
 		float x = ptEnd.x - ptStart.x;
 		float y = ptEnd.y - ptStart.y;
@@ -62,7 +62,31 @@ namespace 트윈테일쟝
 		return sqrtf(x * x + y * y);
 	}
 
-	float getAnglePoint(FPOINT pt1, FPOINT pt2)
+	float getAnglePoint(POINT pt1, POINT pt2)
+	{
+		float x = pt2.x - pt1.x;
+		float y = pt2.y - pt1.y;
+
+		float angle = acosf(x / sqrtf(x * x + y * y));
+
+		if (pt2.y > pt1.y)
+		{
+			angle = PI2 - angle;
+			if (angle >= PI2) angle -= PI2;
+		}
+
+		return angle;
+	}
+
+	float getDistanceFPoint(FPOINT ptStart, FPOINT ptEnd)
+	{
+		float x = ptEnd.x - ptStart.x;
+		float y = ptEnd.y - ptStart.y;
+
+		return sqrtf(x * x + y * y);
+	}
+
+	float getAngleFPoint(FPOINT pt1, FPOINT pt2)
 	{
 		float x = pt2.x - pt1.x;
 		float y = pt2.y - pt1.y;
@@ -80,7 +104,19 @@ namespace 트윈테일쟝
 
 	BOOL PtInEll(RECT rc, FPOINT pt)
 	{
-		FPOINT ptRc = PointMakeRect(rc);
+		FPOINT ptRc = FPointMakeRect(rc);
+
+		if (getDistanceFPoint(ptRc, pt) <= getRectWidth(rc) / 2)
+		{
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
+	BOOL PtInEll(RECT rc, POINT pt)
+	{
+		POINT ptRc = PointMakeRect(rc);
 
 		if (getDistancePoint(ptRc, pt) <= getRectWidth(rc) / 2)
 		{
@@ -90,7 +126,7 @@ namespace 트윈테일쟝
 		return FALSE;
 	}
 
-	BOOL PtInRc(RECT rc, FPOINT pt)
+	BOOL PtInRect(RECT rc, FPOINT pt)
 	{
 		if (rc.left <= pt.x && pt.x <= rc.right
 			&& rc.top <= pt.y && pt.y <= rc.bottom)
@@ -107,7 +143,27 @@ namespace 트윈테일쟝
 		return pt;
 	}
 
-	FPOINT PointMakeRect(RECT rc)
+	POINT PointMakeRect(RECT rc)
+	{
+		POINT pt = {
+			rc.left,
+			rc.top
+		};
+
+		return pt;
+	}
+
+	POINT PointMakeRectCenter(RECT rc)
+	{
+		POINT pt = {
+			rc.right / 2 + rc.left / 2,
+			rc.bottom / 2 + rc.top / 2
+		};
+
+		return pt;
+	}
+
+	FPOINT FPointMakeRect(RECT rc)
 	{
 		FPOINT pt = {
 			rc.left,
@@ -117,7 +173,7 @@ namespace 트윈테일쟝
 		return pt;
 	}
 
-	FPOINT PointMakeRectCenter(RECT rc)
+	FPOINT FPointMakeRectCenter(RECT rc)
 	{
 		FPOINT pt = {
 			rc.right / 2 + rc.left / 2,
@@ -190,45 +246,68 @@ namespace 트윈테일쟝
 			pt.y - height / 2 };
 	}
 
-	void PtMoveAngleSpeed(FPOINT& pt, float& angle, float& speed)
+	void PtMoveAngleSpeed(FPOINT& pt, float angle, float speed)
 	{
 		pt.x += +cosf(angle) * speed;
 		pt.y += -sinf(angle) * speed;
 		return;
 	}
 
-	void XYMoveAngleSpeed(float& x, float& y, float& angle, float& speed)
+	void XYMoveAngleSpeed(float& x, float& y, float angle, float speed)
 	{
 		x += +cosf(angle) * speed;
 		y += -sinf(angle) * speed;
 	}
 
-	void TTTextOut(HDC hdc, int x, int y, char* stri, float f, bool backGround)
+	void TTTextOut(HDC hdc, int x, int y, string str, float num, BOOL backGround)
 	{
-		int buffer = 3 + 4 + 1;	//" : ", "0.00", ""
-		int unit = 10;
-		while (f / (float)unit > 1)
-		{
-			buffer++;
-			unit *= 10;
-		}
-		//진짜 float인지는 모르고 소수점 있으면 float으로 인식
-		bool isfloat = (f - (int)f != 0);
+		BOOL isfloat = (num != (int)num);
+
 		if (isfloat)
 		{
-			char* str = new char[buffer + strlen(stri)];
-			sprintf(str, "%s : %.2f", stri, f);
-			//SetTextColor(hdc, COLORREF)
+			int buffer = 4;
+			{
+				int ten = 1;
+				while ((int)num > ten * 10 - 1)
+				{
+					ten *= 10;
+					++buffer;
+				}
+			}
+
+			char* str2 = new char[str.size() + 3 + buffer + 1];
+			sprintf(str2, "%s : %.2f", str.c_str(), num);
 			if (!backGround) SetBkMode(hdc, TRANSPARENT);
-			TextOut(hdc, x, y, str, strlen(str));
+			TextOut(hdc, x, y, str2, strlen(str2));
 		}
 		else
 		{
-			char* str = new char[buffer - 3 + strlen(stri)];
-			sprintf(str, "%s : %d", stri, f);
+			int buffer = 1;
+			{
+				int ten = 1;
+				while (num > ten * 10 - 1)
+				{
+					ten *= 10;
+					++buffer;
+				}
+			}
+
+			char* str2 = new char[str.size() + 3 + buffer + 1];
+			sprintf(str2, "%s : %d", str.c_str(), num);
 			if (!backGround) SetBkMode(hdc, TRANSPARENT);
-			TextOut(hdc, x, y, str, strlen(str));
+			TextOut(hdc, x, y, str2, strlen(str2));
 		}
+
+	}
+
+	void TTTextOut(string stri, float f)
+	{
+		cout << stri << " : " << f << endl;
+	}
+
+	void TTTextOut(string stri, int d)
+	{
+		cout << stri << " : " << d << endl;
 	}
 
 	BOOL ThisPixelIsMazen(HDC hdc, int x, int y)
@@ -246,35 +325,26 @@ namespace 트윈테일쟝
 		return FALSE;
 	}
 
-	RECT RectMakeSmall(RECT rc)
+	BOOL ThisPixelIsMazen(COLORREF color)
 	{
-		return {
-			long(rc.left * SMALLX),
-			long(rc.top * SMALLY),
-			long(rc.right * SMALLX),
-			long(rc.bottom * SMALLY) };
+		int r2 = GetRValue(color);
+		int g2 = GetGValue(color);
+		int b2 = GetBValue(color);
+
+		if (r2 == 255 && g2 == 0 && b2 == 255)
+		{
+			return TRUE;
+		}
+		return FALSE;
 	}
 
-	RECT RectMakeBig(RECT rc)
+	char* PTSTR_To_String(string str)
 	{
-		return {
-			long(rc.left * BIGX),
-			long(rc.top * BIGY),
-			long(rc.right * BIGX),
-			long(rc.bottom * BIGY) };
+		char* str2 = new char[str.size() + 1];
+
+		strcpy(str2, str.c_str());
+
+		return str2;
 	}
 
-	FPOINT PointMakeSmall(FPOINT pt)
-	{
-		return {
-			pt.x * SMALLX,
-			pt.y * SMALLY };
-	}
-
-	FPOINT PointMakeBig(FPOINT pt)
-	{
-		return {
-			pt.x * BIGX,
-			pt.y * BIGY };
-	}
 }
