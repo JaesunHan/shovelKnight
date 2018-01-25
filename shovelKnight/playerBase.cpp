@@ -24,7 +24,7 @@ HRESULT playerBase::init(float startX, float startY)
 	_currentMP = _maxMP = 30;
 	_skill = NULL;
 	_skillUsed = false;
-	_direction = RIGHT;
+	_direction = PD_RIGHT;
 	_moveSpeed = SPEED;
 	_gravity = GRAVITY;
 	_jumpPower = JUMPPOWER;
@@ -56,27 +56,111 @@ void playerBase::render()
 
 }
 
-void playerBase::hitReAction(int num)
+void playerBase::hitReAction()
 {
-	switch (_cp)
+	switch (_cPlayerTarget)
 	{
-	case CP_NULL:
+		case CP_NULL:
 		break;
-	case CP_GROUND:
+		case CP_OBJECT:
+		{
+			switch (_cLR)
+			{
+				case LR_NULL:
+				_rtBlock = false;
+				_ltBlock = false;
+				break;
+				case LR_LEFT:
+				_rtBlock = true;
+				break;
+				case LR_RIGHT:
+				_ltBlock = true;
+				break;
+			}
+			switch (_cTB)
+			{
+				case TB_NULL:
+				break;
+				case TB_TOP:
+				_jumpPower = JUMPPOWER;
+				break;
+				case TB_BOTTOM:
+				_jumpPower = 0;
+				break;
+			}
+		}
 		break;
-	case CP_OBJECT:
+		case CP_ENEMY:
+		
 		break;
-	case CP_OBJECT_SHOVEL_TOP:
-		break;
-	case CP_ENEMY_RIGHT:
-		break;
-	case CP_ENEMY_LEFT:
-		break;
-	case CP_SHOVEL_ENEMY_RIGHT:
-		break;
-	case CP_SHOVEL_ENEMY_LEFT:
-		break;
+		case CP_GROUND:
+		{
+			switch (_cLR)
+			{
+				case LR_NULL:
+				_rtBlock = false;
+				_ltBlock = false;
+				break;
+				case LR_LEFT:
+				_rtBlock = true;
+				break;
+				case LR_RIGHT:
+				_ltBlock = true;
+				break;
+			}
+			switch (_cTB)
+			{
+				case TB_NULL:
+				break;
+				case TB_TOP:
+				_jumpPower = JUMPPOWER;
+				break;
+				case TB_BOTTOM:
+				_jumpPower = 0;
+				break;
+			}
+		}
+		case CP_SHOVEL_OBJ:
+		{
+			switch (_cTB)
+			{
+			case TB_NULL:
+				break;
+			case TB_TOP:
+				_jumpPower = JUMPPOWER/2;
+				break;
+			case TB_BOTTOM:
+				break;
+			}
+		}
+			break;
+		case CP_SHOVEL_ENEMY:
+		{
+			switch (_cTB)
+			{
+			case TB_NULL:
+				break;
+			case TB_TOP:
+				_jumpPower = JUMPPOWER / 2;
+				break;
+			case TB_BOTTOM:
+				break;
+			}
+			switch (_cLR)
+			{
+			case LR_NULL:
+				break;
+			case LR_LEFT:
+				break;
+			case LR_RIGHT:
+				break;
+			}
+		}
+			break;
+
 	}
+	
+	
 }
 
 void playerBase::attack(float fireX, float fireY, bool skillUsed)
@@ -102,7 +186,7 @@ void playerBase::move()
 	}
 	if (KEYMANAGER->isStayKeyDown('A'))
 	{
-		_direction = LEFT;
+		_direction = PD_LEFT;
 		_action = PR_MOVE;
 	}
 	if (KEYMANAGER->isOnceKeyUp('A'))
@@ -111,7 +195,7 @@ void playerBase::move()
 	}
 	if (KEYMANAGER->isStayKeyDown('D'))
 	{
-		_direction = RIGHT;
+		_direction = PD_RIGHT;
 		_action = PR_MOVE;
 	}
 	if (KEYMANAGER->isOnceKeyUp('D'))
@@ -138,10 +222,6 @@ void playerBase::move()
 		_y -= _jumpPower;
 		_jumpPower -= _gravity;
 	}
-	//if (_state == ONLAND)
-	//{
-	//	_jumpPower = JUMPPOWER;j
-	//}
 
 	_rc = RectMake(_x - HIT_BOX_WIDTH / 2, _y - HIT_BOX_HEIGHT, HIT_BOX_WIDTH, HIT_BOX_HEIGHT);
 }
