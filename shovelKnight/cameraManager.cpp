@@ -22,7 +22,6 @@ void cameraManager::release(void)
 
 }
 
-//바탕이 되는 백그라운드 랜더 (하늘, 구름, 산 같은거)
 void cameraManager::renderBackground(HDC hdc, image* img)
 {
 	GdiTransparentBlt(hdc, 
@@ -51,7 +50,6 @@ void cameraManager::renderBackground(HDC hdc, image* img, int camNum)
 	}
 }
 
-//플레이어가 이동하는 맵 랜더
 void cameraManager::renderMap(HDC hdc, image* img)
 {
 	if (_width >= img->getWidth())
@@ -68,7 +66,26 @@ void cameraManager::renderMap(HDC hdc, image* img)
 	if (_focusX >= img->getWidth() - _width / 2) _focusX = img->getWidth() - _width / 2;
 	if (_focusY <= _height / 2) _focusY = _height / 2;
 	if (_focusY >= img->getHeight() - _height / 2) _focusY = img->getHeight() - _height / 2;
-	GdiTransparentBlt(hdc, 0, 0, WINSIZEX, WINSIZEY, img->getMemDC(), _focusX - _width / 2, _focusY - _height / 2, _width, _height, RGB(255, 0, 255));
+	GdiTransparentBlt(hdc, 
+		0, 0, WINSIZEX, WINSIZEY, 
+		img->getMemDC(), 
+		_focusX - _width / 2, _focusY - _height / 2, 
+		_width, _height, 
+		RGB(255, 0, 255));
+}
+
+void cameraManager::renderTile(HDC hdc, image* img, float destX, float destY, float sourX, float sourY, int tileWidth)
+{
+	GdiTransparentBlt
+	(hdc,
+		(destX * tileWidth - _focusX + _width / 2) * WINSIZEX / _width,
+		(destY * tileWidth - _focusY + _height / 2) * WINSIZEY / _height,
+		tileWidth * WINSIZEX / _width,
+		tileWidth * WINSIZEY / _height,
+		img->getMemDC(),
+		sourX * tileWidth, sourY * tileWidth,
+		tileWidth, tileWidth,
+		RGB(255, 0, 255));
 }
 
 void cameraManager::renderMap(HDC hdc, image* img, int camNum)
@@ -104,7 +121,6 @@ void cameraManager::renderMap(HDC hdc, image* img, int camNum)
 	}
 }
 
-//맵에 뿌려지는 오브젝트들 랜더
 void cameraManager::renderObject(HDC hdc, image* img, float destX, float destY)
 {
 	GdiTransparentBlt
@@ -120,7 +136,6 @@ void cameraManager::renderObject(HDC hdc, image* img, float destX, float destY)
 		RGB(255, 0, 255));
 }
 
-//맵에 뿌려지는 오브젝트들 랜더						  뿌려지는 위치 X, Y			뿌릴 이미지 좌표 X, Y  이미지 가로, 세로 크기 
 void cameraManager::renderObject(HDC hdc, image* img, float destX, float destY, int sourX, int sourY, int width, int height)
 {
 	GdiTransparentBlt
@@ -212,7 +227,6 @@ void cameraManager::aniRenderObject(HDC hdc, image* img, int camNum, animation* 
 	}
 }
 
-//포커스 하나 잡기
 void cameraManager::setSingleFocus(float x, float y) 
 {
 	_focusX = x; 
@@ -221,7 +235,6 @@ void cameraManager::setSingleFocus(float x, float y)
 	_height = WINSIZEY;
 }
 
-//포커스 하나 잡기 + 카메라 가로 크기
 void cameraManager::setSingleFocus(float x, float y, float width)
 {
 	_focusX = x; 
@@ -230,7 +243,6 @@ void cameraManager::setSingleFocus(float x, float y, float width)
 	_height = width * WINSIZEY / WINSIZEX;
 }
 
-//포커스 두개 잡기					포커스 좌표 1,		포커스 좌표2,		포커스 좌표 좌우 여백 비율(1일때 WINSIZEX만큼의 여백을 갖는다.)
 void cameraManager::setDoubleFocus(float x1, float y1, float x2, float y2, float blankRatio)
 {
 	if (x1 >= x2)
@@ -256,25 +268,20 @@ void cameraManager::setMulticam(int camNum, float destX, float destY, float widt
 	_vMulticam.push_back(temp);
 }
 
-//카메라 상의 x좌표 반환
 float cameraManager::getX(float x)
 {
 	return (x - _focusX + _width / 2) * WINSIZEX / _width;
 }
-
-//카메라 상의 y좌표 반환
 float cameraManager::getY(float y)
 {
 	return (y - _focusY + _height / 2) * WINSIZEY / _height;
 }
 
-//카메라 상의 마우스 x좌표 반환
 float cameraManager::getMousePointX(float mousePtX)
 {
 	return (_focusX - _width / 2 + mousePtX * _width / WINSIZEX);
 }
 
-//카메라 상의 마우스 y좌표 반환
 float cameraManager::getMousePointY(float mousePtY)
 {
 	return (_focusY - _height / 2 + mousePtY * _height / WINSIZEY);

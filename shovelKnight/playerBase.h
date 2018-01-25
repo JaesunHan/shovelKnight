@@ -8,7 +8,7 @@
 #define	DOWNATTACK_DAMAGE_BOX_HEIGHT 10
 #define SPEED 4.0f
 #define GRAVITY 0.2f
-#define JUMPPOWER 6.0f
+#define JUMPPOWER 3.0f
 
 enum PLAYERDIRECTION
 {
@@ -25,21 +25,25 @@ enum PLAYERSTATE
 
 enum PLAYERACTION
 {
-	IDLE,
-	MOVE,
-	ATTACK,
-	JUMP,
-	ROOTING,
-	DAMAGED,
-	DIE
+	PR_IDLE,
+	PR_MOVE,
+	PR_ATTACK,
+	PR_JUMP,
+	PR_ROOTING,
+	PR_DAMAGED,
+	PR_DIE
 };
 
 enum COLLISION_PLAYER
 {
 	CP_NULL,
+	CP_GROUND,
 	CP_OBJECT,
-	CP_ENEMY_SIDE,
-	CP_ENEMY_TOP
+	CP_OBJECT_SHOVEL_TOP,
+	CP_ENEMY_RIGHT,
+	CP_ENEMY_LEFT,
+	CP_SHOVEL_ENEMY_RIGHT,
+	CP_SHOVEL_ENEMY_LEFT
 };
 
 
@@ -77,7 +81,7 @@ public:
 	playerBase();
 	~playerBase();
 
-	virtual HRESULT init(float startX, float startY, string imageName);
+	virtual HRESULT init(float startX, float startY);
 	virtual void release();
 	virtual void update();
 	virtual void render();

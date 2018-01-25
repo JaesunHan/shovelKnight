@@ -49,6 +49,7 @@ public:
 	animation* findAnimation(string animationKeyName);
 
 	void deleteAll();
+	BOOL deleteOne(string animationKeyName);
 
 	keyAniManager();
 	~keyAniManager();

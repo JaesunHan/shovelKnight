@@ -9,6 +9,8 @@ private:
 	int _loopX1;
 	float _loopX2;
 	int _mapNum;
+	int _transverseTileNum;
+	int _verticalTileNum;
 	bool _mapLoaded;
 	typedef vector<string> arrElements;
 	typedef vector<string>::iterator iterElements;
@@ -23,6 +25,7 @@ public:
 	void render();
 
 	void loadData();
+	void renderTiles();
 
 	stageManager();
 	~stageManager();

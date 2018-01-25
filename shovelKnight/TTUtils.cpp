@@ -259,7 +259,7 @@ namespace 트윈테일쟝
 		y += -sinf(angle) * speed;
 	}
 
-	void TTTextOut(HDC hdc, int x, int y, string str, float num, BOOL backGround)
+	void TTTextOut(HDC hdc, int x, int y, string str, int num, BOOL backGround)
 	{
 		BOOL isfloat = (num != (int)num);
 
