@@ -259,7 +259,7 @@ namespace 트윈테일쟝
 		y += -sinf(angle) * speed;
 	}
 
-	void TTTextOut(HDC hdc, int x, int y, string str, int num, BOOL backGround)
+	void TTTextOut(HDC hdc, int x, int y, string str, float num, BOOL backGround)
 	{
 		BOOL isfloat = (num != (int)num);
 
@@ -293,7 +293,7 @@ namespace 트윈테일쟝
 			}
 
 			char* str2 = new char[str.size() + 3 + buffer + 1];
-			sprintf(str2, "%s : %d", str.c_str(), num);
+			sprintf(str2, "%s : %d", str.c_str(), (int)num);
 			if (!backGround) SetBkMode(hdc, TRANSPARENT);
 			TextOut(hdc, x, y, str2, strlen(str2));
 		}
@@ -310,7 +310,7 @@ namespace 트윈테일쟝
 		cout << stri << " : " << d << endl;
 	}
 
-	BOOL ThisPixelIsMazen(HDC hdc, int x, int y)
+	BOOL ThisPixelIsMazen(HDC hdc, int x, int y, COLORREF cmpColor)
 	{
 		COLORREF color = GetPixel(hdc, x, y);
 
@@ -318,20 +318,20 @@ namespace 트윈테일쟝
 		int g2 = GetGValue(color);
 		int b2 = GetBValue(color);
 
-		if (r2 == 255 && g2 == 0 && b2 == 255)
+		if (r2 == GetRValue(cmpColor) && g2 == GetGValue(cmpColor) && b2 == GetBValue(cmpColor))
 		{
 			return TRUE;
 		}
 		return FALSE;
 	}
 
-	BOOL ThisPixelIsMazen(COLORREF color)
+	BOOL ThisPixelIsMazen(COLORREF color, COLORREF cmpColor)
 	{
 		int r2 = GetRValue(color);
 		int g2 = GetGValue(color);
 		int b2 = GetBValue(color);
 
-		if (r2 == 255 && g2 == 0 && b2 == 255)
+		if (r2 == GetRValue(cmpColor) && g2 == GetGValue(cmpColor) && b2 == GetBValue(cmpColor))
 		{
 			return TRUE;
 		}
