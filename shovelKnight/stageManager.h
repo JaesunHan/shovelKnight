@@ -27,6 +27,8 @@ public:
 	void loadData();
 	void renderTiles();
 
+
+
 	stageManager();
 	~stageManager();
 };
