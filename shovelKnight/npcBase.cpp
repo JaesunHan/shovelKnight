@@ -24,7 +24,7 @@ HRESULT npcBase::init(string imgKeyString, char* imgFileNmae, float x, float y, 
 	_img = IMAGEMANAGER->addFrameImage(_imgKeyString, _imgFileName, _x, _y, totalWidth, totalHeight, frameX, frameY, true, RGB(255, 0, 255));
 	_width = _img->getFrameWidth();
 	_height = _img->getFrameHeight();
-
+	_stock = 0;
 
 	return S_OK;
 }

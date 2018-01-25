@@ -32,11 +32,16 @@ void enemyManager::render()
 
 
 
-//===================================== 미니언 셋팅
+//============================================== 미니언 셋팅
 void enemyManager::setMinionBeeto(void)
 {
+	minionBeeto* beeto;
+	beeto = new minionBeeto;
+
+	beeto->init(100, 100);
 
 }
+
 void enemyManager::removeMinionBeeto(int arrNum)
 {
 

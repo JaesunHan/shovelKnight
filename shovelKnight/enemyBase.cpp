@@ -12,6 +12,13 @@ enemyBase::~enemyBase()
 
 }
 
+HRESULT enemyBase::init(float x, float y)
+{
+
+
+	return S_OK;
+}
+
 HRESULT enemyBase::init(string imgKeyString, char* imgFileName, float x, float y, int totalWidth, int totalHeight, int frameX, int frameY)
 {
 	_imgKeyString = imgKeyString;
