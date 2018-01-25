@@ -120,11 +120,7 @@ void stageManager::loadData()
 
 void stageManager::renderTiles()
 {
-	//for (_viTileNum = _vTileNum.begin(); _viTileNum != _vTileNum.end(); ++_viTileNum)
-	//{
-	//
-	//}
-	for (int i = 0; i < 3; ++i)						//¸Ê °¡·Î Å¸ÀÏ °¹¼ö
+	for (int i = 0; i < 50; ++i)						//¸Ê °¡·Î Å¸ÀÏ °¹¼ö
 	{
 		for (int j = 0; j < _verticalTileNum; ++j)	//¸Ê ¼¼·Î Å¸ÀÏ °¹¼ö
 		{

@@ -69,13 +69,13 @@ vector<string> txtData::txtLoad(const char* loadFileName)
 {
 	HANDLE file;
 
-	char str[128];
+	char str[16384];
 	DWORD read;
 
 	file = CreateFile(loadFileName, GENERIC_READ, 0, NULL,
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
-	ReadFile(file, str, 128, &read, NULL);
+	ReadFile(file, str, 16384, &read, NULL);
 
 	CloseHandle(file);
 
