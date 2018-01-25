@@ -4,7 +4,6 @@
 #include "enemyManager.h"
 #include "gameObjectManager.h"
 #include "itemManager.h"
-#include "bgManager.h"
 #include "npcManager.h"
 #include "skillManager.h"
 #include "playerManager.h"
