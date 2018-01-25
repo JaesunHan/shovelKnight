@@ -69,7 +69,7 @@ void gameMenuScene::loadPlayerListData()
 	}
 	for (int i = 0; i < MAXPLAYERLIST; ++i)
 	{
-		//playerBase p1 = new player1;
+		playerBase* p1 = new player1;
 		wsprintf(subjectName, "palyer%d", i);
 		INIDATA->loadDataInterger(fileName, subjectName, "Name");
 		
