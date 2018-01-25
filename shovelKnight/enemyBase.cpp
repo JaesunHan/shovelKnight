@@ -45,49 +45,20 @@ void enemyBase::release()
 {
 
 }
+
 void enemyBase::update()
 {
+	//이동
 	move();
 
-
-	switch (_status)
-	{
-		case ENEMY_LEFT_STOP:
-
-		break;
-		case ENEMY_RIGHT_STOP:
-
-		break;
-		case ENEMY_LEFT_MOVE:
-			_x -= _speed;
-		break;
-		case ENEMY_RIGHT_MOVE:
-			_x += _speed;
-		break;
-		case ENEMY_LEFT_JUMP:
-
-		break;
-		case ENEMY_RIGHT_JUMP:
-
-		break;
-		case ENMEY_LEFT_ATTACK:
-
-		break;
-		case ENEMY_RIGHT_ATTACK:
-
-		break;
-		case ENEMY_LEFT_JUMP_ATTACK:
-
-		break;
-		case ENEMY_RIGHT_JUMP_ATTACK:
-
-		break;
-	}
-
+	//RECT update
 	_rc = RectMakeCenter(_x, _y, _width, _height);
+
+
 
 	KEYANIMANAGER->update();
 }
+
 void enemyBase::render()
 {
 	//자식클래스에 있는 draw() 이던지, 아니면 부모클래스에 있는 draw() 던지 하나는 출력된다.
@@ -95,6 +66,7 @@ void enemyBase::render()
 	draw();
 
 }
+
 void enemyBase::draw()
 {
 	_img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
@@ -116,3 +88,4 @@ bool enemyBase::isPlayerFind(float playerX, float playerY, int distance)
 
 	return false;
 }
+

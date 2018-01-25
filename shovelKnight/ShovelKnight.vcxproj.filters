@@ -288,7 +288,7 @@
     <ClInclude Include="StoreManager.h">
       <Filter>playGround\gamePlayScene\npc</Filter>
     </ClInclude>
-    <ClInclude Include="minionBeeto.h">
+    <ClInclude Include="minion1.h">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClInclude>
   </ItemGroup>
@@ -470,7 +470,7 @@
     <ClCompile Include="StoreManager.cpp">
       <Filter>playGround\gamePlayScene\npc</Filter>
     </ClCompile>
-    <ClCompile Include="minionBeeto.cpp">
+    <ClCompile Include="minion1.cpp">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClCompile>
   </ItemGroup>
