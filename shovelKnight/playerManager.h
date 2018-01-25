@@ -30,6 +30,7 @@ public:
 
 
 	RECT getPlayerRc() { return _p1->getPlayerRc(); }
+	void setPlayerRc(RECT rc) { _p1->setPlayerRc(rc); }
 	COLLISION_PLAYER getCollisionPlayer() { return _p1->getCollisionPlayer(); }
 
 

@@ -38,6 +38,7 @@ public:
 	//==========스킬 스토어 관련 함수===============//
 	void changeBGM();								//스킬 파는 함수
 	void changeEffectSound();
-
+	virtual void render();
+	virtual void draw();
 };
 

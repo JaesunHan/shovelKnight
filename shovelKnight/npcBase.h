@@ -72,6 +72,9 @@ public:
 	
 	//렉트 게터
 	inline RECT getRect() { return _rc; }
+
+	//NPC타입 게터
+	inline NPCTYPE getNpcType() { return _npcType; }
 	//==================================== End 게터 세터 작성하기===================================
 };
 

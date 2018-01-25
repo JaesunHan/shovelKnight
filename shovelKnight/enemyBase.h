@@ -1,18 +1,29 @@
 #pragma once
+#include "gameNode.h"
+
 #define GRAVITY	0.9f
 
 //에너미의 상태는 이 부분 맡은 사람이 만들기!
 enum ENEMYSTATUS
 {
-
+	ENEMY_LEFT_STOP,
+	ENEMY_RIGHT_STOP,
+	ENEMY_LEFT_MOVE,
+	ENEMY_RIGHT_MOVE,
+	ENEMY_LEFT_JUMP,
+	ENEMY_RIGHT_JUMP,
+	ENMEY_LEFT_ATTACK,
+	ENEMY_RIGHT_ATTACK,
+	ENEMY_LEFT_JUMP_ATTACK,
+	ENEMY_RIGHT_JUMP_ATTACK
 };
 
-class enemyBase
+class enemyBase : public gameNode
 {
 protected:
-	image * _img;			//사용할 이미지
-	animation* _anim;		//사용할 애니메이션
-	string _imgKeyString;	//이미지 매니저에 등록할 이미지 키값
+	image * _img;			  //사용할 이미지
+	animation* _anim;		  //사용할 애니메이션
+	string _imgKeyString;	  //이미지 매니저에 등록할 이미지 키값
 
 	ENEMYSTATUS _status;	//에너미 상태
 
@@ -21,9 +32,11 @@ protected:
 	float _jumpPower;		//점프 파워
 	float _gravity;			//적용할 중력
 	int _width, _height;	//적의 가로, 세로 크기(렉트를 만들 때 사용할 가로세로크기이다.)
+	float _playerDistance;  //플레이어와의 거리
+	float _speed;
 
 	RECT _rc;				//혹시 사용하게될지도 모를 렉트(충돌용)
-	
+
 public:
 	enemyBase();
 	~enemyBase();
@@ -34,6 +47,9 @@ public:
 	virtual void update();
 	virtual void render();
 	virtual void draw();
+
+	virtual void move();
+	bool isPlayerFind(float playerX, float playerY, int distance);
 
 	//==================================== Start 게터 세터 작성하기===================================
 

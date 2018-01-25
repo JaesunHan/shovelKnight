@@ -54,3 +54,13 @@ void MagicGirl::sellSkill()
 void MagicGirl::stockCount()
 {
 }
+
+void MagicGirl::render()
+{
+	draw();
+}
+
+void MagicGirl::draw()
+{
+	_img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
+}

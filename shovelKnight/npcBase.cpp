@@ -44,5 +44,5 @@ void npcBase::render()
 }
 void npcBase::draw()
 {
-
+	_img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
 }
