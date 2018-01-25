@@ -4,6 +4,7 @@
 
 gamePlayScene::gamePlayScene()
 {
+	_sceneName = "gamePlayScene";
 }
 
 

@@ -14,6 +14,8 @@
 class gamePlayScene : public gameNode
 {
 private:
+	string _sceneName;				//씬매니저에 등록할 씬 이름
+
 	enemyManager* _enemy;
 	gameObjectManager* _gameObject;
 	itemManager* _item;
@@ -26,6 +28,11 @@ private:
 public:
 	gamePlayScene();
 	~gamePlayScene();
+
+	//================================= Start 게터 세터 ============================
+	inline string getSceneName() { return _sceneName; }
+	inline void setSceneName(string sn) { _sceneName = sn; }
+	//================================= End 게터 세터 ==============================
 
 	HRESULT init();
 	void release();
