@@ -15,7 +15,7 @@ HRESULT playerManager::init()
 {
 	_p1->init(WINSIZEX / 2, WINSIZEY / 2, "¤¤¤¤");
 
-
+	_p1->getX();
 	return S_OK;
 }
 void playerManager::release()

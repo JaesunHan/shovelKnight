@@ -25,6 +25,7 @@ HRESULT playerBase::init(float startX, float startY, string imageName)
 	_skillUsed = false;
 	_direction = RIGHT;
 	_moveSpeed = SPEED;
+	_jumpPower = JUMPPOWER;
 	_rc = RectMake(_x - HIT_BOX_WIDTH / 2, _y - HIT_BOX_HEIGHT, HIT_BOX_WIDTH, HIT_BOX_HEIGHT);
 
 	return S_OK;
@@ -95,14 +96,27 @@ void playerBase::move()
 		_action = IDLE;
 	}	
 
+	if (KEYMANAGER->isOnceKeyDown('K'))
+	{
+		_action = ATTACK;
+	}
+	if (KEYMANAGER->isOnceKeyDown('J'))
+	{
+		_action = JUMP;
+	}
+
 	if (_action == MOVE)
 	{
 		_x += _moveSpeed*_direction;
 	}
 	if (_action == JUMP || _state == INAIR)
 	{
-		_y -= _jumpPower - _gravity;
-		_gravity += GRAVITY;
+		_y -= _jumpPower;
+		_jumpPower -= _gravity;
+	}
+	if (_state == ONLAND)
+	{
+		_jumpPower = JUMPPOWER;
 	}
 
 	_rc = RectMake(_x - HIT_BOX_WIDTH / 2, _y - HIT_BOX_HEIGHT, HIT_BOX_WIDTH, HIT_BOX_HEIGHT);
