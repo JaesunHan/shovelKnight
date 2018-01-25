@@ -38,8 +38,9 @@ enum COLLISION_PLAYER
 {
 	CP_NULL,
 	CP_OBJECT,
-	CP_ENEMY_SIDE,
-	CP_ENEMY_TOP
+	CP_PLAYER_ENEMY_LEFT,
+	CP_PLAYER_ENEMY_RIGHT,
+	CP_PLAYER_
 };
 
 
@@ -77,7 +78,7 @@ public:
 	playerBase();
 	~playerBase();
 
-	virtual HRESULT init(float startX, float startY, string imageName);
+	virtual HRESULT init(float startX, float startY);
 	virtual void release();
 	virtual void update();
 	virtual void render();

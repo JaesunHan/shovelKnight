@@ -45,7 +45,7 @@ void stageManager::update()
 		_loopX2 -= 0.3f;
 	}
 
-	CAMERAMANAGER->setSingleFocus(_x, _y, 672);
+	//CAMERAMANAGER->setSingleFocus(_x, _y, 800);
 
 }
 

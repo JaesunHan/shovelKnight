@@ -12,7 +12,7 @@ playerBase::~playerBase()
 
 }
 
-HRESULT playerBase::init(float startX, float startY, string imageName)
+HRESULT playerBase::init(float startX, float startY)
 {
 
 	//_image = IMAGEMANAGER->findImage(imageName);
@@ -38,15 +38,16 @@ void playerBase::release()
 void playerBase::update() 
 {
 	move();
+	CAMERAMANAGER->setSingleFocus(_x, _y, 800);
 }
 void playerBase::render() 
 {
-	Rectangle(getMemDC(), _rc.left, _rc.top, _rc.right, _rc.bottom);
+	Rectangle(getMemDC(), CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_rc.top), CAMERAMANAGER->getX(_rc.right), CAMERAMANAGER->getY(_rc.bottom));
 }
 
 void playerBase::hitReAction(int num)
 {
-	switch (num)
+	/*switch (num)
 	{
 		case CP_OBJECT:
 		break;
@@ -54,7 +55,7 @@ void playerBase::hitReAction(int num)
 		break;
 		case CP_ENEMY_TOP:
 		break;
-	}
+	}*/
 }
 
 void playerBase::attack(float fireX, float fireY, bool skillUsed)
