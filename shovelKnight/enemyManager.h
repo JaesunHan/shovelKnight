@@ -1,5 +1,6 @@
 #pragma once
-#include "enemy1.h"
+#include "gameNode.h"
+
 
 class enemyManager
 {

@@ -1,12 +1,12 @@
 #pragma once
-#include "gameObject1.h"
+#include "dirtBlock.h"
 #include <vector>
 
 
 class gameObjectManager
 {
 private :
-	typedef vector<gameObjectBase>;
+	typedef vector<gameObjectBase> asd;
 
 
 public:

@@ -201,9 +201,6 @@
     <ClInclude Include="npcBase.h">
       <Filter>playGround\gamePlayScene\npc</Filter>
     </ClInclude>
-    <ClInclude Include="gameObject1.h">
-      <Filter>playGround\gamePlayScene\gameObject</Filter>
-    </ClInclude>
     <ClInclude Include="gameObjectBase.h">
       <Filter>playGround\gamePlayScene\gameObject</Filter>
     </ClInclude>
@@ -287,6 +284,12 @@
     </ClInclude>
     <ClInclude Include="soundMenu.h">
       <Filter>playGround\allMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="TTUtils.h">
+      <Filter>2DGameFramework\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="dirtBlock.h">
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -386,9 +389,6 @@
     <ClCompile Include="npcBase.cpp">
       <Filter>playGround\gamePlayScene\npc</Filter>
     </ClCompile>
-    <ClCompile Include="gameObject1.cpp">
-      <Filter>playGround\gamePlayScene\gameObject</Filter>
-    </ClCompile>
     <ClCompile Include="gameObjectBase.cpp">
       <Filter>playGround\gamePlayScene\gameObject</Filter>
     </ClCompile>
@@ -466,6 +466,12 @@
     </ClCompile>
     <ClCompile Include="soundMenu.cpp">
       <Filter>playGround\allMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="TTUtils.cpp">
+      <Filter>2DGameFramework\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="dirtBlock.cpp">
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

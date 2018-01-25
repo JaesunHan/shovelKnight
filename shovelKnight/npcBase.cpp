@@ -12,12 +12,14 @@ npcBase::~npcBase()
 
 }
 
-HRESULT npcBase::init(string imgKeyString, char* imgFileNmae, float x, float y, int totalWidth, int totalHeight, int frameX, int frameY)
+HRESULT npcBase::init(string imgKeyString, char* imgFileNmae, float x, float y, int totalWidth, int totalHeight, int frameX, int frameY, NPCTYPE npcType)
 {
 	_imgKeyString = imgKeyString;
 	_imgFileName = imgFileNmae;
 	_x = x;
 	_y = y;
+
+	_npcType = npcType;
 	
 	_img = IMAGEMANAGER->addFrameImage(_imgKeyString, _imgFileName, _x, _y, totalWidth, totalHeight, frameX, frameY, true, RGB(255, 0, 255));
 	_width = _img->getFrameWidth();

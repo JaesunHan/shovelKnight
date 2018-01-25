@@ -14,6 +14,7 @@ playerBase::~playerBase()
 
 HRESULT playerBase::init(float startX, float startY, string imageName)
 {
+
 	//_image = IMAGEMANAGER->findImage(imageName);
 	_x = startX;
 	_y = startY;

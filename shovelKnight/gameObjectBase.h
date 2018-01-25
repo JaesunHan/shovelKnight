@@ -1,14 +1,13 @@
 #pragma once
 #include "gameNode.h"
 
-class gameObjectBase : public gameNode
+class gameObjectBase
 {
-protected :
+protected:
+	float _x, _y;
+	int _dur;
 	image* _image;
 	RECT _rc;
-	int _dur; //³»±¸µµ(HP°³³ä)
-	float _x, _y;
-
 
 public:
 	gameObjectBase();
@@ -18,7 +17,5 @@ public:
 	virtual void release();
 	virtual void update();
 	virtual void render();
-
-	virtual void collisionReaction(enum target);
 };
 

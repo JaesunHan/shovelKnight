@@ -31,5 +31,5 @@ void gameObjectBase::update()
 }
 void gameObjectBase::render()
 {
-	_image->render(getMemDC(), _rc.left, _rc.top);
+	//_image->render(getMemDC(), _rc.left, _rc.top);
 }

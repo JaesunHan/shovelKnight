@@ -17,9 +17,7 @@ LPTSTR _lpszClass = TEXT("SHOVEL KNIGHT");
 playGround _pg;
 
 //함수의 프로토 타입
-LRESULT
-
-BACK WndProc(HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
 void setWindowSize(int x, int y, int width, int height);
 
