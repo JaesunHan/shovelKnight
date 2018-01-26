@@ -207,9 +207,6 @@
     <ClInclude Include="itemManager.h">
       <Filter>playGround\gamePlayScene\item</Filter>
     </ClInclude>
-    <ClInclude Include="item1.h">
-      <Filter>playGround\gamePlayScene\item</Filter>
-    </ClInclude>
     <ClInclude Include="gamePlayScene.h">
       <Filter>playGround\gamePlayScene</Filter>
     </ClInclude>
@@ -402,9 +399,6 @@
       <Filter>playGround\gamePlayScene\gameObject</Filter>
     </ClCompile>
     <ClCompile Include="itemManager.cpp">
-      <Filter>playGround\gamePlayScene\item</Filter>
-    </ClCompile>
-    <ClCompile Include="item1.cpp">
       <Filter>playGround\gamePlayScene\item</Filter>
     </ClCompile>
     <ClCompile Include="gamePlayScene.cpp">

@@ -57,6 +57,9 @@ HRESULT minion1::init(float x, float y)
 	_jump = new jump;
 	_jump->init();
 
+	_pixelC = new pixelCollision;
+	_pixelC->init("bgMap", _rc, _x, _y, _speed);
+
 	return S_OK;
 }
 
@@ -144,7 +147,8 @@ void minion1::move()
 		break;
 	}
 
-	_rc = RectMakeCenter(_x, _y, _width, _height);
+
+	_rc = RectMakeCenter(_x, _pixelC->pixelCollisonY(), _width, _height);
 }
 
 
