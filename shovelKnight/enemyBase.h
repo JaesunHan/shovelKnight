@@ -22,6 +22,8 @@ enum ENEMYSTATUS
 	ENEMY_RIGHT_DEAD
 };
 
+
+
 class enemyBase : public gameNode
 {
 protected:
@@ -30,6 +32,7 @@ protected:
 	string _imgKeyString;		//이미지 매니저에 등록할 이미지 키값
 
 	ENEMYSTATUS _status;		//에너미 상태
+
 
 	char* _imgFileName;			//이미지 파일 이름(경로 포함)
 	float _x, _y;				//적의 중점좌표

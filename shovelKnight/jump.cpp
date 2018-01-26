@@ -5,12 +5,11 @@
 jump::jump()
 {
 }
-
-
 jump::~jump()
 {
-
 }
+
+
 
 HRESULT jump::init()
 {

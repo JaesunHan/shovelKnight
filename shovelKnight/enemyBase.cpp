@@ -34,6 +34,7 @@ HRESULT enemyBase::init(string imgKeyString, char* imgFileName, float x, float y
 	_vanishTime = 1;
 	_direction = false;
 
+
 	_img = IMAGEMANAGER->addFrameImage(_imgKeyString, _imgFileName, _x, _y, totalWidth, totalHeight, frameX, frameY, true, RGB(255, 0, 255));
 
 	_rc = RectMakeCenter(_x, _y, _img->getFrameWidth(), _img->getFrameHeight());
@@ -75,6 +76,8 @@ void enemyBase::render()
 	{		
 		Rectangle(getMemDC(), CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_rc.top), 
 			CAMERAMANAGER->getX(_rc.right), CAMERAMANAGER->getY(_rc.bottom));
+
+		CAMERAMANAGER->renderMap(getMemDC(), IMAGEMANAGER->findImage("bgMap"));
 	}
 
 }

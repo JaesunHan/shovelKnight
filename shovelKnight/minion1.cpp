@@ -52,6 +52,8 @@ HRESULT minion1::init(float x, float y)
 	_isDeadVanish = false;
 	_vanishTime = 1;
 	_direction = false;
+	_gravity = 0.0f;
+
 
 	_anim = KEYANIMANAGER->findAnimation("beetoLeftMove");
 
@@ -59,25 +61,39 @@ HRESULT minion1::init(float x, float y)
 	_jump->init();
 
 	_pixelC = new pixelCollision;
-	_pixelC->init(_rc, _x, _y, _speed);
+	_pixelC->init(_rc, _x, _y);
 
 	return S_OK;
 }
 
 void minion1::update()
 {
+	//============================================================= 픽셀충돌: 바닥충돌	
+	_pixelC->pixelCollisonY();  //바닥상태 검출
+
+	if (_pixelC->getIsGround())     //상태값에 따른 에네미 상태적용
+	{
+		_gravity = 0.0f;
+	}
+	else
+	{
+		_gravity += 0.1f;
+	}
+	//중력적용
+	_y += _gravity;
+	//=============================================================
+
+
 	//상태값에 따른 에니메이션 및 움직임
 	move();
 
 
-	KEYANIMANAGER->update();
+
 }
 
 void minion1::move()
 {
-	//enemyX좌표 픽셀충돌시 방향전환
-	//if (_pixelC->getPixelDirection()) _status = ENEMY_RIGHT_MOVE;
-	//else _status = ENEMY_LEFT_MOVE;
+
 
 
 	//상태값에 따른 에니메이션 및 움직임
@@ -103,7 +119,6 @@ void minion1::move()
 		break;
 		case ENEMY_LEFT_DEAD:
 			_anim = KEYANIMANAGER->findAnimation("beetoLeftDead");
-			_pixelC->setIsProbe(true);
 
 			//에니메이션
 			if (!_anim->isPlay() && !_isDead)
@@ -133,7 +148,7 @@ void minion1::move()
 		break;
 		case ENEMY_RIGHT_DEAD:
 			_anim = KEYANIMANAGER->findAnimation("beetoRighttDead");
-			_pixelC->setIsProbe(true);
+
 
 			//에니메이션
 			if (!_anim->isPlay() && !_isDead)
@@ -153,15 +168,8 @@ void minion1::move()
 		break;
 	}
 
-	if (_isDead)
-	{
 
-	}
-	else
-	{
-		_y = _pixelC->pixelCollisonY();
-	}
-
+	//렉트위치 update
 	_rc = RectMakeCenter(_x, _y, _width, _height);
 }
 

@@ -89,7 +89,7 @@ void enemyManager::setMinionBeeto(void)
 		minion1* minion;
 		minion = new minion1;
 
-		minion->init(500 + (i * 50), 100 - (i * 20));
+		minion->init(300 + (i * 50), 100);
 
 		_vBeeto.push_back(minion);
 	}

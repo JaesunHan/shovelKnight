@@ -9,26 +9,22 @@ private:
 	RECT _rc;
 
 	float _x, _y;
-	float _gravity;
-	float _speed;
+	bool _collisionGround;
 
-	bool _isProbe;
-	bool _isProbeX;
-	bool _isProbeY;
-	bool _direction;
+
 
 
 public:
 	pixelCollision();
 	~pixelCollision();
 
-	HRESULT init(RECT &rc, float enmeyX, float enemyY, float speed);
-	float pixelCollisonX(bool direction);
-	float pixelCollisonY();
+	HRESULT init(RECT &rc, float enmeyX, float enemyY);
+	bool pixelCollisonX();
+	void pixelCollisonY();
 
 
-	void setIsProbe(bool isProbe) { _isProbe = isProbe; }
-	bool getPixelDirection() { return _direction; }
-	
+	//접근자 설정자
+	inline bool getIsGround() { return _collisionGround; }
+	inline void setIsGround(bool isGround) { _collisionGround = isGround; }
 };
 
