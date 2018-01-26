@@ -1,6 +1,7 @@
 #pragma once
 #include "gameNode.h"
 #include "jump.h"
+#include "pixelCollision.h"
 
 #define GRAVITY	0.9f
 
@@ -24,27 +25,28 @@ enum ENEMYSTATUS
 class enemyBase : public gameNode
 {
 protected:
-	image * _img;			  //사용할 이미지
-	animation* _anim;		  //사용할 애니메이션
-	string _imgKeyString;	  //이미지 매니저에 등록할 이미지 키값
+	image * _img;				//사용할 이미지
+	animation* _anim;			//사용할 애니메이션
+	string _imgKeyString;		//이미지 매니저에 등록할 이미지 키값
 
-	ENEMYSTATUS _status;	//에너미 상태
+	ENEMYSTATUS _status;		//에너미 상태
 
-	char* _imgFileName;		//이미지 파일 이름(경로 포함)
-	float _x, _y;			//적의 중점좌표
-	float _jumpPower;		//점프 파워
-	float _gravity;			//적용할 중력
-	int _width, _height;	//적의 가로, 세로 크기(렉트를 만들 때 사용할 가로세로크기이다.)
+	char* _imgFileName;			//이미지 파일 이름(경로 포함)
+	float _x, _y;				//적의 중점좌표
+	float _jumpPower;			//점프 파워
+	float _gravity;				//적용할 중력
+	int _width, _height;		//적의 가로, 세로 크기(렉트를 만들 때 사용할 가로세로크기이다.)
 
-	float _playerDistance;  //플레이어와의 거리
-	float _speed;           //스피드
-	bool _isDead;           //죽었는지 여부
-	bool _isDeadVanish;     //죽고 벡터에서 지울 불값
-	int _vanishTime;        //죽었을때 사라지게할 여유타임 카운트
+	float _playerDistance;		//플레이어와의 거리
+	float _speed;				//스피드
+	bool _isDead;				//죽었는지 여부
+	bool _isDeadVanish;			//죽고 벡터에서 지울 불값
+	int _vanishTime;			//죽었을때 사라지게할 여유타임 카운트
 
-	RECT _rc;				//혹시 사용하게될지도 모를 렉트(충돌용)
+	RECT _rc;					//혹시 사용하게될지도 모를 렉트(충돌용)
 
-	jump* _jump;
+	jump* _jump;                //액션: 점프
+	pixelCollision* _pixelC;    //액션: 픽셀충돌
 
 public:
 	enemyBase();
