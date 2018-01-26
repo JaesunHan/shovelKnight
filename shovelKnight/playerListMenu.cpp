@@ -23,7 +23,7 @@ HRESULT playerListMenu::init()
 	return S_OK;
 }
 
-HRESULT playerListMenu::init(char* name, int characterKind, int hp, int mana, int money, int suit, int weapon)
+HRESULT playerListMenu::init(char name[128], int characterKind, int hp, int mana, int money, int suit, int weapon)
 {
 	//백그라운드 이미지 초기화
 	_imgKeyString = "playerListMenu";
@@ -92,6 +92,8 @@ void playerListMenu::draw(HDC hdc)
 			_characterTitle->getCenterY() - _characterImg->getFrameHeight(),
 			_characterAnim, 2);
 		//캐릭터의 이름을 텍스트로 출력
-		//TextOut(hdc, _menuImg->getWidth() / 3 * 1, _menuImg->getHeight() / 3 * 1, _cName, strlen(_cName));
+		TextOut(hdc, _menuImg->getWidth() / 3 * 1+20, _menuImg->getHeight() / 3 * 1+10, _cName, strlen(_cName));
+		//hp 출력하기
+		
 	}
 }
