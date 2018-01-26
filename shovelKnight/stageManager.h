@@ -21,6 +21,8 @@ private:
 	typedef vector<string>::iterator iterElements;
 	vector<int> _vTileNum;
 	vector<int>::iterator _viTileNum;
+	vector<int> _vTransitionTileNum;
+	vector<int>::iterator _viTransitionTileNum;
 	playerBase* _player;
 public:
 
