@@ -73,6 +73,23 @@ void gameMenuScene::update()
 		if (_pSlotIdx >= MAXPLAYERLIST - 1)	_pSlotIdx = MAXPLAYERLIST - 1;
 	}
 
+	//타겟 박스가 현재 가리키는 리스트에 값이 존재하지 않으면 캐릭터 생성화면 객체를 업데이트
+	if (_vPList[_pSlotIdx].hp == 0)
+	{
+		_ccm->update();
+	}
+	//타겟 박스가 현재 가리키는 리스트에 값이 존재하면 플레이어 정보를 출ㄹ력하자
+	else
+	{
+		if (_plm->getHP() < 0)
+		{
+			_plm->init(_vPList[_pSlotIdx].name, _vPList[_pSlotIdx].characterkind, _vPList[_pSlotIdx].hp, _vPList[_pSlotIdx].mana, _vPList[_pSlotIdx].money, _vPList[_pSlotIdx].suit, _vPList[_pSlotIdx].weapon);
+		}
+		else
+		{
+			_plm->update();
+		}
+	}
 }
 void gameMenuScene::release()
 {
@@ -95,19 +112,8 @@ void gameMenuScene::draw()
 	//타겟 박스가 현재 가리키는 리스트에 값이 존재하면 플레이어 정보를 출ㄹ력하자
 	else 
 	{	
-		//플레이어 리스트를 보여주는 메뉴 클래스가 없으면 동적할당한다
-		//if (_plm)
-		//{
-		//	_plm = new playerListMenu;
-		//	_plm->init(_vPList[_pSlotIdx].name, _vPList[_pSlotIdx].characterkind, _vPList[_pSlotIdx].hp, _vPList[_pSlotIdx].mana, _vPList[_pSlotIdx].money, _vPList[_pSlotIdx].suit, _vPList[_pSlotIdx].weapon);
-		//}
-		//_plm = new playerListMenu;
 		//초기화 할 때는 지금 선택한 정보를 전달하여 초기화하기
-		if(_plm->getHP() < 0)
-		{
-			_plm->init(_vPList[_pSlotIdx].name, _vPList[_pSlotIdx].characterkind, _vPList[_pSlotIdx].hp, _vPList[_pSlotIdx].mana, _vPList[_pSlotIdx].money, _vPList[_pSlotIdx].suit, _vPList[_pSlotIdx].weapon);
-		}
-		else 
+		if (!(_plm->getHP() < 0))
 		{
 			_plm->render(getMemDC());
 		}
@@ -148,7 +154,7 @@ void gameMenuScene::loadPlayerListData()
 	//playerNumber = 0, playerNumber = 1, .... 
 	//playerNumber 타이틀을 읽어와서 0 번이 저장되어있지 않으면
 	//파일에 내용이 아예 없는 거니까 이때 파일을 만들기
-	if (INIDATA->loadDataInterger(fileName, "player0", "playerNumebr") == NULL)
+	if (INIDATA->loadDataInterger(fileName, "player1", "palyerNumber")==NULL)
 	{
 		makePlayerListData();//파일 만드는 함수를 호출
 	}

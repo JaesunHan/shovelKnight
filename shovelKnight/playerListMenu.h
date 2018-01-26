@@ -53,7 +53,7 @@ class playerListMenu : public menuBase
 	//캐릭터의 가로세로 크기
 	int _characterW, _characterH;
 	//캐릭터 이름 을 저장할 변수
-	char* _cName;
+	TCHAR _cName[128];
 	//체력 이미지
 	tagHPImage _hp;
 	//마나 이미지 및 수치

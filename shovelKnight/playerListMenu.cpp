@@ -33,7 +33,7 @@ HRESULT playerListMenu::init(char* name, int characterKind, int hp, int mana, in
 	_characterTitle = IMAGEMANAGER->addImage("characterTitle", "./image/title/profileCharacterBox.bmp", 160, 180, 100, 100, true, RGB(255, 0, 255));
 
 	//매개변수로 받은 변수들을 전역에 저장
-	_cName = name;
+	wsprintf(_cName, "%s", name);
 	_characterKind = characterKind;
 	_hp.hp = hp;
 	_mana.mana = mana;
@@ -56,10 +56,12 @@ HRESULT playerListMenu::init(char* name, int characterKind, int hp, int mana, in
 		_imgKeyNFile[characterKind].frameY,
 		true, RGB(255, 0, 255));
 
+	//삽기사 아이들 애니메이션 만들기
 	_characterAnim = new animation;
 	_characterAnim->init(_characterImg->getWidth(), _characterImg->getHeight(), _characterImg->getFrameWidth(), _characterImg->getFrameHeight());
-	int arrIdleAnim[] = { 0,1, 2 };
-	_characterAnim->setPlayFrame(arrIdleAnim, 3, true);
+	_characterAnim->setPlayFrame(0, 3, false, true);
+	//int arrIdleAnim[] = { 0, 1, 2 };
+	//_characterAnim->setPlayFrame(arrIdleAnim, 3, true);
 	_characterAnim->setFPS(1);
 	_characterAnim->start();
 
@@ -67,7 +69,7 @@ HRESULT playerListMenu::init(char* name, int characterKind, int hp, int mana, in
 }
 void playerListMenu::update() 
 {
-	_characterAnim->frameUpdate(TIMEMANAGER->getElapsedTime() * 5);
+	_characterAnim->frameUpdate(TIMEMANAGER->getElapsedTime() * 8);
 }
 void playerListMenu::release()
 {
@@ -81,11 +83,15 @@ void playerListMenu::draw(HDC hdc)
 {
 	_menuImg->render(hdc, 0, 0);
 	_characterTitle->render(hdc, _characterTitle->getX(), _characterTitle->getY());
+	//캐릭터 정보가 있으면 그 정보를 출력
 	if (_hp.hp != 0)
 	{
+		//캐릭터 이미지를 애니렌더로 그리기
 		_characterImg->aniRender(hdc,
 			_characterTitle->getCenterX() - _characterImg->getFrameWidth(),
 			_characterTitle->getCenterY() - _characterImg->getFrameHeight(),
 			_characterAnim, 2);
+		//캐릭터의 이름을 텍스트로 출력
+		//TextOut(hdc, _menuImg->getWidth() / 3 * 1, _menuImg->getHeight() / 3 * 1, _cName, strlen(_cName));
 	}
 }
