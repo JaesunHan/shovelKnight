@@ -62,8 +62,8 @@ void skill_fireBall::render()
 	if (!_isFire) return;
 
 	_img->aniRender(IMAGEMANAGER->findImage("backBuffer")->getMemDC(),
-		CAMERAMANAGER->getX(_x),
-		CAMERAMANAGER->getY(_y), _ani);
+		_x,
+		_y, _ani);
 }
 
 void skill_fireBall::fire(SKILL_FIRE charType, float x, float y)
