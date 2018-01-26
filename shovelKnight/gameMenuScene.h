@@ -1,17 +1,22 @@
 #pragma once
 #include "gameNode.h"
 #include "player1.h"
+#include "playerListMenu.h"
+#include "createCharacterMenu.h"
 
 #define MAXPLAYERLIST 10
 
 struct playerList
 {
-	int pNum;
-	image* img;
-	char* name;
-	int hp;
-	int mana;
-	int money;
+	int pNum;			//저장되어 있는 캐릭터슬롯 번호
+	image* img;			//캐릭터 이미지
+	int characterkind;	//캐릭터 종류 : 0번은 삽기사
+	char name[128];			//캐릭터의 닉넴
+	int hp;				//HP
+	int mana;			//마나
+	int money;			//가지고 있는 돈
+	int suit;			//0 번이 기본수트
+	int weapon;			//0 번이 기본무기(삽)
 };
 
 struct playerNumberBox
@@ -39,9 +44,15 @@ private:
 	//현재 선택한 슬롯을 표시하는 타겟이미지
 	image* _targetImg;
 	animation* _animTarget;
-
+	//현재 선택한 슬롯 인텍스
 	int _pSlotIdx;
+	//플레이어 리스트 정보를 답고있는 배열
+	playerList _pList[MAXPLAYERLIST];
 
+	//플레이어 정보를 보여주는 메뉴
+	playerListMenu* _plm;
+	//캐릭터 만들으러 가자는 메뉴 (게임에서  "처음부터"라고 뜨는 메뉴 말하는 거임)
+	createCharacterMenu* _ccm;
 public:
 
 	HRESULT init();

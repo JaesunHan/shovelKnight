@@ -111,7 +111,8 @@ public:
 
 	//애니메이션 렌더링 (뿌려줄 DC, 뿌려줄 위치 X, Y(left, top) 재생하고픈 애니메이션)
 	void aniRender(HDC hdc, int destX, int destY, animation* ani);
-
+	//애니메이션 렌더링(뿌려중 DC, 뿌려줄 위치 X, Y(중점) 재생하려는 애니메이션, 줌인 배수
+	void aniRender(HDC hdc, int destX, int destY, animation* ani, int ZoomInTime);
 	inline HDC getMemDC() { return _imageInfo->hMemDC; }
 
 	//==============================================

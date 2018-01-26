@@ -686,3 +686,20 @@ void image::aniRender(HDC hdc, int destX, int destY, animation* ani)
 {
 	render(hdc, destX, destY, ani->getFramePos().x, ani->getFramePos().y, ani->getFrameWidth(), ani->getFrameHeight());
 }
+
+void image::aniRender(HDC hdc, int destX, int destY, animation* ani, int ZoomInTime)
+{
+	//render(hdc, destX, destY, ani->getFramePos().x*ZoomInTime, ani->getFramePos().y*ZoomInTime, ani->getFrameWidth()*ZoomInTime, ani->getFrameHeight()*ZoomInTime);
+	GdiTransparentBlt(
+		hdc,																	//복사될 영역DC
+		destX,															//복사될 좌표 X
+		destY,															//복사될 좌표 Y
+		ani->getFrameWidth()*ZoomInTime,											//복사될 가로크기
+		ani->getFrameHeight()*ZoomInTime,											//복사될 세로크기
+		_imageInfo->hMemDC,
+		ani->getFramePos().x, ani->getFramePos().y,								//복사해올 좌표
+		ani->getFrameWidth(),													//복사해올 가로크기
+		ani->getFrameHeight(),													//복사해올 세로크기
+		_transColor);
+
+}

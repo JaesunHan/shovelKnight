@@ -17,6 +17,9 @@ gameTitleScene::~gameTitleScene()
 HRESULT gameTitleScene::init()
 {
 	//_sceneName = "GameTitleScene";
+	//사운드 추가 -괴도 JH
+	SOUNDMANAGER->addSound("MainTheme", "./sound/ost/Shovel Knight Soundtrack - 01 - Main Theme.mp3", true, true);
+	SOUNDMANAGER->addSound("MainSelect", "./sound/EFFECTSOUND/selectSound.mp3", false, false);
 
 	_titleBGImgKeyStr = "titleBackgroundImg";
 	_titleBGImgFileName = "./image/title/titleMain.bmp";
@@ -48,6 +51,8 @@ HRESULT gameTitleScene::init()
 }
 void gameTitleScene::update() 
 {
+	//타이틀 사운드 재생을 위한 함수 
+	soundPlay();
 	//삽 이미지가 아래로 이동
 	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 	{
@@ -66,6 +71,11 @@ void gameTitleScene::update()
 		//게임 스타트 버튼 누름
 		if (_shovelIdx == 0)
 		{
+			//선택시 선택사운드 추가
+			if (!SOUNDMANAGER->isPlaySound("MainSelect"))
+			{
+				SOUNDMANAGER->play("MainSelect", 0.3f);
+			}
 			SCENEMANAGER->changeScene(_gms->getSceneName());
 		}
 		//안쓸거임
@@ -86,7 +96,7 @@ void gameTitleScene::update()
 }
 void gameTitleScene::release()
 {
-
+	
 }
 void gameTitleScene::render() 
 {
@@ -129,4 +139,13 @@ void gameTitleScene::setScript()
 	INIDATA->addData(enemyName, "script", "black knight: I knew you'd show your face sooner or later. The cerulean coward!");
 	INIDATA->iniSave(iniFileName);
 	
+}
+
+void gameTitleScene::soundPlay()
+{
+	if (!SOUNDMANAGER->isPlaySound("MainTheme"))
+	{
+		SOUNDMANAGER->play("MainTheme", 0.3f);
+	}
+
 }

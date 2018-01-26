@@ -16,8 +16,10 @@ optionMenu::~optionMenu()
 HRESULT optionMenu::init()
 {
 	//이미지 초기화 
-	//menuBase::init("optionMenu", "./image/")
-
+	_imgKeyString = "option_main";
+	_imgFileName = "./image/title/option_main.bmp";
+	menuBase::init(_imgKeyString, _imgFileName, 0, 0, WINSIZEX, WINSIZEY);
+	
 	return S_OK;
 }
 void optionMenu::update() 
