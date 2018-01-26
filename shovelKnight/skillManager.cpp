@@ -54,24 +54,29 @@ void skillManager::update()
 {
 	if (KEYMANAGER->isOnceKeyDown('R'))
 	{
-		Fire(SKILL_FIRE_TEST, SKILL_FIREBALL, RND->getInt(WINSIZEX), RND->getInt(WINSIZEY));
+		Fire(SKILL_FIRE_TEST, SKILL_FIREBALL, WINSIZEX / 2, WINSIZEY / 2);
 	}
 
+
 	viSkill iter;
-	
+
 	if (_vSkill.size())	
 	{
-		for (iter = _vSkill.begin(); iter != _vSkill.end();)
+
+		for (int i = 0; i != _vSkill.size();)
 		{
-			if ((*iter)->getIsFire())
+
+			if (_vSkill[i]->getIsFire())
 			{
-				(*iter)->update();
-				++iter;
+				_vSkill[i]->update();
+				++i;
 			}
 			else
 			{
-				_vSkill.erase(iter);
+				_vSkill.erase(_vSkill.begin() + i);
 			}
+
+			if (!_vSkill.size()) break;
 		}
 	}
 }

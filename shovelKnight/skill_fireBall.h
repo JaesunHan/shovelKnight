@@ -13,5 +13,8 @@ public:
 	virtual void render();
 
 	virtual void fire(SKILL_FIRE charType, float x, float y);
+
+	static void* goLoop(void* obj);
+	static void* isOut(void* obj);
 };
 
