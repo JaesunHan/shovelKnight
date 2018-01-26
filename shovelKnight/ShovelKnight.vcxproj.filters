@@ -297,6 +297,9 @@
     <ClInclude Include="pixelCollision.h">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClInclude>
+    <ClInclude Include="skill_enemyDeadFx.h">
+      <Filter>playGround\gamePlayScene\skill</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -484,6 +487,9 @@
     </ClCompile>
     <ClCompile Include="pixelCollision.cpp">
       <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="skill_enemyDeadFx.cpp">
+      <Filter>playGround\gamePlayScene\skill</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

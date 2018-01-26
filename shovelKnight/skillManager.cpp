@@ -13,7 +13,7 @@ skillManager::~skillManager()
 
 HRESULT skillManager::init()
 {
-	for (int i = 0; i < 4; ++i)
+	for (int i = 0; i < EFFECTNUM; ++i)
 	{
 		skillBase* sk;
 		switch (i)
@@ -29,6 +29,9 @@ HRESULT skillManager::init()
 			break;
 		case SKILL_FIREBALL:
 			sk = new skill_fireBall;
+			break;
+		case SKILL_ENEMYDEADFX:
+			sk = new skill_enemyDeadFx;
 			break;
 		}
 		sk->init();
@@ -52,20 +55,37 @@ void skillManager::release()
 
 void skillManager::update()
 {
-	if (KEYMANAGER->isOnceKeyDown('R'))
+	if (KEYMANAGER->isOnceKeyDown('Z'))
 	{
-		Fire(SKILL_FIRE_TEST, SKILL_FIREBALL, WINSIZEX / 2, WINSIZEY / 2);
+		Fire(SKILL_FIRE_CENTER, SKILL_FIREBALL, WINSIZEX / 2, WINSIZEY / 2);
+	}
+
+	if (KEYMANAGER->isOnceKeyDown('X'))
+	{
+		Fire(SKILL_FIRE_CENTER, SKILL_BUBBLE, WINSIZEX / 2, WINSIZEY / 2);
+	}
+
+	if (KEYMANAGER->isOnceKeyDown('C'))
+	{
+		Fire(SKILL_FIRE_CENTER, SKILL_DARKKNIGHT_FIREBALL, WINSIZEX / 2, WINSIZEY / 2);
+	}
+
+	if (KEYMANAGER->isOnceKeyDown('V'))
+	{
+		Fire(SKILL_FIRE_CENTER, SKILL_DIRTBLOCKFX, WINSIZEX / 2, WINSIZEY / 2);
+	}
+
+	if (KEYMANAGER->isOnceKeyDown('B'))
+	{
+		Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, WINSIZEX / 2, WINSIZEY / 2);
 	}
 
 
-	viSkill iter;
-
 	if (_vSkill.size())	
 	{
-
 		for (int i = 0; i != _vSkill.size();)
 		{
-
+		
 			if (_vSkill[i]->getIsFire())
 			{
 				_vSkill[i]->update();
@@ -75,9 +95,38 @@ void skillManager::update()
 			{
 				_vSkill.erase(_vSkill.begin() + i);
 			}
-
+		
 			if (!_vSkill.size()) break;
 		}
+
+		//viSkill iter = _vSkill.begin();
+		//
+		//vector<viSkill> vErase;
+		//
+		//for (; _vSkill.size() != 0;)
+		//{
+		//	if (iter == _vSkill.end()) break;
+		//
+		//	if ((*iter)->getIsFire())
+		//	{
+		//		(*iter)->update();
+		//		++iter;
+		//	}
+		//	else
+		//	{
+		//		(*iter) = _vSkill.erase(iter);
+		//		//vErase.push_back(iter);
+		//	}
+		//}
+		//{
+		//	for (; 0 != vErase.size();)
+		//	{
+		//		_vSkill.erase(vErase[0]);
+		//		vErase.erase(vErase.begin());
+		//	}
+		//	vErase.clear();
+		//}
+
 	}
 }
 
@@ -110,6 +159,9 @@ void skillManager::Fire(SKILL_FIRE chartype, SKILL skill, float x, float y)
 		break;
 	case SKILL_FIREBALL:
 		sk = new skill_fireBall;
+		break;
+	case SKILL_ENEMYDEADFX:
+		sk = new skill_enemyDeadFx;
 		break;
 	}
 
