@@ -10,11 +10,8 @@ pixelCollision::~pixelCollision()
 {
 }
 
-HRESULT pixelCollision::init(string strKey, RECT &rc, float enmeyX, float enemyY, float speed)
+HRESULT pixelCollision::init(RECT &rc, float enmeyX, float enemyY, float speed)
 {
-
-
-
 	_rc = rc;
 
 	_x = enmeyX;
@@ -25,6 +22,7 @@ HRESULT pixelCollision::init(string strKey, RECT &rc, float enmeyX, float enemyY
 
 	_isProbeY = false;
 	_direction = false;
+	_isProbe = false;
 
 	return S_OK;
 }
@@ -70,6 +68,8 @@ float pixelCollision::pixelCollisonY()
 
 float pixelCollision::pixelCollisonX(bool direction)
 {
+	_hdc = IMAGEMANAGER->findImage("bgMap")->getMemDC();
+
 	if (direction)
 	{
 		for (int i = _rc.top; i <= _rc.bottom; i += (_rc.right - _rc.left) / 4)
