@@ -29,7 +29,10 @@ HRESULT gamePlayScene::init()
 	_gameCollision->getStoreMemoryAdress(_Store);
 	_gameCollision->getSkillMemoryAdress(_skill);
 	_gameCollision->getPlayerMemoryAdress(_player);
+<<<<<<< HEAD
 	
+=======
+>>>>>>> f4a68556cb8ecae78335ace203640bbbd95fd421
 
 	_enemy->init();
 	_gameObject->init();
