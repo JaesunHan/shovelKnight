@@ -34,10 +34,30 @@ void enemyManager::update()
 		(*_viBeeto)->update();
 	
 	}
-	//화면밖으로 사라지면 제거
+	//데드 TEST
 	for (int i = 0; i < _vBeeto.size(); i++)
 	{
 		if (_vBeeto[i]->getRect().right < 200)
+		{
+			if (_vBeeto[i]->getStatus() == ENEMY_LEFT_MOVE)
+			{
+				_vBeeto[i]->setStatus(ENEMY_LEFT_DEAD);
+			}
+			else if (_vBeeto[i]->getStatus() == ENEMY_RIGHT_MOVE)
+			{
+				_vBeeto[i]->setStatus(ENEMY_RIGHT_DEAD);
+			}
+		}
+		//죽었으면 벡터에서 지우기
+		if (_vBeeto[i]->getIsDeadVanish() == true)
+		{
+			removeMinionBeeto(i);
+		}
+	}
+	//화면밖으로 사라지면 제거
+	for (int i = 0; i < _vBeeto.size(); i++)
+	{
+		if (_vBeeto[i]->getRect().right < 0)
 			removeMinionBeeto(i);
 	}
 	//-------------------------------------------------------------- 
@@ -64,12 +84,12 @@ void enemyManager::render()
 //-------------------------------------------------------------- beeto
 void enemyManager::setMinionBeeto(void)
 {
-	for (int i = 0; i < 5; ++i)
+	for (int i = 0; i < 3; ++i)
 	{
 		minion1* minion;
 		minion = new minion1;
 
-		minion->init(500 + (i * 50), 350 - (i * 50));
+		minion->init(500 + (i * 50), 100 - (i * 20));
 
 		_vBeeto.push_back(minion);
 	}

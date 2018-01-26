@@ -27,6 +27,9 @@ public:
 	void setMaxMP(int increaseMP) { _p1->setMaxMP(increaseMP); }
 	int	getMoney() { return _p1->getMoney(); }
 	void setMoney(int increaseMoney) { _p1->setMoney(increaseMoney); }
+	int getSkillUnlockLv() { return _p1->getSkillUnlockLv(); }
+	void setSkillUnlockLv(int increaseLv) { _p1->setSkillUnlockLv(increaseLv); }
+
 
 
 	RECT getPlayerRc() { return _p1->getPlayerRc(); }

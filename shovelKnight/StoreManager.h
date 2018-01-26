@@ -14,7 +14,7 @@ enum STORESTATUS
 //상호참조를 위한 전방전언
 class playerManager;
 
-class StoreManager
+class StoreManager : public gameNode
 {
 private:
 	typedef vector<npcBase*> vNPC;
@@ -28,6 +28,12 @@ private:
 	playerManager* _pm;							//플레이어매니저 할당
 
 	bool _isCollisionNpc;						//NPC랑 충돌했늬
+
+	char str1[128];
+	char str2[128];
+	char str3[128];
+	char str4[128];
+	char str5[128];
 
 public:
 	StoreManager();

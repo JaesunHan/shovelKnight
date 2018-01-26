@@ -102,9 +102,9 @@
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
     <ClInclude Include="iniDataManager.h" />
-    <ClInclude Include="item1.h" />
     <ClInclude Include="itemBase.h" />
     <ClInclude Include="itemManager.h" />
+    <ClInclude Include="jump.h" />
     <ClInclude Include="keyAniManager.h" />
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="MagicGirl.h" />
@@ -112,6 +112,7 @@
     <ClInclude Include="minion1.h" />
     <ClInclude Include="motherAction.h" />
     <ClInclude Include="npcBase.h" />
+    <ClInclude Include="pixelCollision.h" />
     <ClInclude Include="StoreManager.h" />
     <ClInclude Include="dirtBlock.h" />
     <ClInclude Include="gameObjectBase.h" />
@@ -168,9 +169,9 @@
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
     <ClCompile Include="iniDataManager.cpp" />
-    <ClCompile Include="item1.cpp" />
     <ClCompile Include="itemBase.cpp" />
     <ClCompile Include="itemManager.cpp" />
+    <ClCompile Include="jump.cpp" />
     <ClCompile Include="keyAniManager.cpp" />
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="MagicGirl.cpp" />
@@ -178,6 +179,7 @@
     <ClCompile Include="minion1.cpp" />
     <ClCompile Include="motherAction.cpp" />
     <ClCompile Include="npcBase.cpp" />
+    <ClCompile Include="pixelCollision.cpp" />
     <ClCompile Include="StoreManager.cpp" />
     <ClCompile Include="dirtBlock.cpp" />
     <ClCompile Include="gameObjectBase.cpp" />

@@ -207,9 +207,6 @@
     <ClInclude Include="itemManager.h">
       <Filter>playGround\gamePlayScene\item</Filter>
     </ClInclude>
-    <ClInclude Include="item1.h">
-      <Filter>playGround\gamePlayScene\item</Filter>
-    </ClInclude>
     <ClInclude Include="gamePlayScene.h">
       <Filter>playGround\gamePlayScene</Filter>
     </ClInclude>
@@ -291,8 +288,14 @@
     <ClInclude Include="minion1.h">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClInclude>
+    <ClInclude Include="jump.h">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClInclude>
     <ClInclude Include="createCharacterMenu.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>playGround\allMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="pixelCollision.h">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -398,9 +401,6 @@
     <ClCompile Include="itemManager.cpp">
       <Filter>playGround\gamePlayScene\item</Filter>
     </ClCompile>
-    <ClCompile Include="item1.cpp">
-      <Filter>playGround\gamePlayScene\item</Filter>
-    </ClCompile>
     <ClCompile Include="gamePlayScene.cpp">
       <Filter>playGround\gamePlayScene</Filter>
     </ClCompile>
@@ -476,8 +476,14 @@
     <ClCompile Include="minion1.cpp">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClCompile>
+    <ClCompile Include="jump.cpp">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClCompile>
     <ClCompile Include="createCharacterMenu.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>playGround\allMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="pixelCollision.cpp">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
