@@ -3,7 +3,10 @@
 #include "skill_dirtBlockFx.h"
 #include "skill_fireBall.h"
 #include "skill_bubble.h"
+#include "skill_enemyDeadFx.h"
 #include "gameNode.h"
+
+#define EFFECTNUM 5
 
 enum SKILL
 {
@@ -11,6 +14,7 @@ enum SKILL
 	SKILL_DARKKNIGHT_FIREBALL,
 	SKILL_DIRTBLOCKFX,
 	SKILL_FIREBALL,
+	SKILL_ENEMYDEADFX,
 };
 
 class skillManager

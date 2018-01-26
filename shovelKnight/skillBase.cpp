@@ -36,6 +36,11 @@ void skillBase::update()
 
 void skillBase::render()
 {
+	if (!_isFire) return;
+
+	_img->aniRender(IMAGEMANAGER->findImage("backBuffer")->getMemDC(),
+		_x,
+		_y, _ani);
 }
 
 void skillBase::fire(SKILL_FIRE charType, float x, float y)

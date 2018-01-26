@@ -4,7 +4,8 @@
 enum SKILL_STATS
 {
 	SKILL_STATS_START,
-	SKILL_STATS_LOOP,
+	SKILL_STATS_LOOP_L,
+	SKILL_STATS_LOOP_R,
 	SKILL_STATS_OUT,
 };
 
@@ -15,7 +16,7 @@ enum SKILL_REACTION
 
 enum SKILL_FIRE
 {
-	SKILL_FIRE_TEST,
+	SKILL_FIRE_CENTER,
 };
 
 class skillBase
@@ -33,7 +34,8 @@ protected:
 	SKILL_STATS _stats;
 
 	char* _startName;
-	char* _loopName;
+	char* _loopNameL;
+	char* _loopNameR;
 	char* _outName;
 
 	float _saveX;
@@ -56,11 +58,11 @@ public:
 	virtual void reAction(SKILL_REACTION reaction);
 
 	char* getStartName() { return _startName; }
-	char* getLoopName() { return _loopName; }
+	char* getLoopName() { return _loopNameL; }
 	char* getOutName() { return _outName; }
 
 	void setStartName(char* str) { _startName = str; }
-	void setLoopName(char* str) { _loopName = str; }
+	void setLoopName(char* str) { _loopNameL = str; }
 	void setOutName(char* str) { _outName = str; }
 };
 

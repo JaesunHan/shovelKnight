@@ -176,6 +176,7 @@
     <ClInclude Include="motherAction.h" />
     <ClInclude Include="npcBase.h" />
     <ClInclude Include="pixelCollision.h" />
+    <ClInclude Include="skill_enemyDeadFx.h" />
     <ClInclude Include="StoreManager.h" />
     <ClInclude Include="dirtBlock.h" />
     <ClInclude Include="gameObjectBase.h" />
@@ -245,6 +246,7 @@
     <ClCompile Include="motherAction.cpp" />
     <ClCompile Include="npcBase.cpp" />
     <ClCompile Include="pixelCollision.cpp" />
+    <ClCompile Include="skill_enemyDeadFx.cpp" />
     <ClCompile Include="StoreManager.cpp" />
     <ClCompile Include="dirtBlock.cpp" />
     <ClCompile Include="gameObjectBase.cpp" />

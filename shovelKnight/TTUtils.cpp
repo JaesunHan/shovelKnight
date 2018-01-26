@@ -259,7 +259,7 @@ namespace Æ®À©Å×ÀÏÀö
 		y += -sinf(angle) * speed;
 	}
 
-	void TTTextOut(HDC hdc, int x, int y, string str, float num, BOOL backGround)
+	void TTTextOut(int x, int y, string str, float num, BOOL backGround)
 	{
 		BOOL isfloat = (num != (int)num);
 
@@ -277,8 +277,8 @@ namespace Æ®À©Å×ÀÏÀö
 
 			char* str2 = new char[str.size() + 3 + buffer + 1];
 			sprintf(str2, "%s : %.2f", str.c_str(), num);
-			if (!backGround) SetBkMode(hdc, TRANSPARENT);
-			TextOut(hdc, x, y, str2, strlen(str2));
+			if (!backGround) SetBkMode(IMAGEMANAGER->findImage("backbuffer")->getMemDC(), TRANSPARENT);
+			TextOut(IMAGEMANAGER->findImage("backbuffer")->getMemDC(), x, y, str2, strlen(str2));
 		}
 		else
 		{
@@ -294,8 +294,8 @@ namespace Æ®À©Å×ÀÏÀö
 
 			char* str2 = new char[str.size() + 3 + buffer + 1];
 			sprintf(str2, "%s : %d", str.c_str(), (int)num);
-			if (!backGround) SetBkMode(hdc, TRANSPARENT);
-			TextOut(hdc, x, y, str2, strlen(str2));
+			if (!backGround) SetBkMode(IMAGEMANAGER->findImage("backbuffer")->getMemDC(), TRANSPARENT);
+			TextOut(IMAGEMANAGER->findImage("backbuffer")->getMemDC(), x, y, str2, strlen(str2));
 		}
 
 	}
