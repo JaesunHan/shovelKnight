@@ -32,6 +32,11 @@ protected:
 	bool _isRight;
 	SKILL_STATS _stats;
 
+	char* _startName;
+	char* _loopName;
+	char* _outName;
+
+	float _saveX;
 
 public:
 	skillBase();
@@ -48,12 +53,14 @@ public:
 	virtual bool getIsFire() { return _isFire; }
 	virtual void setIsFire(bool fire) { _isFire = fire; }
 
-	virtual SKILL_STATS getSkillStats() { return _stats; }
-	virtual void setSkillStats(SKILL_STATS stats) { _stats = stats; }
-
-	virtual animation* getSkillAni() { return _ani; }
-	virtual void setSkillAni(animation* ani) { _ani = ani; }
-
 	virtual void reAction(SKILL_REACTION reaction);
+
+	char* getStartName() { return _startName; }
+	char* getLoopName() { return _loopName; }
+	char* getOutName() { return _outName; }
+
+	void setStartName(char* str) { _startName = str; }
+	void setLoopName(char* str) { _loopName = str; }
+	void setOutName(char* str) { _outName = str; }
 };
 

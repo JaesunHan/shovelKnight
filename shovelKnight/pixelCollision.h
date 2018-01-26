@@ -22,11 +22,13 @@ public:
 	pixelCollision();
 	~pixelCollision();
 
-	HRESULT init(string strKey, RECT &rc, float enmeyX, float enemyY, float speed);
+	HRESULT init(RECT &rc, float enmeyX, float enemyY, float speed);
 	float pixelCollisonX(bool direction);
 	float pixelCollisonY();
 
-	bool pixelDirection() { return _direction; }
+
+	void setIsProbe(bool isProbe) { _isProbe = isProbe; }
+	bool getPixelDirection() { return _direction; }
 	
 };
 

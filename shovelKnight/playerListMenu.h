@@ -7,6 +7,7 @@ struct tagHPImage
 {
 	image* hpFull[MAXHPIMAGE];		//2칸짜리 이미지
 	image* hpHalf[MAXHPIMAGE];		//한칸짜리 이미지
+	image* hpEmpty[MAXHPIMAGE];		//빈 칸 이미지
 	int hp;
 	float x, y; 
 };
@@ -65,10 +66,13 @@ class playerListMenu : public menuBase
 	//내 무기	-> 지금은 안쓸듯ㄴ
 	image* _weapon;
 	
-
+	//hp 상태에 따른 세가지 이미지(빈거, 반개짜리, 한개 짜리
+	image* _emptyHP;
+	image* _fullHP;
+	image* _halfHP;
 public:
 	HRESULT init();
-	HRESULT init(char* name, int characterKind, int hp, int mana, int money, int suit, int weapon);
+	HRESULT init(char name[128], int characterKind, int hp, int mana, int money, int suit, int weapon);
 	void update();
 	void release();
 	void render(HDC hdc);

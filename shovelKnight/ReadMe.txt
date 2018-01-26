@@ -249,3 +249,31 @@ void enemyManager::createMinion(RETURN_ENEMY re)
 	}
 	_vEnemy.push_back(em);
 }
+
+
+
+==================================== 추억 저장용 =======================================
+
+//void skill_fireBall::startLoopFire(void* obj)
+//{
+	//skillBase* ki = new skillBase;
+	//skill_fireBall* ni = dynamic_cast<skill_fireBall*>(ki);
+	//ki = dynamic_cast<skill_fireBall*>(ki);
+	//
+	//skillBase* si = new skill_fireBall;
+	//si->getNum();
+	//ki->_num;
+
+	//virtual void getSkillManagerAdress(skillManager* sm) { _sm = sm; }
+	//skill_fireBall::getSkillManagerAdress(skillBase::_sm);
+	//
+	//_sm = dynamic_cast<skillManager*>(_sm);
+
+	//KEYANIMANAGER->setObj("skillFireBallStart", _sm->getVSkill()[si->getNum()]);
+
+	//skill_fireBall* fb = (skill_fireBall*)obj;
+	//
+	//fb->setSkillStats(SKILL_STATS_LOOP);
+	//fb->setSkillAni(KEYANIMANAGER->findAnimation("skillFireBallLoop"));
+	//fb->getSkillAni()->start();
+//}

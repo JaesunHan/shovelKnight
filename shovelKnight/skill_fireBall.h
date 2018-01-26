@@ -1,11 +1,8 @@
 #pragma once
 #include "skillBase.h"
 
-
 class skill_fireBall : public skillBase
 {
-private:
-
 public:
 	skill_fireBall();
 	~skill_fireBall();
@@ -15,7 +12,9 @@ public:
 	virtual void update();
 	virtual void render();
 
-	static void startLoopFire(void* obj);
-	static void outFire(void* obj);
+	virtual void fire(SKILL_FIRE charType, float x, float y);
+
+	static void* goLoop(void* obj);
+	static void* isOut(void* obj);
 };
 

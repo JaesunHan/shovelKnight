@@ -59,7 +59,7 @@ HRESULT minion1::init(float x, float y)
 	_jump->init();
 
 	_pixelC = new pixelCollision;
-	_pixelC->init("bgMap", _rc, _x, _y, _speed);
+	_pixelC->init(_rc, _x, _y, _speed);
 
 	return S_OK;
 }
@@ -76,8 +76,8 @@ void minion1::update()
 void minion1::move()
 {
 	//enemyX좌표 픽셀충돌시 방향전환
-	if (_pixelC->pixelDirection()) _status = ENEMY_RIGHT_MOVE;
-	else _status = ENEMY_LEFT_MOVE;
+	//if (_pixelC->getPixelDirection()) _status = ENEMY_RIGHT_MOVE;
+	//else _status = ENEMY_LEFT_MOVE;
 
 
 	//상태값에 따른 에니메이션 및 움직임
@@ -103,6 +103,7 @@ void minion1::move()
 		break;
 		case ENEMY_LEFT_DEAD:
 			_anim = KEYANIMANAGER->findAnimation("beetoLeftDead");
+			_pixelC->setIsProbe(true);
 
 			//에니메이션
 			if (!_anim->isPlay() && !_isDead)
@@ -132,6 +133,7 @@ void minion1::move()
 		break;
 		case ENEMY_RIGHT_DEAD:
 			_anim = KEYANIMANAGER->findAnimation("beetoRighttDead");
+			_pixelC->setIsProbe(true);
 
 			//에니메이션
 			if (!_anim->isPlay() && !_isDead)
@@ -151,8 +153,16 @@ void minion1::move()
 		break;
 	}
 
+	if (_isDead)
+	{
 
-	_rc = RectMakeCenter(_pixelC->pixelCollisonX(_direction), _pixelC->pixelCollisonY(), _width, _height);
+	}
+	else
+	{
+		_y = _pixelC->pixelCollisonY();
+	}
+
+	_rc = RectMakeCenter(_x, _y, _width, _height);
 }
 
 

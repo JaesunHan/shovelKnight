@@ -11,7 +11,7 @@ struct playerList
 	int pNum;			//저장되어 있는 캐릭터슬롯 번호
 	image* img;			//캐릭터 이미지
 	int characterkind;	//캐릭터 종류 : 0번은 삽기사
-	char* name;			//캐릭터의 닉넴
+	char name[128];			//캐릭터의 닉넴
 	int hp;				//HP
 	int mana;			//마나
 	int money;			//가지고 있는 돈

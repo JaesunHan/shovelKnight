@@ -154,10 +154,10 @@ void gameMenuScene::loadPlayerListData()
 	//playerNumber = 0, playerNumber = 1, .... 
 	//playerNumber 타이틀을 읽어와서 0 번이 저장되어있지 않으면
 	//파일에 내용이 아예 없는 거니까 이때 파일을 만들기
-	if (INIDATA->loadDataInterger(fileName, "player1", "palyerNumber")==NULL)
-	{
-		makePlayerListData();//파일 만드는 함수를 호출
-	}
+	//if (INIDATA->loadDataInterger(fileName, "player1", "palyerNumber")==0)
+	//{
+	//	makePlayerListData();//파일 만드는 함수를 호출
+	//}
 	//파일에 있는 플레이어를 벡터에 담기
 	for (int i = 0; i < MAXPLAYERLIST; ++i)
 	{
@@ -165,7 +165,8 @@ void gameMenuScene::loadPlayerListData()
 		wsprintf(subjectName, "palyer%d", i);
 	
 		p.pNum = INIDATA->loadDataInterger(fileName, subjectName, "playerNumber");
-		p.name = INIDATA->loadDataString(fileName, subjectName, "playerName");
+		wsprintf(p.name, "%s", INIDATA->loadDataString(fileName, subjectName, "Name"));
+		//p.name = INIDATA->loadDataString(fileName, subjectName, "Name");
 		p.characterkind = INIDATA->loadDataInterger(fileName, subjectName, "CharacterKind");
 		p.hp = INIDATA->loadDataInterger(fileName, subjectName, "HP");
 		p.money = INIDATA->loadDataInterger(fileName, subjectName, "Money");

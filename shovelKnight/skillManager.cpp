@@ -52,11 +52,16 @@ void skillManager::release()
 
 void skillManager::update()
 {
-	viSkill iter;
-	
-	if (_vSkill.size())
+	if (KEYMANAGER->isOnceKeyDown('R'))
 	{
-		for (iter = _vSkill.begin(); iter != _vSkill.end(); ++iter)
+		Fire(SKILL_FIRE_TEST, SKILL_FIREBALL, RND->getFromIntTo(100, WINSIZEX-100), RND->getInt(WINSIZEY));
+	}
+
+	if (_vSkill.size())	
+	{
+		viSkill iter = _vSkill.begin();
+
+		for (; iter != _vSkill.end();)
 		{
 			if ((*iter)->getIsFire())
 			{
@@ -104,4 +109,6 @@ void skillManager::Fire(SKILL_FIRE chartype, SKILL skill, float x, float y)
 	}
 
 	sk->fire(chartype, x, y);
+
+	_vSkill.push_back(sk);
 }
