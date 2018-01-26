@@ -8,12 +8,15 @@
 
 struct playerList
 {
-	int pNum;
-	image* img;
-	char* name;
-	int hp;
-	int mana;
-	int money;
+	int pNum;			//저장되어 있는 캐릭터슬롯 번호
+	image* img;			//캐릭터 이미지
+	int characterkind;	//캐릭터 종류 : 0번은 삽기사
+	char* name;			//캐릭터의 닉넴
+	int hp;				//HP
+	int mana;			//마나
+	int money;			//가지고 있는 돈
+	int suit;			//0 번이 기본수트
+	int weapon;			//0 번이 기본무기(삽)
 };
 
 struct playerNumberBox
