@@ -48,9 +48,9 @@ void StoreManager::render()
 		(*_viNpc)->render();
 	}
 	
-	TextOut(getMemDC(), 55, 100, str1, strlen(str1));
-	TextOut(getMemDC(), 55, 100, str2, strlen(str2));
-	TextOut(getMemDC(), 55, 100, str3, strlen(str3));
+	//TextOut(getMemDC(), 55, 100, str1, strlen(str1));
+	//TextOut(getMemDC(), 55, 100, str2, strlen(str2));
+	//TextOut(getMemDC(), 55, 100, str3, strlen(str3));
 }
 
 void StoreManager::playerCollisionNpc(vector<npcBase*>::iterator temp)
@@ -77,7 +77,11 @@ void StoreManager::sellPlayerSkill(vector<npcBase*>::iterator temp)
 				sprintf(str3, "if u OK press 'O', or not press 'P'");
 				
 
-				if (KEYMANAGER->isOnceKeyDown('O'));				//O눌렀을때
+<<<<<<< HEAD
+				if (KEYMANAGER->isOnceKeyDown('O'))					//O눌렀을때
+=======
+				if (KEYMANAGER->isOnceKeyDown('O'))				//O눌렀을때
+>>>>>>> 816b5229f78239017a40418c5a0bf1573a632f90
 				{
 					if ((*temp)->getStock() == 0)					//한번도 상점에서 구매를 하지 않았으면
 					{
@@ -131,7 +135,11 @@ void StoreManager::SellPlayerHp(vector<npcBase*>::iterator temp)
 			sprintf(str3, "if u OK press 'O', or not press 'P'");
 
 
-			if (KEYMANAGER->isOnceKeyDown('O'));				//O눌렀을때
+<<<<<<< HEAD
+			if (KEYMANAGER->isOnceKeyDown('O'))					//O눌렀을때
+=======
+			if (KEYMANAGER->isOnceKeyDown('O'))				//O눌렀을때
+>>>>>>> 816b5229f78239017a40418c5a0bf1573a632f90
 			{
 				if ((*temp)->getStock() == 0)					//한번도 상점에서 구매를 하지 않았으면
 				{

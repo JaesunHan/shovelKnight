@@ -12,42 +12,28 @@ pixelCollision::~pixelCollision()
 
 HRESULT pixelCollision::init(string strKey, RECT &rc, float enmeyX, float enemyY, float speed)
 {
-	//픽셀충돌 이미지 추가
-	IMAGEMANAGER->addImage("bgMap", ".//image//stage//backgroundMap.bmp", 1600, 240, false, RGB(0, 0, 0));
 
 
-	_hdc = IMAGEMANAGER->findImage(strKey)->getMemDC();
+
 	_rc = rc;
 
 	_x = enmeyX;
 	_y = enemyY;
 	_speed = speed;
 
+	_gravity = 0.9f;
+
 	_isProbeY = false;
+	_direction = false;
 
 	return S_OK;
 }
 
 float pixelCollision::pixelCollisonY()
 {
-	//float proveX, proveY;
+	_hdc = IMAGEMANAGER->findImage("bgMap")->getMemDC();
 
-	//proveY = _rc.bottom;
-
-	//for (proveX = _rc.left; proveX != _rc.right; ++proveX)
-	//{
-	//	while (!ThisPixelIsMazen(_hdc, proveX, proveY))
-	//	{
-	//		--proveY;
-	//	}
-	//}
-
-	//if (proveY == _rc.bottom) return NULL;
-	//
-	//return proveY;
-
-
-
+	if (_isProbe) return _y;
 
 
 	for (int i = _rc.left; i <= _rc.right && !_isProbeY; i += (_rc.right - _rc.left) / 2)
@@ -62,47 +48,73 @@ float pixelCollision::pixelCollisonY()
 				_y = j - (_rc.bottom - _rc.top) / 2;
 				_isProbeY = true;
 				return _y;
+
 				break;
 			}
 			else if (GetRValue(color) == 255 &&
 					GetGValue(color) == 0 &&
 					GetBValue(color) == 255)
 			{
-				_y += 0.9f;
+				_gravity += 0.4f;
+
+				_y += _gravity;
 				return _y;
+
 				break;
 			}
-
 		}
 	}
 
 	return _y;
 }
 
-float pixelCollision::pixelCollisonX()
+float pixelCollision::pixelCollisonX(bool direction)
 {
-
-
-	bool isProbe = false;
-
-
-	for (int i = _rc.top; i <= _rc.bottom && !isProbe; i += (_rc.right - _rc.left) / 4)
+	if (direction)
 	{
-		for (int j = _x + (_rc.right - _rc.left) / 2 - _speed; j <= _x + (_rc.right - _rc.left) / 2 + _speed; ++j)
+		for (int i = _rc.top; i <= _rc.bottom; i += (_rc.right - _rc.left) / 4)
 		{
-			COLORREF color = GetPixel(_hdc, j, i);
-
-			if (GetRValue(color) == 0 &&
-				GetGValue(color) == 255 &&
-				GetBValue(color) == 0)
+			for (int j = _x + (_rc.right - _rc.left) / 2 - _speed; j <= _x + (_rc.right - _rc.left) / 2 + _speed; ++j)
 			{
-				_x = j - (_rc.right - _rc.left) / 2;
-				isProbe = true;
-				return _x;
-				break;
+				COLORREF color = GetPixel(_hdc, j, i);
+
+				if (GetRValue(color) == 0 &&
+					GetGValue(color) == 255 &&
+					GetBValue(color) == 0)
+				{
+					_x = j - (_rc.right - _rc.left) / 2;
+					return _x;
+					_direction = false;
+
+					break;
+				}
 			}
 		}
 	}
+	else
+	{
+		for (int i = _rc.top; i <= _rc.bottom; i += (_rc.right - _rc.left) / 4)
+		{
+			for (int j = _x - (_rc.right - _rc.left) / 2 - _speed; j <= _x - (_rc.right - _rc.left) / 2 + _speed; ++j)
+			{
+				COLORREF color = GetPixel(_hdc, j, i);
+
+				if (GetRValue(color) == 0 &&
+					GetGValue(color) == 255 &&
+					GetBValue(color) == 0)
+				{
+					_x = j + (_rc.right - _rc.left) / 2;
+					return _x;
+					_direction = true;
+
+					break;
+				}
+			}
+		}
+	}
+
+
+
 
 	return _x;
 }

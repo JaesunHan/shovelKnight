@@ -51,6 +51,7 @@ HRESULT minion1::init(float x, float y)
 	_isDead = false;
 	_isDeadVanish = false;
 	_vanishTime = 1;
+	_direction = false;
 
 	_anim = KEYANIMANAGER->findAnimation("beetoLeftMove");
 
@@ -74,16 +75,17 @@ void minion1::update()
 
 void minion1::move()
 {
+	//enemyX좌표 픽셀충돌시 방향전환
+	if (_pixelC->pixelDirection()) _status = ENEMY_RIGHT_MOVE;
+	else _status = ENEMY_LEFT_MOVE;
+
+
 	//상태값에 따른 에니메이션 및 움직임
 	switch (_status)
 	{
-		case ENEMY_LEFT_STOP:
-			_speed = 0.0f;
-		break;
-		case ENEMY_RIGHT_STOP:
-			_speed = 0.0f;
-		break;
 		case ENEMY_LEFT_MOVE:
+			_direction = false;
+
 			_anim = KEYANIMANAGER->findAnimation("beetoLeftMove");
 			if (!_anim->isPlay()) _anim->start();
 
@@ -91,6 +93,8 @@ void minion1::move()
 			_x -= _speed;
 		break;
 		case ENEMY_RIGHT_MOVE:
+			_direction = true;
+
 			_anim = KEYANIMANAGER->findAnimation("beetoRightMove");
 			if (!_anim->isPlay()) _anim->start();
 
@@ -134,7 +138,7 @@ void minion1::move()
 			{
 				_anim->start();
 				_isDead = true;
-				_jump->jumping(&_x, &_y, 15.0f, 0.9f);
+				_jump->jumping(&_x, &_y, 15.0f, 0.4f);
 			}
 
 			//움직임: 뒤로 점핑하면서 죽기
@@ -148,7 +152,7 @@ void minion1::move()
 	}
 
 
-	_rc = RectMakeCenter(_x, _pixelC->pixelCollisonY(), _width, _height);
+	_rc = RectMakeCenter(_pixelC->pixelCollisonX(_direction), _pixelC->pixelCollisonY(), _width, _height);
 }
 
 

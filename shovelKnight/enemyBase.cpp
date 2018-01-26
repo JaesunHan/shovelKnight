@@ -32,6 +32,7 @@ HRESULT enemyBase::init(string imgKeyString, char* imgFileName, float x, float y
 	_isDead = false;
 	_isDeadVanish = false;
 	_vanishTime = 1;
+	_direction = false;
 
 	_img = IMAGEMANAGER->addFrameImage(_imgKeyString, _imgFileName, _x, _y, totalWidth, totalHeight, frameX, frameY, true, RGB(255, 0, 255));
 
