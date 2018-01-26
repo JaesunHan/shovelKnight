@@ -32,6 +32,6 @@ public:
 	void getSkillMemoryAdress(skillManager* skill) { _skill = skill; }
 	void getPlayerMemoryAdress(playerManager* player) { _player = player; }
 
-	void collisionPlayerMap(HDC hdc, const RECT rc);
+	void collisionPlayerMap();
 };
 

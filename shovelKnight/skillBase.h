@@ -32,7 +32,6 @@ protected:
 	bool _isRight;
 	SKILL_STATS _stats;
 
-
 public:
 	skillBase();
 	~skillBase();
@@ -47,12 +46,6 @@ public:
 
 	virtual bool getIsFire() { return _isFire; }
 	virtual void setIsFire(bool fire) { _isFire = fire; }
-
-	virtual SKILL_STATS getSkillStats() { return _stats; }
-	virtual void setSkillStats(SKILL_STATS stats) { _stats = stats; }
-
-	virtual animation* getSkillAni() { return _ani; }
-	virtual void setSkillAni(animation* ani) { _ani = ani; }
 
 	virtual void reAction(SKILL_REACTION reaction);
 };

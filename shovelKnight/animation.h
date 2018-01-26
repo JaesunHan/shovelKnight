@@ -75,7 +75,8 @@ public:
 	inline POINT getFramePos(void) { return _frameList[_playList[_nowPlayIndex]]; }
 	inline int getFrameWidth(void) { return _frameWidth; }
 	inline int getFrameHeight(void) { return _frameHeight; }
+	inline DWORD getNowPlayIndex(void) { return _nowPlayIndex; }
 
-
+	void setObj(void* obj) { _obj = obj; }
 };
 

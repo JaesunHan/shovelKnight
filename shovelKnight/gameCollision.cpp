@@ -23,12 +23,9 @@ void gameCollision::release()
 
 void gameCollision::update()
 {
-	RECT temp;
-	RECT player = { 0,0,0,0 }; //= _player->;
-	HDC hdc = IMAGEMANAGER->findImage("bgMap")->getMemDC();
 	RECT enemy;
 
-	collisionPlayerMap(hdc, player);
+	collisionPlayerMap();
 
 	//플레이어와 적의 충돌
 	//for (int i = 0; i != enemy.size(); ++i)
@@ -55,7 +52,25 @@ void gameCollision::render()
 {
 }
 
-void gameCollision::collisionPlayerMap(HDC hdc, const RECT rc)
+void gameCollision::collisionPlayerMap()
 {
-	ThisPixelIsMazen(hdc, 10, 10);
+	HDC hdc = IMAGEMANAGER->findImage("bgMap")->getMemDC();
+
+	RECT rc = _player->getPlayerRc();
+
+	int probeX, probeY;
+
+	probeY = rc.bottom;
+
+	for (probeX = rc.left; probeX != rc.right; ++probeX)
+	{
+		while (!ThisPixelIsMazen(hdc, probeX, probeY))
+		{
+			--probeY;
+		}
+	}
+	if (probeY == rc.bottom) return;
+
+	_player->setY(_player->getY() + (probeY - rc.bottom));
+
 }

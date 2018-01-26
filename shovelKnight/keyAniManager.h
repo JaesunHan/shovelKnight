@@ -41,6 +41,8 @@ public:
 	void addCoordinateFrameAnimation(string animationKeyName, char* imageKeyName, int start, int end, int fps, bool reverse,
 		bool loop, void* cbFunction, void* obj);
 
+	void setObj(string animationKeyName, void* obj);
+
 	void start(string animationKeyName);
 	void stop(string animationKeyName);
 	void pause(string animationKeyName);

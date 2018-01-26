@@ -42,13 +42,7 @@ void skillBase::fire(SKILL_FIRE charType, float x, float y)
 {
 	_x = x;
 	_y = y;
-	switch (charType)
-	{
-	case SKILL_FIRE_TEST:
-		_x += 0;
-		_y += 0;
-		break;
-	}
+
 	_isFire = true;
 }
 
