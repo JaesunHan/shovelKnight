@@ -113,6 +113,7 @@
     <ClInclude Include="minion1.h" />
     <ClInclude Include="motherAction.h" />
     <ClInclude Include="npcBase.h" />
+    <ClInclude Include="pixelCollision.h" />
     <ClInclude Include="StoreManager.h" />
     <ClInclude Include="dirtBlock.h" />
     <ClInclude Include="gameObjectBase.h" />
@@ -180,6 +181,7 @@
     <ClCompile Include="minion1.cpp" />
     <ClCompile Include="motherAction.cpp" />
     <ClCompile Include="npcBase.cpp" />
+    <ClCompile Include="pixelCollision.cpp" />
     <ClCompile Include="StoreManager.cpp" />
     <ClCompile Include="dirtBlock.cpp" />
     <ClCompile Include="gameObjectBase.cpp" />

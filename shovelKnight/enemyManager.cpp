@@ -84,7 +84,7 @@ void enemyManager::render()
 //-------------------------------------------------------------- beeto
 void enemyManager::setMinionBeeto(void)
 {
-	for (int i = 0; i < 1; ++i)
+	for (int i = 0; i < 3; ++i)
 	{
 		minion1* minion;
 		minion = new minion1;
