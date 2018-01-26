@@ -41,6 +41,7 @@ public:
 	void draw();
 
 	void setScript();
+	void soundPlay();
 
 	//================================= Start 게터 세터 ============================
 	string getSceneName() { return _sceneName; }
