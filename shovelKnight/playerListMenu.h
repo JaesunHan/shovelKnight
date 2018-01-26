@@ -66,7 +66,10 @@ class playerListMenu : public menuBase
 	//내 무기	-> 지금은 안쓸듯ㄴ
 	image* _weapon;
 	
-
+	//hp 상태에 따른 세가지 이미지(빈거, 반개짜리, 한개 짜리
+	image* _emptyHP;
+	image* _fullHP;
+	image* _halfHP;
 public:
 	HRESULT init();
 	HRESULT init(char name[128], int characterKind, int hp, int mana, int money, int suit, int weapon);
