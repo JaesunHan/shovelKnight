@@ -96,7 +96,7 @@ void gameTitleScene::update()
 }
 void gameTitleScene::release()
 {
-
+	
 }
 void gameTitleScene::render() 
 {

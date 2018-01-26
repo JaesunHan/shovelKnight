@@ -79,7 +79,7 @@ void gameNode::update(void)
 
 void gameNode::render(void)
 {
-
+	
 }
 
 LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
