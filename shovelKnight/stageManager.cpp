@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "stageManager.h"
+#include "playerBase.h"
 #include <vector>
 
 
@@ -75,17 +76,20 @@ void stageManager::loadData()
 		int maxlayer = INIDATA->loadDataInterger(mapName, "imageTotal", "maxNum");
 		int maxTile = INIDATA->loadDataInterger(mapName, "tileTotal", "maxNum");
 
-		for (int i = 0; i < maxlayer; ++i)
+		if (maxlayer > 0)
 		{
-			char bgImage[128];
-			wsprintf(bgImage, "bgImage%d", i + 1);
-			GetPrivateProfileString(_T(bgImage), _T("key"), NULL, key, 255, _T(iniDir));
-			GetPrivateProfileString(_T(bgImage), _T("directory"), NULL, directory, 255, _T(iniDir));
-			if (IMAGEMANAGER->findImage(key)) IMAGEMANAGER->deleteImage(key);
-			IMAGEMANAGER->addImage(key, directory,
-				INIDATA->loadDataInterger(mapName, bgImage, "width"),
-				INIDATA->loadDataInterger(mapName, bgImage, "height"),
-				true, RGB(255, 0, 255), false);
+			for (int i = 0; i < maxlayer; ++i)
+			{
+				char bgImage[128];
+				wsprintf(bgImage, "bgImage%d", i + 1);
+				GetPrivateProfileString(_T(bgImage), _T("key"), NULL, key, 255, _T(iniDir));
+				GetPrivateProfileString(_T(bgImage), _T("directory"), NULL, directory, 255, _T(iniDir));
+				if (IMAGEMANAGER->findImage(key)) IMAGEMANAGER->deleteImage(key);
+				IMAGEMANAGER->addImage(key, directory,
+					INIDATA->loadDataInterger(mapName, bgImage, "width"),
+					INIDATA->loadDataInterger(mapName, bgImage, "height"),
+					true, RGB(255, 0, 255), false);
+			}
 		}
 
 		char mapImage[128];
@@ -137,5 +141,55 @@ void stageManager::renderTiles()
 					_vTileNum[(i * _verticalTileNum) + j] % 100, 16);
 			}
 		}
+	}
+}
+
+void stageManager::transition()
+{
+	if (_transition == true)
+	{
+		if (_nextMap == true)
+		{
+			TCHAR key[255];
+			TCHAR directory[255];
+			char mapName[128];
+			wsprintf(mapName, "map00%d", _mapNum + 1);
+			char iniDir[128];
+			wsprintf(iniDir, ".\\map00%d.ini", _mapNum + 1);
+			char txtDir[128];
+			wsprintf(txtDir, "map00%d.txt", _mapNum + 1);
+			int maxlayer = INIDATA->loadDataInterger(mapName, "imageTotal", "maxNum");
+			int maxTile = INIDATA->loadDataInterger(mapName, "tileTotal", "maxNum");
+
+			if (maxlayer > 0)
+			{
+				for (int i = 0; i < maxlayer; ++i)
+				{
+					char bgImage[128];
+					wsprintf(bgImage, "bgImage%d", i + 1);
+					GetPrivateProfileString(_T(bgImage), _T("key"), NULL, key, 255, _T(iniDir));
+					GetPrivateProfileString(_T(bgImage), _T("directory"), NULL, directory, 255, _T(iniDir));
+					if (IMAGEMANAGER->findImage(key)) IMAGEMANAGER->deleteImage(key);
+					IMAGEMANAGER->addImage(key, directory,
+						INIDATA->loadDataInterger(mapName, bgImage, "width"),
+						INIDATA->loadDataInterger(mapName, bgImage, "height"),
+						true, RGB(255, 0, 255), false);
+				}
+			}
+		}
+		if (_previousMap == true)
+		{
+			TCHAR key[255];
+			TCHAR directory[255];
+			char mapName[128];
+			wsprintf(mapName, "map00%d", _mapNum - 1);
+			char iniDir[128];
+			wsprintf(iniDir, ".\\map00%d.ini", _mapNum - 1);
+			char txtDir[128];
+			wsprintf(txtDir, "map00%d.txt", _mapNum - 1);
+			int maxlayer = INIDATA->loadDataInterger(mapName, "imageTotal", "maxNum");
+			int maxTile = INIDATA->loadDataInterger(mapName, "tileTotal", "maxNum");
+		}
+		
 	}
 }
