@@ -52,6 +52,8 @@ void StoreManager::render()
 void StoreManager::playerCollisionNpc(vector<npcBase*>::iterator temp)
 {
 	//콜리전 매니저에서 받아오는걸로. 
+	//콜리전 매니저에서 이넘값으로 받아오고
+	//해당 이넘값으로 충돌이 확인되면 w키를 눌러 대화가 가능해지는것으로 구현할것
 	
 
 }
@@ -74,20 +76,63 @@ void StoreManager::sellPlayerSkill(vector<npcBase*>::iterator temp)
 		{
 			_pm->getMoney() > 3000;
 		}
+
+		//NO했을때는 텍스트 아웃으로
+		//"어 그...그래? 안녕 ㅃㅃ " 다이얼로그 출력 ㅃㅃ
+
 	}
 	
 }
 
 void StoreManager::SellPlayerHp(vector<npcBase*>::iterator temp)
 {
-	if ((*temp)->getStock() == 0)
+	if ((*temp)->getNpcType() == HEALTYGUY)	//NPC타입이 매직걸일때
 	{
-		//텍스트 아웃으로 "
+		if ((*temp)->getStock() == 0)		//한번도 구매를 안했으면  (stock이 구매횟수 변수)
+		{
+			//텍스트 아웃으로 "너 이거 살래? Yes or No(bool값<-변수 하나 추가해야함 1.25)
+			//아래는 Yes 선택했을때의 함수
+			_pm->getMoney() > 1000;
+			//플레이어에 셋골드해서 골드 차감하고 
+			//해당 스킬 키값 받아서 
+			//셋으로 true로 바꿔준다.
+			(*temp)->setStock(1);			//한번 구매했으니까 stock을 1로 반환해준다.
+		}
+		if ((*temp)->getStock() == 1) //2회차 구매일때 
+		{
+			_pm->getMoney() > 3000;
+		}
+
+		//NO했을때는 텍스트 아웃으로
+		//"어 그...그래? 안녕 ㅃㅃ " 다이얼로그 출력 ㅃㅃ
+
 	}
 }
 
 void StoreManager::sellGameBgm(vector<npcBase*>::iterator temp)
 {
+	if ((*temp)->getNpcType() == HEALTYGUY)	//NPC타입이 매직걸일때
+	{
+		if ((*temp)->getStock() == 0)		//한번도 구매를 안했으면  (stock이 구매횟수 변수)
+		{
+			//텍스트 아웃으로 "너 이거 살래? Yes or No(bool값<-변수 하나 추가해야함 1.25)
+			//아래는 Yes 선택했을때의 함수
+			_pm->getMoney() > 1000;
+			//플레이어에 셋골드해서 골드 차감하고 
+			//해당 스킬 키값 받아서 
+			//셋으로 true로 바꿔준다.
+			(*temp)->setStock(1);			//한번 구매했으니까 stock을 1로 반환해준다.
+		}
+		if ((*temp)->getStock() == 1) //2회차 구매일때 
+		{
+			_pm->getMoney() > 3000;
+		}
+
+		//NO했을때는 텍스트 아웃으로
+		//"어 그...그래? 안녕 ㅃㅃ " 다이얼로그 출력 ㅃㅃ
+
+	}
+
 }
 
 
