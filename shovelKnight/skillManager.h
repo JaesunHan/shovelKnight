@@ -3,6 +3,7 @@
 #include "skill_dirtBlockFx.h"
 #include "skill_fireBall.h"
 #include "skill_bubble.h"
+#include "gameNode.h"
 
 enum SKILL
 {
@@ -31,5 +32,7 @@ public:
 	virtual void render();
 
 	virtual void Fire(SKILL_FIRE chartype, SKILL skill, float x, float y);
+
+	virtual vSkill getVSkill() { return _vSkill; }
 };
 

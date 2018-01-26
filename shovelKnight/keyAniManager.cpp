@@ -162,6 +162,11 @@ void keyAniManager::addCoordinateFrameAnimation(string animationKeyName, char* i
 
 }
 
+void keyAniManager::setObj(string animationKeyName, void* obj)
+{
+	findAnimation(animationKeyName)->setObj(obj);
+}
+
 
 void keyAniManager::start(string animationKeyName) 
 {
