@@ -19,6 +19,7 @@ enum PLAYER_SKILL
 
 enum COLLISIONTYPE
 {
+	CT_NULL,
 	CT_TOP,
 	CT_BOTTOM,
 	CT_LEFT,
@@ -124,7 +125,7 @@ public:
 	void hitReAction();
 	void attack(float fireX, float fireY, bool skillUsed);
 	void move();
-	inline void collisionPlayerMap();
+	inline int collisionPlayerMap();
 
 
 	inline float getX() { return _x; }

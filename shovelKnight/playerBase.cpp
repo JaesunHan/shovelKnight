@@ -40,6 +40,8 @@ void playerBase::release()
 void playerBase::update() 
 {
 	move();
+	collisionPlayerMap();
+	hitReAction();
 	CAMERAMANAGER->setSingleFocus(_x, _y, 800);
 }
 void playerBase::render() 
@@ -61,6 +63,43 @@ void playerBase::render()
 
 void playerBase::hitReAction()
 {
+	switch (collisionPlayerMap())
+	{
+	case CT_NULL:
+		_cPlayerTarget = CP_NULL;
+		break;
+	case CT_TOP:
+		_cPlayerTarget = CP_GROUND;
+		_cLR = LR_NULL;
+		_cTB = TB_TOP;
+		break;
+	case CT_BOTTOM:
+		_cPlayerTarget = CP_GROUND;
+		_cLR = LR_NULL;
+		_cTB = TB_BOTTOM;
+		break;
+	case CT_LEFT:
+		_cPlayerTarget = CP_GROUND;
+		_cLR = LR_LEFT;
+		_cTB = TB_NULL;
+		break;
+	case CT_RIGHT:
+		_cPlayerTarget = CP_GROUND;
+		_cLR = LR_RIGHT;
+		_cTB = TB_NULL;
+		break;
+	case CT_LEFT_BOTTOM:
+		_cPlayerTarget = CP_GROUND;
+		_cLR = LR_LEFT;
+		_cTB = TB_BOTTOM;
+		break;
+	case CT_RIGHT_BOTTOM:
+		_cPlayerTarget = CP_GROUND;
+		_cLR = LR_RIGHT;
+		_cTB = TB_BOTTOM;
+		break;
+	}
+
 	switch (_cPlayerTarget)
 	{
 		case CP_NULL:
@@ -232,11 +271,12 @@ void playerBase::move()
 	}
 	
 
+
 	_rc = RectMake(_x - HIT_BOX_WIDTH / 2, _y - HIT_BOX_HEIGHT, HIT_BOX_WIDTH, HIT_BOX_HEIGHT);
 }
 
 
-void playerBase::collisionPlayerMap()
+int playerBase::collisionPlayerMap()
 {
 	HDC hdc = IMAGEMANAGER->findImage("bgMap")->getMemDC();
 
@@ -244,6 +284,9 @@ void playerBase::collisionPlayerMap()
 
 	int probeX, probeY, probeY2;
 	bool ltBlock, rtBlock;
+
+	ltBlock = false;
+	rtBlock = false;
 
 	probeY = rc.bottom;
 	probeY2 = rc.bottom;
@@ -287,5 +330,11 @@ void playerBase::collisionPlayerMap()
 		}
 	}
 	
-	if (probeY == rc.bottom) return;
+	if (probeY == rc.bottom&& !ltBlock&& !rtBlock) return CT_BOTTOM;
+	else if (probeY == rc.bottom && ltBlock && !rtBlock) return CT_LEFT_BOTTOM;
+	else if (probeY == rc.bottom && !ltBlock && rtBlock) return CT_RIGHT_BOTTOM;
+	else if (probeY < rc.top && !ltBlock && !rtBlock) return CT_NULL;
+	else if (probeY < rc.top && ltBlock && !rtBlock) return CT_LEFT;
+	else if (probeY < rc.top && !ltBlock && rtBlock) return CT_RIGHT;
+	else return CT_TOP;
 }
