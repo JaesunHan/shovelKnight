@@ -81,6 +81,7 @@ void stageManager::loadData()
 			wsprintf(bgImage, "bgImage%d", i + 1);
 			GetPrivateProfileString(_T(bgImage), _T("key"), NULL, key, 255, _T(iniDir));
 			GetPrivateProfileString(_T(bgImage), _T("directory"), NULL, directory, 255, _T(iniDir));
+			if (IMAGEMANAGER->findImage(key)) IMAGEMANAGER->deleteImage(key);
 			IMAGEMANAGER->addImage(key, directory,
 				INIDATA->loadDataInterger(mapName, bgImage, "width"),
 				INIDATA->loadDataInterger(mapName, bgImage, "height"),
@@ -93,6 +94,7 @@ void stageManager::loadData()
 		GetPrivateProfileString(_T(mapImage), _T("directory"), NULL, directory, 255, _T(iniDir));
 		_transverseTileNum = INIDATA->loadDataInterger(mapName, mapImage, "transverseNum");
 		_verticalTileNum = INIDATA->loadDataInterger(mapName, mapImage, "verticalNum");
+		if (IMAGEMANAGER->findImage(key)) IMAGEMANAGER->deleteImage(key);
 		IMAGEMANAGER->addImage(key, directory,
 			INIDATA->loadDataInterger(mapName, mapImage, "width"),
 			INIDATA->loadDataInterger(mapName, mapImage, "height"),
@@ -104,6 +106,7 @@ void stageManager::loadData()
 			wsprintf(tile, "tile%d", i + 1);
 			GetPrivateProfileString(_T(tile), _T("key"), NULL, key, 255, _T(iniDir));
 			GetPrivateProfileString(_T(tile), _T("directory"), NULL, directory, 255, _T(iniDir));
+			if (IMAGEMANAGER->findImage(key)) IMAGEMANAGER->deleteImage(key);
 			IMAGEMANAGER->addImage(key, directory,
 				INIDATA->loadDataInterger(mapName, tile, "width"),
 				INIDATA->loadDataInterger(mapName, tile, "height"),
@@ -124,7 +127,7 @@ void stageManager::renderTiles()
 {
 	for (int i = 0; i < _transverseTileNum; ++i)						//¸Ê °¡·Î Å¸ÀÏ °¹¼ö
 	{
-		for (int j = 0; j < _verticalTileNum; ++j)	//¸Ê ¼¼·Î Å¸ÀÏ °¹¼ö
+		for (int j = 0; j < _verticalTileNum; ++j)						//¸Ê ¼¼·Î Å¸ÀÏ °¹¼ö
 		{
 			if (_vTileNum[(i * _verticalTileNum) + j] == 0) continue;
 			if ((_vTileNum[(i * _verticalTileNum) + j] / 10000) == 1)

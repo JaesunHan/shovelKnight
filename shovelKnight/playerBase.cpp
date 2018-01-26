@@ -28,6 +28,7 @@ HRESULT playerBase::init(float startX, float startY)
 	_moveSpeed = SPEED;
 	_gravity = GRAVITY;
 	_jumpPower = JUMPPOWER;
+	_jumpCount = 0;
 	_rc = RectMake(_x - HIT_BOX_WIDTH / 2, _y - HIT_BOX_HEIGHT, HIT_BOX_WIDTH, HIT_BOX_HEIGHT);
 
 	return S_OK;
@@ -39,6 +40,8 @@ void playerBase::release()
 void playerBase::update() 
 {
 	move();
+	collisionPlayerMap();
+	hitReAction();
 	CAMERAMANAGER->setSingleFocus(_x, _y, 800);
 }
 void playerBase::render() 
@@ -54,10 +57,49 @@ void playerBase::render()
 	TTTextOut(hdc, 300, 40, "left", _rc.left);
 	TTTextOut(hdc, 300, 55, "right", _rc.right);
 
+
+
 }
 
 void playerBase::hitReAction()
 {
+	switch (collisionPlayerMap())
+	{
+	case CT_NULL:
+		_cPlayerTarget = CP_NULL;
+		break;
+	case CT_TOP:
+		_cPlayerTarget = CP_GROUND;
+		_cLR = LR_NULL;
+		_cTB = TB_TOP;
+		break;
+	case CT_BOTTOM:
+		_cPlayerTarget = CP_GROUND;
+		_cLR = LR_NULL;
+		_cTB = TB_BOTTOM;
+		break;
+	case CT_LEFT:
+		_cPlayerTarget = CP_GROUND;
+		_cLR = LR_LEFT;
+		_cTB = TB_NULL;
+		break;
+	case CT_RIGHT:
+		_cPlayerTarget = CP_GROUND;
+		_cLR = LR_RIGHT;
+		_cTB = TB_NULL;
+		break;
+	case CT_LEFT_BOTTOM:
+		_cPlayerTarget = CP_GROUND;
+		_cLR = LR_LEFT;
+		_cTB = TB_BOTTOM;
+		break;
+	case CT_RIGHT_BOTTOM:
+		_cPlayerTarget = CP_GROUND;
+		_cLR = LR_RIGHT;
+		_cTB = TB_BOTTOM;
+		break;
+	}
+
 	switch (_cPlayerTarget)
 	{
 		case CP_NULL:
@@ -207,21 +249,92 @@ void playerBase::move()
 	{
 		_action = PR_ATTACK;
 	}
-	if (KEYMANAGER->isOnceKeyDown('J'))
+	if (KEYMANAGER->isStayKeyDown('J'))
 	{
 		_action = PR_JUMP;
 		_jumpPower = JUMPPOWER;
 	}
 
+	//좌우 이동부분
 	if (_action == PR_MOVE)
 	{
 		_x += _moveSpeed*_direction;
 	}
+	//상하 이동부분
 	if (_action == PR_JUMP || _state == INAIR)
 	{
 		_y -= _jumpPower;
 		_jumpPower -= _gravity;
+		
+		if (_jumpPower < 0) _currentFrameX = 1;
+		else _currentFrameX = 0;
 	}
+	
+
 
 	_rc = RectMake(_x - HIT_BOX_WIDTH / 2, _y - HIT_BOX_HEIGHT, HIT_BOX_WIDTH, HIT_BOX_HEIGHT);
+}
+
+
+int playerBase::collisionPlayerMap()
+{
+	HDC hdc = IMAGEMANAGER->findImage("bgMap")->getMemDC();
+
+	RECT rc = _rc;
+
+	int probeX, probeY, probeY2;
+	bool ltBlock, rtBlock;
+
+	ltBlock = false;
+	rtBlock = false;
+
+	probeY = rc.bottom;
+	probeY2 = rc.bottom;
+	
+
+	for (probeX = rc.left; probeX != rc.right; ++probeX)
+	{
+		if (probeX == rc.left)
+		{
+			while (ThisPixelIsMazen(hdc, probeX, probeY2))
+			{
+				--probeY2;
+			}
+			while (!ThisPixelIsMazen(hdc, probeX, probeY))
+			{
+				--probeY;
+			}
+
+			if (probeY == probeY2 + 1) ltBlock = false;
+			else ltBlock = true;
+		}
+		if (probeX != rc.left&&probeX != rc.right)
+		{
+			while (!ThisPixelIsMazen(hdc, probeX, probeY))
+			{
+				--probeY;
+			}
+		}
+		if (probeX == rc.right)
+		{
+			while (ThisPixelIsMazen(hdc, probeX, probeY2))
+			{
+				--probeY2;
+			}
+			while (!ThisPixelIsMazen(hdc, probeX, probeY))
+			{
+				--probeY;
+			}
+			if (probeY == probeY2 + 1) rtBlock = false;
+			else rtBlock = true;
+		}
+	}
+	
+	if (probeY == rc.bottom&& !ltBlock&& !rtBlock) return CT_BOTTOM;
+	else if (probeY == rc.bottom && ltBlock && !rtBlock) return CT_LEFT_BOTTOM;
+	else if (probeY == rc.bottom && !ltBlock && rtBlock) return CT_RIGHT_BOTTOM;
+	else if (probeY < rc.top && !ltBlock && !rtBlock) return CT_NULL;
+	else if (probeY < rc.top && ltBlock && !rtBlock) return CT_LEFT;
+	else if (probeY < rc.top && !ltBlock && rtBlock) return CT_RIGHT;
+	else return CT_TOP;
 }

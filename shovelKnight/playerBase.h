@@ -8,7 +8,26 @@
 #define	DOWNATTACK_DAMAGE_BOX_HEIGHT 10
 #define SPEED 4.0f
 #define GRAVITY 0.2f
-#define JUMPPOWER 6.0f
+#define JUMPPOWER 3.0f
+
+enum PLAYER_SKILL
+{
+	SK_NULL,
+	SK_FIREBALL
+};
+
+
+enum COLLISIONTYPE
+{
+	CT_NULL,
+	CT_TOP,
+	CT_BOTTOM,
+	CT_LEFT,
+	CT_RIGHT,
+	CT_LEFT_BOTTOM,
+	CT_RIGHT_BOTTOM
+};
+
 
 enum PLAYERDIRECTION
 {
@@ -71,9 +90,12 @@ protected :
 	COLLISION_LR		_cLR;					//플레이어 충돌방향
 	RECT				_rc;					//플레이어 렉트(충돌렉트)
 	char*				_characterName;			//캐릭터 네임
+	int					_jumpCount;				//점프카운트
 	int					_frameCount;			//프레임카운트
 	int					_currentFrameX;			//
 	int					_currentFrameY;			//
+	int					_currentSkill;			//현재 장착된 스킬
+	int					_skillUnlockLv;			//스킬 해금 단계
 	int					_currentHP;				//현재 체력
 	int					_maxHP;					//최대 체력
 	int					_currentMP;				//현재 마나
@@ -103,6 +125,8 @@ public:
 	void hitReAction();
 	void attack(float fireX, float fireY, bool skillUsed);
 	void move();
+	inline int collisionPlayerMap();
+
 
 	inline float getX() { return _x; }
 	inline void setX(float x) { _x = x; }
@@ -116,11 +140,13 @@ public:
 	inline void setMoney(int increaseMoney) { _money += increaseMoney; }
 	inline char* getName() { return _characterName; }
 	inline void setName(char* name) { _characterName = name; }
-
+	inline int getSkillUnlockLv() { return _skillUnlockLv; }
+	inline void setSkillUnlockLv(int increaseLv) { _skillUnlockLv += increaseLv; }
 
 
 	inline RECT getPlayerRc() { return _rc; }
 	inline void setPlayerRc(RECT rc) { _rc = rc; }
 	inline COLLISION_PLAYER getCollisionPlayer() { return _cPlayerTarget; }
+	
 };
 
