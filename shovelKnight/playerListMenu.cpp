@@ -97,9 +97,11 @@ void playerListMenu::draw(HDC hdc)
 			_characterTitle->getCenterX() - _characterImg->getFrameWidth(),
 			_characterTitle->getCenterY() - _characterImg->getFrameHeight(),
 			_characterAnim, 2);
-		//캐릭터의 이름을 텍스트로 출력
+		//======================== Start 캐릭터의 이름을 텍스트로 출력======================================
 		TextOut(hdc, _menuImg->getWidth() / 3 * 1+20, _menuImg->getHeight() / 3 * 1+10, _cName, strlen(_cName));
-		//hp 출력하기
+		//======================== End 캐릭터의 이름을 텍스트로 출력======================================
+
+		//======================== Start hp 출력하기 ===================================================
 		//기본으로 빈거 4개 깔기
 		for (int i = 0; i < MAXHPIMAGE; ++i)
 		{
@@ -113,6 +115,6 @@ void playerListMenu::draw(HDC hdc)
 		{
 			_halfHP->render(hdc, _menuImg->getWidth() / 3 * 1 + 20 + 16 * (_hp.hp / 2), _menuImg->getHeight() / 3 * 1 + 30);
 		}
-
+		//======================== End hp 출력하기 ===================================================
 	}
 }
