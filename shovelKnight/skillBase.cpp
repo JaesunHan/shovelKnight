@@ -40,7 +40,7 @@ void skillBase::render()
 
 void skillBase::fire(SKILL_FIRE charType, float x, float y)
 {
-	_x = x;
+	_saveX = _x = x;
 	_y = y;
 
 	_isFire = true;

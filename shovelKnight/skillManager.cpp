@@ -54,14 +54,14 @@ void skillManager::update()
 {
 	if (KEYMANAGER->isOnceKeyDown('R'))
 	{
-		Fire(SKILL_FIRE_TEST, SKILL_FIREBALL, RND->getInt(WINSIZEX), RND->getInt(WINSIZEY));
+		Fire(SKILL_FIRE_TEST, SKILL_FIREBALL, RND->getFromIntTo(100, WINSIZEX-100), RND->getInt(WINSIZEY));
 	}
 
-	viSkill iter;
-	
 	if (_vSkill.size())	
 	{
-		for (iter = _vSkill.begin(); iter != _vSkill.end();)
+		viSkill iter = _vSkill.begin();
+
+		for (; iter != _vSkill.end();)
 		{
 			if ((*iter)->getIsFire())
 			{
