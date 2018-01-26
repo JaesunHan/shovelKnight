@@ -39,14 +39,37 @@ HRESULT gameMenuScene::init()
 	_targetImg = IMAGEMANAGER->addFrameImage("targetBox", "./image/title/selectBoxFrame.bmp", 0, 0, 80, 37, 2, 1, true, RGB(255, 0, 255));
 	_animTarget = new animation;
 	_animTarget->init(_targetImg->getWidth(), _targetImg->getHeight(), _targetImg->getFrameWidth(), _targetImg->getFrameHeight());
+	_animTarget->setPlayFrame(0, 2, false, true);
+	_animTarget->setFPS(1);
+	_animTarget->start();
+
 
 	_pSlotIdx = 0;
+
+	//플레이어 리스트를 보여주는 메뉴 클래스를 동적할당한다  이 객체의 렌더에서는 플레이어리스트메뉴의 틀만 보여준다.
+	_plm = new playerListMenu;
+	_plm->init();
+	//캐릭터를 만들자는 메뉴 클랙스를 동적할당한다. 이 객체의 렌더에서는 캐릭터 생성 메뉴의 틀만 보여준다.
+	_ccm = new createCharacterMenu;
+	_ccm->init();
+	
 
 	return S_OK;
 }
 void gameMenuScene::update() 
 {
-	
+	_animTarget->frameUpdate(TIMEMANAGER->getElapsedTime() * 10);
+	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
+	{
+		--_pSlotIdx;
+		if (_pSlotIdx <= 0)	_pSlotIdx = 0;
+	}
+	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
+	{
+		++_pSlotIdx;
+		if (_pSlotIdx >= MAXPLAYERLIST - 1)	_pSlotIdx = MAXPLAYERLIST - 1;
+	}
+
 }
 void gameMenuScene::release()
 {
@@ -60,10 +83,28 @@ void gameMenuScene::draw()
 {
 	//기본이미지 렌더
 	_backgroundImg->render(getMemDC(), 0,0);
+
+	//타겟 박스가 현재 가리키는 리스트에 값이 존재하지 않으면 캐릭터 생성화면을 출력하자
+	if (_vPList[_pSlotIdx].hp == 0)
+	{
+		_ccm->render(getMemDC()); 
+	}
+	//타겟 박스가 현재 가리키는 리스트에 값이 존재하면 플레이어 정보를 출ㄹ력하자
+	else 
+	{
+		_plm->render(getMemDC());
+	}
+	//플레이어리스트 넘머발 타겟 박스는 항상 마지막에 출력하기
 	for (int i = 0; i < MAXPLAYERLIST; ++i)
 	{
 		_pNumberBox[i].img->render(getMemDC(), _pNumberBox[i].numberBox.left, _pNumberBox[i].numberBox.top);
 	}
+	_targetImg->aniRender(getMemDC(),
+		_pNumberBox[_pSlotIdx].numberBox.left + (_pNumberBox[_pSlotIdx].numberBox.right - _pNumberBox[_pSlotIdx].numberBox.left) / 2 - _targetImg->getFrameWidth() / 2,
+		_pNumberBox[_pSlotIdx].numberBox.top + (_pNumberBox[_pSlotIdx].numberBox.bottom - _pNumberBox[_pSlotIdx].numberBox.top) / 2 - _targetImg->getFrameHeight() / 2, 
+		_animTarget);
+
+
 }
 
 void gameMenuScene::makePlayerListData()

@@ -87,6 +87,7 @@
     <ClInclude Include="CharacterSelectMenu.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="commonMacroFunction.h" />
+    <ClInclude Include="createCharacterMenu.h" />
     <ClInclude Include="database.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
@@ -152,6 +153,7 @@
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="CharacterSelectMenu.cpp" />
     <ClCompile Include="collision.cpp" />
+    <ClCompile Include="createCharacterMenu.cpp" />
     <ClCompile Include="database.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />

@@ -13,7 +13,7 @@ public:
 	virtual HRESULT init(string imgKeyString, char* imgFileNmae, float x, float y, int imgWidth, int imgHeight);
 	virtual void update();
 	virtual void release();
-	virtual void render();
+	virtual void render(HDC hdc);
 	virtual void draw(HDC hdc);
 
 
