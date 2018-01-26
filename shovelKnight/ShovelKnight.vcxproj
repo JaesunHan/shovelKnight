@@ -87,6 +87,7 @@
     <ClInclude Include="CharacterSelectMenu.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="commonMacroFunction.h" />
+    <ClInclude Include="createCharacterMenu.h" />
     <ClInclude Include="database.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
@@ -104,6 +105,7 @@
     <ClInclude Include="item1.h" />
     <ClInclude Include="itemBase.h" />
     <ClInclude Include="itemManager.h" />
+    <ClInclude Include="jump.h" />
     <ClInclude Include="keyAniManager.h" />
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="MagicGirl.h" />
@@ -152,6 +154,7 @@
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="CharacterSelectMenu.cpp" />
     <ClCompile Include="collision.cpp" />
+    <ClCompile Include="createCharacterMenu.cpp" />
     <ClCompile Include="database.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
@@ -169,6 +172,7 @@
     <ClCompile Include="item1.cpp" />
     <ClCompile Include="itemBase.cpp" />
     <ClCompile Include="itemManager.cpp" />
+    <ClCompile Include="jump.cpp" />
     <ClCompile Include="keyAniManager.cpp" />
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="MagicGirl.cpp" />

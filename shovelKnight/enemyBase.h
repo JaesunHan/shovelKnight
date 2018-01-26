@@ -1,5 +1,6 @@
 #pragma once
 #include "gameNode.h"
+#include "jump.h"
 
 #define GRAVITY	0.9f
 
@@ -15,7 +16,9 @@ enum ENEMYSTATUS
 	ENMEY_LEFT_ATTACK,
 	ENEMY_RIGHT_ATTACK,
 	ENEMY_LEFT_JUMP_ATTACK,
-	ENEMY_RIGHT_JUMP_ATTACK
+	ENEMY_RIGHT_JUMP_ATTACK,
+	ENEMY_LEFT_DEAD,
+	ENEMY_RIGHT_DEAD
 };
 
 class enemyBase : public gameNode
@@ -32,10 +35,16 @@ protected:
 	float _jumpPower;		//점프 파워
 	float _gravity;			//적용할 중력
 	int _width, _height;	//적의 가로, 세로 크기(렉트를 만들 때 사용할 가로세로크기이다.)
+
 	float _playerDistance;  //플레이어와의 거리
-	float _speed;
+	float _speed;           //스피드
+	bool _isDead;           //죽었는지 여부
+	bool _isDeadVanish;     //죽고 벡터에서 지울 불값
+	int _vanishTime;        //죽었을때 사라지게할 여유타임 카운트
 
 	RECT _rc;				//혹시 사용하게될지도 모를 렉트(충돌용)
+
+	jump* _jump;
 
 public:
 	enemyBase();
@@ -67,6 +76,11 @@ public:
 
 	//렉트 게터
 	inline RECT getRect() { return _rc; }
+
+	//적 상태 접근자 & 설정자
+	inline ENEMYSTATUS getStatus() { return _status; }   	
+	inline void setStatus(ENEMYSTATUS status) { _status = status; }
+	inline bool getIsDeadVanish() { return _isDeadVanish; }
 
 	//==================================== End 게터 세터 작성하기===================================
 

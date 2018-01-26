@@ -1,6 +1,8 @@
 #pragma once
 #include "gameNode.h"
 #include "player1.h"
+#include "playerListMenu.h"
+#include "createCharacterMenu.h"
 
 #define MAXPLAYERLIST 10
 
@@ -39,9 +41,15 @@ private:
 	//현재 선택한 슬롯을 표시하는 타겟이미지
 	image* _targetImg;
 	animation* _animTarget;
-
+	//현재 선택한 슬롯 인텍스
 	int _pSlotIdx;
+	//플레이어 리스트 정보를 답고있는 배열
+	playerList _pList[MAXPLAYERLIST];
 
+	//플레이어 정보를 보여주는 메뉴
+	playerListMenu* _plm;
+	//캐릭터 만들으러 가자는 메뉴 (게임에서  "처음부터"라고 뜨는 메뉴 말하는 거임)
+	createCharacterMenu* _ccm;
 public:
 
 	HRESULT init();

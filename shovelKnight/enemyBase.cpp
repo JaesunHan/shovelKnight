@@ -14,7 +14,8 @@ enemyBase::~enemyBase()
 
 HRESULT enemyBase::init(float x, float y)
 {
-
+	_jump = new jump;
+	_jump->init();
 
 	return S_OK;
 }
@@ -28,6 +29,9 @@ HRESULT enemyBase::init(string imgKeyString, char* imgFileName, float x, float y
 
 	_speed = 3.0f;
 	_playerDistance = 0.0f;
+	_isDead = false;
+	_isDeadVanish = false;
+	_vanishTime = 1;
 
 	_img = IMAGEMANAGER->addFrameImage(_imgKeyString, _imgFileName, _x, _y, totalWidth, totalHeight, frameX, frameY, true, RGB(255, 0, 255));
 
@@ -41,6 +45,7 @@ HRESULT enemyBase::init(string imgKeyString, char* imgFileName, float x, float y
 
 	return S_OK;
 }
+
 void enemyBase::release()
 {
 
@@ -65,11 +70,17 @@ void enemyBase::render()
 	//필요하다면 자식클래스의 draw() 함수에서 부모클래스의 draw()를 호출하도록 하자
 	draw();
 
+	if (KEYMANAGER->isToggleKey(VK_TAB))
+	{		
+		Rectangle(getMemDC(), CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_rc.top), 
+			CAMERAMANAGER->getX(_rc.right), CAMERAMANAGER->getY(_rc.bottom));
+	}
+
 }
 
 void enemyBase::draw()
 {
-	_img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
+	CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
 }
 
 void enemyBase::move()
