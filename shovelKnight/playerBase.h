@@ -7,8 +7,8 @@
 #define DOWNATTACK_DAMAGE_BOX_WIDTH 6
 #define	DOWNATTACK_DAMAGE_BOX_HEIGHT 10
 #define SPEED 4.0f
-#define GRAVITY 0.2f
-#define JUMPPOWER 3.0f
+#define GRAVITY 0.01f
+#define JUMPPOWER 0.1f
 
 enum PLAYER_SKILL
 {
@@ -112,6 +112,7 @@ protected :
 	bool				_isDamaged;				//맞았는지
 	bool				_skillUsed;				//스킬발동했는지
 	bool				_isDead;				//죽었냐?
+	int					probeY;
 
 public:
 	playerBase();
