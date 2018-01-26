@@ -56,7 +56,6 @@ void playerBase::render()
 	TTTextOut(hdc, 300, 55, "right", _rc.right);
 
 
-	_image->frameRender(getMemDC(), _x, _y, _currentFrameX, _direction);
 
 }
 
@@ -243,15 +242,48 @@ void playerBase::collisionPlayerMap()
 
 	RECT rc = _rc;
 
-	int probeX, probeY;
+	int probeX, probeY, probeY2;
+	bool ltBlock, rtBlock;
 
 	probeY = rc.bottom;
+	probeY2 = rc.bottom;
+	
 
 	for (probeX = rc.left; probeX != rc.right; ++probeX)
 	{
-		while (!ThisPixelIsMazen(hdc,probeX,probeY))
+		if (probeX == rc.left)
 		{
-			--probeY;
+			while (ThisPixelIsMazen(hdc, probeX, probeY2))
+			{
+				--probeY2;
+			}
+			while (!ThisPixelIsMazen(hdc, probeX, probeY))
+			{
+				--probeY;
+			}
+
+			if (probeY == probeY2 + 1) ltBlock = false;
+			else ltBlock = true;
+		}
+		if (probeX != rc.left&&probeX != rc.right)
+		{
+			while (!ThisPixelIsMazen(hdc, probeX, probeY))
+			{
+				--probeY;
+			}
+		}
+		if (probeX == rc.right)
+		{
+			while (ThisPixelIsMazen(hdc, probeX, probeY2))
+			{
+				--probeY2;
+			}
+			while (!ThisPixelIsMazen(hdc, probeX, probeY))
+			{
+				--probeY;
+			}
+			if (probeY == probeY2 + 1) rtBlock = false;
+			else rtBlock = true;
 		}
 	}
 	
