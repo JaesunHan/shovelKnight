@@ -171,6 +171,8 @@
     <ClInclude Include="MagicGirl.h" />
     <ClInclude Include="menuBase.h" />
     <ClInclude Include="minion1.h" />
+    <ClInclude Include="minion2.h" />
+    <ClInclude Include="minion3.h" />
     <ClInclude Include="motherAction.h" />
     <ClInclude Include="npcBase.h" />
     <ClInclude Include="pixelCollision.h" />
@@ -238,6 +240,8 @@
     <ClCompile Include="MagicGirl.cpp" />
     <ClCompile Include="menuBase.cpp" />
     <ClCompile Include="minion1.cpp" />
+    <ClCompile Include="minion2.cpp" />
+    <ClCompile Include="minion3.cpp" />
     <ClCompile Include="motherAction.cpp" />
     <ClCompile Include="npcBase.cpp" />
     <ClCompile Include="pixelCollision.cpp" />

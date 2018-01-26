@@ -18,18 +18,22 @@ HRESULT pixelCollision::init(RECT &rc, float enmeyX, float enemyY)
 	_y = enemyY;
 
 	_collisionGround = false;
-
+	_directionChange = false;
 
 	return S_OK;
 }
-void pixelCollision::pixelCollisonY()
+
+
+void pixelCollision::pixelCollisonY(RECT &rc)
 {
+	_rc = rc;
+
 	_hdc = IMAGEMANAGER->findImage("bgMap")->getMemDC();
 
 
 	for (int i = _rc.left; i <= _rc.right; i += (_rc.right - _rc.left) / 2)
 	{
-		for (int j = _y + (_rc.bottom - _rc.top) / 2 - 1; j <= _y + (_rc.bottom - _rc.top) / 2 + 1; ++j)
+		for (int j = _rc.bottom - 1; j <= _rc.bottom + 1; ++j)
 		{
 			COLORREF color = GetPixel(_hdc, i, j);
 
@@ -57,14 +61,17 @@ void pixelCollision::pixelCollisonY()
 
 }
 
-bool pixelCollision::pixelCollisonX()
+void pixelCollision::pixelCollisonX(RECT &rc, bool direction)
 {
+	_rc = rc;
+
 	_hdc = IMAGEMANAGER->findImage("bgMap")->getMemDC();
 
-
+	if (direction)  //오른쪽
+	{
 		for (int i = _rc.top; i <= _rc.bottom; i += (_rc.right - _rc.left) / 4)
 		{
-			for (int j = _x + (_rc.right - _rc.left) / 2; j <= _x + (_rc.right - _rc.left) / 2; ++j)
+			for (int j = _rc.right - 1; j <= _rc.right + 1; ++j)
 			{
 				COLORREF color = GetPixel(_hdc, j, i);
 
@@ -73,13 +80,35 @@ bool pixelCollision::pixelCollisonX()
 					GetBValue(color) == 0)
 				{
 					_x = j - (_rc.right - _rc.left) / 2;
-					return true;
 
+					_directionChange = true;
 					break;
 				}
 			}
 		}
+	}
+	else  //왼쪽
+	{
+		for (int i = _rc.top; i <= _rc.bottom; i += (_rc.right - _rc.left) / 4)
+		{
+			for (int j = _rc.left - 1; j <= _rc.left + 1; ++j)
+			{
+				COLORREF color = GetPixel(_hdc, j, i);
+
+				if (GetRValue(color) == 0 &&
+					GetGValue(color) == 255 &&
+					GetBValue(color) == 0)
+				{
+					_x = j + (_rc.right - _rc.left) / 2;
+
+					_directionChange = true;
+					break;
+				}
+			}
+		}
+	}
 
 
-	return false;
+
+
 }
