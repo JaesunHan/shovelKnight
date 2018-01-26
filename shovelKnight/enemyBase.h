@@ -42,6 +42,7 @@ protected:
 	bool _isDead;				//죽었는지 여부
 	bool _isDeadVanish;			//죽고 벡터에서 지울 불값
 	int _vanishTime;			//죽었을때 사라지게할 여유타임 카운트
+	bool _direction;            //방향
 
 	RECT _rc;					//혹시 사용하게될지도 모를 렉트(충돌용)
 
