@@ -28,6 +28,7 @@ HRESULT playerBase::init(float startX, float startY)
 	_moveSpeed = SPEED;
 	_gravity = GRAVITY;
 	_jumpPower = JUMPPOWER;
+	_jumpCount = 0;
 	_rc = RectMake(_x - HIT_BOX_WIDTH / 2, _y - HIT_BOX_HEIGHT, HIT_BOX_WIDTH, HIT_BOX_HEIGHT);
 
 	return S_OK;
@@ -53,6 +54,9 @@ void playerBase::render()
 	TTTextOut(hdc, 300, 25, "bottom", _rc.bottom);
 	TTTextOut(hdc, 300, 40, "left", _rc.left);
 	TTTextOut(hdc, 300, 55, "right", _rc.right);
+
+
+	_image->frameRender(getMemDC(), _x, _y, _currentFrameX, _direction);
 
 }
 
@@ -207,21 +211,49 @@ void playerBase::move()
 	{
 		_action = PR_ATTACK;
 	}
-	if (KEYMANAGER->isOnceKeyDown('J'))
+	if (KEYMANAGER->isStayKeyDown('J'))
 	{
 		_action = PR_JUMP;
 		_jumpPower = JUMPPOWER;
 	}
 
+	//좌우 이동부분
 	if (_action == PR_MOVE)
 	{
 		_x += _moveSpeed*_direction;
 	}
+	//상하 이동부분
 	if (_action == PR_JUMP || _state == INAIR)
 	{
 		_y -= _jumpPower;
 		_jumpPower -= _gravity;
+		
+		if (_jumpPower < 0) _currentFrameX = 1;
+		else _currentFrameX = 0;
 	}
+	
 
 	_rc = RectMake(_x - HIT_BOX_WIDTH / 2, _y - HIT_BOX_HEIGHT, HIT_BOX_WIDTH, HIT_BOX_HEIGHT);
+}
+
+
+void playerBase::collisionPlayerMap()
+{
+	HDC hdc = IMAGEMANAGER->findImage("bgMap")->getMemDC();
+
+	RECT rc = _rc;
+
+	int probeX, probeY;
+
+	probeY = rc.bottom;
+
+	for (probeX = rc.left; probeX != rc.right; ++probeX)
+	{
+		while (!ThisPixelIsMazen(hdc,probeX,probeY))
+		{
+			--probeY;
+		}
+	}
+	
+	if (probeY == rc.bottom) return;
 }
