@@ -74,7 +74,7 @@ void gameTitleScene::update()
 			//선택시 선택사운드 추가
 			if (!SOUNDMANAGER->isPlaySound("MainSelect"))
 			{
-				SOUNDMANAGER->play("MainSelect", 1.0f);
+				SOUNDMANAGER->play("MainSelect", 0.3f);
 			}
 			SCENEMANAGER->changeScene(_gms->getSceneName());
 		}
@@ -96,7 +96,7 @@ void gameTitleScene::update()
 }
 void gameTitleScene::release()
 {
-
+	
 }
 void gameTitleScene::render() 
 {
@@ -145,7 +145,7 @@ void gameTitleScene::soundPlay()
 {
 	if (!SOUNDMANAGER->isPlaySound("MainTheme"))
 	{
-		SOUNDMANAGER->play("MainTheme", 1.0f);
+		SOUNDMANAGER->play("MainTheme", 0.3f);
 	}
 
 }

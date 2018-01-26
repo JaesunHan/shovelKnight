@@ -1,0 +1,31 @@
+사운드 매니저 기능
+
+addSound("키값", "음악파일 이름", BGM인가?, 반복할것인가?);
+play("키값")
+stop("키값")
+remuse("키값") "
+isPlaySound("키값") 실행중인가? 정지인가?
+isPauseSound("키값") 일시정지인가? 아닌가?
+
+
+getVolume("키값")
+setVolume("키값",float  볼륨) 볼륨=0.0~1.0
+
+채널관계 없이 모든 채널에 간섭가능한 볼륨조절
+getMasterVolume()
+setMasterVolume(볼륨)
+================
+볼륨설정 관련 팁 
+BGM = 0.75         
+effect효과음 = 1
+환경음 = 0.5
+================
+
+multipleFrequency("키값", float 스피드)
+주간단히 말해서 스피드 만큼의 속도조절
+1.2하면 1.2배만큼 빨라집니다.
+
+reverbOn("키값")
+반사음 설정
+reverbOff("키값")
+반사음 해제
