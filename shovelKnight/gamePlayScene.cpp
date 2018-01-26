@@ -61,10 +61,10 @@ void gamePlayScene::update()
 	_enemy->update();
 	_gameObject->update();
 	_item->update();
+	_stage->update();
 	_player->update();
 	_Store->update();
 	_skill->update();
-	_stage->update();
 	_gameCollision->update();
 }
 

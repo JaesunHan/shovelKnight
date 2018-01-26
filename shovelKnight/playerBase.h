@@ -10,8 +10,16 @@
 #define GRAVITY 0.2f
 #define JUMPPOWER 3.0f
 
+enum PLAYER_SKILL
+{
+	SK_NULL,
+	SK_FIREBALL
+};
+
+
 enum COLLISIONTYPE
 {
+	CT_NULL,
 	CT_TOP,
 	CT_BOTTOM,
 	CT_LEFT,
@@ -86,6 +94,8 @@ protected :
 	int					_frameCount;			//프레임카운트
 	int					_currentFrameX;			//
 	int					_currentFrameY;			//
+	int					_currentSkill;			//현재 장착된 스킬
+	int					_skillUnlockLv;			//스킬 해금 단계
 	int					_currentHP;				//현재 체력
 	int					_maxHP;					//최대 체력
 	int					_currentMP;				//현재 마나
@@ -115,7 +125,7 @@ public:
 	void hitReAction();
 	void attack(float fireX, float fireY, bool skillUsed);
 	void move();
-	inline void collisionPlayerMap();
+	inline int collisionPlayerMap();
 
 
 	inline float getX() { return _x; }
@@ -130,7 +140,8 @@ public:
 	inline void setMoney(int increaseMoney) { _money += increaseMoney; }
 	inline char* getName() { return _characterName; }
 	inline void setName(char* name) { _characterName = name; }
-
+	inline int getSkillUnlockLv() { return _skillUnlockLv; }
+	inline void setSkillUnlockLv(int increaseLv) { _skillUnlockLv += increaseLv; }
 
 
 	inline RECT getPlayerRc() { return _rc; }
