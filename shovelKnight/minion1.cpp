@@ -34,22 +34,28 @@ HRESULT minion1::init(float x, float y)
 
 	int rightMove[] = { 0, 1, 2, 3 };
 	KEYANIMANAGER->addArrayFrameAnimation("beetoRightMove", "beeto", rightMove, 4, 4, true);
-
+	
 	int leftMove[] = { 4, 5, 6, 7 };
 	KEYANIMANAGER->addArrayFrameAnimation("beetoLeftMove", "beeto", leftMove, 4, 4, true);
 
 	int rightDead[] = { 8, 9 };
-	KEYANIMANAGER->addArrayFrameAnimation("beetoRightMove", "beeto", rightDead, 2, 4, true);
+	KEYANIMANAGER->addArrayFrameAnimation("beetoRightDead", "beeto", rightDead, 2, 3, false);
 
 	int leftDead[] = { 12, 13 };
-	KEYANIMANAGER->addArrayFrameAnimation("beetoLeftMove", "beeto", leftDead, 2, 4, true);
+	KEYANIMANAGER->addArrayFrameAnimation("beetoLeftDead", "beeto", leftDead, 2, 3, false);
 
 	//=========================================================================================
 
 	_width = _img->getFrameWidth();
 	_height = _img->getFrameHeight();
+	_isDead = false;
+	_isDeadVanish = false;
+	_vanishTime = 1;
 
 	_anim = KEYANIMANAGER->findAnimation("beetoLeftMove");
+
+	_jump = new jump;
+	_jump->init();
 
 	return S_OK;
 }
@@ -59,9 +65,7 @@ void minion1::update()
 	//상태값에 따른 에니메이션 및 움직임
 	move();
 
-	
 
-	
 	KEYANIMANAGER->update();
 }
 
@@ -82,7 +86,6 @@ void minion1::move()
 
 			_speed = BEETOSPEED;
 			_x -= _speed;
-			_rc = RectMakeCenter(_x, _y, _width, _height);
 		break;
 		case ENEMY_RIGHT_MOVE:
 			_anim = KEYANIMANAGER->findAnimation("beetoRightMove");
@@ -90,9 +93,58 @@ void minion1::move()
 
 			_speed = BEETOSPEED;
 			_x += _speed;
-			_rc = RectMakeCenter(_x, _y, _width, _height);
+		break;
+		case ENEMY_LEFT_DEAD:
+			_anim = KEYANIMANAGER->findAnimation("beetoLeftDead");
+
+			//에니메이션
+			if (!_anim->isPlay() && !_isDead)
+			{
+				_anim->start();
+				_isDead = true;
+				_jump->jumping(&_x, &_y, 8.0f, 0.9f);
+			}
+
+			//움직임: 뒤로 점핑하면서 죽기
+			if (_isDead && _jump->getIsJumping() == true)
+			{
+				_speed = BEETOSPEED;
+				_x += _speed;
+				_jump->update();
+			}
+			//벡터에서 지울 불값 설정
+			if (_isDead && _jump->getIsJumping() == false)
+			{
+				_vanishTime++;
+				if (_vanishTime % 20 == 0)
+				{
+					_isDeadVanish = true;
+					_vanishTime = 1;
+				}
+			}
+		break;
+		case ENEMY_RIGHT_DEAD:
+			_anim = KEYANIMANAGER->findAnimation("beetoRighttDead");
+
+			//에니메이션
+			if (!_anim->isPlay() && !_isDead)
+			{
+				_anim->start();
+				_isDead = true;
+				_jump->jumping(&_x, &_y, 15.0f, 0.9f);
+			}
+
+			//움직임: 뒤로 점핑하면서 죽기
+			if (_isDead && _jump->getIsJumping() == true)
+			{
+				_speed = BEETOSPEED;
+				_x -= _speed;
+				_jump->update();
+			}
 		break;
 	}
+
+	_rc = RectMakeCenter(_x, _y, _width, _height);
 }
 
 

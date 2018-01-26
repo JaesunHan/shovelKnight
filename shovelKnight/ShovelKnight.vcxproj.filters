@@ -291,6 +291,9 @@
     <ClInclude Include="minion1.h">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClInclude>
+    <ClInclude Include="jump.h">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -471,6 +474,9 @@
       <Filter>playGround\gamePlayScene\npc</Filter>
     </ClCompile>
     <ClCompile Include="minion1.cpp">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="jump.cpp">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClCompile>
   </ItemGroup>
