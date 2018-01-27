@@ -17,7 +17,7 @@ HRESULT boss1::init(float x, float y)
 	_y = y;
 	_speed = 0.0f;
 
-	_img = IMAGEMANAGER->addFrameImage("dragon", ".//image//monster//bubbleDragon.bmp", _x, _y, 1074, 623, 6, 7, true, RGB(255, 0, 255));
+	_img = IMAGEMANAGER->addFrameImage("dragon", ".//image//monster//bubbleDragon.bmp", _x, _y, 1074, 356, 6, 4, true, RGB(255, 0, 255));
 
 	_rc = RectMakeCenter(_x, _y, _img->getFrameWidth(), _img->getFrameHeight());
 
@@ -47,10 +47,10 @@ HRESULT boss1::init(float x, float y)
 	_isDead = false;
 	_isDeadVanish = false;
 	_vanishTime = 1;
-	_gravity = 0.0f;
 	_directionCount = 1;
 	_direction = false;
-
+	_isPlayerFind = true;
+	_movePatternCount = 1;
 
 	_anim = KEYANIMANAGER->findAnimation("dragonLeftStop");
 
@@ -61,26 +61,27 @@ HRESULT boss1::init(float x, float y)
 void boss1::update()
 {
 	//공격 움직임 패턴
-	_directionCount++;
-
-	if (_directionCount % 100 == 0)
+	if (_isPlayerFind) //플레이어를 발견하면
 	{
-		if (_status == ENEMY_LEFT_MOVE)
+		_directionCount++;
+
+		switch (_directionCount)
 		{
-			_status = ENEMY_LEFT_BACK_MOVE;
-		}
-		else if (_status == ENEMY_LEFT_BACK_MOVE)
-		{
-			_status = ENEMY_LEFT_MOVE;
+			case 100:
+				_status = ENEMY_LEFT_MOVE;
+			break;
+			case 200:
+				_status = ENMEY_LEFT_ATTACK;
+			break;
+			case 250:
+				_status = ENEMY_LEFT_BACK_MOVE;
+			break;
+			case 350:
+				_status = ENMEY_LEFT_ATTACK;
+				_directionCount = 1;
+			break;
 		}
 	}
-	if (_directionCount % 150 == 0)
-	{
-		_status = ENMEY_LEFT_ATTACK;
-
-		_directionCount = 1;
-	}
-
 
 
 	//상태값에 따른 에니메이션 및 움직임
@@ -95,7 +96,6 @@ void boss1::move()
 	{
 		case ENEMY_LEFT_IDLE:
 			
-
 			_anim = KEYANIMANAGER->findAnimation("dragonLeftStop");
 			if (!_anim->isPlay()) _anim->start();
 
@@ -132,6 +132,15 @@ void boss1::move()
 
 			_anim = KEYANIMANAGER->findAnimation("dragonLeftHit");
 			if (!_anim->isPlay()) _anim->start();
+
+			if (_direction)
+			{
+				_x += _speed;
+			}
+			else
+			{
+				_x -= _speed;
+			}
 
 
 		break;

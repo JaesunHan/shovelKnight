@@ -1,12 +1,16 @@
 #pragma once
 #include "menuBase.h"
-class soundMenu
+class soundMenu : public menuBase
 {
 public:
+
+
+	
+
 	HRESULT init();
 	void update();
 	void release();
-	void render();
+	void render(HDC hdc);
 	void draw(HDC hdc);
 
 

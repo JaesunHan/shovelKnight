@@ -20,18 +20,22 @@ HRESULT BardKnight::init()
 	_effectSoundPrice = 500;						//이펙트사운드 체인지 가격
 
 
-													//==========팔렸는지 확인용 변수들==========//
+	//==========팔렸는지 확인용 변수들==========//
 	_stock = 0;										//몇번이나 상점에서 구매했는지 확인 변수
 	_isSellBgm = false;								//브금 팔렸는지
 	_isSellEffectSound = false;						//이펙트 사운드 팔렸는지
 
 
-													//=========마더클래스로부터 가져온 변수들 초기화 ==============//
+	//=========마더클래스로부터 가져온 변수들 초기화 ==============//
 
 	_imgKeyString = "BardKnightIDLE";				//이미지 매니저에 등록할 이미지 키갑
 	_imgFileName = "./image/npc/bardKnight.bmp";		//이미지 파일 이름(경로 포함)`
 
 	_img = IMAGEMANAGER->addFrameImage(_imgKeyString, _imgFileName, 1066, 42, 26, 1, true, RGB(255, 0, 255), false);											// NPC 이미지
+	IMAGEMANAGER->addFrameImage("BardKnightJump", "./image/npc/bardKnight_jump.bmp", 798, 52, 14, 1, true, RGB(255, 0, 255), false);
+	IMAGEMANAGER->addFrameImage("BardKnightPlaying", "./image/npc/bardKnight_playing.bmp", 720, 39, 16, 1, true, RGB(255, 0, 255), false);
+
+
 
 	_x = 400 / 2;
 	_y = 410 / 2;
@@ -50,7 +54,7 @@ HRESULT BardKnight::init()
 	{
 		arrIDLE1[i] = i;
 	}
-	KEYANIMANAGER->addArrayFrameAnimation("바드나이트아이들", "BardKnightIDLE", arrIDLE1, 26, 5, true);
+	KEYANIMANAGER->addArrayFrameAnimation("바드나이트아이들", "BardKnightIDLE", arrIDLE1, 26, 6, true);
 	KEYANIMANAGER->start("바드나이트아이들");
 
 	_anim = KEYANIMANAGER->findAnimation("바드나이트아이들");		//NPC 애니메이션

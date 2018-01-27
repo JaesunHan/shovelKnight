@@ -32,7 +32,12 @@ HRESULT HealtyGuy::init()
 	_imgKeyString = "HealtyGuyIdle";				//이미지 매니저에 등록할 이미지 키갑
 	_imgFileName = "./image/npc/healthGuyStand.bmp";		//이미지 파일 이름(경로 포함)`
 
+	//NPC 이미지
 	_img = IMAGEMANAGER->addFrameImage(_imgKeyString, _imgFileName, 70, 47, 2, 1, true, RGB(255, 0, 255), false);											// NPC 이미지
+	IMAGEMANAGER->addFrameImage("HealtyGuyGood", "./image/npc/healthGuyGood.bmp", 168, 67, 4, 1, true, RGB(255, 0, 255), false);
+	IMAGEMANAGER->addFrameImage("HealtyGuyCook", "./image/npc/healthGuyBackCook.bmp", 897, 43, 23, 1, true, RGB(255, 0, 255), false);
+
+
 
 	_x = 220/2;
 	_y = 280/2;
@@ -50,7 +55,7 @@ HRESULT HealtyGuy::init()
 	_isAppear = false;								//기본상태로 맵에서 등장하지 않는다.
 
 	int arrIDLE1[] = { 0,1 };
-	KEYANIMANAGER->addArrayFrameAnimation("헬스가이아이들", "HealtyGuyIdle", arrIDLE1, 2, 5, true);
+	KEYANIMANAGER->addArrayFrameAnimation("헬스가이아이들", "HealtyGuyIdle", arrIDLE1, 2, 2, true);
 	KEYANIMANAGER->start("헬스가이아이들");
 
 	_anim = KEYANIMANAGER->findAnimation("헬스가이아이들");		//NPC 애니메이션

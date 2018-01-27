@@ -42,94 +42,23 @@ void playerBase::hitReAction()
 	//}
 
 	//설정한 대상, 방향에 따른 물리값을 수정한다
+
+	
+
 	switch (_cPlayerTarget)
 	{
-	case CP_NULL:						//충돌한 대상이 없다
-		_state = INAIR;					// 충돌한 대상이 없으면 공중에 있는거
+	case COLLISION_PLAYER_NULL:							//충돌한 대상이 없다
 		break;
-	case CP_OBJECT:						//오브젝트와 충돌했을때(오브젝트와 캐릭터)
-	{
-		switch (_cLR)					//좌우 방향
-		{
-		case LR_LEFT:				//대상의 왼쪽에서 충돌했을떄
-			_rtBlock = true;			//플레이어의 오른쪽은 막혔다(플레이어는 오른쪽으로 갈수없다)
-			break;
-		case LR_RIGHT:				//대상의 오른쪽에서 충돌했을떄
-			_ltBlock = true;			//플레이어의 왼쪽은 막혔다
-			break;
-		}
-		switch (_cTB)					//상하방향
-		{
-		case TB_TOP:				//대상의 위쪽에서 충돌했을떄
-			_jumpPower = JUMPPOWER;		//점프파워는 복구시킨다
-			_state = ONLAND;			//플레이어의 위치는 땅을밟고있다
-			if (_action == PR_JUMP) PR_IDLE;		//플레이어가 점프하고있으면 기본상태로 돌린다
-			break;
-		case TB_BOTTOM:				//대상의 아래쪽에서 충돌했을떄
-			_jumpPower = 0;				//점프파워를 0으로 해서 더이상 위로 올라가지 못하게한다.
-			break;
-		}
-	}
+	case COLLISION_PLAYER_OBJECT:						//오브젝트와 충돌했을때(오브젝트와 캐릭터)
 	break;
-	case CP_ENEMY:						//적과 충돌했을떄
-										//
-		break;								//
-	case CP_GROUND:						//땅과 충돌했을떄
-	{									//
-		switch (_cLR)					//땅의 좌우
-		{								//
-		case LR_NULL:				//좌우가 뚫려있을경우
-			_rtBlock = false;			//
-			_ltBlock = false;			//
-			break;						//
-		case LR_LEFT:				//오른쪽이 막혀있을때
-			_rtBlock = true;			//
-			break;						//
-		case LR_RIGHT:				//왼쪽이 막혀있을떄
-			_ltBlock = true;			//
-			break;						//
-		}								//
-		switch (_cTB)					//위아래 충돌
-		{								//
-		case TB_TOP:				//땅의 탑과 충돌했을떄
-			_jumpPower = JUMPPOWER;		//점프파워를 복구시킨다
-			_state = ONLAND;
-			_y = probeY;
-			if (_action == PR_JUMP) _action = PR_IDLE;
-			break;						//
-		case TB_BOTTOM:				//
-			_jumpPower = 0;				//
-			break;						//
-		}								//
-	}
-	case CP_SHOVEL_OBJ:					//
-	{									//
-		switch (_cTB)					//
-		{								//
-		case TB_TOP:					//
-			_jumpPower = JUMPPOWER / 2;	//
-			break;						//
-		}								//
-	}									//
-	break;							//
-	case CP_SHOVEL_ENEMY:				//
-	{									//
-		switch (_cTB)					//
-		{								//
-		case TB_TOP:				//
-			_jumpPower = JUMPPOWER / 2;	//
-			break;						//
-		}								//
-		switch (_cLR)					//
-		{								//
-		case LR_LEFT:					//
-			break;						//
-		case LR_RIGHT:					//
-			break;						//
-		}								//
-	}									//
-	break;							//
-									//
-	}										//
-}											//
+	case COLLISION_PLAYER_ENEMY:						//적과 충돌했을떄
+		break;						
+	case COLLISION_PLAYER_GROUND:						//땅과 충돌했을떄
+		break;
+	case COLLISION_PLAYER_SHOVEL_OBJ:					//
+	break;						
+	case COLLISION_PLAYER_SHOVEL_ENEMY:				//
+	break;							
+	}										
+}											
 

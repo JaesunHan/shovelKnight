@@ -58,48 +58,58 @@ HRESULT gameTitleScene::init()
 }
 void gameTitleScene::update() 
 {
-	//타이틀 사운드 재생을 위한 함수 
-	soundPlay();
-	//삽 이미지가 아래로 이동
-	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+	//옵션이 선택되었으면 업데이트를 합시당
+	if (_isOption)
 	{
-		++_shovelIdx;
-		if (_shovelIdx >= MAXBTN-1)	_shovelIdx = MAXBTN - 1;
+		_op->update();
 	}
-	//위로 이동
-	if (KEYMANAGER->isOnceKeyDown(VK_UP))
+	else
 	{
-		--_shovelIdx;
-		if (_shovelIdx <= 0)	_shovelIdx = 0;
-	}
-	
-	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
-	{
-		//게임 스타트 버튼 누름
-		if (_shovelIdx == 0)
+		//타이틀 사운드 재생을 위한 함수 
+		soundPlay();
+		//삽 이미지가 아래로 이동
+		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 		{
-			//선택시 메인테마곡은 끝나고 다음씬에서 다음 노래 재생.
-			SOUNDMANAGER->stop("MainTheme");
-			//선택시 선택사운드 추가
-			if (!SOUNDMANAGER->isPlaySound("MainSelect"))
-			{
-				SOUNDMANAGER->play("MainSelect", _effectSoundVolume);
-			}
-			_isTitleScene = false;
-			SCENEMANAGER->changeScene(_gms->getSceneName());
+			++_shovelIdx;
+			if (_shovelIdx >= MAXBTN - 1)	_shovelIdx = MAXBTN - 1;
 		}
-		//안쓸거임
-		else if (_shovelIdx == 1)
-		{		}
-		//옵션 버튼 누름
-		else if (_shovelIdx == 2)
+		//위로 이동
+		if (KEYMANAGER->isOnceKeyDown(VK_UP))
 		{
-			_isOption = true; // 옵션 눌렀구나! 
+			--_shovelIdx;
+			if (_shovelIdx <= 0)	_shovelIdx = 0;
 		}
-		//안쓸거임
-		else if (_shovelIdx == 3)
-		{		}
 
+		if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
+		{
+			//게임 스타트 버튼 누름
+			if (_shovelIdx == 0)
+			{
+				//선택시 메인테마곡은 끝나고 다음씬에서 다음 노래 재생.
+				SOUNDMANAGER->stop("MainTheme");
+				//선택시 선택사운드 추가
+				if (!SOUNDMANAGER->isPlaySound("MainSelect"))
+				{
+					SOUNDMANAGER->play("MainSelect", _effectSoundVolume);
+				}
+				_isTitleScene = false;
+				SCENEMANAGER->changeScene(_gms->getSceneName());
+			}
+			//안쓸거임
+			else if (_shovelIdx == 1)
+			{
+			}
+			//옵션 버튼 누름
+			else if (_shovelIdx == 2)
+			{
+				_isOption = true; // 옵션 눌렀구나! 
+			}
+			//안쓸거임
+			else if (_shovelIdx == 3)
+			{
+			}
+
+		}
 	}
 
 

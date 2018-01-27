@@ -30,10 +30,11 @@ HRESULT MagicGirl::init()
 	//=========마더클래스로부터 가져온 변수들 초기화 ==============//
 	
 	_imgKeyString = "magicGIRLIDLE";				//이미지 매니저에 등록할 이미지 키갑
-	_imgFileName = "./image/npc/magicGirl.bmp";		//이미지 파일 이름(경로 포함)`
+	_imgFileName = "./image/npc/magicGirlFull.bmp";		//이미지 파일 이름(경로 포함)
 		
-	_img = IMAGEMANAGER->addFrameImage(_imgKeyString, _imgFileName, 420, 50, 12, 1, true, RGB(255,0,255), false);											// NPC 이미지
-
+	//npc이미지
+	_img = IMAGEMANAGER->addFrameImage(_imgKeyString, _imgFileName, 1610, 50, 46, 1, true, RGB(255,0,255), false);											// NPC 이미지
+	IMAGEMANAGER->addFrameImage("magicGirlBow", "./image/npc/magicGirlThankYou.bmp", 186, 53, 6, 1, true, RGB(255, 0, 255), false);
 
 	_x = 633/2;
 	_y = 280/2;
@@ -48,8 +49,13 @@ HRESULT MagicGirl::init()
 
 	_isAppear = false;								//기본상태로 맵에서 등장하지 않는다.
 
-	KEYANIMANAGER->addDefaultFrameAnimation("매직걸아이들", "magicGIRLIDLE", 5, false, true);
-
+	//KEYANIMANAGER->addDefaultFrameAnimation("매직걸아이들", "magicGIRLIDLE", 6, false, true);
+	int arrIDLE1[46];
+	for (int i = 0; i < 46; ++i)
+	{
+		arrIDLE1[i] = i;
+	}
+	KEYANIMANAGER->addArrayFrameAnimation("매직걸아이들", "magicGIRLIDLE", arrIDLE1, 46, 3, true);
 	
 
 	_anim = KEYANIMANAGER->findAnimation("매직걸아이들");		//NPC 애니메이션
