@@ -22,6 +22,8 @@ enum ENEMYSTATUS
 	ENEMY_RIGHT_DEAD
 };
 
+
+
 class enemyBase : public gameNode
 {
 protected:
@@ -31,11 +33,13 @@ protected:
 
 	ENEMYSTATUS _status;		//에너미 상태
 
+
 	char* _imgFileName;			//이미지 파일 이름(경로 포함)
 	float _x, _y;				//적의 중점좌표
 	float _jumpPower;			//점프 파워
 	float _gravity;				//적용할 중력
 	int _width, _height;		//적의 가로, 세로 크기(렉트를 만들 때 사용할 가로세로크기이다.)
+	float _angle;               //이동 각도
 
 	float _playerDistance;		//플레이어와의 거리
 	float _speed;				//스피드
@@ -43,6 +47,10 @@ protected:
 	bool _isDeadVanish;			//죽고 벡터에서 지울 불값
 	int _vanishTime;			//죽었을때 사라지게할 여유타임 카운트
 	bool _direction;            //방향
+	bool _isJump;               //점프여부
+	int _jumpCount;             //점프카운트
+	int _directionCount;        //방향전환 카운트
+
 
 	RECT _rc;					//혹시 사용하게될지도 모를 렉트(충돌용)
 

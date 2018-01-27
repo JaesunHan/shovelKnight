@@ -1,11 +1,11 @@
 #pragma once
 #include "skillBase.h"
 
-class skill_Bubble : public skillBase
+class skill_enemyDeadFx : public skillBase
 {
 public:
-	skill_Bubble();
-	~skill_Bubble();
+	skill_enemyDeadFx();
+	~skill_enemyDeadFx();
 
 	virtual HRESULT init();
 	virtual void release();
