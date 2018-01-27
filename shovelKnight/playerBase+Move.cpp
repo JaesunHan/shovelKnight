@@ -41,11 +41,11 @@ void playerBase::move()
 		_action = PLAYERACTION_IDLE;
 	}
 
-	if (KEYMANAGER->isOnceKeyDown('K'))
+	if (KEYMANAGER->isOnceKeyDown('J'))
 	{
 		_action = PLAYERACTION_ATTACK;
 	}
-	if (KEYMANAGER->isStayKeyDown('J'))
+	if (KEYMANAGER->isStayKeyDown('K'))
 	{
 		_action = PLAYERACTION_JUMP;
 		_jumpPower = JUMPPOWER;
@@ -65,8 +65,8 @@ void playerBase::move()
 		_y -= _jumpPower;
 		_jumpPower -= _gravity;
 		if (_action == PLAYERACTION_MOVE)_x += _moveSpeed * _direction;
-		if (_jumpPower < 0) _currentFrameX = 1;
-		else _currentFrameX = 0;
+		if (_action == PLAYERACTION_JUMP && _jumpPower < 0) _currentFrameX = 1;
+		if (_action == PLAYERACTION_JUMP && _jumpPower > 0) _currentFrameX = 0;
 	}
 	break;
 	case PLAYERSTATE_HANG:
