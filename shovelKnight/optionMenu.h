@@ -49,7 +49,8 @@ public:
 
 	void showLetterBox();
 	
-
+	
+	inline bool getIsSoundMenu() { return _isSoundMenu; }
 
 	optionMenu();
 	~optionMenu();

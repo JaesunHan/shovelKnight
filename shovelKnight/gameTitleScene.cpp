@@ -50,6 +50,10 @@ HRESULT gameTitleScene::init()
 	_isTitleScene = true;	//타이틀씬일때만 노래나오게 제어
 	_op = new optionMenu;
 	_op->init();
+	
+	_sM = new soundMenu;
+	_sM->init();
+
 
 	_effectSoundVolume = 0.3f;
 	_bgmSoundVolume = 0.3f;
