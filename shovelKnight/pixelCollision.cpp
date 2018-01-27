@@ -4,11 +4,11 @@
 
 pixelCollision::pixelCollision()
 {
-
 }
 pixelCollision::~pixelCollision()
 {
 }
+
 
 HRESULT pixelCollision::init(RECT &rc, float enmeyX, float enemyY)
 {

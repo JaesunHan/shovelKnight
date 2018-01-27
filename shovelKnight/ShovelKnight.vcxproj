@@ -143,6 +143,7 @@
     <ClInclude Include="action.h" />
     <ClInclude Include="animation.h" />
     <ClInclude Include="BardKnight.h" />
+    <ClInclude Include="boss1.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="CharacterSelectMenu.h" />
@@ -214,6 +215,7 @@
     <ClCompile Include="action.cpp" />
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="BardKnight.cpp" />
+    <ClCompile Include="boss1.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="CharacterSelectMenu.cpp" />
