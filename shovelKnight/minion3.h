@@ -1,18 +1,17 @@
 #pragma once
 #include "enemyBase.h"
 
-#define BEETOSPEED 1
+#define DRAKESPEED 2.0f
 
-
-class minion1 : public enemyBase
+class minion3 : public enemyBase
 {
 private:
 
 
-
 public:
-	minion1();
-	~minion1();
+	minion3();
+	~minion3();
+
 
 	HRESULT init(float x, float y);
 	void update();

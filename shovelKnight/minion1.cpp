@@ -53,6 +53,8 @@ HRESULT minion1::init(float x, float y)
 	_vanishTime = 1;
 	_direction = false;
 	_gravity = 0.0f;
+	_isJump = false;
+	_jumpCount = 1;
 
 
 	_anim = KEYANIMANAGER->findAnimation("beetoLeftMove");
@@ -69,19 +71,40 @@ HRESULT minion1::init(float x, float y)
 void minion1::update()
 {
 	//============================================================= 픽셀충돌: 바닥충돌	
-	_pixelC->pixelCollisonY();  //바닥상태 검출
+	_pixelC->pixelCollisonY(_rc);  //바닥상태 검출
 
 	if (_pixelC->getIsGround())     //상태값에 따른 에네미 상태적용
 	{
 		_gravity = 0.0f;
+		_y = _pixelC->getProbeY();
 	}
 	else
 	{
-		_gravity += 0.1f;
+		if (!_isJump && !_isDead) _gravity += 0.1f;
+		else _gravity = 0.0f;
 	}
 	//중력적용
 	_y += _gravity;
+	//============================================================= 픽셀충돌: 벽
+	_pixelC->pixelCollisonX(_rc, _direction);  //벽 검출
+
+
+	if (_pixelC->getDirectionChange())  //벽에 부딪치면
+	{
+		if (_direction)  //현상태가 오른쪽이면
+		{
+			_status = ENEMY_LEFT_MOVE;
+		}
+		else            //현상태가 왼쪽이면
+		{
+			_status = ENEMY_RIGHT_MOVE;
+		}
+
+		_pixelC->setDirectionChange(false);  //초기화
+	}
 	//=============================================================
+
+
 
 
 	//상태값에 따른 에니메이션 및 움직임
@@ -165,9 +188,23 @@ void minion1::move()
 				_x -= _speed;
 				_jump->update();
 			}
+
+			//벡터에서 지울 불값 설정
+			if (_isDead && _jump->getIsJumping() == false)
+			{
+				_vanishTime++;
+				if (_vanishTime % 20 == 0)
+				{
+					_isDeadVanish = true;
+					_vanishTime = 1;
+				}
+			}
 		break;
 	}
 
+
+	//점프상태 초기화
+	if (!_jump->getIsJumping()) _isJump = false;
 
 	//렉트위치 update
 	_rc = RectMakeCenter(_x, _y, _width, _height);

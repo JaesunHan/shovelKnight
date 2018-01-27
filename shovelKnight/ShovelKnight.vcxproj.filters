@@ -94,6 +94,9 @@
     <Filter Include="playGround\gamePlayScene\stageManager">
       <UniqueIdentifier>{9ee03396-1726-4a62-bd69-29f2d3be84d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\gamePlayScene\enemy\enemyAction">
+      <UniqueIdentifier>{2821b621-3fe7-42d0-a83b-72c7262aad86}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -288,13 +291,19 @@
     <ClInclude Include="minion1.h">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClInclude>
-    <ClInclude Include="jump.h">
-      <Filter>playGround\gamePlayScene\enemy</Filter>
-    </ClInclude>
     <ClInclude Include="createCharacterMenu.h">
       <Filter>playGround\allMenu</Filter>
     </ClInclude>
+    <ClInclude Include="jump.h">
+      <Filter>playGround\gamePlayScene\enemy\enemyAction</Filter>
+    </ClInclude>
     <ClInclude Include="pixelCollision.h">
+      <Filter>playGround\gamePlayScene\enemy\enemyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="minion2.h">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="minion3.h">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClInclude>
     <ClInclude Include="skill_enemyDeadFx.h">
@@ -479,13 +488,19 @@
     <ClCompile Include="minion1.cpp">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClCompile>
-    <ClCompile Include="jump.cpp">
-      <Filter>playGround\gamePlayScene\enemy</Filter>
-    </ClCompile>
     <ClCompile Include="createCharacterMenu.cpp">
       <Filter>playGround\allMenu</Filter>
     </ClCompile>
+    <ClCompile Include="jump.cpp">
+      <Filter>playGround\gamePlayScene\enemy\enemyAction</Filter>
+    </ClCompile>
     <ClCompile Include="pixelCollision.cpp">
+      <Filter>playGround\gamePlayScene\enemy\enemyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="minion2.cpp">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="minion3.cpp">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClCompile>
     <ClCompile Include="skill_enemyDeadFx.cpp">

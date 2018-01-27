@@ -22,7 +22,7 @@
     <ProjectGuid>{76E0A8FC-8B8B-4E7F-9DA3-6398D34A8AD4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>HeptaAPI</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
     <ProjectName>ShovelKnight</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -171,6 +171,8 @@
     <ClInclude Include="MagicGirl.h" />
     <ClInclude Include="menuBase.h" />
     <ClInclude Include="minion1.h" />
+    <ClInclude Include="minion2.h" />
+    <ClInclude Include="minion3.h" />
     <ClInclude Include="motherAction.h" />
     <ClInclude Include="npcBase.h" />
     <ClInclude Include="pixelCollision.h" />
@@ -239,6 +241,8 @@
     <ClCompile Include="MagicGirl.cpp" />
     <ClCompile Include="menuBase.cpp" />
     <ClCompile Include="minion1.cpp" />
+    <ClCompile Include="minion2.cpp" />
+    <ClCompile Include="minion3.cpp" />
     <ClCompile Include="motherAction.cpp" />
     <ClCompile Include="npcBase.cpp" />
     <ClCompile Include="pixelCollision.cpp" />
