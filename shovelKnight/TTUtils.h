@@ -60,6 +60,8 @@ namespace 트윈테일쟝
 
 	RECT RectMakePointCenter(POINT pt, float width, float height);
 
+	RECT RectMakePointCenter(FPOINT pt, float width, float height);
+
 	void RectangleMakeRect(HDC hdc, RECT rc);
 
 	void EllipseMakeRect(HDC hdc, RECT rc);
@@ -87,8 +89,6 @@ namespace 트윈테일쟝
 
 	// hdc, x좌표, y좌표, 표시할텍스트"", 표시할값, 배경표시여부		":"는 자동으로 써줌
 	void TTTextOut(int x, int y, string str, float num, BOOL backGround = FALSE);
-
-	void TTTextOut(HDC hdc, int x, int y, string str, float num, BOOL backGround = FALSE);
 
 	//콘솔용(float)
 	void TTTextOut(string stri, float f);

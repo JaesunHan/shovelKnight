@@ -13,6 +13,8 @@ minion3::~minion3()
 
 HRESULT minion3::init(float x, float y)
 {
+	_enemyType = ELEMY_DRAKE;
+
 	_x = x;
 	_y = y;
 	_speed = 0.0f;

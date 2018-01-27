@@ -13,31 +13,37 @@ itemBase::~itemBase()
 
 }
 
-HRESULT itemBase::init(string imgKeyString, char* imgFileName, float x, float y, int totalWidth, int totalHeight, int frameX, int frameY)
+HRESULT itemBase::init()
 {
-	_imgKeyString = imgKeyString;
-	_imgFileName = imgFileName;
-	_x = x, _y = y;
+	_pt = { 0 ,0 };
+	_add = { 0, 0 };
+	_gravity = 0;
+	_isFire = 0;
+	_stats = ITEM_STATS_GRAVITY;
+	_aniName = 0;
 
-	_img = IMAGEMANAGER->addFrameImage(_imgKeyString, _imgFileName, _x, _y, totalWidth, totalHeight, frameX, frameY, true, RGB(255, 0, 255));
-	_width = _img->getFrameWidth();
-	_height = _img->getFrameHeight();
+	_rc = { 0, 0, 0, 0 };
+	_img = 0;
+	_ani = 0;
+	_imgWidth = 0;
+	_imgHeight = 0;
 
 	return S_OK;
 }
-void itemBase::update()	
-{
-	_rc = RectMakeCenter(_x, _y, _width, _height);
-}
-void itemBase::release()
-{
 
-}
 void itemBase::render()	
 {
-	draw();
+	_img->aniRender(IMAGEMANAGER->findImage("backBuffer")->getMemDC(), _pt.x, _pt.y, _ani);
 }
-void itemBase::draw()	
-{
 
+void itemBase::reRect()
+{
+	_rc = RectMakePointCenter(_pt, _imgWidth, _imgHeight);
 }
+
+void itemBase::eatItem()
+{
+	_isFire = false;
+}
+
+

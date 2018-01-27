@@ -25,6 +25,15 @@ enum ENEMYSTATUS
 	ENEMY_RIGHT_DEAD
 };
 
+enum ENEMYTYPE
+{
+	ENEMY_BEETO,
+	ENEMY_BLORB,
+	ELEMY_DRAKE,
+	ENEMY_SKELETON,
+	ENEMY_DRAGON,
+	ENEMY_BLACKKNIGHT
+};
 
 
 class enemyBase : public gameNode
@@ -54,6 +63,8 @@ protected:
 	int _jumpCount;             //점프카운트
 	int _directionCount;        //방향전환 카운트
 	bool _isPlayerFind;         //플레이어 발견
+
+	ENEMYTYPE _enemyType;       //에너미타입
 
 
 	RECT _rc;					//혹시 사용하게될지도 모를 렉트(충돌용)
@@ -95,10 +106,12 @@ public:
 	//적 상태 접근자 & 설정자
 	ENEMYSTATUS getStatus() { return _status; }   	
 	void setStatus(ENEMYSTATUS status) { _status = status; }
-	bool getIsDeadVanish() { return _isDeadVanish; }
+	bool getIsDeadVanish() { return _isDeadVanish; }   //죽고 사라지는 불값
+	ENEMYTYPE getEnemyType() { return _enemyType; }    //에네미타입
 
 	//플레이어 발견 접근자
 	void setPlayerFind(bool playerFind) { _isPlayerFind = playerFind; }
+	
 
 	//==================================== End 게터 세터 작성하기===================================
 

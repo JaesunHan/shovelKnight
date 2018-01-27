@@ -45,8 +45,8 @@ public:
 	~skillBase();
 
 	virtual HRESULT init();
-	virtual void release();
-	virtual void update();
+	virtual void release() = 0;
+	virtual void update() = 0;
 	virtual void render();
 
 	virtual void fire(SKILL_FIRE charType, float x, float y);

@@ -201,6 +201,15 @@ namespace 트윈테일쟝
 			long(pt.y + height / 2) };
 	}
 
+	RECT RectMakePointCenter(FPOINT pt, float width, float height)
+	{
+		return {
+			long(pt.x - width / 2),
+			long(pt.y - height / 2),
+			long(pt.x + width / 2),
+			long(pt.y + height / 2) };
+	}
+
 	void RectangleMakeRect(HDC hdc, RECT rc)
 	{
 		Rectangle(hdc,
@@ -300,10 +309,6 @@ namespace 트윈테일쟝
 
 	}
 
-	void TTTextOut(HDC hdc, int x, int y, string str, float num, BOOL backGround)
-	{
-		TTTextOut(x, y, str, num);
-	}
 
 	void TTTextOut(string stri, float f)
 	{

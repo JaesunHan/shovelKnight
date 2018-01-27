@@ -26,14 +26,6 @@ HRESULT skillBase::init()
 	return S_OK;
 }
 
-void skillBase::release()
-{
-}
-
-void skillBase::update()
-{
-}
-
 void skillBase::render()
 {
 	if (!_isFire) return;

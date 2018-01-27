@@ -6,10 +6,13 @@
 #define ATTACK_DAMAGE_BOX_HEIGHT 6
 #define DOWNATTACK_DAMAGE_BOX_WIDTH 6
 #define	DOWNATTACK_DAMAGE_BOX_HEIGHT 10
-#define SPEED 4.0f
+#define ACCELERATION 0.5f
+#define MAXSPEED 1.0f
 #define TIMECOUNT 0.05f
-#define GRAVITY 0.f
-#define JUMPPOWER 0.f
+#define GRAVITY 0.01f
+#define JUMPPOWER 1.0f
+#define friction 0.5f
+
 
 enum PLAYER_SKILL
 {
@@ -53,6 +56,7 @@ enum PLAYERACTION
 	PLAYERACTION_IDLE,
 	PLAYERACTION_MOVE,
 	PLAYERACTION_ATTACK,
+	PLAYERACTION_DOWNATTACK,
 	PLAYERACTION_JUMP,
 	PLAYERACTION_ROOTING,
 	PLAYERACTION_DAMAGED,
@@ -85,8 +89,8 @@ enum COLLISION_LR //충돌방향(좌우) ->대상기준
 
 class playerBase : public gameNode
 {
-protected : 
-	image*				_image;					//플레이어 이미지
+protected:
+	image * _image;					//플레이어 이미지
 	PLAYERDIRECTION		_direction;				//플레이어 상태
 	PLAYERDIRECTIONTB	_directionTB;			//
 	PLAYERSTATE			_state;					//플레이어 위치
@@ -118,6 +122,7 @@ protected :
 	bool				_rtBlock;				//오른쪽 막힘
 	bool				_ltBlock;				//왼쪽막힘
 	bool				_isDamaged;				//맞았는지
+	bool				_isJump;
 	bool				_skillUsed;				//스킬발동했는지
 	bool				_isDead;				//죽었냐?
 	int					probeY;
@@ -135,6 +140,7 @@ public:
 	void attack(float fireX, float fireY, bool skillUsed);
 	void move();
 	void imageSetting();
+	void collision();
 
 
 	inline float getX() { return _x; }
@@ -153,7 +159,8 @@ public:
 	inline void setSkillUnlockLv(int increaseLv) { _skillUnlockLv += increaseLv; }
 	inline PLAYERSTATE getState() { return _state; }
 	inline void setState(PLAYERSTATE state) { _state = state; }
-	
+	inline PLAYERACTION getAction() { return _action; }
+	inline void setAction(PLAYERACTION action) { _action = action; }
 
 	inline RECT getPlayerRc() { return _rc; }
 	inline void setPlayerRc(RECT rc) { _rc = rc; }
