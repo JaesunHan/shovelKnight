@@ -54,6 +54,8 @@ void playerBase::hitReAction()
 	case COLLISION_PLAYER_ENEMY:						//적과 충돌했을떄
 		break;						
 	case COLLISION_PLAYER_GROUND:						//땅과 충돌했을떄
+		_state = PLAYERSTATE_ONLAND;
+		_action = PLAYERACTION_IDLE;
 		break;
 	case COLLISION_PLAYER_SHOVEL_OBJ:					//
 	break;						

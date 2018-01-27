@@ -38,6 +38,7 @@ HRESULT gameNode::init(bool managerInit)
 		INIDATA->init();
 		DATABASE->init();
 		CAMERAMANAGER->init();
+		DIALOGUEMANAGER->init(0.5f);
 	}
 
 	return S_OK;
@@ -67,6 +68,8 @@ void gameNode::release(void)
 		DATABASE->releaseSingleton();
 		CAMERAMANAGER->release();
 		CAMERAMANAGER->releaseSingleton();
+		DIALOGUEMANAGER->release();
+		DIALOGUEMANAGER->releaseSingleton();
 	}
 
 	ReleaseDC(_hWnd, _hdc);

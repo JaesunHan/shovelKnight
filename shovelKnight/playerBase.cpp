@@ -51,14 +51,15 @@ HRESULT playerBase::init(float startX, float startY)
 	_money = 0;
 	_skill = 0;
 	_alpha = 255;
-	_jumpPower = JUMPPOWER;
+	_jumpPower = 0;
 	_gravity = GRAVITY;
-	_moveSpeed = SPEED;
+	_moveSpeed = 0;
 	_rtBlock = false;
 	_ltBlock = false;
 	_isDamaged = false;
 	_skillUsed = false;
 	_isDead = false;
+	_isJump = true;
 
 	return S_OK;
 }
@@ -70,12 +71,14 @@ void playerBase::update()
 {
 	move();
 	hitReAction();
+	collision();
 	CAMERAMANAGER->setSingleFocus(_x, _y, 800);
 	imageSetting();
 	if (_direction == PLAYERDIRECTION_RIGHT) _currentFrameY = 0;
 	else _currentFrameY = 1;
 
 	_time += TIMEMANAGER->getElapsedTime();
+	
 	while (_time > TIMECOUNT)
 	{
 		if (_image->getMaxFrameX()>1) _currentFrameX++;
@@ -139,5 +142,35 @@ void playerBase::imageSetting()
 		break;
 	}
 
+
+}
+
+void playerBase::collision()
+{
+	probeY = _y - 1;
+	HDC hdc = IMAGEMANAGER->findImage("bgMap")->getMemDC();
+	
+
+
+	COLORREF color = GetPixel(hdc, _x, probeY);
+	int r = GetRValue(color);
+	int g = GetGValue(color);
+	int b = GetBValue(color);
+
+	if ((r == 0 && g == 255 && b == 0))
+	{
+		if (_action == PLAYERACTION_JUMP) _action = PLAYERACTION_IDLE;
+		_jumpPower = 0;
+		_state = PLAYERSTATE_ONLAND;
+		//_isJump = false;
+	}
+
+	//if ((r == 255 && g == 0 && b == 255))
+	//{
+
+	//	_jumpPower = 0;
+	//	_state = PLAYERSTATE_INAIR;
+	//	//_isJump = false;
+	//}
 
 }

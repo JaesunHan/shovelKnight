@@ -15,6 +15,8 @@ private:
 
 	int _dialogueTime;
 	int _elapsedTime;
+	int _cnt;
+	int _r, _g, _b;
 
 	string _scriptStr;
 	image* _scriptwindow;
@@ -27,7 +29,7 @@ public:
 	void update();
 	void render(HDC hdc);
 
-	void setScriptNScriptWindow(string script, image* scriptWindow);
+	void setScriptNScriptWindow(string script, image* scriptWindow, int r, int g, int b);
 
 	//글자를 출력하는 시간 간격 지정하기
 	inline void setDialogueTime(float dt) { _dialogueTime = dt; }
