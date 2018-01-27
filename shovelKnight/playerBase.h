@@ -127,6 +127,7 @@ public:
 	void hitReAction();
 	void attack(float fireX, float fireY, bool skillUsed);
 	void move();
+	void imageSetting();
 
 
 	inline float getX() { return _x; }

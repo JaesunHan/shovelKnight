@@ -512,5 +512,11 @@
     <ClCompile Include="boss1.cpp">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClCompile>
+    <ClCompile Include="playerBase+Move.cpp">
+      <Filter>playGround\gamePlayScene\player</Filter>
+    </ClCompile>
+    <ClCompile Include="playerBase+hitReaction.cpp">
+      <Filter>playGround\gamePlayScene\player</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
