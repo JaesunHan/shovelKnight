@@ -151,7 +151,6 @@
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="createCharacterMenu.h" />
     <ClInclude Include="database.h" />
-    <ClInclude Include="dialogueManager.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
     <ClInclude Include="enemyBase.h" />
@@ -223,7 +222,6 @@
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="createCharacterMenu.cpp" />
     <ClCompile Include="database.cpp" />
-    <ClCompile Include="dialogueManager.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
     <ClCompile Include="enemyBase.cpp" />

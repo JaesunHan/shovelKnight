@@ -94,8 +94,6 @@
     <Filter Include="playGround\gamePlayScene\stageManager">
       <UniqueIdentifier>{9ee03396-1726-4a62-bd69-29f2d3be84d2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2DGameFramework\Manager\dialogue">
-      <UniqueIdentifier>{99ca5ac2-f0e0-445a-89c3-e3d6e6b7e58c}</UniqueIdentifier>
     <Filter Include="playGround\gamePlayScene\enemy\enemyAction">
       <UniqueIdentifier>{2821b621-3fe7-42d0-a83b-72c7262aad86}</UniqueIdentifier>
     </Filter>
@@ -314,9 +312,6 @@
     <ClInclude Include="boss1.h">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClInclude>
-    <ClInclude Include="dialogueManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -517,8 +512,6 @@
     <ClCompile Include="boss1.cpp">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClCompile>
-    <ClCompile Include="dialogueManager.cpp">
-      <Filter>소스 파일</Filter>
     <ClCompile Include="playerBase+Move.cpp">
       <Filter>playGround\gamePlayScene\player</Filter>
     </ClCompile>
