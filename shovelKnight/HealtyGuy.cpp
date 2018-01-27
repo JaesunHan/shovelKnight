@@ -31,6 +31,7 @@ HealtyGuy::HealtyGuy()
 	_npcType = HEALTYGUY;							//NPC타입
 
 	_isCollision = false;							//플레이어와 충돌했는가? true : 그렇다, false : 아니다
+	_isAppear = false;								//기본상태로 맵에서 등장하지 않는다.
 
 	int arrIDLE1[] = { 0,1 };
 	KEYANIMANAGER->addArrayFrameAnimation("헬스가이아이들", "HealtyGuyIdle", arrIDLE1, 2, 5, true);
@@ -50,7 +51,10 @@ void HealtyGuy::sellHpItem()
 
 void HealtyGuy::render()
 {
-	draw();
+	if (_isAppear)
+	{
+		draw();
+	}
 }
 
 void HealtyGuy::draw()

@@ -83,30 +83,36 @@ void StoreManager::sellPlayerSkill(vector<npcBase*>::iterator temp)
 				{
 					if ((*temp)->getStock() == 0)					//한번도 상점에서 구매를 하지 않았으면
 					{
-						if (_pm->getMoney() >= 1000)					//플레이어 골드가 1000원보다 크다면
+						if (_pm->getSkillUnlockLv() == 0 )			//플레이어 스킬이 0(삽질)만 있다면
 						{
-							_pm->setMoney(-1000);						//플레이어 골드에서 1000원을 감소하고 
-							_pm->setMaxHP(+1);							//maxHP를 1 증가준다.
-							(*temp)->setStock(1);						//한번 구매했으니까 stock을 1로 반환해준다.
+							if (_pm->getMoney() >= 1000)				//1000원보다 돈이 많다면
+							{
+								_pm->setMoney(-1000);						//플레이어 골드에서 1000원을 감소하고 
+								_pm->setSkillUnlockLv(+1);					//플레이어 스킬을 1로 바꿔준다 (파이어볼)
+								(*temp)->setStock(1);						//한번 구매했으니까 stock을 1로 반환해준다.
+							}
+							if (_pm->getMoney() < 1000)						//플레이어 골드가 1000원보다 작다면
+							{
+								sprintf(str4, "get the fuck off!!!!");		
+							}
 						}
-						if (_pm->getMoney() < 1000)						//플레이어 골드가 1000원보다 작다면
-						{
-							sprintf(str4, "get the fuck off!!!!");
-						}
+						
 					}
 
-
-					if ((*temp)->getStock() == 1)						//상점에서 구매가 2회차일떄
+					if ((*temp)->getStock() == 1)							//한번도 상점에서 구매를 하지 않았으면
 					{
-						if (_pm->getMoney() >= 3000)					//플레이어 골드가 1000원보다 크다면
+						if (_pm->getSkillUnlockLv() == 1)					//플레이어 스킬이 1, 파이어볼이라면 
 						{
-							_pm->setMoney(-3000);						//플레이어 골드에서 1000원을 감소하고 
-							_pm->setMaxHP(+1);							//maxHP를 1 증가준다.
-							(*temp)->setStock(2);						//stock을 2로 반환해준다.
-						}
-						if (_pm->getMoney() < 3000)						//플레이어 골드가 3000원보다 작다면
-						{
-							sprintf(str4, "get the fuck off!!!!");
+							if (_pm->getMoney() >= 3000)					//3000원보다 돈이 많다면
+							{
+								_pm->setMoney(-3000);						//플레이어 골드에서 3000원을 감소하고 
+								_pm->setSkillUnlockLv(+1);					//플레이어 스킬을 2로 바꿔준다 (선더볼트)
+								(*temp)->setStock(2);						//한번 구매했으니까 stock을 1로 반환해준다.
+							}
+							if (_pm->getMoney() < 3000)						//플레이어 골드가 3000원보다 작다면
+							{
+								sprintf(str4, "get the fuck off!!!!");
+							}
 						}
 					}
 				}
@@ -173,7 +179,7 @@ void StoreManager::SellPlayerHp(vector<npcBase*>::iterator temp)
 
 void StoreManager::sellGameBgm(vector<npcBase*>::iterator temp)
 {
-	if ((*temp)->getNpcType() == HEALTYGUY)	//NPC타입이 매직걸일때
+	if ((*temp)->getNpcType() == BARDKNIGHT)	//NPC타입이 바드나이트일때
 	{
 		if ((*temp)->getStock() == 0)		//한번도 구매를 안했으면  (stock이 구매횟수 변수)
 		{

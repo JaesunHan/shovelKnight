@@ -30,6 +30,7 @@ BardKnight::BardKnight()
 	_npcType = BARDKNIGHT;							//NPC타입
 
 	_isCollision = false;							//플레이어와 충돌했는가? true : 그렇다, false : 아니다
+	_isAppear = false;								//기본상태로 맵에서 등장하지 않는다.
 
 	int arrIDLE1[26];
 	KEYANIMANAGER->addArrayFrameAnimation("바드나이트아이들", "BardKnightIDLE", arrIDLE1, 26, 5, true);
@@ -55,7 +56,10 @@ void BardKnight::changeEffectSound()
 
 void BardKnight::render()
 {
-	draw();
+	if (_isAppear)
+	{
+		draw();
+	}
 }
 
 void BardKnight::draw()

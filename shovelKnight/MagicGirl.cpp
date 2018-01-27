@@ -24,6 +24,9 @@ MagicGirl::MagicGirl()
 		
 	_img = IMAGEMANAGER->addFrameImage(_imgKeyString, _imgFileName, 420, 50, 12, 1, true, RGB(255,0,255), false);											// NPC 이미지
 
+	_x = 220;
+	_y = 280;
+
 	_img->setCenter(_x, _y);						//이미지 중점좌표로 중점좌표 잡는다. 
 	_width = _img->getFrameWidth();					//가로크기
 	_height = _img->getFrameHeight();				//세로크기
@@ -31,6 +34,8 @@ MagicGirl::MagicGirl()
 	_npcType = MAGICGIRL;							//NPC타입
 
 	_isCollision = false;							//플레이어와 충돌했는가? true : 그렇다, false : 아니다
+
+	_isAppear = false;								//기본상태로 맵에서 등장하지 않는다.
 
 	int arrIDLE1[] = { 0,1,2,3,4,5,6,7,8,9,10,11 };
 	KEYANIMANAGER->addArrayFrameAnimation("매직걸아이들", "magicGIRLIDLE", arrIDLE1, 12, 5, true);
@@ -57,7 +62,10 @@ void MagicGirl::stockCount()
 
 void MagicGirl::render()
 {
-	draw();
+	if (_isAppear)
+	{
+		draw();
+	}
 }
 
 void MagicGirl::draw()

@@ -45,7 +45,7 @@ HRESULT optionMenu::init()
 	_letterBoxEnum = LETTERBACK;
 
 	_letterBox = IMAGEMANAGER->findImage("2글자박스");
-
+	_indexRc = 0;
 
 	//애니메이션 세팅 
 	int letter2Move[] = { 0,1 };
@@ -94,8 +94,9 @@ void optionMenu::showLetterBox()
 {
 	switch (_letterBoxEnum)
 	{
-	default: 
+	default: _letterBox = IMAGEMANAGER->findImage("2글자박스");
 		break;
+
 	}
 }
 
