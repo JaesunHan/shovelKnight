@@ -63,6 +63,7 @@ protected:
 	int _jumpCount;             //점프카운트
 	int _directionCount;        //방향전환 카운트
 	bool _isPlayerFind;         //플레이어 발견
+	int _enemyHp;               //적 체력
 
 	ENEMYTYPE _enemyType;       //에너미타입
 
@@ -111,7 +112,9 @@ public:
 
 	//플레이어 발견 접근자
 	void setPlayerFind(bool playerFind) { _isPlayerFind = playerFind; }
-	
+
+	//데미지 설정자
+	void setEnemyDamage(int damage) { _enemyHp -= damage; }
 
 	//==================================== End 게터 세터 작성하기===================================
 
