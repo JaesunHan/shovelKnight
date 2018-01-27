@@ -12,17 +12,21 @@ enemyManager::~enemyManager()
 
 HRESULT enemyManager::init()
 {
-	_enemyIsOn = true;
-
-	//利 积己
-	if (_enemyIsOn)
+	for (int i = 0; i < 3; ++i)
 	{
-		setEnemy(ENEMY_BEETO, 200, 200);
-		setEnemy(ENEMY_BLORB, 300, 200);
-		setEnemy(ELEMY_DRAKE, 400, 150);
-		setEnemy(ENEMY_DRAGON, 500, 200);
+		_enemyIsOn[i] = true;
 	}
 
+	//==================================== 利 积己
+	//stage1
+	if (_enemyIsOn[0])
+	{
+		setEnemy(ENEMY_BEETO, 200, 70);
+		setEnemy(ENEMY_BLORB, 300, 70);
+		setEnemy(ELEMY_DRAKE, 400, 150);
+		setEnemy(ENEMY_DRAGON, 400, 200);
+	}
+	//====================================
 
 	return S_OK;
 }

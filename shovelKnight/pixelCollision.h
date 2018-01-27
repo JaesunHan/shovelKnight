@@ -12,7 +12,7 @@ private:
 	bool _collisionGround;
 	bool _directionChange;
 
-
+	int _currentStage;
 
 public:
 	pixelCollision();

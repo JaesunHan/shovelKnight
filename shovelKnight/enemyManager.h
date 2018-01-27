@@ -19,7 +19,7 @@ private:
 	vEnemy1		_vEnemy;
 	viEnemy1	_viEnemy;
 
-	bool _enemyIsOn;
+	bool _enemyIsOn[3];
 
 public:
 	enemyManager();
@@ -32,7 +32,9 @@ public:
 
 
 	//미니언 생성&소멸 접근자
-	void setEnemyIsOn(bool isOn) { _enemyIsOn = isOn; }
+	void setStage1EnemyOn(bool isOn) { _enemyIsOn[0] = isOn; }
+	void setStage2EnemyOn(bool isOn) { _enemyIsOn[1] = isOn; }
+	void setStage3EnemyOn(bool isOn) { _enemyIsOn[2] = isOn; }
 
 	//========================================= Start 미니언 셋팅 ========================================
 

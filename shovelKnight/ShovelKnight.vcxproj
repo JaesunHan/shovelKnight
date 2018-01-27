@@ -22,7 +22,7 @@
     <ProjectGuid>{76E0A8FC-8B8B-4E7F-9DA3-6398D34A8AD4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>HeptaAPI</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
     <ProjectName>ShovelKnight</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -185,6 +185,7 @@
     <ClInclude Include="motherAction.h" />
     <ClInclude Include="npcBase.h" />
     <ClInclude Include="pixelCollision.h" />
+    <ClInclude Include="skeleton.h" />
     <ClInclude Include="skill_enemyDeadFx.h" />
     <ClInclude Include="StoreManager.h" />
     <ClInclude Include="dirtBlock.h" />
@@ -266,6 +267,7 @@
     <ClCompile Include="pixelCollision.cpp" />
     <ClCompile Include="playerBase+hitReaction.cpp" />
     <ClCompile Include="playerBase+Move.cpp" />
+    <ClCompile Include="skeleton.cpp" />
     <ClCompile Include="skill_enemyDeadFx.cpp" />
     <ClCompile Include="StoreManager.cpp" />
     <ClCompile Include="dirtBlock.cpp" />

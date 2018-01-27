@@ -79,6 +79,10 @@ HRESULT optionMenu::init()
 }
 void optionMenu::update() 
 {
+	if (_isSoundMenu)
+	{
+		_sm->update();
+	}
 	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 	{
 		if (_indexRc == 5) _indexRc = 0;
@@ -138,7 +142,7 @@ void optionMenu::draw(HDC hdc)
 		}
 	}
 	
-	TTTextOut(300, 10, "_indexRC", _indexRc);
+	//TTTextOut(300, 10, "_indexRC", _indexRc);
 	if (_indexRc >= 0 && _indexRc <= 2)
 	{
 		_letterBox->aniRender(hdc, _rcOption[0].left - 5, _rcOption[0].top + _indexRc * 32, _letterBoxAni);
@@ -152,9 +156,9 @@ void optionMenu::draw(HDC hdc)
 		_letterBoxEm2->aniRender(hdc, _rcOption[0].left - 5, _rcOption[0].top + _indexRc * 32, _letterBoxAni3);
 	}
 
-	if (_isSoundMenu = true)
+	if (_isSoundMenu == true)
 	{
-		//_sm->render(hdc);
+		_sm->render(hdc);
 	}
 	
 	//if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
