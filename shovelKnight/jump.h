@@ -1,5 +1,6 @@
 #pragma once
 #include "gameNode.h"
+#include "pixelCollision.h"
 
 class jump : public gameNode
 {
@@ -16,6 +17,9 @@ private:
 	float _startY;
 
 	bool _isJumping;
+
+	//ÇÈ¼¿ ÄÝ¸®Á¯
+	pixelCollision* _pixelC;
 
 public:
 	jump();

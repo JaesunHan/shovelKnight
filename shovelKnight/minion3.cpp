@@ -59,20 +59,20 @@ void minion3::update()
 	{
 		if (_status == ENEMY_LEFT_MOVE)
 		{
-			_status = ENEMY_LEFT_STOP;
+			_status = ENEMY_LEFT_IDLE;
 		}
 		else if (_status == ENEMY_RIGHT_MOVE)
 		{
-			_status = ENEMY_RIGHT_STOP;
+			_status = ENEMY_RIGHT_IDLE;
 		}
 	}
 	if (_directionCount % 120 == 0)
 	{
-		if (_status == ENEMY_LEFT_STOP)
+		if (_status == ENEMY_LEFT_IDLE)
 		{
 			_status = ENEMY_RIGHT_MOVE;
 		}
-		else if (_status == ENEMY_RIGHT_STOP)
+		else if (_status == ENEMY_RIGHT_IDLE)
 		{
 			_status = ENEMY_LEFT_MOVE;
 		}
@@ -90,14 +90,14 @@ void minion3::move()
 	//상태값에 따른 에니메이션 및 움직임
 	switch (_status)
 	{
-		case ENEMY_LEFT_STOP:
+		case ENEMY_LEFT_IDLE:
 			_direction = false;
 
 			_anim = KEYANIMANAGER->findAnimation("drakeLeftMove");
 
 
 		break;
-		case ENEMY_RIGHT_STOP:
+		case ENEMY_RIGHT_IDLE:
 			_direction = true;
 
 			_anim = KEYANIMANAGER->findAnimation("drakeRightMove");

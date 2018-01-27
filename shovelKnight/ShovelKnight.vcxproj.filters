@@ -309,6 +309,9 @@
     <ClInclude Include="skill_enemyDeadFx.h">
       <Filter>playGround\gamePlayScene\skill</Filter>
     </ClInclude>
+    <ClInclude Include="boss1.h">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -505,6 +508,15 @@
     </ClCompile>
     <ClCompile Include="skill_enemyDeadFx.cpp">
       <Filter>playGround\gamePlayScene\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="boss1.cpp">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="playerBase+Move.cpp">
+      <Filter>playGround\gamePlayScene\player</Filter>
+    </ClCompile>
+    <ClCompile Include="playerBase+hitReaction.cpp">
+      <Filter>playGround\gamePlayScene\player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

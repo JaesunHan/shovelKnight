@@ -68,14 +68,20 @@ HRESULT playerListMenu::init(char name[128], int characterKind, int hp, int mana
 	_fullHP = IMAGEMANAGER->addImage("fullHPBlock", "./image/UI/Hud_hpFull.bmp", 16, 16, true, RGB(255, 0, 255));
 	_halfHP = IMAGEMANAGER->addImage("halfHPBlock", "./image/UI/Hud_hpHalf.bmp", 16, 16, true, RGB(255, 0, 255));
 
+	//마나 출력에 사용될 이미지 와 텍스트
+	_mana.manaImg = IMAGEMANAGER->addImage("manaImage", "./image/UI/Hud_mana.bmp", 12, 20, true, RGB(255, 0, 255));
+	wsprintf(_mana.manaText, "%d", _mana.mana);
 
-
+	//내돈 출력에 사용될 이미지와 텍스트
+	_money.moneyImg = IMAGEMANAGER->addImage("moneyImage", "./image/UI/Hud_gold.bmp", 18, 12, true, RGB(255, 0, 255));
+	wsprintf(_money.moneyText, "%d", _money.money);
 
 	return S_OK;
 }
 void playerListMenu::update() 
 {
 	_characterAnim->frameUpdate(TIMEMANAGER->getElapsedTime() * 8);
+
 }
 void playerListMenu::release()
 {
@@ -105,16 +111,28 @@ void playerListMenu::draw(HDC hdc)
 		//기본으로 빈거 4개 깔기
 		for (int i = 0; i < MAXHPIMAGE; ++i)
 		{
-			_emptyHP->render(hdc, _menuImg->getWidth() / 3 * 1 + 20 + 16 * i, _menuImg->getHeight() / 3 * 1 + 30);
+			_emptyHP->render(hdc, _menuImg->getWidth() / 3 * 1 + 20 + 16 * i, _menuImg->getHeight() / 3 * 1 + 35);
 		}
 		for (int i = 0; i < _hp.hp / 2; ++i)
 		{
-			_fullHP->render(hdc, _menuImg->getWidth() / 3 * 1 + 20 + 16 * i, _menuImg->getHeight() / 3 * 1 + 30);
+			_fullHP->render(hdc, _menuImg->getWidth() / 3 * 1 + 20 + 16 * i, _menuImg->getHeight() / 3 * 1 + 35);
 		}
 		if (_hp.hp % 2 == 1)
 		{
-			_halfHP->render(hdc, _menuImg->getWidth() / 3 * 1 + 20 + 16 * (_hp.hp / 2), _menuImg->getHeight() / 3 * 1 + 30);
+			_halfHP->render(hdc, _menuImg->getWidth() / 3 * 1 + 20 + 16 * (_hp.hp / 2), _menuImg->getHeight() / 3 * 1 + 35);
 		}
 		//======================== End hp 출력하기 ===================================================
+
+		//======================== Start Mana 출력하기 ===============================================
+		_mana.manaImg->render(hdc, _menuImg->getWidth() / 3 * 1 + 20, _menuImg->getHeight() / 3 * 1 + 60);
+		TextOut(hdc, _menuImg->getWidth() / 3 * 1 + 40 + _mana.manaImg->getWidth(), _menuImg->getHeight() / 3 * 1 + 60, _mana.manaText, strlen(_mana.manaText));
+		//======================== End Mana 출력하기 =================================================
+
+		//======================== Start Money 출력하기 ==============================================
+		_money.moneyImg->render(hdc, _menuImg->getWidth() / 3 * 1 + 20, _menuImg->getHeight() / 3 * 1 + 85);
+		TextOut(hdc, _menuImg->getWidth() / 3 * 1 + 40 + _money.moneyImg->getWidth(), _menuImg->getHeight() / 3 * 1 + 85, _money.moneyText, strlen(_money.moneyText));
+		//======================== End Money 출력하기 ================================================
+
+
 	}
 }

@@ -17,32 +17,15 @@ HRESULT enemyBase::init(float x, float y)
 	_jump = new jump;
 	_jump->init();
 
+	_pixelC = new pixelCollision;
+	_pixelC->init(_rc, _x, _y);
+
 	return S_OK;
 }
 
 HRESULT enemyBase::init(string imgKeyString, char* imgFileName, float x, float y, int totalWidth, int totalHeight, int frameX, int frameY)
 {
-	_imgKeyString = imgKeyString;
-	_imgFileName = imgFileName;
-	_x = x;
-	_y = y;
 
-	_speed = 3.0f;
-	_playerDistance = 0.0f;
-	_isDead = false;
-	_isDeadVanish = false;
-	_vanishTime = 1;
-	_direction = false;
-
-
-	_img = IMAGEMANAGER->addFrameImage(_imgKeyString, _imgFileName, _x, _y, totalWidth, totalHeight, frameX, frameY, true, RGB(255, 0, 255));
-
-	_rc = RectMakeCenter(_x, _y, _img->getFrameWidth(), _img->getFrameHeight());
-
-	_status = ENEMY_LEFT_STOP;
-
-	_width = _img->getFrameWidth();
-	_height = _img->getFrameHeight();
 
 
 	return S_OK;

@@ -27,8 +27,9 @@ public:
 
 	HRESULT init();
 	void release();
-
+	//문자열 저장
 	void addData(const char* subject, const char* title, const char* body);
+	
 	void iniSave(char* fileName);
 
 	char* loadDataString(const char* fileName, const char* subject, const char* title);
