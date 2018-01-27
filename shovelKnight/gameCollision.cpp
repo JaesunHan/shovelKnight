@@ -25,36 +25,63 @@ void gameCollision::update()
 {
 	RECT enemy;
 
-	for (int i = 0; i != _enemy->getVBeeto().size(); ++i)
+	for (int i = 0; i != _enemy->getVEnemy().size(); ++i)
 	{
-		if (_enemy->getVBeeto()[i]->getStatus() == ENEMY_LEFT_DEAD ||
-			_enemy->getVBeeto()[i]->getStatus() == ENEMY_RIGHT_DEAD)
+		switch (_enemy->getVEnemy()[i]->getEnemyType())
 		{
-			_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVBeeto()[i]->getX(), _enemy->getVBeeto()[i]->getY());
-			//_enemy->removeMinionBeeto(i);
+		case ENEMY_BEETO:
+			if (_enemy->getVEnemy()[i]->getStatus() == ENEMY_LEFT_DEAD ||
+				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
+			{
+				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
+				_enemy->removeEnemy(i);
+			}
+			break;
+		case ENEMY_BLORB:
+			if (_enemy->getVEnemy()[i]->getStatus() == ENEMY_LEFT_DEAD ||
+				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
+			{
+				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
+				_enemy->removeEnemy(i);
+			}
+			break;
+		case ELEMY_DRAKE:
+			if (_enemy->getVEnemy()[i]->getStatus() == ENEMY_LEFT_DEAD ||
+				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
+			{
+				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
+				_enemy->removeEnemy(i);
+			}
+			break;
+		case ENEMY_SKELETON:
+			if (_enemy->getVEnemy()[i]->getStatus() == ENEMY_LEFT_DEAD ||
+				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
+			{
+				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
+				_enemy->removeEnemy(i);
+			}
+			break;
+		case ENEMY_DRAGON:
+			if (_enemy->getVEnemy()[i]->getStatus() == ENEMY_LEFT_DEAD ||
+				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
+			{
+				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
+				_enemy->removeEnemy(i);
+			}
+			break;
+		case ENEMY_BLACKKNIGHT:
+			if (_enemy->getVEnemy()[i]->getStatus() == ENEMY_LEFT_DEAD ||
+				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
+			{
+				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
+				_enemy->removeEnemy(i);
+			}
+			break;
 		}
 	}
 
 	collisionPlayerMap();
-	
 
-	//collisionPlayerMap();
-
-	//플레이어와 적의 충돌
-	//for (int i = 0; i != enemy.size(); ++i)
-	//{
-	//	for (int j = 0; j != player.size(); ++j)
-	//	{
-	//		if (IntersectRect(&temp, &player, &enemy))
-	//		{
-	//
-	//
-	//
-	//			player			[j]->Reaction(DAMAGE_MAX);
-	//			enemy[i]->Reaction(2);
-	//		}
-	//	}
-	//}
 	//플레이어와 스킬의 충돌
 	//적과 스킬의 충돌
 	//플레이어와 item의 충돌
@@ -85,5 +112,5 @@ void gameCollision::collisionPlayerMap()
 	if (probeY == rc.bottom - 1) return;
 
 	_player->setY(_player->getY() + (probeY - rc.bottom));
-	//_player->setPlayerState(,ONLAND,,,);
+	_player->setState(PLAYERSTATE_ONLAND);
 }

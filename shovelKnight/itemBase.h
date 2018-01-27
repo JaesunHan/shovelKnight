@@ -1,39 +1,64 @@
 #pragma once
+#include "gameNode.h"
+
+enum ITEM_STATS
+{
+	ITEM_STATS_STOP,
+	ITEM_STATS_GRAVITY,
+};
+
+enum ITEM_FIRE
+{
+	ITEM_FIRE_CENTER,
+	ITEM_FIRE_LEFT,
+	ITEM_FIRE_RIGHT,
+};
+
 class itemBase
 {
 protected:
-	image * _img;				//아이템 이미지
-	string _imgKeyString;		//이미지매니저에 등록할 이미지 키값
-	char* _imgFileName;			//아이템 이미지 파일(경로 포함)
+	FPOINT _pt;
+	FPOINT _add;
+	float _gravity;
+	bool _isFire;
+	ITEM_STATS _stats;
+	char* _aniName;
 
-	float _x, _y;				//중점 좌표
-	float _jumpPower;			//아이템이 드랍될때 위로 뛰어올랐다가 떨어짐
-	float _itemGravity;			//그렇다면 중력이 적용되어야 게찌요?
-	int _width, _height;		//아이템 충돌 렉트 그릴 때 쓸 가로세로 크기
+	RECT _rc;
+	image* _img;
+	animation* _ani;
+	int _imgWidth;
+	int _imgHeight;
 
-	RECT _rc;					//아이템 충돌 렉트
 
 public:
 	itemBase();
 	~itemBase();
 
-	virtual HRESULT init(string imgKeyString, char* imgFileName, float x, float y, int totalWidth, int totalHeight, int frameX, int frameY);
-	virtual void update();
-	virtual void release();
+	virtual HRESULT init();
+	virtual void release() = 0;
+	virtual void update() = 0;
 	virtual void render();
-	virtual void draw();
+
+	virtual void reRect();
+	virtual void eatItem();
 
 	//==================================== Start 게터 세터 작성하기===================================
-	//중점X 게터 세터
-	inline float getX() { return _x; }		inline void setX(float x) { _x = x; }
-	//중점Y 게터 세터
-	inline float getY() { return _y; }		inline void setY(float y) { _y = y; }
+	//중점 게터 세터
+	inline FPOINT getCenter() { return _pt; }
+	inline void setX(FPOINT pt) { _pt = pt; }
+
 	//가로크기 게터 세터
-	inline int getWidth() { return _width; }	inline void setWidth(int w) { _width = w; }
+	inline int getWidth() { return _imgWidth; }
+	inline void setWidth(int w) { _imgWidth = w; }
+
 	//세로크기 게터 세터
-	inline int getHeight() { return _height; }	inline void setHeight(int h) { _height = h; }
+	inline int getHeight() { return _imgHeight; }
+	inline void setHeight(int h) { _imgHeight = h; }
+
 	//점프파워 게터 세터
-	inline float getJumpPower() { return _jumpPower; }	inline void setJumpPower(float jp) { _jumpPower = jp; }
+	inline FPOINT getAdd() { return _add; }
+	inline void setAdd(FPOINT add) { _add = add; }
 
 	//렉트 게터
 	inline RECT getRect() { return _rc; }
