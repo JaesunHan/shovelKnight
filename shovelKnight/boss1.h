@@ -1,7 +1,7 @@
 #pragma once
 #include "enemyBase.h"
 
-#define DRAGONSPEED 2
+#define DRAGONSPEED 1
 
 class boss1 : public enemyBase
 {

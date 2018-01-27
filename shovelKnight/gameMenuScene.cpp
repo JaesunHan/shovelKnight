@@ -46,8 +46,12 @@ HRESULT gameMenuScene::init()
 //	//플레이어 리스트를 보여주는 메뉴 클래스를 동적할당한다  이 객체의 렌더에서는 플레이어리스트메뉴의 틀만 보여준다.
 //	_plm = new playerListMenu;
 //	_plm->init();
-	_plm = new playerListMenu;
-	_plm->init();
+	for (int i = 0; i < MAXPLAYERLIST; ++i)
+	{
+		_plm[i] = new playerListMenu;
+		_plm[i]->init();
+	}
+	
 	//_plm->init(_vPList[_pSlotIdx].name, _vPList[_pSlotIdx].characterkind, _vPList[_pSlotIdx].hp, _vPList[_pSlotIdx].mana, _vPList[_pSlotIdx].money, _vPList[_pSlotIdx].suit, _vPList[_pSlotIdx].weapon);
 	//캐릭터를 만들자는 메뉴 클랙스를 동적할당한다. 이 객체의 렌더에서는 캐릭터 생성 메뉴의 틀만 보여준다.
 	_ccm = new createCharacterMenu;
@@ -61,7 +65,9 @@ HRESULT gameMenuScene::init()
 }
 void gameMenuScene::update() 
 {
+	//타겟 박스는 애니렌더이므로 프레임을 업뎃하기
 	_animTarget->frameUpdate(TIMEMANAGER->getElapsedTime() * 5);
+	//타겟 박스는 방향키로 움직인다(좌우)
 	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
 	{
 		--_pSlotIdx;
@@ -74,20 +80,35 @@ void gameMenuScene::update()
 	}
 
 	//타겟 박스가 현재 가리키는 리스트에 값이 존재하지 않으면 캐릭터 생성화면 객체를 업데이트
-	if (_vPList[_pSlotIdx].hp == 0)
+	if (_vPList[_pSlotIdx].hp < 0)
 	{
-		_ccm->update();
+		//_ccm->update();
 	}
 	//타겟 박스가 현재 가리키는 리스트에 값이 존재하면 플레이어 정보를 출ㄹ력하자
 	else
 	{
-		if (_plm->getHP() < 0)
+		//plm 에 아직 정보가 초기화 되지 않은 경우
+		if (_plm[_pSlotIdx]->getHP() < 0)
 		{
-			_plm->init(_vPList[_pSlotIdx].name, _vPList[_pSlotIdx].characterkind, _vPList[_pSlotIdx].hp, _vPList[_pSlotIdx].mana, _vPList[_pSlotIdx].money, _vPList[_pSlotIdx].suit, _vPList[_pSlotIdx].weapon);
+			//초기화하기
+			_plm[_pSlotIdx]->init(_vPList[_pSlotIdx].name, _vPList[_pSlotIdx].characterkind, _vPList[_pSlotIdx].hp, _vPList[_pSlotIdx].mana, _vPList[_pSlotIdx].money, _vPList[_pSlotIdx].suit, _vPList[_pSlotIdx].weapon);
 		}
 		else
 		{
-			_plm->update();
+			//이 업데이트에서는 캐릭터 이미지의 프레임 업뎃이 있음 (삽기사 캐릭터의 갑옷이 반짝임)
+			_plm[_pSlotIdx]->update();
+		}
+	}
+
+	//K 버튼을 누르면 현재 인덱스에 캐릭터를 생성하기(기본값으로 생성한다.)
+	if (KEYMANAGER->isOnceKeyDown('K'))
+	{
+		//지금 선택한 슬롯에 정보가 없을 때만 캐릭터를 새로 생성한다.
+		if (_vPList[_pSlotIdx].name[0] == '\0')
+		{
+			//새로운 기본캐릭터를 생성하고 ini 파일에 저장하는 함수를 호출
+			createNewDefaultCharacter();
+			_plm[_pSlotIdx]->init(_vPList[_pSlotIdx].name, _vPList[_pSlotIdx].characterkind, _vPList[_pSlotIdx].hp, _vPList[_pSlotIdx].mana, _vPList[_pSlotIdx].money, _vPList[_pSlotIdx].suit, _vPList[_pSlotIdx].weapon);
 		}
 	}
 }
@@ -113,9 +134,9 @@ void gameMenuScene::draw()
 	else 
 	{	
 		//초기화 할 때는 지금 선택한 정보를 전달하여 초기화하기
-		if (!(_plm->getHP() < 0))
+		if (!(_plm[_pSlotIdx]->getHP() < 0))
 		{
-			_plm->render(getMemDC());
+			_plm[_pSlotIdx]->render(getMemDC());
 		}
 	}
 	//플레이어리스트 넘머발 타겟 박스는 항상 마지막에 출력하기
@@ -139,10 +160,10 @@ void gameMenuScene::makePlayerListData()
 	char titleBody[128];
 	for (int i = 0; i < MAXPLAYERLIST; ++i)
 	{
-		wsprintf(subjectName, "palyer%d", i);
+		wsprintf(subjectName, "player%d", i);
 		wsprintf(titleBody, "%d", i);
 		//플레이어 번호 저장하기
-		INIDATA->addData(subjectName, "palyerNumber", titleBody);
+		INIDATA->addData(subjectName, "playerNumber", titleBody);
 		INIDATA->iniSave(fileName);
 	}
 }
@@ -151,6 +172,11 @@ void gameMenuScene::loadPlayerListData()
 {
 	char* fileName = "playerList";
 	char subjectName[256];
+	//ini 파일이 존재하지 않으면 새로 만들기
+	if (access("./playerList.ini", 0) == -1)
+	{
+		makePlayerListData();
+	}
 	//playerNumber = 0, playerNumber = 1, .... 
 	//playerNumber 타이틀을 읽어와서 0 번이 저장되어있지 않으면
 	//파일에 내용이 아예 없는 거니까 이때 파일을 만들기
@@ -162,7 +188,7 @@ void gameMenuScene::loadPlayerListData()
 	for (int i = 0; i < MAXPLAYERLIST; ++i)
 	{
 		playerList p;
-		wsprintf(subjectName, "palyer%d", i);
+		wsprintf(subjectName, "player%d", i);
 	
 		p.pNum = INIDATA->loadDataInterger(fileName, subjectName, "playerNumber");
 		wsprintf(p.name, "%s", INIDATA->loadDataString(fileName, subjectName, "Name"));
@@ -179,3 +205,61 @@ void gameMenuScene::loadPlayerListData()
 
 }
 
+void gameMenuScene::createNewDefaultCharacter()
+{
+	
+	//기본값을 세팅할 구조체를  선언하고
+	playerList p;
+	wsprintf(p.name, "palyerNumber%d", _pSlotIdx);
+	p.characterkind = 0;
+	p.hp = 8;
+	p.mana = 30;
+	p.money = 1000;
+	p.suit = 0;
+	p.weapon = 0;
+	//벡터의 해당 인덱스에 이 구조체 데이터를 덮어쓴다
+	_vPList[_pSlotIdx] = p;
+	//그리고 INIDATA에 저장한다
+
+	char* fileName = "playerList";
+	char subjectName[256];
+	wsprintf(subjectName, "player%d", _pSlotIdx);
+	
+	INIDATA->addData(subjectName, "Name", _vPList[_pSlotIdx].name);
+	INIDATA->iniSave(fileName);
+	addNsaveINTDataInINIFile(fileName, subjectName, "CharacterKind", _vPList[_pSlotIdx].characterkind);
+	addNsaveINTDataInINIFile(fileName, subjectName, "HP", _vPList[_pSlotIdx].hp);
+	addNsaveINTDataInINIFile(fileName, subjectName, "Mana", _vPList[_pSlotIdx].mana);
+	addNsaveINTDataInINIFile(fileName, subjectName, "Money", _vPList[_pSlotIdx].money);
+	addNsaveINTDataInINIFile(fileName, subjectName, "Suit", _vPList[_pSlotIdx].suit);
+	addNsaveINTDataInINIFile(fileName, subjectName, "Weapon", _vPList[_pSlotIdx].weapon);
+
+
+	//INIDATA->addData(subjectName, "CharacterKind", _vPList[_pSlotIdx].characterkind);
+	//INIDATA->iniSave(fileName);
+	//INIDATA->addData(subjectName, "HP", _vPList[_pSlotIdx].hp);
+	//INIDATA->iniSave(fileName);
+	//INIDATA->addData(subjectName, "Mana", _vPList[_pSlotIdx].mana);
+	//INIDATA->iniSave(fileName);
+	//INIDATA->addData(subjectName, "Money", _vPList[_pSlotIdx].money);
+	//INIDATA->iniSave(fileName);
+	//INIDATA->addData(subjectName, "Suit", _vPList[_pSlotIdx].suit);
+	//INIDATA->iniSave(fileName);
+	//INIDATA->addData(subjectName, "Weapon", _vPList[_pSlotIdx].weapon);
+	//INIDATA->iniSave(fileName);
+	/*palyerNumber=0
+	Name=shovelknight0
+	CharacterKind=0
+	HP=5
+	Mana=30
+	Money=10000
+	Suit=0
+	Weapon=0*/
+}
+void gameMenuScene::addNsaveINTDataInINIFile(char* fileName, char subjectName[256], char title[256], int data)
+{
+	char str[128];
+	wsprintf(str, "%d", data);
+	INIDATA->addData(subjectName, title, str);
+	INIDATA->iniSave(fileName);
+}

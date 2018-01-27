@@ -32,7 +32,10 @@ HRESULT boss1::init(float x, float y)
 	KEYANIMANAGER->addArrayFrameAnimation("dragonLeftForwardMove", "dragon", leftForwardMove, 6, 6, false);
 
 	int leftBackMove[] = { 12, 13, 14, 15, 16, 17 };
-	KEYANIMANAGER->addArrayFrameAnimation("dragonLefBacktMove", "dragon", leftBackMove, 6, 6, false);
+	KEYANIMANAGER->addArrayFrameAnimation("dragonLeftBackMove", "dragon", leftBackMove, 6, 6, false);
+
+	int leftHit[] = { 18, 19, 20 };
+	KEYANIMANAGER->addArrayFrameAnimation("dragonLeftHit", "dragon", leftHit, 3, 4, false);
 
 	int leftAttack[] = { 21, 22, 23 };
 	KEYANIMANAGER->addArrayFrameAnimation("dragonLeftAttack", "dragon", leftAttack, 3, 4, false);
@@ -46,6 +49,7 @@ HRESULT boss1::init(float x, float y)
 	_vanishTime = 1;
 	_gravity = 0.0f;
 	_directionCount = 1;
+	_direction = false;
 
 
 	_anim = KEYANIMANAGER->findAnimation("dragonLeftStop");
@@ -90,6 +94,7 @@ void boss1::move()
 	switch (_status)
 	{
 		case ENEMY_LEFT_IDLE:
+			
 
 			_anim = KEYANIMANAGER->findAnimation("dragonLeftStop");
 			if (!_anim->isPlay()) _anim->start();
@@ -97,6 +102,7 @@ void boss1::move()
 
 		break;
 		case ENEMY_LEFT_MOVE:
+			_direction = false;  //앞으로 움직이는 상태
 
 			_anim = KEYANIMANAGER->findAnimation("dragonLeftForwardMove");
 			if (!_anim->isPlay()) _anim->start();
@@ -106,8 +112,9 @@ void boss1::move()
 			_x -= _speed;
 		break;
 		case ENEMY_LEFT_BACK_MOVE:
+			_direction = true;  //뒤로 움직이는 상태
 
-			_anim = KEYANIMANAGER->findAnimation("dragonLefBacktMove");
+			_anim = KEYANIMANAGER->findAnimation("dragonLeftBackMove");
 			if (!_anim->isPlay()) _anim->start();
 
 
@@ -117,6 +124,13 @@ void boss1::move()
 		case ENMEY_LEFT_ATTACK:
 
 			_anim = KEYANIMANAGER->findAnimation("dragonLeftAttack");
+			if (!_anim->isPlay()) _anim->start();
+
+
+		break;
+		case ENEMY_LEFT_HIT:
+
+			_anim = KEYANIMANAGER->findAnimation("dragonLeftHit");
 			if (!_anim->isPlay()) _anim->start();
 
 
