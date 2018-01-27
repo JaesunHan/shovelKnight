@@ -88,14 +88,14 @@
     <Filter Include="playGround\gameMenuScene">
       <UniqueIdentifier>{fb09364f-fd5b-44c4-84f5-16d7f362e322}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\allMenu">
-      <UniqueIdentifier>{aaf728bd-1a66-422a-a5f5-7c2456400d62}</UniqueIdentifier>
-    </Filter>
     <Filter Include="playGround\gamePlayScene\stageManager">
       <UniqueIdentifier>{9ee03396-1726-4a62-bd69-29f2d3be84d2}</UniqueIdentifier>
     </Filter>
     <Filter Include="playGround\gamePlayScene\enemy\enemyAction">
       <UniqueIdentifier>{2821b621-3fe7-42d0-a83b-72c7262aad86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\database\allMenu">
+      <UniqueIdentifier>{aaf728bd-1a66-422a-a5f5-7c2456400d62}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -259,22 +259,22 @@
       <Filter>playGround\gameMenuScene</Filter>
     </ClInclude>
     <ClInclude Include="menuBase.h">
-      <Filter>playGround\allMenu</Filter>
+      <Filter>playGround\database\allMenu</Filter>
     </ClInclude>
     <ClInclude Include="selectNickNameMenu.h">
-      <Filter>playGround\allMenu</Filter>
+      <Filter>playGround\database\allMenu</Filter>
     </ClInclude>
     <ClInclude Include="playerListMenu.h">
-      <Filter>playGround\allMenu</Filter>
+      <Filter>playGround\database\allMenu</Filter>
     </ClInclude>
     <ClInclude Include="CharacterSelectMenu.h">
-      <Filter>playGround\allMenu</Filter>
+      <Filter>playGround\database\allMenu</Filter>
     </ClInclude>
     <ClInclude Include="optionMenu.h">
-      <Filter>playGround\allMenu</Filter>
+      <Filter>playGround\database\allMenu</Filter>
     </ClInclude>
     <ClInclude Include="soundMenu.h">
-      <Filter>playGround\allMenu</Filter>
+      <Filter>playGround\database\allMenu</Filter>
     </ClInclude>
     <ClInclude Include="TTUtils.h">
       <Filter>2DGameFramework\utils</Filter>
@@ -292,7 +292,7 @@
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClInclude>
     <ClInclude Include="createCharacterMenu.h">
-      <Filter>playGround\allMenu</Filter>
+      <Filter>playGround\database\allMenu</Filter>
     </ClInclude>
     <ClInclude Include="jump.h">
       <Filter>playGround\gamePlayScene\enemy\enemyAction</Filter>
@@ -459,22 +459,22 @@
       <Filter>playGround\gameMenuScene</Filter>
     </ClCompile>
     <ClCompile Include="menuBase.cpp">
-      <Filter>playGround\allMenu</Filter>
+      <Filter>playGround\database\allMenu</Filter>
     </ClCompile>
     <ClCompile Include="selectNickNameMenu.cpp">
-      <Filter>playGround\allMenu</Filter>
+      <Filter>playGround\database\allMenu</Filter>
     </ClCompile>
     <ClCompile Include="playerListMenu.cpp">
-      <Filter>playGround\allMenu</Filter>
+      <Filter>playGround\database\allMenu</Filter>
     </ClCompile>
     <ClCompile Include="CharacterSelectMenu.cpp">
-      <Filter>playGround\allMenu</Filter>
+      <Filter>playGround\database\allMenu</Filter>
     </ClCompile>
     <ClCompile Include="optionMenu.cpp">
-      <Filter>playGround\allMenu</Filter>
+      <Filter>playGround\database\allMenu</Filter>
     </ClCompile>
     <ClCompile Include="soundMenu.cpp">
-      <Filter>playGround\allMenu</Filter>
+      <Filter>playGround\database\allMenu</Filter>
     </ClCompile>
     <ClCompile Include="TTUtils.cpp">
       <Filter>2DGameFramework\utils</Filter>
@@ -492,7 +492,7 @@
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClCompile>
     <ClCompile Include="createCharacterMenu.cpp">
-      <Filter>playGround\allMenu</Filter>
+      <Filter>playGround\database\allMenu</Filter>
     </ClCompile>
     <ClCompile Include="jump.cpp">
       <Filter>playGround\gamePlayScene\enemy\enemyAction</Filter>

@@ -6,7 +6,7 @@
 class boss1 : public enemyBase
 {
 private:
-
+	int _movePatternCount;
 
 public:
 	boss1();

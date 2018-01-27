@@ -39,8 +39,8 @@ protected:
 
 	char* _imgFileName;			//이미지 파일 이름(경로 포함)
 	float _x, _y;				//적의 중점좌표
-	float _jumpPower;			//점프 파워
-	float _gravity;				//적용할 중력
+	//float _jumpPower;			//점프 파워
+	float _gravity;			//적용할 중력
 	int _width, _height;		//적의 가로, 세로 크기(렉트를 만들 때 사용할 가로세로크기이다.)
 	float _angle;               //이동 각도
 
@@ -53,6 +53,7 @@ protected:
 	bool _isJump;               //점프여부
 	int _jumpCount;             //점프카운트
 	int _directionCount;        //방향전환 카운트
+	bool _isPlayerFind;         //플레이어 발견
 
 
 	RECT _rc;					//혹시 사용하게될지도 모를 렉트(충돌용)
@@ -86,15 +87,18 @@ public:
 	//세로크기 게터 세터
 	inline int getHeight() { return _height; }	inline void setHeight(int h) { _height = h; }
 	//점프파워 게터 세터
-	inline float getJumpPower() { return _jumpPower; }	inline void setJumpPower(float jp) { _jumpPower = jp; }
+	/*inline float getJumpPower() { return _jumpPower; }	inline void setJumpPower(float jp) { _jumpPower = jp; }*/
 
 	//렉트 게터
 	inline RECT getRect() { return _rc; }
 
 	//적 상태 접근자 & 설정자
-	inline ENEMYSTATUS getStatus() { return _status; }   	
-	inline void setStatus(ENEMYSTATUS status) { _status = status; }
-	inline bool getIsDeadVanish() { return _isDeadVanish; }
+	ENEMYSTATUS getStatus() { return _status; }   	
+	void setStatus(ENEMYSTATUS status) { _status = status; }
+	bool getIsDeadVanish() { return _isDeadVanish; }
+
+	//플레이어 발견 접근자
+	void setPlayerFind(bool playerFind) { _isPlayerFind = playerFind; }
 
 	//==================================== End 게터 세터 작성하기===================================
 

@@ -53,20 +53,20 @@ public:
 
 	//========================================= Start 미니언 셋팅 ========================================
 	//--------------------------------- beeto
-	inline void setMinionBeeto(void);
-	inline void removeMinionBeeto(int arrNum);
+	void setMinionBeeto(void);
+	void removeMinionBeeto(int arrNum);
 
 	//--------------------------------- blorb
-	inline void setMinionBlorb(void);
-	inline void removeMinionBlorb(int arrNum);
+	void setMinionBlorb(void);
+	void removeMinionBlorb(int arrNum);
 
 	//--------------------------------- drake
-	inline void setMinionDrake(void);
-	inline void removeMinionDrake(int arrNum);
+	void setMinionDrake(void);
+	void removeMinionDrake(int arrNum);
 
 	//--------------------------------- dragon
-	inline void setBossDragon(void);
-	inline void removeBossDragon(int arrNum);
+	void setBossDragon(void);
+	void removeBossDragon(int arrNum);
 
 	//========================================== End 미니언 셋팅 =========================================
 
