@@ -14,6 +14,24 @@ StoreManager::~StoreManager()
 
 HRESULT StoreManager::init()
 {
+	for (int i = 0; i < NPCNUM; ++i)
+	{
+		npcBase* npc;
+		switch (i)
+		{
+		case 	MAGICGIRL	:		//마법상인
+			npc = new MagicGirl;
+			break;
+		case HEALTYGUY:				//체력상인
+			npc = new HealtyGuy;
+			break;
+		case BARDKNIGHT:			//음악상인
+			npc = new BardKnight;
+			break;
+		}
+		npc->init();
+		_vNpc.push_back(npc);
+	}
 	return S_OK;
 }
 
@@ -139,7 +157,7 @@ void StoreManager::SellPlayerHp(vector<npcBase*>::iterator temp)
 			sprintf(str3, "if u OK press 'O', or not press 'P'");
 
 
-			if (KEYMANAGER->isOnceKeyDown('O'))				//O눌렀을때
+			if (KEYMANAGER->isOnceKeyDown('O'))				//O눌렀을때(true값을 받았을때)
 			{
 				if ((*temp)->getStock() == 0)					//한번도 상점에서 구매를 하지 않았으면
 				{

@@ -57,7 +57,8 @@ public:
 	npcBase();
 	~npcBase();
 
-	virtual HRESULT init(string imgKeyString, char* imgFileNmae, float x, float y, int totalWidth, int totalHeight, int frameXx, int frameY, NPCTYPE npctype);
+	//virtual HRESULT init(string imgKeyString, char* imgFileNmae, float x, float y, int totalWidth, int totalHeight, int frameXx, int frameY, NPCTYPE npctype);
+	virtual HRESULT init();
 	virtual void release();
 	virtual void update();
 	virtual void render();
@@ -85,6 +86,10 @@ public:
 
 	//등장변수 셋함수 
 	inline void setAppear(bool isAppear) { _isAppear = isAppear; }
+
+	//충돌했나 셋함수
+	inline void setIsCollision(bool isCollision) { _isCollision = isCollision; }
+
 
 	//==================================== End 게터 세터 작성하기===================================
 };

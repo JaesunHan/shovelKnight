@@ -20,6 +20,8 @@ class HealtyGuy :
 public:
 	HealtyGuy();
 	~HealtyGuy();
+	virtual HRESULT init();
+
 
 	//==========가격 세팅 변수===========//
 	int _chicken;								//치킨가격
@@ -34,7 +36,8 @@ public:
 
 	//==========스킬 스토어 관련 함수===============//
 	void sellHpItem();								//스킬 파는 함수 
-	virtual void render();
-	virtual void draw();
+	
+	//virtual void render();
+	//virtual void draw();
 };
 

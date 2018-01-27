@@ -6,62 +6,73 @@ void playerBase::move()
 
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
-		if (_state == HANG) _action = PR_MOVE;
+		if (_state == PLAYERSTATE_HANG) _action = PLAYERACTION_MOVE;
+		_directionTB = PLAYERDIRECTION_TOP;
+	}
+	if (KEYMANAGER->isOnceKeyUp('W'))
+	{
+		if (_state == PLAYERSTATE_HANG)_action = PLAYERACTION_IDLE;
 	}
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
-		if (_state == HANG) _action = PR_MOVE;
-		if (_state == INAIR) _action = PR_ATTACK;
+		if (_state == PLAYERSTATE_HANG) _action = PLAYERACTION_MOVE;
+		_directionTB = PLAYERDIRECTION_BOTTOM;
 	}
 	if (KEYMANAGER->isOnceKeyUp('S'))
 	{
-		if (_state == INAIR) _action = PR_ATTACK;
-		if (_state == HANG)_action = PR_IDLE;
+		if (_state == PLAYERSTATE_HANG)_action = PLAYERACTION_IDLE;
 	}
 	if (KEYMANAGER->isStayKeyDown('A'))
 	{
-		_direction = PD_LEFT;
-		_action = PR_MOVE;
+		_direction = PLAYERDIRECTION_LEFT;
+		_action = PLAYERACTION_MOVE;
 	}
 	if (KEYMANAGER->isOnceKeyUp('A'))
 	{
-		_action = PR_IDLE;
+		_action = PLAYERACTION_IDLE;
 	}
 	if (KEYMANAGER->isStayKeyDown('D'))
 	{
-		_direction = PD_RIGHT;
-		_action = PR_MOVE;
+		_direction = PLAYERDIRECTION_RIGHT;
+		_action = PLAYERACTION_MOVE;
 	}
 	if (KEYMANAGER->isOnceKeyUp('D'))
 	{
-		_action = PR_IDLE;
+		_action = PLAYERACTION_IDLE;
 	}
 
-	if (KEYMANAGER->isOnceKeyDown('K'))
+	if (KEYMANAGER->isOnceKeyDown('J'))
 	{
-		_action = PR_ATTACK;
+		_action = PLAYERACTION_ATTACK;
 	}
-	if (KEYMANAGER->isStayKeyDown('J'))
+	if (KEYMANAGER->isStayKeyDown('K'))
 	{
-		_action = PR_JUMP;
+		_action = PLAYERACTION_JUMP;
 		_jumpPower = JUMPPOWER;
 	}
 
-	//좌우 이동부분
-	if (_action == PR_MOVE)
+
+
+	switch (_state)
 	{
-		_x += _moveSpeed * _direction;
+	case PLAYERSTATE_ONLAND:
+	{
+		if (_action == PLAYERACTION_MOVE)_x += _moveSpeed * _direction;
 	}
-	//상하 이동부분
-	if (_action == PR_JUMP || _state == INAIR)
+		break;
+	case PLAYERSTATE_INAIR:
 	{
 		_y -= _jumpPower;
 		_jumpPower -= _gravity;
-
-		if (_jumpPower < 0) _currentFrameX = 1;
-		else _currentFrameX = 0;
+		if (_action == PLAYERACTION_MOVE)_x += _moveSpeed * _direction;
+		if (_action == PLAYERACTION_JUMP && _jumpPower < 0) _currentFrameX = 1;
+		if (_action == PLAYERACTION_JUMP && _jumpPower > 0) _currentFrameX = 0;
 	}
-
+	break;
+	case PLAYERSTATE_HANG:
+		if (_action == PLAYERACTION_MOVE)_y += _moveSpeed * _directionTB;
+		break;
+	}
 
 	_rc = RectMake(_x - HIT_BOX_WIDTH / 2, _y - HIT_BOX_HEIGHT, HIT_BOX_WIDTH, HIT_BOX_HEIGHT);
 }
