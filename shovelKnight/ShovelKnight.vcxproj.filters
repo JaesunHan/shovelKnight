@@ -97,6 +97,12 @@
     <Filter Include="playGround\gamePlayScene\enemy\enemyAction">
       <UniqueIdentifier>{2821b621-3fe7-42d0-a83b-72c7262aad86}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\gamePlayScene\item\unit">
+      <UniqueIdentifier>{ffd497d6-b3fe-4396-8909-d72d04dbda6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\gamePlayScene\skill\unit">
+      <UniqueIdentifier>{de5f9949-860d-4dfe-aebf-ebb1262a4d81}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -240,18 +246,6 @@
     <ClInclude Include="cameraManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="skill_darkKnight_fireBall.h">
-      <Filter>playGround\gamePlayScene\skill</Filter>
-    </ClInclude>
-    <ClInclude Include="skill_dirtBlockFx.h">
-      <Filter>playGround\gamePlayScene\skill</Filter>
-    </ClInclude>
-    <ClInclude Include="skill_fireBall.h">
-      <Filter>playGround\gamePlayScene\skill</Filter>
-    </ClInclude>
-    <ClInclude Include="skill_bubble.h">
-      <Filter>playGround\gamePlayScene\skill</Filter>
-    </ClInclude>
     <ClInclude Include="gameTitleScene.h">
       <Filter>playGround\gameTitleScene</Filter>
     </ClInclude>
@@ -306,11 +300,44 @@
     <ClInclude Include="minion3.h">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClInclude>
-    <ClInclude Include="skill_enemyDeadFx.h">
-      <Filter>playGround\gamePlayScene\skill</Filter>
-    </ClInclude>
     <ClInclude Include="boss1.h">
       <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="skill_bubble.h">
+      <Filter>playGround\gamePlayScene\skill\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="skill_darkKnight_fireBall.h">
+      <Filter>playGround\gamePlayScene\skill\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="skill_dirtBlockFx.h">
+      <Filter>playGround\gamePlayScene\skill\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="skill_enemyDeadFx.h">
+      <Filter>playGround\gamePlayScene\skill\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="skill_fireBall.h">
+      <Filter>playGround\gamePlayScene\skill\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="item_moneyBunch.h">
+      <Filter>playGround\gamePlayScene\item\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="item_apple.h">
+      <Filter>playGround\gamePlayScene\item\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="item_gems_diapink.h">
+      <Filter>playGround\gamePlayScene\item\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="item_gems_diared.h">
+      <Filter>playGround\gamePlayScene\item\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="item_gems_emerald.h">
+      <Filter>playGround\gamePlayScene\item\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="item_gems_money.h">
+      <Filter>playGround\gamePlayScene\item\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="item_gems_sapphire.h">
+      <Filter>playGround\gamePlayScene\item\unit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -440,18 +467,6 @@
     <ClCompile Include="cameraManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="skill_darkKnight_fireBall.cpp">
-      <Filter>playGround\gamePlayScene\skill</Filter>
-    </ClCompile>
-    <ClCompile Include="skill_dirtBlockFx.cpp">
-      <Filter>playGround\gamePlayScene\skill</Filter>
-    </ClCompile>
-    <ClCompile Include="skill_fireBall.cpp">
-      <Filter>playGround\gamePlayScene\skill</Filter>
-    </ClCompile>
-    <ClCompile Include="skill_bubble.cpp">
-      <Filter>playGround\gamePlayScene\skill</Filter>
-    </ClCompile>
     <ClCompile Include="gameTitleScene.cpp">
       <Filter>playGround\gameTitleScene</Filter>
     </ClCompile>
@@ -506,9 +521,6 @@
     <ClCompile Include="minion3.cpp">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClCompile>
-    <ClCompile Include="skill_enemyDeadFx.cpp">
-      <Filter>playGround\gamePlayScene\skill</Filter>
-    </ClCompile>
     <ClCompile Include="boss1.cpp">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClCompile>
@@ -517,6 +529,42 @@
     </ClCompile>
     <ClCompile Include="playerBase+hitReaction.cpp">
       <Filter>playGround\gamePlayScene\player</Filter>
+    </ClCompile>
+    <ClCompile Include="skill_bubble.cpp">
+      <Filter>playGround\gamePlayScene\skill\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="skill_darkKnight_fireBall.cpp">
+      <Filter>playGround\gamePlayScene\skill\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="skill_dirtBlockFx.cpp">
+      <Filter>playGround\gamePlayScene\skill\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="skill_enemyDeadFx.cpp">
+      <Filter>playGround\gamePlayScene\skill\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="skill_fireBall.cpp">
+      <Filter>playGround\gamePlayScene\skill\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="item_moneyBunch.cpp">
+      <Filter>playGround\gamePlayScene\item\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="item_apple.cpp">
+      <Filter>playGround\gamePlayScene\item\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="item_gems_diapink.cpp">
+      <Filter>playGround\gamePlayScene\item\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="item_gems_diared.cpp">
+      <Filter>playGround\gamePlayScene\item\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="item_gems_emerald.cpp">
+      <Filter>playGround\gamePlayScene\item\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="item_gems_money.cpp">
+      <Filter>playGround\gamePlayScene\item\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="item_gems_sapphire.cpp">
+      <Filter>playGround\gamePlayScene\item\unit</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
