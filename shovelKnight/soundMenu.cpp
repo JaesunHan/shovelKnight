@@ -73,12 +73,12 @@ void soundMenu::update()
 {
 	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 	{
-		if (_indexSoundRc == 4) _indexSoundRc = 0;
+		if (_indexSoundRc == 3) _indexSoundRc = 0;
 		else _indexSoundRc++;
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_UP))
 	{
-		if (_indexSoundRc == 0) _indexSoundRc = 4;
+		if (_indexSoundRc == 0) _indexSoundRc = 3;
 		else _indexSoundRc--;
 	}
 
