@@ -33,6 +33,12 @@ HRESULT minion3::init(float x, float y)
 	int leftMove[] = { 3, 4, 5};
 	KEYANIMANAGER->addArrayFrameAnimation("drakeLeftMove", "drake", leftMove, 3, 4, true);
 
+	int rightHit[] = { 12, 13, 14 };
+	KEYANIMANAGER->addArrayFrameAnimation("drakeRightHit", "drake", rightHit, 3, 4, false);
+
+	int leftHit[] = { 15, 16, 17 };
+	KEYANIMANAGER->addArrayFrameAnimation("drakeLeftHit", "drake", leftHit, 3, 4, false);
+
 	//=========================================================================================
 
 	_width = _img->getFrameWidth();
@@ -130,6 +136,20 @@ void minion3::move()
 			_speed -= 0.3f;
 			_x += _speed;
 			_y += -sinf(_angle) * _speed;
+		break;
+		case ENEMY_RIGHT_HIT:
+
+			_anim = KEYANIMANAGER->findAnimation("drakeLeftHit");
+			if (!_anim->isPlay()) _anim->start();
+
+
+		break;
+		case ENEMY_LEFT_HIT:
+
+			_anim = KEYANIMANAGER->findAnimation("drakeRightHit");
+			if (!_anim->isPlay()) _anim->start();
+
+
 		break;
 		case ENEMY_LEFT_DEAD:
 			_anim = KEYANIMANAGER->findAnimation("drakeLeftMove");

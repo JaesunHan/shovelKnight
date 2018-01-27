@@ -1,54 +1,35 @@
 #include "stdafx.h"
-#include "minion2.h"
+#include "skeleton.h"
 
 
-minion2::minion2()
+skeleton::skeleton()
 {
 }
-minion2::~minion2()
+skeleton::~skeleton()
 {
 }
 
-
-HRESULT minion2::init(float x, float y)
+HRESULT skeleton::init(float x, float y)
 {
-	_enemyType = ENEMY_BLORB;
+	_enemyType = ENEMY_SKELETON;
 
 	_x = x;
 	_y = y;
 	_speed = 0.0f;
 
-	_img = IMAGEMANAGER->addFrameImage("blorb", ".//image//monster//Blorb.bmp", _x, _y, 80, 162, 4, 6, true, RGB(255, 0, 255));
+	_img = IMAGEMANAGER->addFrameImage("skeleton", ".//image//monster//skeleton.bmp", _x, _y, 111, 256, 3, 8, true, RGB(255, 0, 255));
 
-	_rc = RectMakeCenter(_x, _y, _img->getFrameWidth(), 19);
+	_rc = RectMakeCenter(_x, _y, _img->getFrameWidth(), _img->getFrameHeight());
 
 	_status = ENEMY_LEFT_MOVE;
 
 	//========================================================================================= 에니메이션
 
-	int rightStop[] = { 0 };
-	KEYANIMANAGER->addArrayFrameAnimation("blorbRightStop", "blorb", rightStop, 1, 10, false);
+	int rightMove[] = { 0, 1, 2 };
+	KEYANIMANAGER->addArrayFrameAnimation("skeletonRightMove", "skeleton", rightMove, 3, 4, true);
 
-	int leftStop[] = { 4 };
-	KEYANIMANAGER->addArrayFrameAnimation("blorbLeftStop", "blorb", leftStop, 1, 10, false);
-
-	int rightMove[] = { 0, 1, 2, 3 };
-	KEYANIMANAGER->addArrayFrameAnimation("blorbRightMove", "blorb", rightMove, 4, 4, true);
-
-	int leftMove[] = { 4, 5, 6, 7 };
-	KEYANIMANAGER->addArrayFrameAnimation("blorbLeftMove", "blorb", leftMove, 4, 4, true);
-
-	int rightHit[] = { 16, 17, 18, 19 };
-	KEYANIMANAGER->addArrayFrameAnimation("blorbRightHit", "blorb", rightHit, 4, 4, false);
-
-	int leftHit[] = { 20, 21, 22, 23 };
-	KEYANIMANAGER->addArrayFrameAnimation("blorbLeftHit", "blorb", leftHit, 4, 4, false);
-
-	int rightDead[] = { 8, 9, 10, 11 };
-	KEYANIMANAGER->addArrayFrameAnimation("blorbRightDead", "blorb", rightDead, 4, 4, false);
-
-	int leftDead[] = { 12, 13, 14, 15 };
-	KEYANIMANAGER->addArrayFrameAnimation("blorbLeftDead", "blorb", leftDead, 4, 4, false);
+	int leftMove[] = { 3, 4, 5 };
+	KEYANIMANAGER->addArrayFrameAnimation("skeletonLeftMove", "skeleton", leftMove, 3, 4, true);
 
 	//=========================================================================================
 
@@ -59,23 +40,17 @@ HRESULT minion2::init(float x, float y)
 	_vanishTime = 1;
 	_direction = false;
 	_gravity = 0.0f;
-	_jumpTime = 1;
-	_isJump = false;
-	_jumpCount = 1;
+	_directionCount = 1;
+	_angle = 0.0f;
 
 
-	_anim = KEYANIMANAGER->findAnimation("blorbLeftMove");
+	_anim = KEYANIMANAGER->findAnimation("drakeLeftMove");
 
-	_jump = new jump;
-	_jump->init();
-
-	_pixelC = new pixelCollision;
-	_pixelC->init(_rc, _x, _y);
 
 	return S_OK;
 }
 
-void minion2::update()
+void skeleton::update()
 {
 	//============================================================= 픽셀충돌: 바닥충돌	
 	_pixelC->pixelCollisonY(_rc);  //바닥상태 검출
@@ -87,7 +62,7 @@ void minion2::update()
 	}
 	else
 	{
-		if (!_isJump && !_isDead) _gravity += 0.1f;	
+		if (!_isJump && !_isDead) _gravity += 0.1f;
 		else _gravity = 0.0f;
 	}
 	//중력적용
@@ -117,12 +92,9 @@ void minion2::update()
 	//상태값에 따른 에니메이션 및 움직임
 	move();
 
-
-
 }
 
-
-void minion2::move()
+void skeleton::move()
 {
 
 	//상태값에 따른 에니메이션 및 움직임
@@ -147,9 +119,9 @@ void minion2::move()
 		_jump->update();
 		//-----------------------------------
 
-		_speed = BLORBSPEED;
+		_speed = SKELETONSPEED;
 		_x -= _speed;
-	break;
+		break;
 	case ENEMY_RIGHT_MOVE:
 		_direction = true;
 		_jumpCount++;
@@ -170,23 +142,23 @@ void minion2::move()
 		_jump->update();
 		//-----------------------------------
 
-		_speed = BLORBSPEED;
+		_speed = SKELETONSPEED;
 		_x += _speed;
-	break;
+		break;
 	case ENEMY_RIGHT_HIT:
 
 		_anim = KEYANIMANAGER->findAnimation("blorbRightHit");
 		if (!_anim->isPlay()) _anim->start();
 
 
-	break;
+		break;
 	case ENEMY_LEFT_HIT:
 
 		_anim = KEYANIMANAGER->findAnimation("blorbLeftHit");
 		if (!_anim->isPlay()) _anim->start();
 
 
-	break;
+		break;
 	case ENEMY_LEFT_DEAD:
 		_anim = KEYANIMANAGER->findAnimation("blorbLeftDead");
 
@@ -201,7 +173,7 @@ void minion2::move()
 		//움직임: 뒤로 점핑하면서 죽기
 		if (_isDead && _jump->getIsJumping() == true)
 		{
-			_speed = BLORBSPEED;
+			_speed = SKELETONSPEED;
 			_x += _speed;
 			_jump->update();
 		}
@@ -215,7 +187,7 @@ void minion2::move()
 				_vanishTime = 1;
 			}
 		}
-	break;
+		break;
 	case ENEMY_RIGHT_DEAD:
 		_anim = KEYANIMANAGER->findAnimation("blorbRightDead");
 
@@ -231,7 +203,7 @@ void minion2::move()
 		//움직임: 뒤로 점핑하면서 죽기
 		if (_isDead && _jump->getIsJumping() == true)
 		{
-			_speed = BLORBSPEED;
+			_speed = SKELETONSPEED;
 			_x -= _speed;
 			_jump->update();
 		}
@@ -246,7 +218,7 @@ void minion2::move()
 				_vanishTime = 1;
 			}
 		}
-	break;
+		break;
 	}
 
 	//점프상태 초기화
