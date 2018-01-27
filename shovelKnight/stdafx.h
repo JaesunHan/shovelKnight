@@ -12,6 +12,7 @@
 #include <memory.h>
 #include <tchar.h>
 #include <iostream>
+#include <io.h>
 
 #include "commonMacroFunction.h"
 #include "randomFunction.h"

@@ -11,7 +11,7 @@ struct playerList
 	int pNum;			//저장되어 있는 캐릭터슬롯 번호
 	image* img;			//캐릭터 이미지
 	int characterkind;	//캐릭터 종류 : 0번은 삽기사
-	char name[128];			//캐릭터의 닉넴
+	TCHAR name[128];			//캐릭터의 닉넴
 	int hp;				//HP
 	int mana;			//마나
 	int money;			//가지고 있는 돈
@@ -50,7 +50,7 @@ private:
 	playerList _pList[MAXPLAYERLIST];
 
 	//플레이어 정보를 보여주는 메뉴
-	playerListMenu* _plm;
+	playerListMenu* _plm[MAXPLAYERLIST];
 	//캐릭터 만들으러 가자는 메뉴 (게임에서  "처음부터"라고 뜨는 메뉴 말하는 거임)
 	createCharacterMenu* _ccm;
 public:
@@ -71,6 +71,12 @@ public:
 	void makePlayerListData();
 	//플레이어 리스트가 담긴 ini 파일이 있는지 검사하여 있으면 데이터 읽어오는 기능을 하는 함수
 	void loadPlayerListData();
+
+	//새로운 캐릭터를 생성해서 ini 데이터 파일에저장하는 함수
+	void createNewDefaultCharacter();
+	//인트형을 ini 파일에 저장하기 위한 함수
+	//							저장할 ini파일이름, 서브젝트 네임,			타이틀,			저장할 인트형 데이터
+	void addNsaveINTDataInINIFile(char* fileName, char subjectName[256], char title[256], int data);
 
 	gameMenuScene();
 	~gameMenuScene();

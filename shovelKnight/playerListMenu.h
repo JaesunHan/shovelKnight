@@ -17,6 +17,7 @@ struct tagMana
 	image* manaImg;
 	int mana;
 	float x, y;
+	TCHAR manaText[128];
 };
 //자금 관련 구조체
 struct tagMoney
@@ -24,6 +25,7 @@ struct tagMoney
 	image* moneyImg;
 	int money;
 	float x, y;
+	TCHAR moneyText[128];
 };
 //캐릭터 이미지 등록할 때 사용할 이미지 KeyString 과 이미지 File Name 을 관리하기 편하게 하기 위한 구조체
 struct tagImageKeyNFileName
