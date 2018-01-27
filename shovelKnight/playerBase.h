@@ -7,8 +7,9 @@
 #define DOWNATTACK_DAMAGE_BOX_WIDTH 6
 #define	DOWNATTACK_DAMAGE_BOX_HEIGHT 10
 #define SPEED 4.0f
-#define GRAVITY 0.01f
-#define JUMPPOWER 0.1f
+#define TIMECOUNT 0.5f
+#define GRAVITY 0.f
+#define JUMPPOWER 0.f
 
 enum PLAYER_SKILL
 {
@@ -19,63 +20,67 @@ enum PLAYER_SKILL
 
 enum COLLISIONTYPE
 {
-	CT_NULL,
-	CT_TOP,
-	CT_BOTTOM,
-	CT_LEFT,
-	CT_RIGHT,
-	CT_LEFT_BOTTOM,
-	CT_RIGHT_BOTTOM
+	COLLISIONTYPE_NULL,
+	COLLISIONTYPE_TOP,
+	COLLISIONTYPE_BOTTOM,
+	COLLISIONTYPE_LEFT,
+	COLLISIONTYPE_RIGHT,
+	COLLISIONTYPE_LEFT_BOTTOM,
+	COLLISIONTYPE_RIGHT_BOTTOM
 };
 
 
 enum PLAYERDIRECTION
 {
-	PD_RIGHT = 1,
-	PD_LEFT = -1
+	PLAYERDIRECTION_RIGHT = 1,
+	PLAYERDIRECTION_LEFT = -1
+};
+enum PLAYERDIRECTIONTB
+{
+	PLAYERDIRECTION_TOP = -1, 
+	PLAYERDIRECTION_BOTTOM = 1
 };
 
 enum PLAYERSTATE
 {
-	ONLAND,
-	INAIR,
-	HANG
+	PLAYERSTATE_ONLAND,
+	PLAYERSTATE_INAIR,
+	PLAYERSTATE_HANG
 };
 
 enum PLAYERACTION
 {
-	PR_IDLE,
-	PR_MOVE,
-	PR_ATTACK,
-	PR_JUMP,
-	PR_ROOTING,
-	PR_DAMAGED,
-	PR_DIE
+	PLAYERACTION_IDLE,
+	PLAYERACTION_MOVE,
+	PLAYERACTION_ATTACK,
+	PLAYERACTION_JUMP,
+	PLAYERACTION_ROOTING,
+	PLAYERACTION_DAMAGED,
+	PLAYERACTION_DIE
 };
 
 enum COLLISION_PLAYER //충돌 대상
 {
-	CP_NULL,
-	CP_OBJECT,
-	CP_ENEMY,
-	CP_GROUND,
-	CP_SHOVEL_OBJ,
-	CP_SHOVEL_ENEMY
-
+	COLLISION_PLAYER_NULL,
+	COLLISION_PLAYER_OBJECT,
+	COLLISION_PLAYER_ENEMY,
+	COLLISION_PLAYER_GROUND,
+	COLLISION_PLAYER_SHOVEL_OBJ,
+	COLLISION_PLAYER_SHOVEL_ENEMY
 };
 
 enum COLLISION_TB //충돌방향(상하) ->대상기준
 {
-	TB_NULL,
-	TB_TOP,
-	TB_BOTTOM
+	COLLISION_TB_NULL,
+	COLLISION_TB_TOP,
+	COLLISION_TB_BOTTOM
 };
 
 enum COLLISION_LR //충돌방향(좌우) ->대상기준
 {
-	LR_NULL,
-	LR_LEFT,
-	LR_RIGHT
+	COLLISION_LR_NULL,
+	COLLISION_LR_LEFT,
+	COLLISION_LR_RIGHT
 };
 
 class playerBase : public gameNode
@@ -83,6 +88,7 @@ class playerBase : public gameNode
 protected : 
 	image*				_image;					//플레이어 이미지
 	PLAYERDIRECTION		_direction;				//플레이어 상태
+	PLAYERDIRECTIONTB	_directionTB;			//
 	PLAYERSTATE			_state;					//플레이어 위치
 	PLAYERACTION		_action;				//플레이어 동작
 	COLLISION_PLAYER	_cPlayerTarget;			//플레이어 충돌
@@ -104,6 +110,7 @@ protected :
 	int					_maxMP;					//최대 마나
 	int					_skill;					//스킬넘버
 	int					_alpha;					//알파값
+	float				_time;
 	float				_x, _y;					//이동좌표	
 	float				_jumpPower;				//점프파워
 	float				_gravity;				//중력값
@@ -146,14 +153,7 @@ public:
 	inline void setSkillUnlockLv(int increaseLv) { _skillUnlockLv += increaseLv; }
 	inline PLAYERSTATE getState() { return _state; }
 	inline void setState(PLAYERSTATE state) { _state = state; }
-	inline void setPlayerState(PLAYERDIRECTION pd, PLAYERSTATE ps, PLAYERACTION pa, COLLISION_PLAYER cp, COLLISIONTYPE ct)
-	{
-		_direction = pd;
-		_state = ps;
-		_action = pa;
-		_cPlayerTarget = cp;
-		_cType = ct;
-	}
+	
 
 	inline RECT getPlayerRc() { return _rc; }
 	inline void setPlayerRc(RECT rc) { _rc = rc; }

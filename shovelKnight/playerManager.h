@@ -31,10 +31,10 @@ public:
 	void setSkillUnlockLv(int increaseLv) { _p1->setSkillUnlockLv(increaseLv); }
 	PLAYERSTATE getState() { _p1->getState(); }
 	void setState(PLAYERSTATE state) { _p1->setState(state); }
-	inline void setPlayerState(PLAYERDIRECTION pd, PLAYERSTATE ps, PLAYERACTION pa, COLLISION_PLAYER cp, COLLISIONTYPE ct)
-	{
-		_p1->setPlayerState(pd, ps, pa, cp, ct);
-	}
+	//inline void setPlayerState(PLAYERDIRECTION pd, PLAYERSTATE ps, PLAYERACTION pa, COLLISION_PLAYER cp, COLLISIONTYPE ct)
+	//{
+	//	_p1->setPlayerState(pd, ps, pa, cp, ct);
+	//}
 
 
 
