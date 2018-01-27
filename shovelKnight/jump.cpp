@@ -5,16 +5,18 @@
 jump::jump()
 {
 }
-
-
 jump::~jump()
 {
-
 }
+
+
 
 HRESULT jump::init()
 {
 	_isJumping = _jumpPower = _gravity = 0;
+
+	_pixelC = new pixelCollision;
+
 
 	return S_OK;
 }

@@ -39,7 +39,7 @@ void skill_fireBall::update()
 	{
 	case SKILL_STATS_START:
 		break;
-	case SKILL_STATS_LOOP:
+	case SKILL_STATS_LOOP_L:
 		if (_isRight) _x += speed;
 		else if (!_isRight) _x -= speed;
 		reRect();
@@ -53,17 +53,6 @@ void skill_fireBall::update()
 	case SKILL_STATS_OUT:
 		break;
 	}
-
-	KEYANIMANAGER->update();
-}
-
-void skill_fireBall::render()
-{
-	if (!_isFire) return;
-
-	_img->aniRender(IMAGEMANAGER->findImage("backBuffer")->getMemDC(),
-		_x,
-		_y, _ani);
 }
 
 void skill_fireBall::fire(SKILL_FIRE charType, float x, float y)
@@ -78,9 +67,9 @@ void skill_fireBall::fire(SKILL_FIRE charType, float x, float y)
 
 		int num = 0;
 
-		char* str4 = PTSTR_To_String(str1);
-		char* str5 = PTSTR_To_String(str2);
-		char* str6 = PTSTR_To_String(str3);
+		char* str4 = LPSTR_To_String(str1);
+		char* str5 = LPSTR_To_String(str2);
+		char* str6 = LPSTR_To_String(str3);
 
 		char str7[128];
 
@@ -90,7 +79,7 @@ void skill_fireBall::fire(SKILL_FIRE charType, float x, float y)
 
 		while (KEYANIMANAGER->findAnimation(str4) != NULL)
 		{
-			str4 = PTSTR_To_String(str1);
+			str4 = LPSTR_To_String(str1);
 			++num;
 			itoa(num, str7, 10);
 			strcat(str4, str7);
@@ -99,18 +88,18 @@ void skill_fireBall::fire(SKILL_FIRE charType, float x, float y)
 		strcat(str6, str7);
 
 		_startName = str4;
-		_loopName = str5;
+		_loopNameL = str5;
 		_outName = str6;
 	}
 
 	int fireBallStart[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-	KEYANIMANAGER->addArrayFrameAnimation(_startName, "image/skill/fireBall", fireBallStart, 10, 3, false, goLoop, this);
+	KEYANIMANAGER->addArrayFrameAnimation(_startName, "image/skill/fireBall", fireBallStart, 10, 4, false, goLoop, this);
 
 	int fireBallLoop[] = { 10, 11 };
-	KEYANIMANAGER->addArrayFrameAnimation(_loopName, "image/skill/fireBall", fireBallLoop, 2, 3, true);
+	KEYANIMANAGER->addArrayFrameAnimation(_loopNameL, "image/skill/fireBall", fireBallLoop, 2, 8, true);
 
 	int fireBallOut[] = { 12, 13, 14, 15, 16, 17 };
-	KEYANIMANAGER->addArrayFrameAnimation(_outName, "image/skill/fireBall", fireBallOut, 6, 3, false, isOut, this);
+	KEYANIMANAGER->addArrayFrameAnimation(_outName, "image/skill/fireBall", fireBallOut, 6, 7, false, isOut, this);
 
 	_img = IMAGEMANAGER->findImage("image/skill/fireBall");
 	_imgWidth = _img->getFrameWidth();
@@ -129,8 +118,8 @@ void skill_fireBall::fire(SKILL_FIRE charType, float x, float y)
 void * skill_fireBall::goLoop(void* obj)
 {
 	skill_fireBall* f = (skill_fireBall*)obj;
-	f->_ani = KEYANIMANAGER->findAnimation(f->_loopName);
-	f->_stats = SKILL_STATS_LOOP;
+	f->_ani = KEYANIMANAGER->findAnimation(f->_loopNameL);
+	f->_stats = SKILL_STATS_LOOP_L;
 	f->_ani->start();
 
 	return NULL;
@@ -140,13 +129,6 @@ void * skill_fireBall::isOut(void* obj)
 {
 	skill_fireBall* f = (skill_fireBall*)obj;
 	f->_isFire = false;
+
 	return NULL;
 }
-
-
-
-//void skill_fireBall::outFire(void* obj)
-//{
-//	skill_fireBall* fb = (skill_fireBall*)obj;
-//	fb->setIsFire(false);
-//}

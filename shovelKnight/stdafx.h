@@ -13,6 +13,9 @@
 #include <tchar.h>
 #include <iostream>
 #include <io.h>
+#include <math.h>
+#include <conio.h>
+
 
 #include "commonMacroFunction.h"
 #include "randomFunction.h"

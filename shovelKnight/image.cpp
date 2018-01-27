@@ -344,15 +344,18 @@ void image::release(void)
 		SelectObject(_imageInfo->hMemDC, _imageInfo->hOBit);
 		DeleteObject(_imageInfo->hBit);
 		DeleteDC(_imageInfo->hMemDC);
-		
-		//init함수 안에 블렌드 이미지 정보도 있기에 이렇게 구성한다 
-		SelectObject(_blendImage->hMemDC, _blendImage->hOBit);
-		DeleteObject(_blendImage->hBit);
-		DeleteDC(_blendImage->hMemDC);
+
+		if (_alphablend == true)
+		{
+			//init함수 안에 블렌드 이미지 정보도 있기에 이렇게 구성한다 
+			SelectObject(_blendImage->hMemDC, _blendImage->hOBit);
+			DeleteObject(_blendImage->hBit);
+			DeleteDC(_blendImage->hMemDC);
+			SAFE_DELETE(_blendImage);
+		}
 
 		SAFE_DELETE(_imageInfo);
 		SAFE_DELETE(_fileName);
-		SAFE_DELETE(_blendImage);
 
 		_trans = false;
 		_transColor = RGB(0, 0, 0);

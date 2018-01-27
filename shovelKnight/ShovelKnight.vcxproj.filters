@@ -96,6 +96,8 @@
     </Filter>
     <Filter Include="2DGameFramework\Manager\dialogue">
       <UniqueIdentifier>{99ca5ac2-f0e0-445a-89c3-e3d6e6b7e58c}</UniqueIdentifier>
+    <Filter Include="playGround\gamePlayScene\enemy\enemyAction">
+      <UniqueIdentifier>{2821b621-3fe7-42d0-a83b-72c7262aad86}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -291,13 +293,25 @@
     <ClInclude Include="minion1.h">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClInclude>
-    <ClInclude Include="jump.h">
-      <Filter>playGround\gamePlayScene\enemy</Filter>
-    </ClInclude>
     <ClInclude Include="createCharacterMenu.h">
       <Filter>playGround\allMenu</Filter>
     </ClInclude>
+    <ClInclude Include="jump.h">
+      <Filter>playGround\gamePlayScene\enemy\enemyAction</Filter>
+    </ClInclude>
     <ClInclude Include="pixelCollision.h">
+      <Filter>playGround\gamePlayScene\enemy\enemyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="minion2.h">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="minion3.h">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="skill_enemyDeadFx.h">
+      <Filter>playGround\gamePlayScene\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="boss1.h">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClInclude>
     <ClInclude Include="dialogueManager.h">
@@ -482,17 +496,34 @@
     <ClCompile Include="minion1.cpp">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClCompile>
-    <ClCompile Include="jump.cpp">
-      <Filter>playGround\gamePlayScene\enemy</Filter>
-    </ClCompile>
     <ClCompile Include="createCharacterMenu.cpp">
       <Filter>playGround\allMenu</Filter>
     </ClCompile>
+    <ClCompile Include="jump.cpp">
+      <Filter>playGround\gamePlayScene\enemy\enemyAction</Filter>
+    </ClCompile>
     <ClCompile Include="pixelCollision.cpp">
+      <Filter>playGround\gamePlayScene\enemy\enemyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="minion2.cpp">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="minion3.cpp">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="skill_enemyDeadFx.cpp">
+      <Filter>playGround\gamePlayScene\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="boss1.cpp">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClCompile>
     <ClCompile Include="dialogueManager.cpp">
       <Filter>소스 파일</Filter>
+    <ClCompile Include="playerBase+Move.cpp">
+      <Filter>playGround\gamePlayScene\player</Filter>
+    </ClCompile>
+    <ClCompile Include="playerBase+hitReaction.cpp">
+      <Filter>playGround\gamePlayScene\player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

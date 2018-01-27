@@ -143,6 +143,7 @@
     <ClInclude Include="action.h" />
     <ClInclude Include="animation.h" />
     <ClInclude Include="BardKnight.h" />
+    <ClInclude Include="boss1.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="CharacterSelectMenu.h" />
@@ -172,9 +173,12 @@
     <ClInclude Include="MagicGirl.h" />
     <ClInclude Include="menuBase.h" />
     <ClInclude Include="minion1.h" />
+    <ClInclude Include="minion2.h" />
+    <ClInclude Include="minion3.h" />
     <ClInclude Include="motherAction.h" />
     <ClInclude Include="npcBase.h" />
     <ClInclude Include="pixelCollision.h" />
+    <ClInclude Include="skill_enemyDeadFx.h" />
     <ClInclude Include="StoreManager.h" />
     <ClInclude Include="dirtBlock.h" />
     <ClInclude Include="gameObjectBase.h" />
@@ -212,6 +216,7 @@
     <ClCompile Include="action.cpp" />
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="BardKnight.cpp" />
+    <ClCompile Include="boss1.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="CharacterSelectMenu.cpp" />
@@ -240,9 +245,14 @@
     <ClCompile Include="MagicGirl.cpp" />
     <ClCompile Include="menuBase.cpp" />
     <ClCompile Include="minion1.cpp" />
+    <ClCompile Include="minion2.cpp" />
+    <ClCompile Include="minion3.cpp" />
     <ClCompile Include="motherAction.cpp" />
     <ClCompile Include="npcBase.cpp" />
     <ClCompile Include="pixelCollision.cpp" />
+    <ClCompile Include="playerBase+hitReaction.cpp" />
+    <ClCompile Include="playerBase+Move.cpp" />
+    <ClCompile Include="skill_enemyDeadFx.cpp" />
     <ClCompile Include="StoreManager.cpp" />
     <ClCompile Include="dirtBlock.cpp" />
     <ClCompile Include="gameObjectBase.cpp" />
