@@ -145,6 +145,7 @@ void gameMenuScene::draw()
 		{
 			_plm[_pSlotIdx]->render(getMemDC());
 		}
+		DIALOGUEMANAGER->render(getMemDC(), 0, 0, 800, 96);
 	}
 	//플레이어리스트 넘머발 타겟 박스는 항상 마지막에 출력하기
 	for (int i = 0; i < MAXPLAYERLIST; ++i)
@@ -156,7 +157,7 @@ void gameMenuScene::draw()
 		_pNumberBox[_pSlotIdx].numberBox.top + (_pNumberBox[_pSlotIdx].numberBox.bottom - _pNumberBox[_pSlotIdx].numberBox.top) / 2 - _targetImg->getFrameHeight() / 2, 
 		_animTarget);
 
-	DIALOGUEMANAGER->render(getMemDC(), 0,0, 800, 96);
+	
 }
 
 void gameMenuScene::makePlayerListData()
