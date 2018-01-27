@@ -59,7 +59,9 @@ HRESULT playerBase::init(float startX, float startY)
 	_isDamaged = false;
 	_skillUsed = false;
 	_isDead = false;
-	_isJump = true;
+	_isJumping = true;
+	_maxAti = false;
+
 
 	return S_OK;
 }
@@ -81,14 +83,22 @@ void playerBase::update()
 	
 	while (_time > TIMECOUNT)
 	{
-		if (_image->getMaxFrameX()>1) _currentFrameX++;
 		_time -= TIMECOUNT;
-		if (_currentFrameX > _image->getMaxFrameX())
+		if (_action == PLAYERACTION_DIE || _action == PLAYERACTION_MOVE || _action == PLAYERACTION_ATTACK||_action == PLAYERACTION_IDLE)
 		{
-			_currentFrameX = 0;
-			if (_action == PLAYERACTION_ATTACK) _action = PLAYERACTION_IDLE;
+
+			if (_image->getMaxFrameX()>1) _currentFrameX++;
+			if (_currentFrameX > _image->getMaxFrameX())
+			{
+				_currentFrameX = 0;
+				if (_action == PLAYERACTION_ATTACK) _action = PLAYERACTION_IDLE;
+			}
 		}
+		
 	}
+	if (_action == PLAYERACTION_JUMP && _jumpPower <= 0) _currentFrameX = 1;
+	if (_action == PLAYERACTION_JUMP && _jumpPower > 0) _currentFrameX = 0;
+	if (_action == PLAYERACTION_IDLE && _state == PLAYERSTATE_INAIR) _action == PLAYERACTION_JUMP;
 }
 void playerBase::render() 
 {
@@ -104,6 +114,7 @@ void playerBase::render()
 	TTTextOut(300, 55, "right", _rc.right);
 	TTTextOut(300, 70, "state", _state);
 	TTTextOut(400, 10, "action", _action);
+	//TTTextOut(400, 25, "speed", _moveSpeed);
 	CAMERAMANAGER->frameRenderObject(hdc, _image, _x-_image->getFrameWidth()/2, _y-_image->getFrameHeight(), _currentFrameX, _currentFrameY);
 
 }
@@ -121,9 +132,7 @@ void playerBase::imageSetting()
 			_image = IMAGEMANAGER->findImage("shovelIdle");
 		break;
 		case PLAYERACTION_MOVE:
-			if (_state == PLAYERSTATE_ONLAND)_image = IMAGEMANAGER->findImage("shovelMove");
-			if (_state == PLAYERSTATE_HANG) _image = IMAGEMANAGER->findImage("shovelClimb");
-			if (_state == PLAYERSTATE_INAIR) _image = IMAGEMANAGER->findImage("shovelJump");
+			_image = IMAGEMANAGER->findImage("shovelMove");
 		break;
 		case PLAYERACTION_ATTACK:
 			_image = IMAGEMANAGER->findImage("shovelAttack");
@@ -161,8 +170,9 @@ void playerBase::collision()
 	{
 		if (_action == PLAYERACTION_JUMP) _action = PLAYERACTION_IDLE;
 		_jumpPower = 0;
+		_maxAti = false;
 		_state = PLAYERSTATE_ONLAND;
-		//_isJump = false;
+		_isJumping = false;
 	}
 
 	//if ((r == 255 && g == 0 && b == 255))

@@ -7,9 +7,10 @@
 #define DOWNATTACK_DAMAGE_BOX_WIDTH 6
 #define	DOWNATTACK_DAMAGE_BOX_HEIGHT 10
 #define ACCELERATION 0.5f
-#define MAXSPEED 1.0f
+#define MAXSPEED 2.0f
 #define TIMECOUNT 0.05f
-#define GRAVITY 0.01f
+#define MAXATTITUDE 30
+#define GRAVITY 0.04f
 #define JUMPPOWER 1.0f
 #define friction 0.5f
 
@@ -115,6 +116,7 @@ protected:
 	int					_skill;					//스킬넘버
 	int					_alpha;					//알파값
 	float				_time;
+	float				_startY;
 	float				_x, _y;					//이동좌표	
 	float				_jumpPower;				//점프파워
 	float				_gravity;				//중력값
@@ -122,9 +124,10 @@ protected:
 	bool				_rtBlock;				//오른쪽 막힘
 	bool				_ltBlock;				//왼쪽막힘
 	bool				_isDamaged;				//맞았는지
-	bool				_isJump;
+	bool				_isJumping;
 	bool				_skillUsed;				//스킬발동했는지
 	bool				_isDead;				//죽었냐?
+	bool				_maxAti;
 	int					probeY;
 
 public:
