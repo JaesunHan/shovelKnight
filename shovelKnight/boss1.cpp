@@ -13,6 +13,8 @@ boss1::~boss1()
 
 HRESULT boss1::init(float x, float y)
 {
+	_enemyType = ENEMY_DRAGON;
+
 	_x = x;
 	_y = y;
 	_speed = 0.0f;

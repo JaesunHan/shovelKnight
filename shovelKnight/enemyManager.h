@@ -8,16 +8,6 @@
 
 #include <vector>
 
-enum ENEMYTYPE
-{
-	ENEMY_BEETO,
-	ENEMY_BLORB,
-	ELEMY_DRAKE,
-	ENEMY_SKELETON,
-	ENEMY_DRAGON,
-	ENEMY_BLACKKNIGHT
-};
-
 
 class enemyManager 
 {

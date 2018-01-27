@@ -339,6 +339,9 @@
     <ClInclude Include="item_gems_sapphire.h">
       <Filter>playGround\gamePlayScene\item\unit</Filter>
     </ClInclude>
+    <ClInclude Include="dialogueManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -565,6 +568,9 @@
     </ClCompile>
     <ClCompile Include="item_gems_sapphire.cpp">
       <Filter>playGround\gamePlayScene\item\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="dialogueManager.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

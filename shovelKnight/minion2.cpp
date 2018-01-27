@@ -12,6 +12,8 @@ minion2::~minion2()
 
 HRESULT minion2::init(float x, float y)
 {
+	_enemyType = ENEMY_BLORB;
+
 	_x = x;
 	_y = y;
 	_speed = 0.0f;

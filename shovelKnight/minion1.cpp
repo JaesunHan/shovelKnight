@@ -14,6 +14,8 @@ minion1::~minion1()
 
 HRESULT minion1::init(float x, float y)
 {
+	_enemyType = ENEMY_BEETO;
+
 	_x = x;
 	_y = y;
 	_speed = 0.0f;
