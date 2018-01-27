@@ -312,6 +312,9 @@
     <ClInclude Include="boss1.h">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClInclude>
+    <ClInclude Include="dialogueManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -517,6 +520,9 @@
     </ClCompile>
     <ClCompile Include="playerBase+hitReaction.cpp">
       <Filter>playGround\gamePlayScene\player</Filter>
+    </ClCompile>
+    <ClCompile Include="dialogueManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

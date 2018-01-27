@@ -32,6 +32,7 @@
 #include "txtData.h"
 #include "database.h"
 #include "cameraManager.h"
+#include "dialogueManager.h"
 
 using namespace std;
 using namespace HEPTA_UTIL;
@@ -59,6 +60,7 @@ using namespace HEPTA_UTIL;
 #define INIDATA			iniDataManager::getSingleton()
 #define DATABASE		database::getSingleton()
 #define CAMERAMANAGER	cameraManager::getSingleton()
+#define DIALOGUEMANAGER dialogueManager::getSingleton()
 
 #include "TTUtils.h"
 using namespace 트윈테일쟝;
