@@ -88,6 +88,7 @@ protected :
 	COLLISION_PLAYER	_cPlayerTarget;			//플레이어 충돌
 	COLLISION_TB		_cTB;					//플레이어 충돌방향
 	COLLISION_LR		_cLR;					//플레이어 충돌방향
+	COLLISIONTYPE		_cType;
 	RECT				_rc;					//플레이어 렉트(충돌렉트)
 	char*				_characterName;			//캐릭터 네임
 	int					_jumpCount;				//점프카운트
@@ -126,7 +127,6 @@ public:
 	void hitReAction();
 	void attack(float fireX, float fireY, bool skillUsed);
 	void move();
-	inline int collisionPlayerMap();
 
 
 	inline float getX() { return _x; }
@@ -143,7 +143,16 @@ public:
 	inline void setName(char* name) { _characterName = name; }
 	inline int getSkillUnlockLv() { return _skillUnlockLv; }
 	inline void setSkillUnlockLv(int increaseLv) { _skillUnlockLv += increaseLv; }
-
+	inline PLAYERSTATE getState() { return _state; }
+	inline void setState(PLAYERSTATE state) { _state = state; }
+	inline void setPlayerState(PLAYERDIRECTION pd, PLAYERSTATE ps, PLAYERACTION pa, COLLISION_PLAYER cp, COLLISIONTYPE ct)
+	{
+		_direction = pd;
+		_state = ps;
+		_action = pa;
+		_cPlayerTarget = cp;
+		_cType = ct;
+	}
 
 	inline RECT getPlayerRc() { return _rc; }
 	inline void setPlayerRc(RECT rc) { _rc = rc; }

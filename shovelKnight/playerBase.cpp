@@ -54,13 +54,13 @@ void playerBase::render()
 		CAMERAMANAGER->getY(_rc.top),
 		CAMERAMANAGER->getX(_rc.right),
 		CAMERAMANAGER->getY(_rc.bottom));
-	TTTextOut(hdc, 300, 10, "top", _rc.top);
-	TTTextOut(hdc, 300, 25, "bottom", _rc.bottom);
-	TTTextOut(hdc, 300, 40, "left", _rc.left);
-	TTTextOut(hdc, 300, 55, "right", _rc.right);
-	TTTextOut(hdc, 300, 70, "state", _state);
-	TTTextOut(hdc, 400, 10, "action", _action);
-	TTTextOut(hdc, 400, 25, "충돌", collisionPlayerMap());
+	TTTextOut(300, 10, "top", _rc.top);
+	TTTextOut(300, 25, "bottom", _rc.bottom);
+	TTTextOut(300, 40, "left", _rc.left);
+	TTTextOut(300, 55, "right", _rc.right);
+	TTTextOut(300, 70, "state", _state);
+	TTTextOut(400, 10, "action", _action);
+	TTTextOut(400, 25, "충돌", collisionPlayerMap());
 
 }
 //충돌에 따른 물리값 수정 
@@ -263,57 +263,4 @@ void playerBase::move()
 
 
 	_rc = RectMake(_x - HIT_BOX_WIDTH / 2, _y - HIT_BOX_HEIGHT, HIT_BOX_WIDTH, HIT_BOX_HEIGHT);
-}
-
-
-int playerBase::collisionPlayerMap()
-{
-	HDC hdc = IMAGEMANAGER->findImage("bgMap")->getMemDC();
-
-	RECT rc = _rc;
-
-	int probeX, probeY2, probeY3;
-	bool ltBlock, rtBlock;
-
-	ltBlock = false;
-	rtBlock = false;
-	
-	POINT probePoint[9];
-	bool collisionCheck[9];
-	
-
-	for (int i = 0; i < 9; ++i)
-	{
-		probePoint[i] = PointMake(_x + (i % 3 * HIT_BOX_WIDTH / 2 - HIT_BOX_WIDTH / 2), _y + (i % 3 * HIT_BOX_HEIGHT / 2 - HIT_BOX_HEIGHT / 2));
-		collisionCheck[i] = false;
-	}
-
-
-	probeY = rc.bottom;
-	
-	
-	
-	for (probeX = rc.left; probeX != rc.right; ++probeX)
-	{
-		while (!ThisPixelIsMazen(hdc, probeX, probeY)) //관측점이 마젠타(배경)이 아닐떄 ->충돌했을떄
-		{
-			--probeY;									
-		}
-	}
-	
-
-	//충돌 방향을 구하는
-
-	/*for (int i = 0; i < 9; ++i)
-	{
-		while (ThisPixelIsMazen(hdc, probePoint[i].x, probePoint[i].y,RGB(0,255,0)))
-		{
-			collisionCheck[i] = true;
-		}
-	}*/
-
-	
-	if (KEYMANAGER->isStayKeyDown('Y')) return CT_BOTTOM;
-	else return CT_NULL;
-	
 }
