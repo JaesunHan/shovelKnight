@@ -294,10 +294,15 @@ namespace Æ®À©Å×ÀÏÀö
 
 			char* str2 = new char[str.size() + 3 + buffer + 1];
 			sprintf(str2, "%s : %d", str.c_str(), (int)num);
-			if (!backGround) SetBkMode(IMAGEMANAGER->findImage("backbuffer")->getMemDC(), TRANSPARENT);
-			TextOut(IMAGEMANAGER->findImage("backbuffer")->getMemDC(), x, y, str2, strlen(str2));
+			if (!backGround) SetBkMode(IMAGEMANAGER->findImage("backBuffer")->getMemDC(), TRANSPARENT);
+			TextOut(IMAGEMANAGER->findImage("backBuffer")->getMemDC(), x, y, str2, strlen(str2));
 		}
 
+	}
+
+	void TTTextOut(HDC hdc, int x, int y, string str, float num, BOOL backGround)
+	{
+		TTTextOut(x, y, str, num);
 	}
 
 	void TTTextOut(string stri, float f)
@@ -338,13 +343,34 @@ namespace Æ®À©Å×ÀÏÀö
 		return FALSE;
 	}
 
-	char* PTSTR_To_String(string str)
+	char* LPSTR_To_String(string str)
 	{
 		char* str2 = new char[str.size() + 1];
 
 		strcpy(str2, str.c_str());
 
 		return str2;
+	}
+
+
+	void strcat_ns(string& str, float f)
+	{
+		char* str2;
+		bool isFloat = (f != (int)f);
+
+		if(isFloat)
+		{
+			sprintf(str2, "%f", f);
+		}
+		else
+		{
+			itoa((int)f, str2, 10);
+		}
+
+		char* str3 = LPSTR_To_String(str);
+		strcat_s(str3, strlen(str3) + strlen(str2) + 1, str2);
+
+		str = str3;
 	}
 
 }
