@@ -57,6 +57,8 @@ HRESULT gameMenuScene::init()
 	_ccm = new createCharacterMenu;
 	_ccm->init();
 
+	//스크립트 테스트 용
+	_testScript = IMAGEMANAGER->addImage("scriptWindow", "./image/UI/Script_window.bmp", 0, 0, 800, 96, true, RGB(255, 0, 255));
 
 	//INI 데이터 파일 읽어오기
 	loadPlayerListData();
@@ -72,11 +74,13 @@ void gameMenuScene::update()
 	{
 		--_pSlotIdx;
 		if (_pSlotIdx <= 0)	_pSlotIdx = 0;
+		DIALOGUEMANAGER->setScriptNScriptWindow("this is test Script ", _testScript, 255, 255, 255);
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 	{
 		++_pSlotIdx;
 		if (_pSlotIdx >= MAXPLAYERLIST - 1)	_pSlotIdx = MAXPLAYERLIST - 1;
+		DIALOGUEMANAGER->setScriptNScriptWindow("this is test Script ", _testScript, 255, 255, 255);
 	}
 
 	//타겟 박스가 현재 가리키는 리스트에 값이 존재하지 않으면 캐릭터 생성화면 객체를 업데이트
@@ -92,11 +96,13 @@ void gameMenuScene::update()
 		{
 			//초기화하기
 			_plm[_pSlotIdx]->init(_vPList[_pSlotIdx].name, _vPList[_pSlotIdx].characterkind, _vPList[_pSlotIdx].hp, _vPList[_pSlotIdx].mana, _vPList[_pSlotIdx].money, _vPList[_pSlotIdx].suit, _vPList[_pSlotIdx].weapon);
+
 		}
 		else
 		{
 			//이 업데이트에서는 캐릭터 이미지의 프레임 업뎃이 있음 (삽기사 캐릭터의 갑옷이 반짝임)
 			_plm[_pSlotIdx]->update();
+			
 		}
 	}
 
@@ -111,6 +117,7 @@ void gameMenuScene::update()
 			_plm[_pSlotIdx]->init(_vPList[_pSlotIdx].name, _vPList[_pSlotIdx].characterkind, _vPList[_pSlotIdx].hp, _vPList[_pSlotIdx].mana, _vPList[_pSlotIdx].money, _vPList[_pSlotIdx].suit, _vPList[_pSlotIdx].weapon);
 		}
 	}
+	DIALOGUEMANAGER->update();
 }
 void gameMenuScene::release()
 {
@@ -149,7 +156,7 @@ void gameMenuScene::draw()
 		_pNumberBox[_pSlotIdx].numberBox.top + (_pNumberBox[_pSlotIdx].numberBox.bottom - _pNumberBox[_pSlotIdx].numberBox.top) / 2 - _targetImg->getFrameHeight() / 2, 
 		_animTarget);
 
-
+	DIALOGUEMANAGER->render(getMemDC(), 0,0, 800, 96);
 }
 
 void gameMenuScene::makePlayerListData()

@@ -18,7 +18,7 @@ private:
 	int _cnt;
 	int _r, _g, _b;
 
-	string _scriptStr;
+	LPTSTR _scriptStr;
 	image* _scriptwindow;
 
 public:
@@ -27,7 +27,7 @@ public:
 	HRESULT init(float dt);
 	void release();
 	void update();
-	void render(HDC hdc);
+	void render(HDC hdc, float x, float y,  int width, int height);
 
 	void setScriptNScriptWindow(string script, image* scriptWindow, int r, int g, int b);
 

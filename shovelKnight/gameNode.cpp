@@ -38,7 +38,7 @@ HRESULT gameNode::init(bool managerInit)
 		INIDATA->init();
 		DATABASE->init();
 		CAMERAMANAGER->init();
-		DIALOGUEMANAGER->init(0.5f);
+		DIALOGUEMANAGER->init(10);
 	}
 
 	return S_OK;

@@ -53,6 +53,10 @@ private:
 	playerListMenu* _plm[MAXPLAYERLIST];
 	//캐릭터 만들으러 가자는 메뉴 (게임에서  "처음부터"라고 뜨는 메뉴 말하는 거임)
 	createCharacterMenu* _ccm;
+
+	image* _testScript;
+
+
 public:
 
 	HRESULT init();
