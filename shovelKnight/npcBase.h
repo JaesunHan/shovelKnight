@@ -88,7 +88,7 @@ public:
 	inline void setAppear(bool isAppear) { _isAppear = isAppear; }
 
 	//충돌했나 셋함수
-	inline void setIsCollision(bool isCollision) { _isCollision = isCollision; }
+	void setIsCollision(bool isCollision) { _isCollision = isCollision; }
 
 
 	//==================================== End 게터 세터 작성하기===================================
