@@ -58,8 +58,8 @@ void skill_Bubble::fire(SKILL_FIRE charType, float x, float y)
 		str3 = "skillBubbleOut";
 
 		int num = 0;
-		char* str5 = PTSTR_To_String(str2);
-		char* str6 = PTSTR_To_String(str3);
+		char* str5 = LPSTR_To_String(str2);
+		char* str6 = LPSTR_To_String(str3);
 
 		char str7[128];
 
@@ -69,7 +69,7 @@ void skill_Bubble::fire(SKILL_FIRE charType, float x, float y)
 
 		while (KEYANIMANAGER->findAnimation(str5) != NULL)
 		{
-			str5 = PTSTR_To_String(str2);
+			str5 = LPSTR_To_String(str2);
 			++num;
 			itoa(num, str7, 10);
 			strcat(str5, str7);

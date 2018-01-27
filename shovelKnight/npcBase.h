@@ -47,6 +47,8 @@ protected:
 	NPCTYPE _npcType;		//NPC타입
 
 	bool _isCollision;		//플레이어와 충돌했는가? true : 그렇다, false : 아니다
+	bool _isAppear;			//등장할때니? 아니니? (맵에서 등장하는지 아닌지 체크)
+
 
 	int _stock;				//몇번 구매했는지 확인하는 변수
 	
@@ -80,6 +82,10 @@ public:
 	//스톡변수 게터 (상점구매횟수)
 	inline int getStock() { return _stock; }
 	void setStock(int stock) { _stock = stock; }
+
+	//등장변수 셋함수 
+	inline void setAppear(bool isAppear) { _isAppear = isAppear; }
+
 	//==================================== End 게터 세터 작성하기===================================
 };
 

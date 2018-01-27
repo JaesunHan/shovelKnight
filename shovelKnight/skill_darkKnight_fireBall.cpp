@@ -66,7 +66,7 @@ void skill_darkKnight_fireBall::fire(SKILL_FIRE charType, float x, float y)
 
 		int num = 0;
 
-		char* str5 = PTSTR_To_String(str2);
+		char* str5 = LPSTR_To_String(str2);
 
 		char str7[128];
 
@@ -77,7 +77,7 @@ void skill_darkKnight_fireBall::fire(SKILL_FIRE charType, float x, float y)
 
 		while (KEYANIMANAGER->findAnimation(str5) != NULL)
 		{
-			str5 = PTSTR_To_String(str2);
+			str5 = LPSTR_To_String(str2);
 			++num;
 			itoa(num, str7, 10);
 			strcat(str5, str7);

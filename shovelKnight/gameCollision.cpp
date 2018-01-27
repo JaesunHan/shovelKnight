@@ -25,7 +25,7 @@ void gameCollision::update()
 {
 	RECT enemy;
 
-	collisionPlayerMap();
+	//collisionPlayerMap();
 
 	//플레이어와 적의 충돌
 	//for (int i = 0; i != enemy.size(); ++i)

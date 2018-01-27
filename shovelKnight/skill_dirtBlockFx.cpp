@@ -49,7 +49,7 @@ void skill_dirtBlockFx::fire(SKILL_FIRE charType, float x, float y)
 
 		int num = 0;
 
-		char* str6 = PTSTR_To_String(str3);
+		char* str6 = LPSTR_To_String(str3);
 
 		char str7[128];
 
@@ -59,7 +59,7 @@ void skill_dirtBlockFx::fire(SKILL_FIRE charType, float x, float y)
 
 		while (KEYANIMANAGER->findAnimation(str6) != NULL)
 		{
-			str6 = PTSTR_To_String(str3);
+			str6 = LPSTR_To_String(str3);
 			++num;
 			itoa(num, str7, 10);
 			strcat(str6, str7);

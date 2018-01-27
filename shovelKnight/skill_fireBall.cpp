@@ -67,9 +67,9 @@ void skill_fireBall::fire(SKILL_FIRE charType, float x, float y)
 
 		int num = 0;
 
-		char* str4 = PTSTR_To_String(str1);
-		char* str5 = PTSTR_To_String(str2);
-		char* str6 = PTSTR_To_String(str3);
+		char* str4 = LPSTR_To_String(str1);
+		char* str5 = LPSTR_To_String(str2);
+		char* str6 = LPSTR_To_String(str3);
 
 		char str7[128];
 
@@ -79,7 +79,7 @@ void skill_fireBall::fire(SKILL_FIRE charType, float x, float y)
 
 		while (KEYANIMANAGER->findAnimation(str4) != NULL)
 		{
-			str4 = PTSTR_To_String(str1);
+			str4 = LPSTR_To_String(str1);
 			++num;
 			itoa(num, str7, 10);
 			strcat(str4, str7);

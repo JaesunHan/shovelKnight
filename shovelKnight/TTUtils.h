@@ -88,6 +88,8 @@ namespace 트윈테일쟝
 	// hdc, x좌표, y좌표, 표시할텍스트"", 표시할값, 배경표시여부		":"는 자동으로 써줌
 	void TTTextOut(int x, int y, string str, float num, BOOL backGround = FALSE);
 
+	void TTTextOut(HDC hdc, int x, int y, string str, float num, BOOL backGround = FALSE);
+
 	//콘솔용(float)
 	void TTTextOut(string stri, float f);
 
@@ -100,6 +102,9 @@ namespace 트윈테일쟝
 	//그 color가 마젠인지?
 	BOOL ThisPixelIsMazen(COLORREF color, COLORREF cmpColor = MAZEN);
 
-	char* PTSTR_To_String(string str);
+	char* LPSTR_To_String(string str);
+
+	//문자+숫자 시키기	strcat Not String
+	void strcat_ns(string& str, float f);
 }
 
