@@ -23,7 +23,7 @@ HRESULT soundMenu::init()
 	//글자 3개박스
 	_soundLetter4Box = IMAGEMANAGER->addFrameImage("사운드4글자박스", "./image/title/4letterSelectBox.bmp", 185, 39, 2, 1, true, RGB(255, 0, 255), false);
 	//글자 5개박스
-	_soundLetter5Box = IMAGEMANAGER->addFrameImage("사운드5글자박스", "./image/title/5letterSelectBox.bmp", 185, 39, 2, 1, true, RGB(255, 0, 255), false);
+	_soundLetter5Box = IMAGEMANAGER->addFrameImage("사운드5글자박스", "./image/title/5letterSelectBox.bmp", 267, 39, 2, 1, true, RGB(255, 0, 255), false);
 	//글자 10개박스
 	_soundLetter10Box = IMAGEMANAGER->addFrameImage("사운드10글자박스", "./image/title/10letterSelectBox.bmp", 500, 42, 2, 1, true, RGB(255, 0, 255), false);
 	
