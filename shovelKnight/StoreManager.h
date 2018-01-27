@@ -5,6 +5,9 @@
 #include "BardKnight.h"
 #include <vector>
 
+#define NPCNUM 3
+
+
 enum STORESTATUS
 {
 	STORECOLLISION,
@@ -26,6 +29,8 @@ private:
 	viNPC _viNpc;								//npc벡터이터레이터
 
 	playerManager* _pm;							//플레이어매니저 할당
+
+
 
 	bool _isCollisionNpc;						//NPC랑 충돌했늬
 
@@ -58,5 +63,10 @@ public:
 	//5. 골드 체크(구매가능한지 확인)
 	//6. 체크단계 지나면 구매가능하면 구매, 
 	//
+
+	//벡터 겟함수 추가해야함
+
+
+
 };
 
