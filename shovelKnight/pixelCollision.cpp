@@ -28,6 +28,7 @@ void pixelCollision::pixelCollisonY(RECT &rc)
 {
 	_rc = rc;
 
+
 	_hdc = IMAGEMANAGER->findImage("bgMap")->getMemDC();
 
 

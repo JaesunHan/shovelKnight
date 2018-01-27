@@ -166,6 +166,13 @@
     <ClInclude Include="iniDataManager.h" />
     <ClInclude Include="itemBase.h" />
     <ClInclude Include="itemManager.h" />
+    <ClInclude Include="item_apple.h" />
+    <ClInclude Include="item_gems_diapink.h" />
+    <ClInclude Include="item_gems_diared.h" />
+    <ClInclude Include="item_gems_emerald.h" />
+    <ClInclude Include="item_gems_money.h" />
+    <ClInclude Include="item_gems_sapphire.h" />
+    <ClInclude Include="item_moneyBunch.h" />
     <ClInclude Include="jump.h" />
     <ClInclude Include="keyAniManager.h" />
     <ClInclude Include="keyManager.h" />
@@ -237,6 +244,13 @@
     <ClCompile Include="iniDataManager.cpp" />
     <ClCompile Include="itemBase.cpp" />
     <ClCompile Include="itemManager.cpp" />
+    <ClCompile Include="item_apple.cpp" />
+    <ClCompile Include="item_gems_diapink.cpp" />
+    <ClCompile Include="item_gems_diared.cpp" />
+    <ClCompile Include="item_gems_emerald.cpp" />
+    <ClCompile Include="item_gems_money.cpp" />
+    <ClCompile Include="item_gems_sapphire.cpp" />
+    <ClCompile Include="item_moneyBunch.cpp" />
     <ClCompile Include="jump.cpp" />
     <ClCompile Include="keyAniManager.cpp" />
     <ClCompile Include="keyManager.cpp" />

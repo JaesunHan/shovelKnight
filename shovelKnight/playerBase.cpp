@@ -72,7 +72,20 @@ void playerBase::update()
 	hitReAction();
 	CAMERAMANAGER->setSingleFocus(_x, _y, 800);
 	imageSetting();
-	_frameCount++;
+	if (_direction == PLAYERDIRECTION_RIGHT) _currentFrameY = 0;
+	else _currentFrameY = 1;
+
+	_time += TIMEMANAGER->getElapsedTime();
+	while (_time > TIMECOUNT)
+	{
+		if (_image->getMaxFrameX()>1) _currentFrameX++;
+		_time -= TIMECOUNT;
+		if (_currentFrameX > _image->getMaxFrameX())
+		{
+			_currentFrameX = 0;
+			if (_action == PLAYERACTION_ATTACK) _action = PLAYERACTION_IDLE;
+		}
+	}
 }
 void playerBase::render() 
 {
@@ -125,22 +138,6 @@ void playerBase::imageSetting()
 			_image = IMAGEMANAGER->findImage("shovelDead");
 		break;
 	}
-	if (_direction == PLAYERDIRECTION_RIGHT) _currentFrameY = 0;
-	else _currentFrameY = 1;
 
-	_time += TIMEMANAGER->getElapsedTime();
-	while (_time > TIMECOUNT)
-	{
-		_frameCount++;
-		_time -= TIMECOUNT;
-		if (_frameCount >= _image->getMaxFrameX())
-		{
-			_currentFrameX = 0;
-		}
-	}
-	if (_frameCount == 1)
-	{
-		_currentFrameX++;
-	}
-	
+
 }

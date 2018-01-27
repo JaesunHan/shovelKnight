@@ -7,7 +7,7 @@
 #define DOWNATTACK_DAMAGE_BOX_WIDTH 6
 #define	DOWNATTACK_DAMAGE_BOX_HEIGHT 10
 #define SPEED 4.0f
-#define TIMECOUNT 0.5f
+#define TIMECOUNT 0.05f
 #define GRAVITY 0.f
 #define JUMPPOWER 0.f
 
