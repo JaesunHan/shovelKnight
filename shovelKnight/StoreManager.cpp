@@ -140,7 +140,7 @@ void StoreManager::SellPlayerHp(vector<npcBase*>::iterator temp)
 					if (_pm->getMoney() >= 1000)					//플레이어 골드가 1000원보다 크다면
 					{
 						_pm->setMoney(-1000);						//플레이어 골드에서 1000원을 감소하고 
-						_pm->setMaxHP(+1);							//maxHP를 1 증가준다.
+						_pm->setMaxHP(+2);							//maxHP를 1 증가준다.
 						(*temp)->setStock(1);						//한번 구매했으니까 stock을 1로 반환해준다.
 					}
 					if (_pm->getMoney() < 1000)						//플레이어 골드가 1000원보다 작다면
@@ -155,7 +155,7 @@ void StoreManager::SellPlayerHp(vector<npcBase*>::iterator temp)
 					if (_pm->getMoney() >= 3000)					//플레이어 골드가 1000원보다 크다면
 					{
 						_pm->setMoney(-3000);						//플레이어 골드에서 1000원을 감소하고 
-						_pm->setMaxHP(+1);							//maxHP를 1 증가준다.
+						_pm->setMaxHP(+2);							//maxHP를 1 증가준다.
 						(*temp)->setStock(2);						//stock을 2로 반환해준다.
 					}
 					if (_pm->getMoney() < 3000)						//플레이어 골드가 3000원보다 작다면

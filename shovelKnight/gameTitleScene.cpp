@@ -46,6 +46,13 @@ HRESULT gameTitleScene::init()
 	//적 스크립트 세팅
 	setScript();
 
+	_isOption = false;		//옵션 선택됐니? = 기본 false by JH^_^
+	_isTitleScene = true;	//타이틀씬일때만 노래나오게 제어
+	_op = new optionMenu;
+	_op->init();
+
+	_effectSoundVolume = 0.3f;
+	_bgmSoundVolume = 0.3f;
 
 	return S_OK;
 }
@@ -71,11 +78,14 @@ void gameTitleScene::update()
 		//게임 스타트 버튼 누름
 		if (_shovelIdx == 0)
 		{
+			//선택시 메인테마곡은 끝나고 다음씬에서 다음 노래 재생.
+			SOUNDMANAGER->stop("MainTheme");
 			//선택시 선택사운드 추가
 			if (!SOUNDMANAGER->isPlaySound("MainSelect"))
 			{
-				SOUNDMANAGER->play("MainSelect", 0.3f);
+				SOUNDMANAGER->play("MainSelect", _effectSoundVolume);
 			}
+			_isTitleScene = false;
 			SCENEMANAGER->changeScene(_gms->getSceneName());
 		}
 		//안쓸거임
@@ -84,11 +94,12 @@ void gameTitleScene::update()
 		//옵션 버튼 누름
 		else if (_shovelIdx == 2)
 		{
-
+			_isOption = true; // 옵션 눌렀구나! 
 		}
 		//안쓸거임
 		else if (_shovelIdx == 3)
 		{		}
+
 	}
 
 
@@ -119,6 +130,13 @@ void gameTitleScene::draw()
 	//삽 출력
 	_shovelImg->render(getMemDC(), _rcBtn[_shovelIdx].left, _rcBtn[_shovelIdx].top);
 	
+	
+	//옵션이 선택되었으면 랜더를 합시당
+	if (_isOption)
+	{
+		_op->render(getMemDC());
+	}
+
 }
 
 void gameTitleScene::setScript()
@@ -143,9 +161,12 @@ void gameTitleScene::setScript()
 
 void gameTitleScene::soundPlay()
 {
-	if (!SOUNDMANAGER->isPlaySound("MainTheme"))
+	if(_isTitleScene)
 	{
-		SOUNDMANAGER->play("MainTheme", 0.3f);
+		if (!SOUNDMANAGER->isPlaySound("MainTheme"))
+		{
+			SOUNDMANAGER->play("MainTheme", _bgmSoundVolume);
+		}
 	}
 
 }

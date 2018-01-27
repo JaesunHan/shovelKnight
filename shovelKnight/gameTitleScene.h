@@ -29,8 +29,12 @@ private :
 
 	bool _isOption;					//옵션을 선택하면 옵션메뉴 출력 ( true : 출력, false : 출력 안함)
 	bool _isSound;					//사운드조절 선택하면 사운드 메뉴 출력 ( true : 출력, false : 출력 안함)
-
+	bool _isTitleScene;				//타이틀씬일때만 노래가 나오도록
 	gameMenuScene* _gms;
+	optionMenu* _op;			//옵션메뉴창 
+
+	float _effectSoundVolume;	//이펙트 사운드볼륨
+	float _bgmSoundVolume;		//bmg사운드 볼륨
 
 public:
 
