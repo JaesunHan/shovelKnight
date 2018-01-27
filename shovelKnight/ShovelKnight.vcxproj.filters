@@ -303,10 +303,6 @@
     <ClInclude Include="boss1.h">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="dialogueManager.h">
-      <Filter>2DGameFramework\Manager</Filter>
-=======
     <ClInclude Include="skill_bubble.h">
       <Filter>playGround\gamePlayScene\skill\unit</Filter>
     </ClInclude>
@@ -342,7 +338,6 @@
     </ClInclude>
     <ClInclude Include="item_gems_sapphire.h">
       <Filter>playGround\gamePlayScene\item\unit</Filter>
->>>>>>> 57e96631291aafa68df0e660737a2b155764e3d5
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -535,10 +530,6 @@
     <ClCompile Include="playerBase+hitReaction.cpp">
       <Filter>playGround\gamePlayScene\player</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="dialogueManager.cpp">
-      <Filter>2DGameFramework\Manager</Filter>
-=======
     <ClCompile Include="skill_bubble.cpp">
       <Filter>playGround\gamePlayScene\skill\unit</Filter>
     </ClCompile>
@@ -574,7 +565,6 @@
     </ClCompile>
     <ClCompile Include="item_gems_sapphire.cpp">
       <Filter>playGround\gamePlayScene\item\unit</Filter>
->>>>>>> 57e96631291aafa68df0e660737a2b155764e3d5
     </ClCompile>
   </ItemGroup>
 </Project>
