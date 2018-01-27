@@ -160,11 +160,17 @@ void playerBase::collision()
 	if ((r == 0 && g == 255 && b == 0))
 	{
 		if (_action == PLAYERACTION_JUMP) _action = PLAYERACTION_IDLE;
-		_jumpPower = JUMPPOWER;
+		_jumpPower = 0;
 		_state = PLAYERSTATE_ONLAND;
-		_isJump = false;
+		//_isJump = false;
 	}
 
+	//if ((r == 255 && g == 0 && b == 255))
+	//{
 
+	//	_jumpPower = 0;
+	//	_state = PLAYERSTATE_INAIR;
+	//	//_isJump = false;
+	//}
 
 }

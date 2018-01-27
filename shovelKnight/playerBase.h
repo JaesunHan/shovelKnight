@@ -6,11 +6,13 @@
 #define ATTACK_DAMAGE_BOX_HEIGHT 6
 #define DOWNATTACK_DAMAGE_BOX_WIDTH 6
 #define	DOWNATTACK_DAMAGE_BOX_HEIGHT 10
-#define ACCELERATION 0.4f
-#define MAXSPEED 2.0f
+#define ACCELERATION 0.5f
+#define MAXSPEED 1.0f
 #define TIMECOUNT 0.05f
 #define GRAVITY 0.01f
 #define JUMPPOWER 1.0f
+#define friction 0.5f
+
 
 enum PLAYER_SKILL
 {
@@ -112,7 +114,6 @@ protected:
 	int					_maxMP;					//최대 마나
 	int					_skill;					//스킬넘버
 	int					_alpha;					//알파값
-	float				_speed;
 	float				_time;
 	float				_x, _y;					//이동좌표	
 	float				_jumpPower;				//점프파워
@@ -158,7 +159,8 @@ public:
 	inline void setSkillUnlockLv(int increaseLv) { _skillUnlockLv += increaseLv; }
 	inline PLAYERSTATE getState() { return _state; }
 	inline void setState(PLAYERSTATE state) { _state = state; }
-	
+	inline PLAYERACTION getAction() { return _action; }
+	inline void setAction(PLAYERACTION action) { _action = action; }
 
 	inline RECT getPlayerRc() { return _rc; }
 	inline void setPlayerRc(RECT rc) { _rc = rc; }

@@ -18,13 +18,12 @@ void playerBase::move()
 		if (_action != PLAYERACTION_MOVE || _direction != PLAYERDIRECTION_LEFT) _currentFrameX = 0;
 		_direction = PLAYERDIRECTION_LEFT;
 		if (_state = PLAYERSTATE_ONLAND)_action = PLAYERACTION_MOVE;
-		if(_speed<MAXSPEED)_speed += ACCELERATION;
-		if (_speed > MAXSPEED)_speed = MAXSPEED;
+		if(_moveSpeed<MAXSPEED)_moveSpeed += ACCELERATION;
+		if (_moveSpeed > MAXSPEED)_moveSpeed = MAXSPEED;
 	}
 	if (KEYMANAGER->isOnceKeyUp('A'))
 	{
 		if (_action == PLAYERACTION_MOVE)_action = PLAYERACTION_IDLE;
-		if (_speed > 0)_speed -= ACCELERATION;
 	}
 	if (KEYMANAGER->isStayKeyDown('D'))
 	{
@@ -34,13 +33,13 @@ void playerBase::move()
 			if (_state = PLAYERSTATE_ONLAND)_action = PLAYERACTION_MOVE;
 		}
 		_direction = PLAYERDIRECTION_RIGHT;
-		if (_speed<MAXSPEED)_speed += ACCELERATION;
-		if (_speed > MAXSPEED)_speed = MAXSPEED;
+		if (_moveSpeed<MAXSPEED)_moveSpeed += ACCELERATION;
+		if (_moveSpeed > MAXSPEED)_moveSpeed = MAXSPEED;
 	}
 	if (KEYMANAGER->isOnceKeyUp('D'))
 	{
 		if(_action==PLAYERACTION_MOVE)_action = PLAYERACTION_IDLE;
-		if (_speed > 0)_speed -= ACCELERATION;
+		if (_moveSpeed > 0)_moveSpeed -= ACCELERATION;
 	}
 
 	if (KEYMANAGER->isOnceKeyDown('J'))
@@ -53,7 +52,7 @@ void playerBase::move()
 		_action = PLAYERACTION_JUMP;
 		_jumpPower = JUMPPOWER;
 	}
-	if (_action == PLAYERACTION_JUMP&&_isJump)
+	if (_action == PLAYERACTION_JUMP)
 	{
 		_y -= _jumpPower;
 		_jumpPower -= _gravity;
@@ -61,6 +60,11 @@ void playerBase::move()
 
 	_x += _moveSpeed * _direction;
 
+	if (_action != PLAYERACTION_MOVE)
+	{
+		if (_moveSpeed > 0)_moveSpeed -= friction;
+		if (_moveSpeed <= 0)_moveSpeed = 0;
+	}
 	switch (_state)
 	{
 	case PLAYERSTATE_ONLAND:
