@@ -44,17 +44,21 @@ void stageManager::update()
 	loadData();
 	_loopX1 += 1;
 
-	for (int i = 0; i < 4; ++i)
+	if (_transition == false)
 	{
-		RECT temp;
-		if (IntersectRect(&temp, &_PM->getPlayerRc(), &_mapTransition[i].rc))
+		for (int i = 0; i < 4; ++i)
 		{
-			_transition = true;
-			_transitionNum = i;
+			RECT temp;
+			if (IntersectRect(&temp, &_PM->getPlayerRc(), &_mapTransition[i].rc))
+			{
+				_transitionNum = i;
+				_transition = true;
+				transition();
+			}
 		}
 	}
 	
-
+	KEYANIMANAGER->update();
 }
 
 void stageManager::render()	
@@ -63,6 +67,11 @@ void stageManager::render()
 	IMAGEMANAGER->findImage("layer2")->loopRender(getMemDC(), &RectMake(0, 0, WINSIZEX, WINSIZEY), _loopX2, 0);
 	CAMERAMANAGER->renderMap(getMemDC(), IMAGEMANAGER->findImage("bgMap"));
 	if (_transition == false) renderTiles();
+	if (_transition == true)
+	{
+		_frameImage->aniRender(getMemDC(), 0, 0, KEYANIMANAGER->findAnimation("frameBG"));
+	}
+	if (_maxFrameImage > 0) _frameImage->aniRender(getMemDC(), 0, 0, KEYANIMANAGER->findAnimation("frameBG"));
 	//TTTextOut(getMemDC(), _ptMouse.x, _ptMouse.y - 40, "마우스X", CAMERAMANAGER->getMousePointX(_ptMouse.x) / 16, false);
 	//TTTextOut(getMemDC(), _ptMouse.x, _ptMouse.y - 20, "마우스Y", CAMERAMANAGER->getMousePointY(_ptMouse.y) / 16, false);
 	//CAMERAMANAGER->renderTile(getMemDC(), IMAGEMANAGER->findImage("tile1"), 0, 13, 10, 14, 16);
@@ -126,20 +135,20 @@ void stageManager::loadData()
 				true, RGB(255, 0, 255), false);
 		}
 
-		//for (int i = 0; i < _maxFrameImage; ++i)
-		//{
-		//	char frameImage[128];
-		//	wsprintf(frameImage, "frameImage%d", i + 1);
-		//	GetPrivateProfileString(_T(frameImage), _T("key"), NULL, key, 255, _T(iniDir));
-		//	GetPrivateProfileString(_T(frameImage), _T("directory"), NULL, directory, 255, _T(iniDir));
-		//	if (IMAGEMANAGER->findImage(key)) IMAGEMANAGER->deleteImage(key);
-		//	IMAGEMANAGER->addFrameImage(key, directory,
-		//		INIDATA->loadDataInterger(mapName, frameImage, "width"),
-		//		INIDATA->loadDataInterger(mapName, frameImage, "height"),
-		//		INIDATA->loadDataInterger(mapName, frameImage, "frameX"),
-		//		INIDATA->loadDataInterger(mapName, frameImage, "frameY"),
-		//		true, RGB(255, 0, 255), false);
-		//}
+		for (int i = 0; i < _maxFrameImage; ++i)
+		{
+			//KEYANIMANAGER->deleteOne("frameBG");
+			char frameImage[128];
+			wsprintf(frameImage, "frameImage%d", i + 1);
+			GetPrivateProfileString(_T(frameImage), _T("key"), NULL, key, 255, _T(iniDir));
+			GetPrivateProfileString(_T(frameImage), _T("directory"), NULL, directory, 255, _T(iniDir));
+			if (IMAGEMANAGER->findImage(key)) IMAGEMANAGER->deleteImage(key);
+
+			_frameImage = IMAGEMANAGER->addFrameImage("frameImage1", ".\\image\\stage\\shopFrameImageMiddle.bmp", 3200, 480, 4, 1, true, RGB(255, 0, 255), false);
+			int arr[] = { 0, 1, 2, 3 };
+			KEYANIMANAGER->addArrayFrameAnimation("frameBG", "frameImage1", arr, 4, 5, true);
+			KEYANIMANAGER->start("frameBG");
+		}
 
 		for (int j = 0; j < 4; ++j)
 		{
@@ -201,7 +210,7 @@ void stageManager::transition()
 		wsprintf(txtDir, "map00%d.txt", _mapTransition[_transitionNum].mapNum);
 		int maxLayer = INIDATA->loadDataInterger(mapName, "imageTotal", "maxNum");
 		int maxTile = INIDATA->loadDataInterger(mapName, "tileTotal", "maxNum");
-		int maxFrameImage = INIDATA->loadDataInterger(mapName, "frameIamgeTotal", "maxNum");
+		_maxFrameImage = INIDATA->loadDataInterger(mapName, "frameIamgeTotal", "maxNum");
 
 		for (int i = 0; i < maxLayer; ++i)
 		{
@@ -242,13 +251,16 @@ void stageManager::transition()
 			GetPrivateProfileString(_T(frameImage), _T("key"), NULL, key, 255, _T(iniDir));
 			GetPrivateProfileString(_T(frameImage), _T("directory"), NULL, directory, 255, _T(iniDir));
 			if (IMAGEMANAGER->findImage(key)) IMAGEMANAGER->deleteImage(key);
-			_frameImage = IMAGEMANAGER->addFrameImage(key, directory,
-				INIDATA->loadDataInterger(mapName, frameImage, "width"),
-				INIDATA->loadDataInterger(mapName, frameImage, "height"),
-				INIDATA->loadDataInterger(mapName, frameImage, "frameX"),
-				INIDATA->loadDataInterger(mapName, frameImage, "frameY"),
-				true, RGB(255, 0, 255), false);
-			KEYANIMANAGER->addDefaultFrameAnimation("frameBG", key, 5, false, true);
+
+			_frameImage = IMAGEMANAGER->addFrameImage("frameImage1", ".\\image\\stage\\shopFrameImageMiddle.bmp", 3200, 480, 4, 1, true, RGB(255, 0, 255), false);
+			//_frameImage = IMAGEMANAGER->addFrameImage(key, directory,
+			//	INIDATA->loadDataInterger(mapName, frameImage, "width"),
+			//	INIDATA->loadDataInterger(mapName, frameImage, "height"),
+			//	INIDATA->loadDataInterger(mapName, frameImage, "frameX"),
+			//	INIDATA->loadDataInterger(mapName, frameImage, "frameY"),
+			//	true, RGB(255, 0, 255), false);
+			int arr[] = { 0, 1, 2, 3 };
+			KEYANIMANAGER->addArrayFrameAnimation("frameBG", "frameImage1", arr, 4, 5, true);
 			KEYANIMANAGER->start("frameBG");
 		}
 		

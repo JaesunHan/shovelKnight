@@ -15,7 +15,7 @@ keyAniManager::~keyAniManager()
 
 HRESULT keyAniManager::init()
 {
-
+	
 	return S_OK;
 }
 
