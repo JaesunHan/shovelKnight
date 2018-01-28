@@ -33,7 +33,6 @@ HRESULT gamePlayScene::init()
 	_stage->setStoreManagerMemoryAddressLink(_Store);
 	_player->setStageManagerMemoryAddressLink(_stage);
 	_player->setGameCollisinMemoryAddressLink(_gameCollision);
-	_Store->playerSetMMemoryAddressLink(_player);
 
 	_enemy->init();
 	_gameObject->init();

@@ -69,7 +69,6 @@ void gameCollision::enemyDead()
 				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
 			{
 				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
-				_enemy->removeEnemy(i);
 			}
 			break;
 		case ENEMY_BLORB:
@@ -77,7 +76,6 @@ void gameCollision::enemyDead()
 				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
 			{
 				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
-				_enemy->removeEnemy(i);
 			}
 			break;
 		case ELEMY_DRAKE:
@@ -85,7 +83,6 @@ void gameCollision::enemyDead()
 				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
 			{
 				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
-				_enemy->removeEnemy(i);
 			}
 			break;
 		case ENEMY_SKELETON:
@@ -93,7 +90,6 @@ void gameCollision::enemyDead()
 				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
 			{
 				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
-				_enemy->removeEnemy(i);
 			}
 			break;
 		case ENEMY_DRAGON:
@@ -101,7 +97,6 @@ void gameCollision::enemyDead()
 				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
 			{
 				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
-				_enemy->removeEnemy(i);
 			}
 			break;
 		case ENEMY_BLACKKNIGHT:
@@ -109,7 +104,6 @@ void gameCollision::enemyDead()
 				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
 			{
 				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
-				_enemy->removeEnemy(i);
 			}
 			break;
 		}
@@ -132,11 +126,11 @@ void gameCollision::PlayerMeetNPC()
 	{
 		if (IntersectRect(&temp, &_player->getPlayerRc(), &_store->getVNpc()[i]->getRect()))
 		{
-			_store->getVNpc()[i]->setIsCollision(true);
+			_store->getVNpc()[i]->isCollision(true);
 		}
 		else
 		{
-			_store->getVNpc()[i]->setIsCollision(false);
+			_store->getVNpc()[i]->isCollision(false);
 		}
 	}
 	_playerMeetNPC = true;
@@ -151,7 +145,7 @@ void gameCollision::PlayerMeetEnemy()
 		if (IntersectRect(&temp, &_player->getPlayerRc(), &_enemy->getVEnemy()[i]->getRect()))
 		{
 			//_player->setDamagePlayer();
-			_enemy->getVEnemy()[i]->setEnemyDamage(true);
+			//_enemy->getVEnemy()[i]->setEnemyDamage();
 		}
 	}
 }
