@@ -33,7 +33,7 @@ private:
 
 
 	bool _isCollisionNpc;						//NPC랑 충돌했늬
-
+	int _showshowshowshow;						//충돌했는지 참고할 변수
 	char str1[128];
 	char str2[128];
 	char str3[128];
@@ -68,6 +68,7 @@ public:
 	vector <npcBase*> getVNpc() { return _vNpc; }
 	vector <npcBase*>::iterator getViNpc() { return _viNpc; }
 
-
+	//플레이어 셋 메모리 어드레스 링크
+	inline void playerSetMMemoryAddressLink(playerManager* pm) { _pm = pm; }
 };
 
