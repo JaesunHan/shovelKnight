@@ -185,7 +185,6 @@
     <ClInclude Include="minion3.h" />
     <ClInclude Include="motherAction.h" />
     <ClInclude Include="npcBase.h" />
-    <ClInclude Include="objectManager.h" />
     <ClInclude Include="pixelCollision.h" />
     <ClInclude Include="skeleton.h" />
     <ClInclude Include="skill_enemyDeadFx.h" />
@@ -267,7 +266,6 @@
     <ClCompile Include="minion3.cpp" />
     <ClCompile Include="motherAction.cpp" />
     <ClCompile Include="npcBase.cpp" />
-    <ClCompile Include="objectManager.cpp" />
     <ClCompile Include="pixelCollision.cpp" />
     <ClCompile Include="skeleton.cpp" />
     <ClCompile Include="skill_enemyDeadFx.cpp" />
