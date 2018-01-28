@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "gameMenuScene.h"
-
+#include "gamePlayScene.h"
 
 gameMenuScene::gameMenuScene()
 {
@@ -116,6 +116,10 @@ void gameMenuScene::update()
 			//새로운 기본캐릭터를 생성하고 ini 파일에 저장하는 함수를 호출
 			createNewDefaultCharacter();
 			_plm[_pSlotIdx]->init(_vPList[_pSlotIdx].name, _vPList[_pSlotIdx].characterkind, _vPList[_pSlotIdx].hp, _vPList[_pSlotIdx].mana, _vPList[_pSlotIdx].money, _vPList[_pSlotIdx].suit, _vPList[_pSlotIdx].weapon);
+		}
+		else
+		{
+			SCENEMANAGER->changeScene(_GPS->getSceneName());
 		}
 	}
 	DIALOGUEMANAGER->update();

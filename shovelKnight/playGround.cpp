@@ -24,13 +24,13 @@ HRESULT playGround::init()
 	_GTS->setGameMenuSceneAddressLink(_GMS);
 	
 	SCENEMANAGER->changeScene(_GTS->getSceneName());
-	SCENEMANAGER->changeScene(_GTS->getSceneName());
 
 	_GTS->setGameMenuSceneAddressLink(_GMS);
 
 	_GPS = new gamePlayScene;
 	SCENEMANAGER->addScene(_GPS->getSceneName(), _GPS);
 	//SCENEMANAGER->changeScene(_GPS->getSceneName());
+	_GMS->setGamePlaySceneAdressLink(_GPS);
 
 	SOUNDMANAGER->addSound("GamePlayBGM", "./sound/ost/Shovel Knight Soundtrack - 04 - Strike the Earth! (Plains of Passage).mp3", true, true);
 	

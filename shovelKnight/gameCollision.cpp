@@ -25,7 +25,6 @@ void gameCollision::update()
 {
 	enemyDead();
 	enemyDetectPlayer();
-	PlayerMeetNPC();
 
 	//collisionPlayerMapRight();
 	//collisionPlayerMapLeft();
@@ -41,6 +40,7 @@ void gameCollision::update()
 
 void gameCollision::render()
 {
+	PlayerMeetNPC();
 
 	RECT rc = _player->getPlayerRc();
 
@@ -131,13 +131,28 @@ void gameCollision::PlayerMeetNPC()
 	RECT temp;
 	for (int i = 0; i != _store->getVNpc().size(); ++i)
 	{
+
+
+
+
+		_store->getVNpc()[i]->setSkillUnlockLv(_player->getSkillUnlockLv());
+		_store->getVNpc()[i]->setMoney(_player->getMoney());
+		_player->setMoney(_store->getVNpc()[i]->getMinusMoney());
+		_player->setSkillUnlockLv(_store->getVNpc()[i]->getSkillUnlockLv());
+
+		
+
+
+
+
+
 		if (IntersectRect(&temp, &_player->getPlayerRc(), &_store->getVNpc()[i]->getRect()))
 		{
-			_store->getVNpc()[i]->setIsCollision(true);
+			_store->getVNpc()[i]->isCollision(true);
 		}
 		else
 		{
-			_store->getVNpc()[i]->setIsCollision(false);
+			_store->getVNpc()[i]->isCollision(false);
 		}
 	}
 }
