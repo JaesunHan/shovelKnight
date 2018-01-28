@@ -50,6 +50,7 @@ private:
 	int ocil;
 	float _frequency;
 	float _bpm;
+
 	arrSounds _mTotalSounds;
 
 public:

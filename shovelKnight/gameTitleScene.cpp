@@ -90,13 +90,14 @@ void gameTitleScene::update()
 			if (_shovelIdx == 0)
 			{
 				//선택시 메인테마곡은 끝나고 다음씬에서 다음 노래 재생.
+				_isTitleScene = false;
 				SOUNDMANAGER->stop("MainTheme");
 				//선택시 선택사운드 추가
 				if (!SOUNDMANAGER->isPlaySound("MainSelect"))
 				{
 					SOUNDMANAGER->play("MainSelect", _effectSoundVolume);
 				}
-				_isTitleScene = false;
+				
 				SCENEMANAGER->changeScene(_gms->getSceneName());
 			}
 			//안쓸거임

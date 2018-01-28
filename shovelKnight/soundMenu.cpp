@@ -27,7 +27,18 @@ HRESULT soundMenu::init()
 	//글자 10개박스
 	_soundLetter10Box = IMAGEMANAGER->addFrameImage("사운드10글자박스", "./image/title/10letterSelectBox.bmp", 500, 42, 2, 1, true, RGB(255, 0, 255), false);
 	
-	
+
+	_effectSoundRectButtonX = 525;
+	_bgmSoundRectButtonX = 525;
+	//볼룸바 렉트선언=============
+	_rcEffectVolume = RectMake(525, 179, 101, 6);				//이펙트볼륨바 렉트
+	_rcEffectVolumeButton = RectMake(_effectSoundRectButtonX, 173, 6, 20);				//이펙트볼륨바 버튼 렉트
+	_bmgVolume = RectMake(525, 209, 100, 6);					//배경음볼륨바 렉트
+	_bgmVolumeButton = RectMake(_bgmSoundRectButtonX, 204, 6, 20);				//배경음볼륨바 버튼 렉트
+	//볼륨바 이미지 선언===================
+	_effectVolumeButton = IMAGEMANAGER->addImage("이펙트볼륨바버튼", "./image/title/soundBar.bmp", 4, 12, true, RGB(255, 0, 255), false);	//이펙트볼륨바 버튼 이미지
+	_bgmVolumeButtonimg = IMAGEMANAGER->addImage("배경음볼륨바버튼", "./image/title/soundBar.bmp", 4, 12, true, RGB(255, 0, 255), false);	//배경음볼륨바 버튼 이미지
+
 	
 	//232, 250 시작( right, top)
 	_rcSound[0] = RectMake(144, 130 , 48, 28);
@@ -82,6 +93,44 @@ void soundMenu::update()
 		else _indexSoundRc--;
 	}
 
+	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
+	{
+		if (_indexSoundRc == 1)
+		{
+			if (_effectSoundRectButtonX > 525)
+			{
+				_effectSoundRectButtonX -= 10;
+			}
+		}
+		if (_indexSoundRc == 2)
+		{
+			if (_bgmSoundRectButtonX > 525)
+			{
+				_bgmSoundRectButtonX -= 10;
+			}
+		}
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
+	{
+		if (_indexSoundRc == 1)
+		{
+			if (_effectSoundRectButtonX < 625)
+			{
+				_effectSoundRectButtonX += 10;
+			}
+		}
+		if (_indexSoundRc == 2)
+		{
+			if (_bgmSoundRectButtonX < 625)
+			{
+				_bgmSoundRectButtonX += 10;
+			}
+		}
+	}
+	
+	_rcEffectVolumeButton = RectMake(_effectSoundRectButtonX, 173, 6, 20);				//이펙트볼륨바 버튼 렉트
+	_bgmVolumeButton = RectMake(_bgmSoundRectButtonX, 204, 6, 20);				//배경음볼륨바 버튼 렉트
 }
 void soundMenu::release()
 {
@@ -95,6 +144,9 @@ void soundMenu::draw(HDC hdc)
 {
 	_menuImg->render(hdc, WINSIZEX / 2 - 534 / 2, WINSIZEY / 2 - 320 / 2);
 	
+	_effectVolumeButton->render(hdc, _effectSoundRectButtonX, 175);
+	_bgmVolumeButtonimg->render(hdc, _bgmSoundRectButtonX, 206);
+
 	if (KEYMANAGER->isStayKeyDown('G'))
 	{
 		// 테스트용 : 설정메뉴 렉트 출력
@@ -102,7 +154,12 @@ void soundMenu::draw(HDC hdc)
 		{
 			Rectangle(hdc, _rcSound[i].left, _rcSound[i].top, _rcSound[i].right, _rcSound[i].bottom);
 		}
+		Rectangle(hdc, _rcEffectVolume.left, _rcEffectVolume.top, _rcEffectVolume.right, _rcEffectVolume.bottom);
+		Rectangle(hdc, _bmgVolume.left, _bmgVolume.top, _bmgVolume.right, _bmgVolume.bottom);
+		Rectangle(hdc, _rcEffectVolumeButton.left, _rcEffectVolumeButton.top, _rcEffectVolumeButton.right, _rcEffectVolumeButton.bottom);
+		Rectangle(hdc, _bgmVolumeButton.left, _bgmVolumeButton.top, _bgmVolumeButton.right, _bgmVolumeButton.bottom);
 	}
+	
 	
 	TTTextOut(300, 10, "_indexSoundRc", _indexSoundRc);
 	
@@ -122,4 +179,6 @@ void soundMenu::draw(HDC hdc)
 	{
 		_soundLetterBoxEm4->aniRender(hdc, _rcSound[0].left - 5, _rcSound[0].top + _indexSoundRc * 32, _soundLetterBoxAni4);
 	}
+
+
 }
