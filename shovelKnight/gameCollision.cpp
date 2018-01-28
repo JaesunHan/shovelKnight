@@ -24,7 +24,7 @@ void gameCollision::release()
 void gameCollision::update()
 {
 	enemyDead();
-	//enemyDetectPlayer();
+	enemyDetectPlayer();
 	PlayerMeetNPC();
 
 	//collisionPlayerMapRight();
@@ -106,8 +106,8 @@ void gameCollision::enemyDetectPlayer()
 {
 	for (int i = 0; i != _enemy->getVEnemy().size(); ++i)
 	{
-		//_enemy->getVEnemy()[i]->getPlayerX(_player->getX());
-		//_enemy->getVEnemy()[i]->getPlayerStatus(_player->getPlayerAction());
+		_enemy->getVEnemy()[i]->getPlayerX(_player->getX());
+		_enemy->getVEnemy()[i]->getPlayerStatus(_player->getPlayerAction());
 	}
 }
 

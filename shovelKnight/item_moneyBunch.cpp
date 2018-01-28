@@ -18,7 +18,6 @@ HRESULT item_moneyBunch::init()
 	sprintf(str, "%s%s", _imgName, ".bmp");
 
 	_img = IMAGEMANAGER->addFrameImage(_imgName, str, 114, 29, 3, 1);
-	itemBase::init();
 
 	return S_OK;
 }

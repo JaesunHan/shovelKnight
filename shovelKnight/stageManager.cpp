@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "stageManager.h"
 #include "playerManager.h"
+#include "StoreManager.h"
 #include <vector>
 
 
@@ -253,6 +254,10 @@ void stageManager::renderTiles()
 
 void stageManager::transition()
 {
+	for (int i = 0; i < 3; ++i)
+	{
+		_storeM->getVNpc()[i]->setAppear(false);
+	}
 	if (_mapTransition[_transitionNum].direction == 0)
 	{
 		_mapNum = _mapTransition[_transitionNum].mapNum;
