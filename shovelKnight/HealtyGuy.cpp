@@ -15,6 +15,7 @@ HealtyGuy::~HealtyGuy()
 
 HRESULT HealtyGuy::init()
 {
+	npcBase::init();
 	//»ı¼ºÀÚ¿¡ ÃÊ±âÈ­
 	//==========°¡°İ ¼¼ÆÃ º¯¼ö===========//
 	_chicken = 1000;								//¯ƒÈù °¡°İ
@@ -51,7 +52,7 @@ HRESULT HealtyGuy::init()
 
 
 
-	_isCollision = false;							//ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹Çß´Â°¡? true : ±×·¸´Ù, false : ¾Æ´Ï´Ù
+	_isCollisionNpc = false;							//ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹Çß´Â°¡? true : ±×·¸´Ù, false : ¾Æ´Ï´Ù
 	_isAppear = true;								//±âº»»óÅÂ·Î ¸Ê¿¡¼­ µîÀåÇÏÁö ¾Ê´Â´Ù.
 
 	int arrIDLE1[] = { 0,1 };
@@ -91,4 +92,8 @@ void HealtyGuy::draw()
 void HealtyGuy::update()
 {
 	npcBase::update();
+}
+
+void HealtyGuy::isCollision(bool collision)
+{
 }

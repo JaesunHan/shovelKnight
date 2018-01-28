@@ -8,11 +8,11 @@
 #define NPCNUM 3
 
 
-enum STORESTATUS
-{
-	STORECOLLISION,
-	ENDSTORESTATUS
-};
+//enum STORESTATUS
+//{
+//	STORECOLLISION,
+//	ENDSTORESTATUS
+//};
 
 //상호참조를 위한 전방전언
 class playerManager;
@@ -28,17 +28,17 @@ private:
 	vNPC _vNpc;									//npc벡터
 	viNPC _viNpc;								//npc벡터이터레이터
 
-	playerManager* _pm;							//플레이어매니저 할당
-
-
-
-	bool _isCollisionNpc;						//NPC랑 충돌했늬
-	int _showshowshowshow;						//충돌했는지 참고할 변수
-	char str1[128];
-	char str2[128];
-	char str3[128];
-	char str4[128];
-	char str5[128];
+	//playerManager* _pm;							//플레이어매니저 할당
+	//
+	//
+	//
+	//bool _isCollisionNpc;						//NPC랑 충돌했늬
+	//int _showshowshowshow;						//충돌했는지 참고할 변수
+	//char str1[128];
+	//char str2[128];
+	//char str3[128];
+	//char str4[128];
+	//char str5[128];
 
 public:
 	StoreManager();
@@ -50,11 +50,10 @@ public:
 	virtual void render();
 
 
-	void playerCollisionNpc(vector<npcBase*>::iterator temp);					//NPC랑 충돌검출
-	void sellPlayerSkill(vector<npcBase*>::iterator temp);						//플레이어 스킬판매
-	void SellPlayerHp(vector<npcBase*>::iterator temp);							//플레이어 최대체력 추가판매
-	void sellGameBgm(vector<npcBase*>::iterator temp);							//BGM판매
-	void collisionSignalFromCollisionManager(bool collisionSignal);				//충돌매니저로부터 오는 충돌신호
+	//void playerCollisionNpc(vector<npcBase*>::iterator temp);					//NPC랑 충돌검출
+	//void sellPlayerSkill(vector<npcBase*>::iterator temp);						//플레이어 스킬판매
+	//void SellPlayerHp(vector<npcBase*>::iterator temp);							//플레이어 최대체력 추가판매
+	//void sellGameBgm(vector<npcBase*>::iterator temp);							//BGM판매
 	//스토어 매니저에서 있어야 하는 함수
 	//1. 플레이어와 NPC와의 렉트충돌이 되었는지
 	//2. 렉트충돌시 W키로 상호작용
@@ -69,6 +68,6 @@ public:
 	vector <npcBase*>::iterator getViNpc() { return _viNpc; }
 
 	//플레이어 셋 메모리 어드레스 링크
-	inline void playerSetMMemoryAddressLink(playerManager* pm) { _pm = pm; }
+	//inline void playerSetMMemoryAddressLink(playerManager* pm) { _pm = pm; }
 };
 

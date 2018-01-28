@@ -46,7 +46,7 @@ protected:
 	RECT _rc;				//상점NPC 렉트
 	NPCTYPE _npcType;		//NPC타입
 
-	bool _isCollision;		//플레이어와 충돌했는가? true : 그렇다, false : 아니다
+	bool _isCollisionNpc;		//플레이어와 충돌했는가? true : 그렇다, false : 아니다
 	bool _isAppear;			//등장할때니? 아니니? (맵에서 등장하는지 아닌지 체크)
 
 
@@ -88,7 +88,22 @@ public:
 	inline void setAppear(bool isAppear) { _isAppear = isAppear; }
 
 	//충돌했나 셋함수
-	void setIsCollision(bool isCollision) { _isCollision = isCollision; }
+	//void setIsCollision(bool isCollision) { _isCollisionNpc = isCollision; }
+
+	virtual void isCollision(bool collision);
+
+
+	//===========================================ㅈㅅ합니다========================================
+
+	int _skillUnlockLv;
+	int getSkillUnlockLv() { return _skillUnlockLv; }
+	void setSkillUnlockLv(int asd) { _skillUnlockLv = asd; }
+
+	int _money;
+	void setMoney(int asd) { _money = asd; }
+
+	int _minusMoney;
+	int getMinusMoney() { return _minusMoney; }
 
 
 	//==================================== End 게터 세터 작성하기===================================
