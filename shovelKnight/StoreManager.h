@@ -54,7 +54,7 @@ public:
 	void sellPlayerSkill(vector<npcBase*>::iterator temp);						//플레이어 스킬판매
 	void SellPlayerHp(vector<npcBase*>::iterator temp);							//플레이어 최대체력 추가판매
 	void sellGameBgm(vector<npcBase*>::iterator temp);							//BGM판매
-
+	void collisionSignalFromCollisionManager(bool collisionSignal);				//충돌매니저로부터 오는 충돌신호
 	//스토어 매니저에서 있어야 하는 함수
 	//1. 플레이어와 NPC와의 렉트충돌이 되었는지
 	//2. 렉트충돌시 W키로 상호작용
@@ -64,8 +64,9 @@ public:
 	//6. 체크단계 지나면 구매가능하면 구매, 
 	//
 
-	//벡터 겟함수 추가해야함
-
+	//벡터 겟함수
+	vector <npcBase*> getVNpc() { return _vNpc; }
+	vector <npcBase*>::iterator getViNpc() { return _viNpc; }
 
 
 };
