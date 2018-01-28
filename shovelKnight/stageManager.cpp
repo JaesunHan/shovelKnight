@@ -54,7 +54,7 @@ void stageManager::update()
 				if (_mapTransition[i].direction != 0)
 				{
 					_PM->setPlayerPause(true);
-					_PM->setX(_PM->getX() );
+					_PM->setX(_PM->getX() - _currentMapWidth + 400);
 				}
 				if (_mapTransition[i].direction == 0) _warpTransition = true;
 				else _warpTransition = false;
@@ -90,13 +90,13 @@ void stageManager::update()
 
 void stageManager::render()	
 {
+	CAMERAMANAGER->renderMap(getMemDC(), IMAGEMANAGER->findImage("bgMap"));
 	if (_maxFrameImage > 0) _frameImage->aniRender(getMemDC(), 0, 0, KEYANIMANAGER->findAnimation("frameBG"));
 	if (_maxLayer > 0)
 	{
 		IMAGEMANAGER->findImage("layer1")->loopRender(getMemDC(), &RectMake(0, 0, WINSIZEX, WINSIZEY), _loopX1, 0);
 		if (_maxLayer > 1) IMAGEMANAGER->findImage("layer2")->loopRender(getMemDC(), &RectMake(0, 0, WINSIZEX, WINSIZEY), _loopX2, 0);
 	}
-	CAMERAMANAGER->renderMap(getMemDC(), IMAGEMANAGER->findImage("bgMap"));
 	if (_transition == false) renderTiles();
 	else if (_transition == true)
 	{

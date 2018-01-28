@@ -96,6 +96,17 @@ void player1::render()
 			_counter = 0;
 		}
 	}
+
+	char testX[128];
+	int testx = _x;
+	wsprintf(testX, "playerX : %d", testx);
+	TextOut(getMemDC(), 200, 0, testX, strlen(testX));
+	char testY[128];
+	int testy = _y;
+	wsprintf(testY, "playerY : %d", testy);
+	TextOut(getMemDC(), 200, 20, testY, strlen(testY));
+	//TTTextOut(300, 0, "playerX", _x);
+	//TTTextOut(300, 20, "playerY", _y);
 }
 
 void player1::control2()
