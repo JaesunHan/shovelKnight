@@ -18,7 +18,7 @@ private:
 	int _cnt;
 	int _r, _g, _b;
 
-	LPTSTR _scriptStr;
+	TCHAR _scriptStr[1024];
 	image* _scriptwindow;
 
 public:
