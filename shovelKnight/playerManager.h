@@ -32,7 +32,9 @@ public:
 	inline void setSkillUnlockLv(int increaseLv) { _p1->setSkillUnlockLv(increaseLv); }
 	inline void setStageManagerMemoryAddressLink(stageManager* sm) { _SM = sm; }
 	inline void setPlayerPause(bool pause) { _p1->setPause(pause); }
-
+	//IDLE = 0, MOVE = 1, ATTACK = 2, JUMP = 3, ROOTING = 4, DAMAGED = 5, DIE = 6
+	inline int getPlayerAction() { return _p1->getPlayerAction(); }
+	inline void setDamagePlayer() { _p1->setDamagePlayer(); }
 	RECT getPlayerRc() { return _p1->getPlayerRc(); }
 
 

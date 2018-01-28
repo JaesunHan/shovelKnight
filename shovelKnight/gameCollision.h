@@ -32,11 +32,16 @@ public:
 	void getSkillMemoryAdress(skillManager* skill) { _skill = skill; }
 	void getPlayerMemoryAdress(playerManager* player) { _player = player; }
 
-	//void collisionPlayerMapDown();
-	//void collisionPlayerMapUp();
-	//void collisionPlayerMapRight();
-	//void collisionPlayerMapLeft();
-	//void collisionPlayerInAir();
-	//BOOL collisionPlayerInAir2(int probeX, int probeY);
+
+	void enemyDead();
+	//void enemyDetectPlayer();
+	void PlayerMeetNPC();
 };
 
+
+//void collisionPlayerMapDown();
+//void collisionPlayerMapUp();
+//void collisionPlayerMapRight();
+//void collisionPlayerMapLeft();
+//void collisionPlayerInAir();
+//BOOL collisionPlayerInAir2(int probeX, int probeY);

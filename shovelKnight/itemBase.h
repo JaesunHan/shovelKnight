@@ -47,6 +47,7 @@ public:
 	virtual void reRect();
 	virtual void eatItem();
 
+	virtual void setImageName(char* img) { _imgName = img; }
 
 	virtual void fire(ITEM_FIRE itemFire, FPOINT pt);
 };

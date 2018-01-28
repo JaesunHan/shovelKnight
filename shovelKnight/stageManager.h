@@ -25,6 +25,7 @@ private:
 	int _transitionNum = 0;
 	int _maxLayer = 0;
 	int _currentMapWidth = 0;
+	int _nextMapWidth = 0;
 	int _transitionCounter = 0;
 	bool _mapLoaded = false;
 	bool _transition = false;

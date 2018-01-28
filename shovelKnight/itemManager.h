@@ -5,9 +5,10 @@
 #include "item_gems_emerald.h"
 #include "item_gems_money.h"
 #include "item_gems_sapphire.h"
+#include "item_gems_silver.h"
 #include "item_moneyBunch.h"
 
-#define EFFECTNUM 7
+#define EFFECTNUM 8
 
 enum ITEM
 {
@@ -17,6 +18,7 @@ enum ITEM
 	ITEM_GEMS_EMERALD,
 	ITEM_GEMS_MONEY,
 	ITEM_GEMS_SAPPHIRE,
+	ITEM_GEMS_SILVER,
 	ITEM_MONEYBUNCH,
 };
 
