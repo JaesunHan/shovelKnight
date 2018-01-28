@@ -54,8 +54,9 @@ protected:
 	int _width, _height;		//적의 가로, 세로 크기(렉트를 만들 때 사용할 가로세로크기이다.)
 	float _angle;               //이동 각도
 
-	float _getPlayerX;             //플레이어 x좌표 get
+	float _getPlayerX;          //플레이어 x좌표 get
 	int _playerStatus;          //플레이어 상태
+	bool _playerFind;           //플레이어 발견
 	float _speed;				//스피드
 	bool _isDead;				//죽었는지 여부
 	bool _isDeadVanish;			//죽고 벡터에서 지울 불값
@@ -117,7 +118,7 @@ public:
 	void getPlayerStatus(int status) { _playerStatus = status; }        //플레이어 상태 get
 
 	//데미지 설정자
-	void setEnemyDamage(bool damage) { _isHit = damage; }
+	void setEnemyDamage() { _isHit = true; }
 
 	//==================================== End 게터 세터 작성하기===================================
 

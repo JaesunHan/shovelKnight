@@ -44,7 +44,7 @@ void gameCollision::render()
 
 	RECT rc = _player->getPlayerRc();
 
-	for (int i = 0; i < _store->getVNpc().size; ++i)
+	for (int i = 0; i < _store->getVNpc().size(); ++i)
 	{
 		if (_store->getVNpc()[i]->getNpcType() != MAGICGIRL) continue;
 
@@ -151,7 +151,7 @@ void gameCollision::PlayerMeetEnemy()
 		if (IntersectRect(&temp, &_player->getPlayerRc(), &_enemy->getVEnemy()[i]->getRect()))
 		{
 			//_player->setDamagePlayer();
-			_enemy->getVEnemy()[i]->setEnemyDamage(true);
+			_enemy->getVEnemy()[i]->setEnemyDamage();
 		}
 	}
 }
