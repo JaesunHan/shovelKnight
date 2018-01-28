@@ -4,6 +4,8 @@
 // ## 17.11.24 ## - image Class - ##
 //============================================
 
+#define MAZEN COLORREF RGB(255,0,255)
+
 class image
 {
 public:
@@ -75,17 +77,17 @@ public:
 	HRESULT init(int width, int height);
 	//파일로부터 이미지 초기화
 	HRESULT init(const char* fileName, int width, int height,
-		BOOL trans = FALSE, COLORREF transColor = FALSE, BOOL alphablend = FALSE);
+		BOOL trans = TRUE, COLORREF transColor = MAZEN, BOOL alphablend = FALSE);
 	//파일로부터 이미지 초기화           처음 시작 좌표      가로       세로
 	HRESULT init(const char* fileName, float x, float y, int width, int height,
-		BOOL trans = FALSE, COLORREF transColor = FALSE, BOOL alphablend = FALSE);
+		BOOL trans = TRUE, COLORREF transColor = MAZEN, BOOL alphablend = FALSE);
 
 	//이미지 + 프레임초기화
 	HRESULT init(const char* fileName, float x, float y, int width, int height,
-		int frameX, int frameY, BOOL trans = FALSE, COLORREF transColor = RGB(255, 0, 255), BOOL alphablend = FALSE);
+		int frameX, int frameY, BOOL trans = TRUE, COLORREF transColor = MAZEN, BOOL alphablend = FALSE);
 
 	HRESULT init(const char* fileName, int width, int height, int frameX, int frameY, 
-		BOOL trans = FALSE, COLORREF transColor = RGB(255, 0, 255), BOOL alphablend = FALSE);
+		BOOL trans = TRUE, COLORREF transColor = MAZEN, BOOL alphablend = FALSE);
 
 	//이미지 릴리즈
 	void release(void);
