@@ -169,18 +169,4 @@ void MagicGirl::draw()
 void MagicGirl::update()
 {
 	npcBase::update();
-<<<<<<< HEAD
-=======
-	int a;
-	if (_isCollision)
-	{
-		a = 1;
-	}
-	else
-	{
-		a = 0;
-	}
->>>>>>> 39cad69c410fa07973274a5b3bad7a57e37c1058
-	
-	
 }
