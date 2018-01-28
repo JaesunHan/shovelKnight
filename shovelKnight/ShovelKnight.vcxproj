@@ -265,8 +265,6 @@
     <ClCompile Include="motherAction.cpp" />
     <ClCompile Include="npcBase.cpp" />
     <ClCompile Include="pixelCollision.cpp" />
-    <ClCompile Include="playerBase+hitReaction.cpp" />
-    <ClCompile Include="playerBase+Move.cpp" />
     <ClCompile Include="skeleton.cpp" />
     <ClCompile Include="skill_enemyDeadFx.cpp" />
     <ClCompile Include="StoreManager.cpp" />

@@ -530,12 +530,6 @@
     <ClCompile Include="boss1.cpp">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClCompile>
-    <ClCompile Include="playerBase+Move.cpp">
-      <Filter>playGround\gamePlayScene\player</Filter>
-    </ClCompile>
-    <ClCompile Include="playerBase+hitReaction.cpp">
-      <Filter>playGround\gamePlayScene\player</Filter>
-    </ClCompile>
     <ClCompile Include="skill_bubble.cpp">
       <Filter>playGround\gamePlayScene\skill\unit</Filter>
     </ClCompile>

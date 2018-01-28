@@ -80,7 +80,7 @@ void gameCollision::update()
 		}
 	}
 
-	collisionPlayerMap();
+	//collisionPlayerMap();
 
 	//플레이어와 스킬의 충돌
 	//적과 스킬의 충돌
@@ -112,5 +112,5 @@ void gameCollision::collisionPlayerMap()
 	if (probeY == rc.bottom - 1) return;
 
 	_player->setY(_player->getY() + (probeY - rc.bottom));
-	_player->setState(PLAYERSTATE_ONLAND);
+	//_player->setState(PLAYERSTATE_ONLAND);
 }
