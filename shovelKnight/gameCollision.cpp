@@ -128,6 +128,7 @@ void gameCollision::PlayerMeetNPC()
 
 
 
+
 		_store->getVNpc()[i]->setSkillUnlockLv(_player->getSkillUnlockLv());
 		_store->getVNpc()[i]->setMoney(_player->getMoney());
 		_player->setMoney(_store->getVNpc()[i]->getMinusMoney());
@@ -141,7 +142,9 @@ void gameCollision::PlayerMeetNPC()
 
 
 
+
 		if (IntersectRect(&temp, &_player->getPlayerRC(), &_store->getVNpc()[i]->getRect()))
+
 		{
 			_store->getVNpc()[i]->isCollision(true);
 		}
