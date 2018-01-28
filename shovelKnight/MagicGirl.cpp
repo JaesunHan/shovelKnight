@@ -47,7 +47,7 @@ HRESULT MagicGirl::init()
 
 	_isCollision = false;							//플레이어와 충돌했는가? true : 그렇다, false : 아니다
 
-	_isAppear = false;								//기본상태로 맵에서 등장하지 않는다.
+	_isAppear = true;								//기본상태로 맵에서 등장한다.
 
 	//KEYANIMANAGER->addDefaultFrameAnimation("매직걸아이들", "magicGIRLIDLE", 6, false, true);
 	int arrIDLE1[46];
@@ -84,15 +84,16 @@ void MagicGirl::stockCount()
 {
 }
 
-//void MagicGirl::render()
-//{
-////	if (_isAppear)
-//	//{
-//	//	draw();
-//	//}
-//}
-//
-//void MagicGirl::draw()
-//{
-//	//_img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
-//}
+void MagicGirl::render()
+{
+	if (_isAppear)
+	{
+		draw();
+	}
+}
+
+void MagicGirl::draw()
+{
+	//_img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
+	CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
+}
