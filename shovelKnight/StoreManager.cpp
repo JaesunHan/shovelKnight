@@ -32,6 +32,10 @@ HRESULT StoreManager::init()
 		npc->init();
 		_vNpc.push_back(npc);
 	}
+
+
+	_isCollisionNpc = false;						//처음에는 콜리전이 false세팅.
+
 	return S_OK;
 }
 
@@ -76,7 +80,7 @@ void StoreManager::playerCollisionNpc(vector<npcBase*>::iterator temp)
 	//콜리전 매니저에서 받아오는걸로. 
 	//콜리전 매니저에서 이넘값으로 받아오고
 	//해당 이넘값으로 충돌이 확인되면 w키를 눌러 대화가 가능해지는것으로 구현할것
-	_isCollisionNpc == true;
+	
 
 }
 
@@ -219,6 +223,20 @@ void StoreManager::sellGameBgm(vector<npcBase*>::iterator temp)
 		_isCollisionNpc == false;
 	}
 
+}
+
+void StoreManager::collisionSignalFromCollisionManager(bool collisionSignal)
+{
+
+	if (collisionSignal)
+	{
+		_isCollisionNpc = true;
+	}
+
+	if (!collisionSignal)
+	{
+		_isCollisionNpc = false;
+	}
 }
 
 
