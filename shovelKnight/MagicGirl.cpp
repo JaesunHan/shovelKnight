@@ -100,10 +100,14 @@ void MagicGirl::draw()
 void MagicGirl::update()
 {
 	npcBase::update();
-	
+	int a;
 	if (_isCollision)
 	{
-		int a = 0;
+		a = 1;
+	}
+	else
+	{
+		a = 0;
 	}
 	
 	
