@@ -23,8 +23,29 @@ void gameCollision::release()
 
 void gameCollision::update()
 {
-	RECT enemy;
+	enemyDead();
+	//enemyDetectPlayer();
+	PlayerMeetNPC();
 
+	//collisionPlayerMapRight();
+	//collisionPlayerMapLeft();
+	//collisionPlayerMapDown(); 
+	//collisionPlayerMapUp();
+	//collisionPlayerInAir();
+
+	//플레이어와 스킬의 충돌	 
+	//적과 스킬의 충돌
+	//플레이어와 item의 충돌
+
+}
+
+void gameCollision::render()
+{
+}
+
+void gameCollision::enemyDead()
+{
+	//몬스터에 따라 죽는게 다르므로 스위치로 나눔
 	for (int i = 0; i != _enemy->getVEnemy().size(); ++i)
 	{
 		switch (_enemy->getVEnemy()[i]->getEnemyType())
@@ -79,21 +100,31 @@ void gameCollision::update()
 			break;
 		}
 	}
-
-	//collisionPlayerMapRight();
-	//collisionPlayerMapLeft();
-	//collisionPlayerMapDown(); 
-	//collisionPlayerMapUp();
-	//collisionPlayerInAir();
-
-	//플레이어와 스킬의 충돌	 
-	//적과 스킬의 충돌
-	//플레이어와 item의 충돌
-
 }
 
-void gameCollision::render()
+void gameCollision::enemyDetectPlayer()
 {
+	for (int i = 0; i != _enemy->getVEnemy().size(); ++i)
+	{
+		//_enemy->getVEnemy()[i]->getPlayerX(_player->getX());
+		//_enemy->getVEnemy()[i]->getPlayerStatus(_player->getPlayerAction());
+	}
+}
+
+void gameCollision::PlayerMeetNPC()
+{
+	RECT temp;
+	for (int i = 0; i != _store->getVNpc().size(); ++i)
+	{
+		if (IntersectRect(&temp, &_player->getPlayerRc(), &_store->getVNpc()[i]->getRect()))
+		{
+			_store->getVNpc()[i]->setIsCollision(true);
+		}
+		else
+		{
+			_store->getVNpc()[i]->setIsCollision(false);
+		}
+	}
 }
 
 //void gameCollision::collisionPlayerMapDown()

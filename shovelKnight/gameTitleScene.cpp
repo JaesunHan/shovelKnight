@@ -180,7 +180,7 @@ void gameTitleScene::soundPlay()
 	{
 		if (!SOUNDMANAGER->isPlaySound("MainTheme"))
 		{
-			SOUNDMANAGER->play("MainTheme", _bgmSoundVolume);
+			SOUNDMANAGER->play("MainTheme", _bgmSoundVolume, true);
 		}
 	}
 

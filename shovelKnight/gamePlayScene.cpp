@@ -74,11 +74,11 @@ void gamePlayScene::update()
 void gamePlayScene::render()
 {
 	_stage->render();
+	_Store->render();
+	_gameObject->render();
 	_player->render();
 	_enemy->render();
-	_gameObject->render();
 	_item->render();
-	_Store->render();
 	_skill->render();
 	_gameCollision->render();
 }
