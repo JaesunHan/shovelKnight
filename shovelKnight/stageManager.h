@@ -3,6 +3,7 @@
 #include <vector>
 
 class playerManager;
+class StoreManager;
 
 struct tagMAPTRANSITION
 {
@@ -42,6 +43,7 @@ private:
 	vector<int>::iterator _viTransitionTileNum;
 	tagMAPTRANSITION _mapTransition[4];
 	playerManager* _PM;
+	StoreManager* _storeM;
 public:
 
 	HRESULT init();
@@ -55,6 +57,7 @@ public:
 	void renderTransitionTiles();
 
 	void setPlayerManagerMemoryAddressLink(playerManager* pm) { _PM = pm; }
+	void setStoreManagerMemoryAddressLink(StoreManager* sm) { _storeM = sm; }
 	void setLayer2LoopX(float loopx) { _loopX2 += loopx; }
 
 
