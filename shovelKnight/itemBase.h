@@ -36,6 +36,9 @@ protected:
 	float _speed;
 	float _angle;
 
+	float _time;
+	bool _petrol;
+
 	RECT _rc;
 	image* _img;
 	animation* _ani;

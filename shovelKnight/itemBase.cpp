@@ -65,37 +65,41 @@ void itemBase::fire(ITEM_FIRE itemFire, FPOINT pt)
 	switch (_moveType)
 	{
 	case ITEM_MOVE_GRAVITY:
-		switch (itemFire)
 		{
-		case ITEM_FIRE_NULL:
-			_speed = 0;
-			break;
-		case ITEM_FIRE_CENTER: case ITEM_FIRE_LEFT: case ITEM_FIRE_RIGHT:
-			_speed = RND->getFromFloatTo(5.f, 6.f);
-			break;
-		}
+			switch (itemFire)
+			{
+			case ITEM_FIRE_NULL:
+				_speed = 0;
+				break;
+			case ITEM_FIRE_CENTER: case ITEM_FIRE_LEFT: case ITEM_FIRE_RIGHT:
+				_speed = RND->getFromFloatTo(5.f, 6.f);
+				break;
+			}
 
-		switch (itemFire)
-		{
-		case ITEM_FIRE_NULL:
-			_angle = 0;
-			break;
-		case ITEM_FIRE_CENTER:
-			_angle = RND->getFromFloatTo(PI16 * 3, PI16 * 13);
-			break;
-		case ITEM_FIRE_LEFT:
-			_angle = RND->getFromFloatTo(PI16 * 10, PI16 * 13);
-			break;
-		case ITEM_FIRE_RIGHT:
-			_angle = RND->getFromFloatTo(PI16 * 3, PI16 * 6);
-			break;
+			switch (itemFire)
+			{
+			case ITEM_FIRE_NULL:
+				_angle = 0;
+				break;
+			case ITEM_FIRE_CENTER:
+				_angle = RND->getFromFloatTo(PI16 * 3, PI16 * 13);
+				break;
+			case ITEM_FIRE_LEFT:
+				_angle = RND->getFromFloatTo(PI16 * 10, PI16 * 13);
+				break;
+			case ITEM_FIRE_RIGHT:
+				_angle = RND->getFromFloatTo(PI16 * 3, PI16 * 6);
+				break;
+			}
+			_gravity = 0.3f;
+			_stats = ITEM_STATS_GRAVITY;
 		}
-		_gravity = 0.3f;
-		_stats = ITEM_STATS_GRAVITY;
 		break;
 	case ITEM_MOVE_STOP:
 		break;
 	case ITEM_MOVE_PETROL:
+		_time = 0;
+		_petrol = false;
 		break;
 	}
 	
