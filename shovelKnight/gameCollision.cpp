@@ -142,6 +142,20 @@ void gameCollision::PlayerMeetNPC()
 	}
 }
 
+void gameCollision::PlayerMeetEnemy()
+{
+	for (int i = 0; i != _enemy->getVEnemy().size(); ++i)
+	{
+		RECT temp;
+
+		if (IntersectRect(&temp, &_player->getPlayerRc(), &_enemy->getVEnemy()[i]->getRect()))
+		{
+			//_player->setDamagePlayer();
+			_enemy->getVEnemy()[i]->setEnemyDamage(true);
+		}
+	}
+}
+
 //void gameCollision::collisionPlayerMapDown()
 //{
 //	RECT rc = _player->getPlayerRc();
