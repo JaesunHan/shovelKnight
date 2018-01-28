@@ -28,26 +28,8 @@ HRESULT pixelCollision::init(RECT &rc, float enmeyX, float enemyY)
 void pixelCollision::pixelCollisonY(RECT &rc)
 {
 	_rc = rc;
-
-	//픽셀충돌 hdc영역 설정
-	switch (_currentStage)
-	{
-		case 0: //추후 이름변경 예정
-
-			_hdc = IMAGEMANAGER->findImage("bgMap")->getMemDC();
-
-		break;
-		case 1: 
-
-			
-
-		break;
-		case 2:
-
-
-
-		break;
-	}
+	
+	_hdc = IMAGEMANAGER->findImage("bgMap")->getMemDC();
 
 
 	for (int i = _rc.left; i <= _rc.right; i += (_rc.right - _rc.left) / 2)
@@ -88,7 +70,7 @@ void pixelCollision::pixelCollisonX(RECT &rc, bool direction)
 
 	if (direction)  //오른쪽
 	{
-		for (int i = _rc.top; i <= _rc.bottom; i += (_rc.right - _rc.left) / 4)
+		for (int i = _rc.top; i <= _rc.bottom - 1; i += (_rc.right - _rc.left) / 4)
 		{
 			for (int j = _rc.right - 1; j <= _rc.right + 1; ++j)
 			{
@@ -108,7 +90,7 @@ void pixelCollision::pixelCollisonX(RECT &rc, bool direction)
 	}
 	else  //왼쪽
 	{
-		for (int i = _rc.top; i <= _rc.bottom; i += (_rc.right - _rc.left) / 4)
+		for (int i = _rc.top; i <= _rc.bottom - 1; i += (_rc.right - _rc.left) / 4)
 		{
 			for (int j = _rc.left - 1; j <= _rc.left + 1; ++j)
 			{

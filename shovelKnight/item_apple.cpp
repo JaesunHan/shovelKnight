@@ -18,7 +18,6 @@ HRESULT item_apple::init()
 	sprintf(str, "%s%s", _imgName, ".bmp");
 
 	_img = IMAGEMANAGER->addFrameImage(_imgName, str, 12, 11, 1, 1);
-	itemBase::init();
 
 	return S_OK;
 }

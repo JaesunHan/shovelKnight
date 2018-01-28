@@ -21,7 +21,11 @@ HRESULT boss1::init(float x, float y)
 
 	_img = IMAGEMANAGER->addFrameImage("dragon", ".//image//monster//bubbleDragon.bmp", _x, _y, 1074, 356, 6, 4, true, RGB(255, 0, 255));
 
+	//이미지 렉트
 	_rc = RectMakeCenter(_x, _y, _img->getFrameWidth(), _img->getFrameHeight());
+	//충돌용 렉트
+	_headRc = RectMakeCenter(_x - DRAGONHEADRECTX, _y + DRAGONHEADRECTY, 40, 25);
+	_trunkRc = RectMakeCenter(_x + DRAGONTRUNKRECTX, _y + DRAGONTRUNKRECTY, 85, 60);
 
 	_status = ENEMY_LEFT_IDLE;
 
@@ -51,8 +55,8 @@ HRESULT boss1::init(float x, float y)
 	_vanishTime = 1;
 	_directionCount = 1;
 	_direction = false;
-	_isPlayerFind = true;
 	_movePatternCount = 1;
+
 
 	_anim = KEYANIMANAGER->findAnimation("dragonLeftStop");
 
@@ -63,7 +67,7 @@ HRESULT boss1::init(float x, float y)
 void boss1::update()
 {
 	//공격 움직임 패턴
-	if (_isPlayerFind) //플레이어를 발견하면
+	if (isPlayerFind(_x, 100)) //플레이어를 발견하면
 	{
 		_directionCount++;
 
@@ -73,21 +77,38 @@ void boss1::update()
 				_status = ENEMY_LEFT_MOVE;
 			break;
 			case 200:
-				_status = ENMEY_LEFT_ATTACK;
+				_status = ENEMY_LEFT_ATTACK;
 			break;
 			case 250:
 				_status = ENEMY_LEFT_BACK_MOVE;
 			break;
 			case 350:
-				_status = ENMEY_LEFT_ATTACK;
+				_status = ENEMY_LEFT_ATTACK;
 				_directionCount = 1;
 			break;
 		}
 	}
 
-
 	//상태값에 따른 에니메이션 및 움직임
 	move();
+}
+
+void boss1::render()
+{
+
+	draw();
+
+	if (KEYMANAGER->isToggleKey(VK_TAB))
+	{
+		//머리 렉트
+		Rectangle(getMemDC(), CAMERAMANAGER->getX(_headRc.left), CAMERAMANAGER->getY(_headRc.top),
+			CAMERAMANAGER->getX(_headRc.right), CAMERAMANAGER->getY(_headRc.bottom));
+		//몸통 렉트
+		Rectangle(getMemDC(), CAMERAMANAGER->getX(_trunkRc.left), CAMERAMANAGER->getY(_trunkRc.top),
+			CAMERAMANAGER->getX(_trunkRc.right), CAMERAMANAGER->getY(_trunkRc.bottom));
+
+	}
+	
 }
 
 
@@ -123,7 +144,7 @@ void boss1::move()
 			_speed = DRAGONSPEED;
 			_x += _speed;
 		break;
-		case ENMEY_LEFT_ATTACK:
+		case ENEMY_LEFT_ATTACK:
 
 			_anim = KEYANIMANAGER->findAnimation("dragonLeftAttack");
 			if (!_anim->isPlay()) _anim->start();
@@ -174,4 +195,6 @@ void boss1::move()
 
 	//렉트위치 update
 	_rc = RectMakeCenter(_x, _y, _width, _height);
+	_headRc = RectMakeCenter(_x - DRAGONHEADRECTX, _y + DRAGONHEADRECTY, 40, 25);
+	_trunkRc = RectMakeCenter(_x + DRAGONTRUNKRECTX, _y + DRAGONTRUNKRECTY, 85, 60);
 }

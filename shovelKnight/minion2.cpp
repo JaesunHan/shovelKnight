@@ -20,7 +20,6 @@ HRESULT minion2::init(float x, float y)
 
 	_img = IMAGEMANAGER->addFrameImage("blorb", ".//image//monster//Blorb.bmp", _x, _y, 80, 162, 4, 6, true, RGB(255, 0, 255));
 
-	_rc = RectMakeCenter(_x, _y, _img->getFrameWidth(), 19);
 
 	_status = ENEMY_LEFT_MOVE;
 
@@ -53,7 +52,7 @@ HRESULT minion2::init(float x, float y)
 	//=========================================================================================
 
 	_width = _img->getFrameWidth();
-	_height = _img->getFrameHeight();
+	_height = 10;
 	_isDead = false;
 	_isDeadVanish = false;
 	_vanishTime = 1;
@@ -63,6 +62,7 @@ HRESULT minion2::init(float x, float y)
 	_isJump = false;
 	_jumpCount = 1;
 
+	_rc = RectMakeCenter(_x, _y, _img->getFrameWidth(), _height);
 
 	_anim = KEYANIMANAGER->findAnimation("blorbLeftMove");
 
@@ -95,7 +95,6 @@ void minion2::update()
 	//============================================================= 픽셀충돌: 벽
 	_pixelC->pixelCollisonX(_rc, _direction);  //벽 검출
 
-
 	if (_pixelC->getDirectionChange())  //벽에 부딪치면
 	{
 		if (_direction)  //현상태가 오른쪽이면
@@ -119,6 +118,14 @@ void minion2::update()
 
 
 
+}
+
+
+void minion2::draw()
+{
+	CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top - 18);
+
+	//TTTextOut(CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_rc.top - 20), "상태", _status, true);
 }
 
 

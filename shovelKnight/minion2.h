@@ -16,5 +16,6 @@ public:
 	HRESULT init(float x, float y);
 	void update();
 	void move();
+	void draw();
 };
 
