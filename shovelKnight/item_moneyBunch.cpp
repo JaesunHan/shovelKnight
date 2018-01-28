@@ -28,4 +28,14 @@ void item_moneyBunch::release()
 
 void item_moneyBunch::update()
 {
+	if (_petrol)
+	{
+		_add.y += 0.1f;
+	}
+	else
+	{
+		_add.y -= 0.1f;
+	}
+
+	_pt.y += _add.y;
 }
