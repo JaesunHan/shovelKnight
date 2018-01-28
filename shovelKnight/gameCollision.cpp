@@ -13,6 +13,7 @@ gameCollision::~gameCollision()
 
 HRESULT gameCollision::init()
 {
+	_playerMeetNPC = false;
 
 	return S_OK;
 }
@@ -25,6 +26,7 @@ void gameCollision::update()
 {
 	enemyDead();
 	enemyDetectPlayer();
+	if(KEYMANAGER->isOnceKeyDown('1') || _playerMeetNPC) PlayerMeetNPC();
 
 	//collisionPlayerMapRight();
 	//collisionPlayerMapLeft();
@@ -40,7 +42,6 @@ void gameCollision::update()
 
 void gameCollision::render()
 {
-	PlayerMeetNPC();
 
 	RECT rc = _player->getPlayerRc();
 
@@ -50,12 +51,10 @@ void gameCollision::render()
 
 		RECT rc2 = _store->getVNpc()[i]->getRect();
 
-		TTTextOut(300, 300, "RC2left", rc2.left);
-		TTTextOut(300, 320, "RC2Top", rc2.top);
+		TTTextOut(300, 300, "rc2", rc2);
 	}
 
-	TTTextOut(400, 10, "PLeft", rc.left);
-	TTTextOut(400, 30, "PLetop", rc.top);
+	TTTextOut(400, 300, "rc", rc);
 }
 
 void gameCollision::enemyDead()
@@ -131,30 +130,16 @@ void gameCollision::PlayerMeetNPC()
 	RECT temp;
 	for (int i = 0; i != _store->getVNpc().size(); ++i)
 	{
-
-
-
-
-		_store->getVNpc()[i]->setSkillUnlockLv(_player->getSkillUnlockLv());
-		_store->getVNpc()[i]->setMoney(_player->getMoney());
-		_player->setMoney(_store->getVNpc()[i]->getMinusMoney());
-		_player->setSkillUnlockLv(_store->getVNpc()[i]->getSkillUnlockLv());
-
-		
-
-
-
-
-
 		if (IntersectRect(&temp, &_player->getPlayerRc(), &_store->getVNpc()[i]->getRect()))
 		{
-			_store->getVNpc()[i]->isCollision(true);
+			_store->getVNpc()[i]->setIsCollision(true);
 		}
 		else
 		{
-			_store->getVNpc()[i]->isCollision(false);
+			_store->getVNpc()[i]->setIsCollision(false);
 		}
 	}
+	_playerMeetNPC = true;
 }
 
 void gameCollision::PlayerMeetEnemy()
@@ -166,7 +151,7 @@ void gameCollision::PlayerMeetEnemy()
 		if (IntersectRect(&temp, &_player->getPlayerRc(), &_enemy->getVEnemy()[i]->getRect()))
 		{
 			//_player->setDamagePlayer();
-			_enemy->getVEnemy()[i]->setEnemyDamage();
+			_enemy->getVEnemy()[i]->setEnemyDamage(true);
 		}
 	}
 }
