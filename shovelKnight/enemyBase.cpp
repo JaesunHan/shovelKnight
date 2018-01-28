@@ -64,6 +64,8 @@ void enemyBase::render()
 	//필요하다면 자식클래스의 draw() 함수에서 부모클래스의 draw()를 호출하도록 하자
 	draw();
 
+	TTTextOut(CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_y - 10), "힛트", _isHit);
+
 }
 
 void enemyBase::draw()
@@ -79,7 +81,14 @@ void enemyBase::move()
 //                           에너미X좌표   반응거리    
 bool enemyBase::isPlayerFind(float enemyX, int distance)
 {
-	float playerDistance = fabs(enemyX - _getPlayerX);
+	//거리계산
+	float playerDistance = enemyX - _getPlayerX;
+
+	//에너미 방향설정
+	if (playerDistance >= 0) _direction = false;
+	else _direction = true;
+
+	playerDistance = fabs(playerDistance);  //절대값
 
 	if (playerDistance <= distance)
 	{

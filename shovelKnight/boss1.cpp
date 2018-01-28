@@ -59,6 +59,7 @@ HRESULT boss1::init(float x, float y)
 	_playerFind = false;
 	_enemyHp = 7;
 	_isHit = false;
+	_previousStatus = _status;
 
 	_anim = KEYANIMANAGER->findAnimation("dragonLeftStop");
 
@@ -77,6 +78,7 @@ void boss1::update()
 
 	//플레이어가 일정거리 안으로 들어오면
 	if (isPlayerFind(_x, 200)) _playerFind = true;
+	_direction = false;  //예외처리: 방향 무조건 왼쪽으로
 
 	//공격 움직임 패턴
 	if (_playerFind) //플레이어를 발견하면

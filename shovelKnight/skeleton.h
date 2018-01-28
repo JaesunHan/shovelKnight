@@ -8,6 +8,7 @@ class skeleton : public enemyBase
 private:
 	bool _isHit;  //hit 판정후 상태값 변경을 위한 변수
 
+
 public:
 	skeleton();
 	~skeleton();
