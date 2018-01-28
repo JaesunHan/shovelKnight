@@ -43,7 +43,7 @@ void keyAniManager::render()
 
 
 //디폴트 애니메이션
-void keyAniManager::addDefaultFrameAnimation(string animationKeyName, char* imageKeyName, int fps, bool reverse, bool loop)
+animation* keyAniManager::addDefaultFrameAnimation(string animationKeyName, char* imageKeyName, int fps, bool reverse, bool loop)
 {
 	image* img = IMAGEMANAGER->findImage(imageKeyName);
 	animation* ani = new animation;
@@ -53,6 +53,8 @@ void keyAniManager::addDefaultFrameAnimation(string animationKeyName, char* imag
 	ani->setFPS(fps);
 
 	_mTotalAnimation.insert(pair<string, animation*>(animationKeyName, ani));
+
+	return ani;
 }
 
 void keyAniManager::addDefaultFrameAnimation(string animationKeyName, char* imageKeyName, int fps, bool reverse, bool loop, void* cbFunction)
