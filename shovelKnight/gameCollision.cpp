@@ -43,7 +43,7 @@ void gameCollision::update()
 void gameCollision::render()
 {
 
-	RECT rc = _player->getPlayerRc();
+	RECT rc = _player->getPlayerRC();
 
 	for (int i = 0; i < _store->getVNpc().size(); ++i)
 	{
@@ -124,7 +124,7 @@ void gameCollision::PlayerMeetNPC()
 	RECT temp;
 	for (int i = 0; i != _store->getVNpc().size(); ++i)
 	{
-		if (IntersectRect(&temp, &_player->getPlayerRc(), &_store->getVNpc()[i]->getRect()))
+		if (IntersectRect(&temp, &_player->getPlayerRC(), &_store->getVNpc()[i]->getRect()))
 		{
 			_store->getVNpc()[i]->isCollision(true);
 		}
@@ -142,7 +142,7 @@ void gameCollision::PlayerMeetEnemy()
 	{
 		RECT temp;
 
-		if (IntersectRect(&temp, &_player->getPlayerRc(), &_enemy->getVEnemy()[i]->getRect()))
+		if (IntersectRect(&temp, &_player->getPlayerRC(), &_enemy->getVEnemy()[i]->getRect()))
 		{
 			//_player->setDamagePlayer();
 			//_enemy->getVEnemy()[i]->setEnemyDamage();
