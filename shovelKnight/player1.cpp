@@ -57,7 +57,12 @@ void player1::update()
 		control();
 		physics();
 		pixelCollision();
+		attack();
 		CAMERAMANAGER->setSingleFocus(_x, _y, WINSIZEX);
+	}
+	if (_currentHP == 0)
+	{
+		_isDead = true;
 	}
 }
 
@@ -65,16 +70,23 @@ void player1::render()
 {
 	if (_isDead == true)
 	{
-		CAMERAMANAGER->frameRenderObject(getMemDC(), IMAGEMANAGER->findImage("Dead"), _x - 21, _y - 34, _frameX, _direction);
-		frameCounter(3, 10);
+		_counter++;
+		_pause = true;
+		CAMERAMANAGER->frameRenderObject(getMemDC(), IMAGEMANAGER->findImage("Dead"), _x - 21, _y - 30, _frameX, _direction);
+		if (_counter > 30 && _frameX < 2)
+		{
+			_frameX++;
+			_counter = 0;
+		}
 	}
 	else if(_isDamaged == true)
 	{
-		CAMERAMANAGER->frameRenderObject(getMemDC(), IMAGEMANAGER->findImage("Damaged"), _x - 20, _y - 38, 0, _direction);
 		_counter++;
-		if (_counter > 20)
+		if (_playerRC.left > 0 && _playerRC.right < IMAGEMANAGER->findImage("bgMap")->getWidth()) _x += (_direction * 2 - 1) * 0.5f;
+		if (_counter % 2 == 0) CAMERAMANAGER->frameRenderObject(getMemDC(), IMAGEMANAGER->findImage("Damaged"), _x - 20, _y - 38, 0, _direction);
+		if (_counter > 40)
 		{
-			_isDamaged == false;
+			_isDamaged = false;
 		}
 	}
 	else
@@ -133,6 +145,11 @@ void player1::render()
 			CAMERAMANAGER->getY(_playerRC.top),
 			CAMERAMANAGER->getX(_playerRC.right),
 			CAMERAMANAGER->getY(_playerRC.bottom));
+		Rectangle(getMemDC(),
+			CAMERAMANAGER->getX(_attackRC.left),
+			CAMERAMANAGER->getY(_attackRC.top),
+			CAMERAMANAGER->getX(_attackRC.right),
+			CAMERAMANAGER->getY(_attackRC.bottom));
 	}
 	//TTTextOut(300, 0, "playerX", _x);
 	//TTTextOut(300, 20, "playerY", _y);
@@ -143,5 +160,46 @@ void player1::control2()
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
 		if (_state == INAIR) _downwardThrust = true;
+	}
+	if (KEYMANAGER->isOnceKeyDown('R'))
+	{
+		//_jumpPower = 3;
+		//_state = INAIR;
+		//_isDamaged = true;
+		_counter = 0;
+		_isDead = true;
+	}
+}
+
+void player1::attack()
+{
+	if (_isDamaged == false && _isDead == false)
+	{
+		if (_action == ATTACK)
+		{
+			switch (_frameX)
+			{
+			case(0):
+				_attackRC = RectMakeCenter(_x + (-14) * (_direction * 2 - 1), _y - 7, 10, 8);
+				break;
+			case(1):
+				_attackRC = RectMakeCenter(_x + (-26) * (_direction * 2 - 1), _y - 11, 10, 8);
+				break;
+			case(2):
+				_attackRC = RectMakeCenter(_x + (-21) * (_direction * 2 - 1), _y - 20, 10, 8);
+				break;
+			case(3):
+				_attackRC = RectMakeCenter(_x + (13) * (_direction * 2 - 1), _y - 24, 10, 8);
+				break;
+			}
+		}
+		else
+		{
+			_attackRC = RectMake(0, 0, 0, 0);
+		}
+	}
+	else
+	{
+		_attackRC = RectMake(0, 0, 0, 0);
 	}
 }

@@ -32,6 +32,7 @@ HRESULT stageManager::init()
 		_mapTransition[j].rc.right = 0;
 		_mapTransition[j].rc.bottom = 0;
 	}
+	IMAGEMANAGER->addImage("bgMap", ".\\image\\stage\\transitionMap.bmp", 400, 240, true, RGB(255, 0, 255));
 	return S_OK;
 }
 
