@@ -51,9 +51,6 @@ void enemyBase::update()
 
 void enemyBase::render()
 {
-	//자식클래스에 있는 draw() 이던지, 아니면 부모클래스에 있는 draw() 던지 하나는 출력된다.
-	//필요하다면 자식클래스의 draw() 함수에서 부모클래스의 draw()를 호출하도록 하자
-	draw();
 
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{		
@@ -62,6 +59,10 @@ void enemyBase::render()
 
 		CAMERAMANAGER->renderMap(getMemDC(), IMAGEMANAGER->findImage("bgMap"));
 	}
+
+	//자식클래스에 있는 draw() 이던지, 아니면 부모클래스에 있는 draw() 던지 하나는 출력된다.
+	//필요하다면 자식클래스의 draw() 함수에서 부모클래스의 draw()를 호출하도록 하자
+	draw();
 
 }
 
@@ -75,11 +76,12 @@ void enemyBase::move()
 
 }
 
-bool enemyBase::isPlayerFind(float playerX, float playerY, int distance)
+//                           에너미X좌표   반응거리    
+bool enemyBase::isPlayerFind(float enemyX, int distance)
 {
-	_playerDistance = getDistance(playerX, playerY, _x, _y);
+	float playerDistance = fabs(enemyX - _getPlayerX);
 
-	if (_playerDistance <= distance)
+	if (playerDistance <= distance)
 	{
 		return true;
 	}

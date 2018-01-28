@@ -3,8 +3,8 @@
 #include "minion1.h"
 #include "minion2.h"
 #include "minion3.h"
+#include "skeleton.h"
 #include "boss1.h"
-
 
 #include <vector>
 
@@ -31,7 +31,7 @@ public:
 	virtual void render();
 
 
-	//미니언 생성&소멸 접근자
+	//에너미 생성&소멸 설정자
 	void setStage1EnemyOn(bool isOn) { _enemyIsOn[0] = isOn; }
 	void setStage2EnemyOn(bool isOn) { _enemyIsOn[1] = isOn; }
 	void setStage3EnemyOn(bool isOn) { _enemyIsOn[2] = isOn; }

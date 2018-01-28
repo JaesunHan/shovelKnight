@@ -52,7 +52,7 @@ HRESULT HealtyGuy::init()
 
 
 	_isCollision = false;							//플레이어와 충돌했는가? true : 그렇다, false : 아니다
-	_isAppear = false;								//기본상태로 맵에서 등장하지 않는다.
+	_isAppear = true;								//기본상태로 맵에서 등장하지 않는다.
 
 	int arrIDLE1[] = { 0,1 };
 	KEYANIMANAGER->addArrayFrameAnimation("헬스가이아이들", "HealtyGuyIdle", arrIDLE1, 2, 2, true);
@@ -67,15 +67,28 @@ void HealtyGuy::sellHpItem()
 {
 }
 
-//void HealtyGuy::render()
-//{
-//	//if (_isAppear)
-//	//{
-//	//	draw();
-//	//}
-//}
-//
-//void HealtyGuy::draw()
-//{
-//	//_img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
-//}
+void HealtyGuy::render()
+{
+	if (_isAppear == true)
+	{
+		draw();
+	}
+	if (KEYMANAGER->isToggleKey(VK_TAB))
+	{
+		Rectangle(getMemDC(), CAMERAMANAGER->getX(_rc.left),
+			CAMERAMANAGER->getY(_rc.top),
+			CAMERAMANAGER->getX(_rc.right),
+			CAMERAMANAGER->getY(_rc.bottom));
+	}
+}
+
+void HealtyGuy::draw()
+{
+	//_img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
+	CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
+}
+
+void HealtyGuy::update()
+{
+	npcBase::update();
+}

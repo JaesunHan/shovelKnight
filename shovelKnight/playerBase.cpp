@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "playerBase.h"
-
+#include "stageManager.h"
+#include "gameCollision.h"
 
 playerBase::playerBase()
 {
@@ -12,57 +13,8 @@ playerBase::~playerBase()
 
 }
 
-HRESULT playerBase::init(float startX, float startY)
+HRESULT playerBase::init()
 {
-/*
-	_image = IMAGEMANAGER->findImage("shovelIdle");
-	_x = startX;
-	_y = startY;
-	_isDead = false;
-	_isDamaged = false;
-	_currentFrameX = _currentFrameY = 0;
-	_currentHP = _maxHP = 8;
-	_currentMP = _maxMP = 30;
-	_skill = NULL;
-	_skillUsed = false;
-	_action = PR_IDLE;
-	_state = INAIR;
-	_direction = PD_RIGHT;
-	_moveSpeed = SPEED;
-	_gravity = GRAVITY;
-	_jumpPower = JUMPPOWER;
-	_jumpCount = 0;
-	_rc = RectMake(_x - HIT_BOX_WIDTH / 2, _y - HIT_BOX_HEIGHT, HIT_BOX_WIDTH, HIT_BOX_HEIGHT);*/
-	_image			= IMAGEMANAGER->findImage("shovelIdle");
-	_direction		= PLAYERDIRECTION_RIGHT;
-	_state			= PLAYERSTATE_INAIR;
-	_action			= PLAYERACTION_IDLE;
-	_time = 0;
-	_x = startX;
-	_y = startY;
-	_rc				= RectMake(_x - HIT_BOX_WIDTH / 2, _y - HIT_BOX_HEIGHT, HIT_BOX_WIDTH, HIT_BOX_HEIGHT);
-	_frameCount		= 0;
-	_currentFrameX	= 0;
-	_currentFrameY	= 0;
-	_currentSkill	= 0;
-	_skillUnlockLv = 0;
-	_currentHP = _maxHP = 8;
-	_currentMP = _maxMP = 30;
-	_money = 0;
-	_skill = 0;
-	_alpha = 255;
-	_jumpPower = 0;
-	_gravity = GRAVITY;
-	_moveSpeed = 0;
-	_rtBlock = false;
-	_ltBlock = false;
-	_isDamaged = false;
-	_skillUsed = false;
-	_isDead = false;
-	_isJumping = true;
-	_maxAti = false;
-
-
 	return S_OK;
 }
 void playerBase::release()
@@ -71,116 +23,330 @@ void playerBase::release()
 }
 void playerBase::update() 
 {
-	move();
-	hitReAction();
-	collision();
-	CAMERAMANAGER->setSingleFocus(_x, _y, 800);
-	imageSetting();
-	if (_direction == PLAYERDIRECTION_RIGHT) _currentFrameY = 0;
-	else _currentFrameY = 1;
-
-	_time += TIMEMANAGER->getElapsedTime();
 	
-	while (_time > TIMECOUNT)
-	{
-		_time -= TIMECOUNT;
-		if (_action == PLAYERACTION_DIE || _action == PLAYERACTION_MOVE || _action == PLAYERACTION_ATTACK||_action == PLAYERACTION_IDLE)
-		{
-
-			if (_image->getMaxFrameX()>1) _currentFrameX++;
-			if (_currentFrameX > _image->getMaxFrameX())
-			{
-				_currentFrameX = 0;
-				if (_action == PLAYERACTION_ATTACK) _action = PLAYERACTION_IDLE;
-			}
-		}
-		
-	}
-	if (_action == PLAYERACTION_JUMP && _jumpPower <= 0) _currentFrameX = 1;
-	if (_action == PLAYERACTION_JUMP && _jumpPower > 0) _currentFrameX = 0;
-	if (_action == PLAYERACTION_IDLE && _state == PLAYERSTATE_INAIR) _action == PLAYERACTION_JUMP;
 }
 void playerBase::render() 
 {
-	HDC hdc = getMemDC();
-	Rectangle(hdc,
-		CAMERAMANAGER->getX(_rc.left),
-		CAMERAMANAGER->getY(_rc.top),
-		CAMERAMANAGER->getX(_rc.right),
-		CAMERAMANAGER->getY(_rc.bottom));
-	TTTextOut(300, 10, "top", _rc.top);
-	TTTextOut(300, 25, "bottom", _rc.bottom);
-	TTTextOut(300, 40, "left", _rc.left);
-	TTTextOut(300, 55, "right", _rc.right);
-	TTTextOut(300, 70, "state", _state);
-	TTTextOut(400, 10, "action", _action);
-	//TTTextOut(400, 25, "speed", _moveSpeed);
-	CAMERAMANAGER->frameRenderObject(hdc, _image, _x-_image->getFrameWidth()/2, _y-_image->getFrameHeight(), _currentFrameX, _currentFrameY);
 
-}
-//Ãæµ¹¿¡ µû¸¥ ¹°¸®°ª ¼öÁ¤ 
-void playerBase::attack(float fireX, float fireY, bool skillUsed)
+}			
+
+void playerBase::control()
 {
-
-}
-
-void playerBase::imageSetting()
-{
-	switch (_action)
+	if (KEYMANAGER->isOnceKeyDown('J'))
 	{
-		case PLAYERACTION_IDLE:
-			_image = IMAGEMANAGER->findImage("shovelIdle");
-		break;
-		case PLAYERACTION_MOVE:
-			_image = IMAGEMANAGER->findImage("shovelMove");
-		break;
-		case PLAYERACTION_ATTACK:
-			_image = IMAGEMANAGER->findImage("shovelAttack");
-		break;
-		case PLAYERACTION_JUMP:
-			_image = IMAGEMANAGER->findImage("shovelJump");
-		break;
-		case PLAYERACTION_ROOTING:
-			_image = IMAGEMANAGER->findImage("shovelRooting");
-		break;
-		case PLAYERACTION_DAMAGED:
-			_image = IMAGEMANAGER->findImage("shovelDamaged");
-		break;
-		case PLAYERACTION_DIE:
-			_image = IMAGEMANAGER->findImage("shovelDead");
-		break;
+		if (_isAttacking == false)
+		{
+			_isAttacking = true;
+			_action = ATTACK;
+			_counter = 0;
+			_frameX = 0;
+		}
 	}
 
+	if (KEYMANAGER->isStayKeyDown('A'))
+	{
+		if (_action != ATTACK) _direction = LEFT;
+		_rtBlock = false;
+		_ltMoving = true;
+	}
+	if (KEYMANAGER->isOnceKeyUp('A'))
+	{
+		_ltMoving = false;
+	}
+	if (KEYMANAGER->isStayKeyDown('D'))
+	{
+		if (_action != ATTACK) _direction = RIGHT;
+		_ltBlock = false;
+		_rtMoving = true;
+	}
+	if (KEYMANAGER->isOnceKeyUp('D'))
+	{
+		_rtMoving = false;
+	}
+	if (_ltMoving == false && _rtMoving == false && _state == ONLAND && _action != ATTACK)
+	{
+		_action = IDLE;
+	}
+	if (_state == ONLAND && 
+		_action != MOVE && 
+		_action != ATTACK &&
+		(_ltMoving == true || _rtMoving == true))	//ÀÌµ¿ ÇÁ·¹ÀÓ ÃÊ±âÈ­
+	{
+		_frameX = 0;
+		_counter = 0;
+		_action = MOVE;
+	}
+	if (_ltBlock == false)
+	{
+		if (_ltMoving == true)
+		{
+			if (!(_state == ONLAND && _action == ATTACK) && _playerRC.left > 0)
+			{
+				_x -= SPEED;
+				_SM->setLayer2LoopX(-0.3f);
+			}
+		}
+	}
+	if (_rtBlock == false)
+	{
+		if (_rtMoving == true)
+		{
+			if (!(_state == ONLAND && _action == ATTACK) && _playerRC.right < IMAGEMANAGER->findImage("bgMap")->getWidth())
+			{
+				_x += SPEED;
+				_SM->setLayer2LoopX(0.3f);
+			}
+		}
+	}
 
+	if (KEYMANAGER->isStayKeyDown('W'))
+	{
+		_GC->PlayerMeetNPC();
+	}
+
+	if (KEYMANAGER->isOnceKeyDown('K'))
+	{
+		_jumpKeyDown = true;
+		if (_state == ONLAND)
+		{
+			_state = INAIR;
+			_action = JUMP;
+			_isAttacking = false;
+			_jumpPower = JUMPPOWER;
+		}
+	}
+	if (_jumpKeyDown == true)
+	{
+		_jumpCounter++;
+		if (_jumpCounter < 10)
+		{
+			_jumpPower += 0.3f;
+		}
+	}
+	if (KEYMANAGER->isOnceKeyUp('K'))
+	{
+		if (_state == INAIR) _jumpCounter = 30;
+		if (_state == ONLAND) _jumpCounter = 0;
+	}
+
+	if (_action == IDLE)
+	{
+		_shineCounter++;
+		if (_shineCounter > 200) _shine = true;
+		if (_shineCounter > 205)
+		{
+			_shineFrameX = 1;
+		}
+		if (_shineCounter > 210)
+		{
+			_shineFrameX = 2;
+		}
+		if (_shineCounter > 215)
+		{
+			_shine = false;
+			_shineFrameX = 0;
+			_shineCounter = 0;
+		}
+	}
+	else
+	{
+		_shine = false;
+		_shineFrameX = 0;
+		_shineCounter = 0;
+	}
+
+	_playerRC = RectMake(_x - HIT_BOX_WIDTH / 2, _y - HIT_BOX_HEIGHT, HIT_BOX_WIDTH, HIT_BOX_HEIGHT);
 }
 
-void playerBase::collision()
+
+void playerBase::pixelCollision()
 {
-	probeY = _y - 1;
 	HDC hdc = IMAGEMANAGER->findImage("bgMap")->getMemDC();
-	
-
-
-	COLORREF color = GetPixel(hdc, _x, probeY);
-	int r = GetRValue(color);
-	int g = GetGValue(color);
-	int b = GetBValue(color);
-
-	if ((r == 0 && g == 255 && b == 0))
+	COLORREF color, color2, color3;
+	int R, G, B, R2, G2, B2, R3, G3, B3;
+	if (_jumpPower <= 0)	//ÇÏ°­ ÁßÀÏ ¶§ ¶¥¿¡ ´êÀ¸¸é ¸ØÃç¶ó
 	{
-		if (_action == PLAYERACTION_JUMP) _action = PLAYERACTION_IDLE;
-		_jumpPower = 0;
-		_maxAti = false;
-		_state = PLAYERSTATE_ONLAND;
-		_isJumping = false;
+		for (int i = 0; i < 10; ++i)
+		{
+			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right, _playerRC.bottom + i);
+			R = GetRValue(color);
+			G = GetGValue(color);
+			B = GetBValue(color);
+			if ((R == 0 && G == 255 && B == 0) || (R == 0 && G == 0 && B == 255))
+			{
+				_y = _playerRC.bottom + i;
+				_jumpPower = 0;
+				_jumpCounter = 0;
+				_jumpKeyDown = false;
+				_downwardThrust = false;
+				_state = ONLAND;
+				break;
+			}
+			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left, _playerRC.bottom + i);
+			R = GetRValue(color);
+			G = GetGValue(color);
+			B = GetBValue(color);
+			if ((R == 0 && G == 255 && B == 0) || (R == 0 && G == 0 && B == 255))
+			{
+				_y = _playerRC.bottom + i;
+				_jumpPower = 0;
+				_jumpCounter = 0;
+				_jumpKeyDown = false;
+				_downwardThrust = false;
+				_state = ONLAND;
+				break;
+			}
+			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), (_playerRC.right + _playerRC.left) / 2, _playerRC.bottom + i);
+			R = GetRValue(color);
+			G = GetGValue(color);
+			B = GetBValue(color);
+			if ((R == 0 && G == 255 && B == 0) || (R == 0 && G == 0 && B == 255))
+			{
+				_y = _playerRC.bottom + i;
+				_jumpPower = 0;
+				_jumpCounter = 0;
+				_jumpKeyDown = false;
+				_downwardThrust = false;
+				_state = ONLAND;
+				break;
+			}
+		}
 	}
-
-	//if ((r == 255 && g == 0 && b == 255))
-	//{
-
-	//	_jumpPower = 0;
-	//	_state = PLAYERSTATE_INAIR;
-	//	//_isJump = false;
-	//}
-
+	if (_jumpPower > 0)	//»ó½Â ÁßÀÏ ¶§ ¶¥¿¡ ´êÀ¸¸é ¸ØÃç¶ó
+	{
+		for (int i = 5; i > 0; --i)
+		{
+			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right, _playerRC.top + i);
+			R = GetRValue(color);
+			G = GetGValue(color);
+			B = GetBValue(color);
+			if (R == 0 && G == 255 && B == 0)
+			{
+				_y = _playerRC.bottom + i;
+				_jumpPower = 0;
+				break;
+			}
+			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left, _playerRC.top + i);
+			R = GetRValue(color);
+			G = GetGValue(color);
+			B = GetBValue(color);
+			if (R == 0 && G == 255 && B == 0)
+			{
+				_y = _playerRC.bottom + i;
+				_jumpPower = 0;
+				break;
+			}
+			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), (_playerRC.right + _playerRC.left) / 2, _playerRC.top + i);
+			R = GetRValue(color);
+			G = GetGValue(color);
+			B = GetBValue(color);
+			if (R == 0 && G == 255 && B == 0)
+			{
+				_y = _playerRC.bottom + i;
+				_jumpPower = 0;
+				break;
+			}
+		}
+	}
+	if (_rtMoving == true)	//¿À¸¥ÂÊ ÀÌµ¿ Áß¿¡ º®¿¡ ºÎµúÈ÷¸é ¸ØÃç¶ó
+	{
+		_rtBlock = false;
+		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 2, _playerRC.bottom - 1);
+		R = GetRValue(color);
+		G = GetGValue(color);
+		B = GetBValue(color);
+		if (R == 0 && G == 255 && B == 0)
+		{
+			_rtBlock = true;
+		}
+		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 2, _playerRC.top + 1);
+		R = GetRValue(color);
+		G = GetGValue(color);
+		B = GetBValue(color);
+		if (R == 0 && G == 255 && B == 0)
+		{
+			_rtBlock = true;
+		}
+		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 2, (_playerRC.top + _playerRC.bottom) / 2);
+		R = GetRValue(color);
+		G = GetGValue(color);
+		B = GetBValue(color);
+		if (R == 0 && G == 255 && B == 0)
+		{
+			_rtBlock = true;
+		}
+	}
+	if (_ltMoving == true)	//¿ÞÂÊ ÀÌµ¿ Áß¿¡ º®¿¡ ºÎµúÈ÷¸é ¸ØÃç¶ó
+	{
+		_ltBlock = false;
+		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 2, _playerRC.bottom - 1);
+		R = GetRValue(color);
+		G = GetGValue(color);
+		B = GetBValue(color);
+		if (R == 0 && G == 255 && B == 0)
+		{
+			_ltBlock = true;
+		}
+		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 2, _playerRC.top + 1);
+		R = GetRValue(color);
+		G = GetGValue(color);
+		B = GetBValue(color);
+		if (R == 0 && G == 255 && B == 0)
+		{
+			_ltBlock = true;
+		}
+		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 2, (_playerRC.top + _playerRC.bottom) / 2);
+		R = GetRValue(color);
+		G = GetGValue(color);
+		B = GetBValue(color);
+		if (R == 0 && G == 255 && B == 0)
+		{
+			_ltBlock = true;
+		}
+	}
+	//¹Ù´Ú¿¡¼­ ¹þ¾î³ª¸é ¶³¾îÁ®¶ó
+	color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 1, _playerRC.bottom + 1);
+	R = GetRValue(color);
+	G = GetGValue(color);
+	B = GetBValue(color);
+	if (!(R == 0 && G == 255 && B == 0) && !(R == 0 && G == 0 && B == 255))
+	{
+		color2 = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 1, _playerRC.bottom + 1);
+		R2 = GetRValue(color2);
+		G2 = GetGValue(color2);
+		B2 = GetBValue(color2);
+		if (!(R2 == 0 && G2 == 255 && B2 == 0) && !(R == 0 && G == 0 && B == 255))
+		{
+			color3 = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), (_playerRC.right + _playerRC.left) / 2, _playerRC.bottom + 1);
+			R3 = GetRValue(color3);
+			G3 = GetGValue(color3);
+			B3 = GetBValue(color3);
+			if (!(R2 == 0 && G2 == 255 && B2 == 0) && !(R == 0 && G == 0 && B == 255))
+			{
+				_state = INAIR;
+				if (_action != ATTACK) _action = JUMP;
+			}
+		}
+	}
 }
+
+void playerBase::physics()
+{
+	if (_state == INAIR)
+	{
+		_y -= _jumpPower;
+		_jumpPower -= _gravity;
+	}
+}
+
+void playerBase::frameCounter(float frameMax, float counterMax)
+{
+	_counter++;
+	if (_counter > counterMax)
+	{
+		_frameX++;
+		if (_frameX >= frameMax) _frameX = 0;
+		_counter = 0;
+	}
+}
+

@@ -47,8 +47,8 @@ HRESULT MagicGirl::init()
 
 	_isCollision = false;							//플레이어와 충돌했는가? true : 그렇다, false : 아니다
 
-	_isAppear = false;								//기본상태로 맵에서 등장하지 않는다.
-
+	_isAppear = true;								//기본상태로 맵에서 등장한다.
+	_showshowshowshow = 0;
 	//KEYANIMANAGER->addDefaultFrameAnimation("매직걸아이들", "magicGIRLIDLE", 6, false, true);
 	int arrIDLE1[46];
 	for (int i = 0; i < 46; ++i)
@@ -63,15 +63,7 @@ HRESULT MagicGirl::init()
 	return S_OK;
 }
 
-void MagicGirl::render()
-{
-	npcBase::render();
-}
 
-void MagicGirl::draw()
-{
-	npcBase::draw();
-}
 
 void MagicGirl::sellSkill()
 {
@@ -84,15 +76,39 @@ void MagicGirl::stockCount()
 {
 }
 
-//void MagicGirl::render()
-//{
-////	if (_isAppear)
-//	//{
-//	//	draw();
-//	//}
-//}
-//
-//void MagicGirl::draw()
-//{
-//	//_img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
-//}
+void MagicGirl::render()
+{
+	if (_isAppear==true)
+	{
+		draw();
+	}
+	if (KEYMANAGER->isToggleKey(VK_TAB))
+	{
+		Rectangle(getMemDC(), CAMERAMANAGER->getX(_rc.left),
+			CAMERAMANAGER->getY(_rc.top),
+			CAMERAMANAGER->getX(_rc.right),
+			CAMERAMANAGER->getY(_rc.bottom));
+	}
+}
+
+void MagicGirl::draw()
+{
+	//_img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
+	CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
+}
+
+void MagicGirl::update()
+{
+	npcBase::update();
+	int a;
+	if (_isCollision)
+	{
+		a = 1;
+	}
+	else
+	{
+		a = 0;
+	}
+	
+	
+}

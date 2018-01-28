@@ -31,7 +31,7 @@ HRESULT BardKnight::init()
 	_imgKeyString = "BardKnightIDLE";				//이미지 매니저에 등록할 이미지 키갑
 	_imgFileName = "./image/npc/bardKnight.bmp";		//이미지 파일 이름(경로 포함)`
 
-	_img = IMAGEMANAGER->addFrameImage(_imgKeyString, _imgFileName, 1066, 42, 26, 1, true, RGB(255, 0, 255), false);											// NPC 이미지
+	_img = IMAGEMANAGER->addFrameImage(_imgKeyString, _imgFileName, 1066, 42, 26, 1, true, RGB(255, 0, 255), false);		// NPC 이미지
 	IMAGEMANAGER->addFrameImage("BardKnightJump", "./image/npc/bardKnight_jump.bmp", 798, 52, 14, 1, true, RGB(255, 0, 255), false);
 	IMAGEMANAGER->addFrameImage("BardKnightPlaying", "./image/npc/bardKnight_playing.bmp", 720, 39, 16, 1, true, RGB(255, 0, 255), false);
 
@@ -47,7 +47,7 @@ HRESULT BardKnight::init()
 	_npcType = BARDKNIGHT;							//NPC타입
 
 	_isCollision = false;							//플레이어와 충돌했는가? true : 그렇다, false : 아니다
-	_isAppear = false;								//기본상태로 맵에서 등장하지 않는다.
+	_isAppear = true;								//기본상태로 맵에서 등장하지 않는다.
 
 	int arrIDLE1[26];
 	for (int i = 0; i < 26; ++i)
@@ -73,16 +73,28 @@ void BardKnight::changeEffectSound()
 
 
 
-//void BardKnight::render()
-//{
-//	//if (_isAppear)
-//	//{
-//	//	draw();
-//	//}
-//}
-//
-//void BardKnight::draw()
-//{
-//	//_img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
-//	//CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
-//}
+void BardKnight::render()
+{
+	if (_isAppear == true)
+	{
+		draw();
+	}
+	if (KEYMANAGER->isToggleKey(VK_TAB))
+	{
+		Rectangle(getMemDC(), CAMERAMANAGER->getX(_rc.left),
+			CAMERAMANAGER->getY(_rc.top),
+			CAMERAMANAGER->getX(_rc.right),
+			CAMERAMANAGER->getY(_rc.bottom));
+	}
+}
+
+void BardKnight::draw()
+{
+	//_img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
+	CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
+}
+
+void BardKnight::update()
+{
+	npcBase::update();
+}

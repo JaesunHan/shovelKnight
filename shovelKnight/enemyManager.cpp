@@ -22,9 +22,10 @@ HRESULT enemyManager::init()
 	if (_enemyIsOn[0])
 	{
 		setEnemy(ENEMY_BEETO, 200, 70);
-		setEnemy(ENEMY_BLORB, 300, 70);
+		setEnemy(ENEMY_BLORB, 300, 200);
 		setEnemy(ELEMY_DRAKE, 400, 150);
 		setEnemy(ENEMY_DRAGON, 400, 200);
+		setEnemy(ENEMY_SKELETON, 200, 150);
 	}
 	//====================================
 
@@ -48,23 +49,23 @@ void enemyManager::update()
 	}
 
 	//데드 TEST
-	//for (int i = 0; i < _vDragon.size(); i++)
+	//for (int i = 0; i < _vEnemy.size(); i++)
 	//{
-	//	if (KEYMANAGER->isOnceKeyDown('K'))
+	//	if (KEYMANAGER->isOnceKeyDown('1'))
 	//	{
-	//		if (_vDragon[i]->getStatus() == ENEMY_LEFT_MOVE)
+	//		if (_vEnemy[i]->getStatus() == ENEMY_LEFT_MOVE)
 	//		{
-	//			_vDragon[i]->setStatus(ENEMY_LEFT_DEAD);
+	//			_vEnemy[i]->setStatus(ENEMY_LEFT_DEAD);
 	//		}
-	//		else if (_vDragon[i]->getStatus() == ENEMY_RIGHT_MOVE)
+	//		else if (_vEnemy[i]->getStatus() == ENEMY_RIGHT_MOVE)
 	//		{
-	//			_vDragon[i]->setStatus(ENEMY_RIGHT_DEAD);
+	//			_vEnemy[i]->setStatus(ENEMY_RIGHT_DEAD);
 	//		}
 	//	}
 	//	//죽었으면 벡터에서 지우기
-	//	if (_vDragon[i]->getIsDeadVanish() == true)
+	//	if (_vEnemy[i]->getIsDeadVanish() == true)
 	//	{
-	//		removeBossDragon(i);
+	//		removeEnemy(i);
 	//	}
 	//}
 	//화면밖으로 사라지면 제거
@@ -97,53 +98,51 @@ void enemyManager::render()
 //                          에네미 종류          X좌표         Y좌표        
 void enemyManager::setEnemy(ENEMYTYPE enemyType, float enemyX, float enemyY)
 {
-	for (int i = 0; i < 2; ++i)
+	enemyBase* minion;
+
+	switch (enemyType)
 	{
-		enemyBase* minion;
+		case ENEMY_BEETO:
 
-		switch (enemyType)
-		{
-			case ENEMY_BEETO:
+			minion = new minion1;
+			minion->init(enemyX, enemyY);
 
-				minion = new minion1;
-				minion->init(enemyX, enemyY);
+		break;
+		case ENEMY_BLORB:
 
-			break;
-			case ENEMY_BLORB:
+			minion = new minion2;
+			minion->init(enemyX, enemyY);
+		
+		break;
+		case ELEMY_DRAKE:
 
-				minion = new minion2;
-				minion->init(enemyX, enemyY);
-			
-			break;
-			case ELEMY_DRAKE:
+			minion = new minion3;
+			minion->init(enemyX, enemyY);
 
-				minion = new minion3;
-				minion->init(enemyX, enemyY);
-	
-			break;
-			case ENEMY_SKELETON:
-	
-				//minion = new minion4;
-				//minion->init(enemyX, enemyY);
+		break;
+		case ENEMY_SKELETON:
 
-			break;
-			case ENEMY_DRAGON:
+			minion = new skeleton;
+			minion->init(enemyX, enemyY);
 
-				minion = new boss1;
-				minion->init(enemyX, enemyY);
+		break;
+		case ENEMY_DRAGON:
 
-			break;
-			case ENEMY_BLACKKNIGHT:
+			minion = new boss1;
+			minion->init(enemyX, enemyY);
 
-				//minion = new boss2;
-				//minion->init(enemyX, enemyY);
+		break;
+		case ENEMY_BLACKKNIGHT:
 
-			break;
-		}
-	
+			//minion = new boss2;
+			//minion->init(enemyX, enemyY);
 
-		_vEnemy.push_back(minion);
+		break;
 	}
+
+
+	_vEnemy.push_back(minion);
+
 }
 
 void enemyManager::removeEnemy(int arrNum)

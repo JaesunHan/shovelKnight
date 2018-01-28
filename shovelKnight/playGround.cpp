@@ -32,6 +32,7 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene(_GPS->getSceneName(), _GPS);
 	//SCENEMANAGER->changeScene(_GPS->getSceneName());
 
+	SOUNDMANAGER->addSound("GamePlayBGM", "./sound/ost/Shovel Knight Soundtrack - 04 - Strike the Earth! (Plains of Passage).mp3", true, true);
 	
 	return S_OK;
 }
@@ -51,6 +52,8 @@ void playGround::update(void)
 
 	if (KEYMANAGER->isOnceKeyDown('T'))
 	{
+		SOUNDMANAGER->stop("MainTheme");
+		SOUNDMANAGER->play("GamePlayBGM", 0.3f);
 		SCENEMANAGER->changeScene(_GPS->getSceneName());
 	}
 

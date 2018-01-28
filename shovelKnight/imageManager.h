@@ -18,11 +18,11 @@ public:
 	void release(void);
 
 	image* addImage(string strKey, int width, int height);
-	image* addImage(string strKey, const char* fileName, int width, int height, bool trans, COLORREF transColor, BOOL alphablend = FALSE);
-	image* addImage(string strKey, const char* fileName, float x, float y, int width, int height, bool trans, COLORREF transColor, BOOL alphablend = FALSE);
+	image* addImage(string strKey, const char* fileName, int width, int height, BOOL trans = TRUE, COLORREF transColor = MAZEN, BOOL alphablend = FALSE);
+	image* addImage(string strKey, const char* fileName, float x, float y, int width, int height, BOOL trans = TRUE, COLORREF transColor = MAZEN, BOOL alphablend = FALSE);
 
-	image* addFrameImage(string strKey, const char* fileName, float x, float y, int width, int height, int frameX, int frameY, bool trans, COLORREF transColor, BOOL alphablend = FALSE);
-	image* addFrameImage(string strKey, const char* fileName, int width, int height, int frameX, int frameY, bool trans, COLORREF transColor, BOOL alphablend = FALSE);
+	image* addFrameImage(string strKey, const char* fileName, float x, float y, int width, int height, int frameX, int frameY, BOOL trans = TRUE, COLORREF transColor = MAZEN, BOOL alphablend = FALSE);
+	image* addFrameImage(string strKey, const char* fileName, int width, int height, int frameX, int frameY, BOOL trans = TRUE, COLORREF transColor = MAZEN, BOOL alphablend = FALSE);
 
 	image* findImage(string strKey);
 
@@ -35,8 +35,11 @@ public:
 	void render(string strKey, HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight);
 
 	//ÇÁ·¹ÀÓ ·»´õ
+	void frameRender(string strKey, HDC hdc, int destX, int destY);
+	void frameRender(string strKey, HDC hdc, int destX, int destY, int currentFrameX, int currentFrameY);
 
 	//·çÇÁ·»´õ
+	void loopRender(string strKey, HDC hdc, const LPRECT drawArea, int offSetX, int offSetY);
 
 	//¾ËÆÄ·»´õ
 	void alphaRender(string strKey, HDC hdc, BYTE alpha);
