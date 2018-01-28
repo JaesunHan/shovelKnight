@@ -174,7 +174,6 @@ void minion1::move()
 		case ENEMY_RIGHT_DEAD:
 			_anim = KEYANIMANAGER->findAnimation("beetoRighttDead");
 
-
 			//에니메이션
 			if (!_anim->isPlay() && !_isDead)
 			{
@@ -193,6 +192,35 @@ void minion1::move()
 
 			//벡터에서 지울 불값 설정
 			if (_isDead && _jump->getIsJumping() == false)
+			{
+				_vanishTime++;
+				if (_vanishTime % 20 == 0)
+				{
+					_isDeadVanish = true;
+					_vanishTime = 1;
+				}
+			}
+		break;
+		case ENEMY_LEFT_JUMP_DEAD: ENEMY_RIGHT_JUMP_DEAD:
+			if (_direction)
+			{
+				_anim = KEYANIMANAGER->findAnimation("beetoRightDead");
+			}
+			else
+			{
+				_anim = KEYANIMANAGER->findAnimation("beetoLeftDead");
+			}
+			
+
+			//에니메이션
+			if (!_anim->isPlay() && !_isDead)
+			{
+				_anim->start();
+				_isDead = true;
+			}
+
+			//벡터에서 지울 불값 설정
+			if (_isDead)
 			{
 				_vanishTime++;
 				if (_vanishTime % 20 == 0)
