@@ -49,10 +49,10 @@ void npcBase::render()
 {
 	//자식클래스에 있는 draw() 이던지, 아니면 부모클래스에 있는 draw() 던지 하나는 출력된다.
 	//필요하다면 자식클래스의 draw() 함수에서 부모클래스의 draw()를 호출하도록 하자
-	draw();
+	//draw();
 }
 void npcBase::draw()
 {
 	//_img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
-	CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
+	//CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
 }

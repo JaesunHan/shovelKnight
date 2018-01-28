@@ -63,15 +63,7 @@ HRESULT MagicGirl::init()
 	return S_OK;
 }
 
-void MagicGirl::render()
-{
-	npcBase::render();
-}
 
-void MagicGirl::draw()
-{
-	npcBase::draw();
-}
 
 void MagicGirl::sellSkill()
 {
@@ -86,7 +78,7 @@ void MagicGirl::stockCount()
 
 void MagicGirl::render()
 {
-	if (_isAppear)
+	if (_isAppear==true)
 	{
 		draw();
 	}

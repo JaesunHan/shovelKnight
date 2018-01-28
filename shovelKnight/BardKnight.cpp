@@ -75,7 +75,7 @@ void BardKnight::changeEffectSound()
 
 void BardKnight::render()
 {
-	if (_isAppear)
+	if (_isAppear == true)
 	{
 		draw();
 	}

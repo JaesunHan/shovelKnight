@@ -69,7 +69,7 @@ void HealtyGuy::sellHpItem()
 
 void HealtyGuy::render()
 {
-	if (_isAppear)
+	if (_isAppear == true)
 	{
 		draw();
 	}
