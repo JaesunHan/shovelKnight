@@ -140,6 +140,8 @@ void gameCollision::PlayerMeetNPC()
 		_player->setMoney(_store->getVNpc()[i]->getMinusMoney());
 		_player->setSkillUnlockLv(_store->getVNpc()[i]->getSkillUnlockLv());
 
+		_player->setMaxHP(_store->getVNpc()[i]->getMaxHp());
+		_store->getVNpc()[i]->setMaxHp(_player->getMaxHP());
 		
 
 

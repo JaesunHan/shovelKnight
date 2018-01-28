@@ -28,13 +28,14 @@ public:
 	int _bgmPrice;									//배경음 가격
 	int _effectSoundPrice;							//이펙트 사운드 가격  -> 삽질 사운드만 
 	
+	
 
 	//==========팔렸는지 확인용 변수들==========//
 	int _stock;										//몇번이나 상점에서 구매했는지 확인 변수
 	bool _isSellBgm;								//브금 팔렸는지
 	bool _isSellEffectSound;						//이펙트 사운드 팔렸는지
 	//bool _isCollisionNpc;								//NPC와 충돌
-
+	bool _isChange;						
 	//==========스킬 스토어 관련 함수===============//
 	void changeBGM();								//스킬 파는 함수
 	void changeEffectSound();
@@ -44,6 +45,7 @@ public:
 	virtual void update();
 
 	virtual void isCollision(bool collision);
+	void soundChange();
 	
 };
 

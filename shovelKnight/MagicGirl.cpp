@@ -153,13 +153,14 @@ void MagicGirl::render()
 	if (_isAppear==true)
 	{
 		draw();
-	}
-	if (KEYMANAGER->isToggleKey(VK_TAB))
-	{
-		Rectangle(getMemDC(), CAMERAMANAGER->getX(_rc.left),
-			CAMERAMANAGER->getY(_rc.top),
-			CAMERAMANAGER->getX(_rc.right),
-			CAMERAMANAGER->getY(_rc.bottom));
+	
+		if (KEYMANAGER->isToggleKey(VK_TAB))
+		{
+			Rectangle(getMemDC(), CAMERAMANAGER->getX(_rc.left),
+				CAMERAMANAGER->getY(_rc.top),
+				CAMERAMANAGER->getX(_rc.right),
+				CAMERAMANAGER->getY(_rc.bottom));
+		}
 	}
 }
 
@@ -172,8 +173,5 @@ void MagicGirl::draw()
 void MagicGirl::update()
 {
 	npcBase::update();
-<<<<<<< HEAD
-=======
 
->>>>>>> a48ceef96cbbb73efae9a4c4e612783bbbe9e453
 }

@@ -16,6 +16,7 @@ enum LETTERBOX
 #define selectRect	6
 
 
+
 class optionMenu : public menuBase
 {
 public:
@@ -34,6 +35,8 @@ public:
 
 
 	soundMenu* _sm;
+	
+
 
 	RECT _rcOption[selectRect];			//뒤로, 게임, 조작, 사운드, 그래픽, 데이터 삭제를 선택하기 위한 렉트를 깐다.
 	int _indexRc;						//인덱스 RC
@@ -54,5 +57,7 @@ public:
 
 	optionMenu();
 	~optionMenu();
+
+	
 };
 
