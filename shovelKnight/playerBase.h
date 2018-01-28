@@ -82,6 +82,7 @@ protected :
 	bool _isDamaged = false;				//맞았는지
 	bool				_skillUsed;				//스킬발동했는지
 	bool				_isDead;				//죽었냐?
+	bool _invincibility = false;
 
 	stageManager* _SM;
 	gameCollision* _GC;
@@ -121,7 +122,16 @@ public:
 	inline RECT getPlayerRc() { return _playerRC; }
 	//IDLE = 0, MOVE = 1, ATTACK = 2, JUMP = 3, ROOTING = 4, DAMAGED = 5, DIE = 6
 	inline int getPlayerAction() { return _action; }
-	inline void setDamagePlayer() { _isDamaged = true; }
+	inline void setDamagePlayer() 
+	{ 
+		if (_invincibility == false)
+		{
+			_counter = 0;
+			_currentHP--;
+			_isDamaged = true;
+			_invincibility = true;
+		}
+	}
 	
 };
 

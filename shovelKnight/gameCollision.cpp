@@ -44,7 +44,7 @@ void gameCollision::render()
 
 	RECT rc = _player->getPlayerRc();
 
-	for (int i = 0; i < _store->getVNpc().size; ++i)
+	for (int i = 0; i < _store->getVNpc().size(); ++i)
 	{
 		if (_store->getVNpc()[i]->getNpcType() != MAGICGIRL) continue;
 
