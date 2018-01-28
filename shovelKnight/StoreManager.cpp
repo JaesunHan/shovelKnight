@@ -50,7 +50,7 @@ void StoreManager::update()
 	{
 		//NPC벡터를 업데이트에서 계속 돌다가
 
-
+		
 		//if (playerCollisionNpc) // 충돌했으면? <- collision매니저에서 받아서 돌린다.
 		//{
 			sellPlayerSkill(_viNpc);		//스킬상인과의 상호작용
@@ -60,6 +60,8 @@ void StoreManager::update()
 		(*_viNpc)->update();
 	}
 	
+
+	//_vNpc[0]->update();
 	
 }
 

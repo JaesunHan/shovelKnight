@@ -41,6 +41,21 @@ void gameCollision::update()
 
 void gameCollision::render()
 {
+
+	RECT rc = _player->getPlayerRc();
+
+	for (int i = 0; i < _store->getVNpc().size; ++i)
+	{
+		if (_store->getVNpc()[i]->getNpcType() != MAGICGIRL) continue;
+
+		RECT rc2 = _store->getVNpc()[i]->getRect();
+
+		TTTextOut(300, 300, "RC2left", rc2.left);
+		TTTextOut(300, 320, "RC2Top", rc2.top);
+	}
+
+	TTTextOut(400, 10, "PLeft", rc.left);
+	TTTextOut(400, 30, "PLetop", rc.top);
 }
 
 void gameCollision::enemyDead()

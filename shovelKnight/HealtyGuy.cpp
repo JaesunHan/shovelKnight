@@ -73,10 +73,22 @@ void HealtyGuy::render()
 	{
 		draw();
 	}
+	if (KEYMANAGER->isToggleKey(VK_TAB))
+	{
+		Rectangle(getMemDC(), CAMERAMANAGER->getX(_rc.left),
+			CAMERAMANAGER->getY(_rc.top),
+			CAMERAMANAGER->getX(_rc.right),
+			CAMERAMANAGER->getY(_rc.bottom));
+	}
 }
 
 void HealtyGuy::draw()
 {
 	//_img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
 	CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
+}
+
+void HealtyGuy::update()
+{
+	npcBase::update();
 }
