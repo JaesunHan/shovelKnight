@@ -151,32 +151,32 @@ void minion2::update()
 
 
 	//hp=0일경우 상태 변경
-	//if (_enemyHp <= 0)
-	//{
-	//	if (_playerStatus == 3) //플레이어가 점프상태일 경우
-	//	{
-	//		if (_direction)
-	//		{
-	//			_status = ENEMY_RIGHT_JUMP_DEAD;
-	//		}
-	//		else
-	//		{
-	//			_status = ENEMY_LEFT_JUMP_DEAD;
-	//		}
-	//	}
-	//	else //플레이어가 바닥에서 공격할 경우
-	//	{
-	//		if (_direction)
-	//		{
-	//			_status = ENEMY_RIGHT_DEAD;
-	//		}
-	//		else
-	//		{
-	//			_status = ENEMY_LEFT_DEAD;
-	//		}
-	//	}
+	if (_enemyHp <= 0)
+	{
+		if (_playerStatus == 3) //플레이어가 점프상태일 경우
+		{
+			if (_direction)
+			{
+				_status = ENEMY_RIGHT_JUMP_DEAD;
+			}
+			else
+			{
+				_status = ENEMY_LEFT_JUMP_DEAD;
+			}
+		}
+		else //플레이어가 바닥에서 공격할 경우
+		{
+			if (_direction)
+			{
+				_status = ENEMY_RIGHT_DEAD;
+			}
+			else
+			{
+				_status = ENEMY_LEFT_DEAD;
+			}
+		}
 
-	//}
+	}
 
 
 
@@ -283,20 +283,7 @@ void minion2::move()
 			}
 			else
 			{
-				if (_enemyHp <= 0)
-				{
-					//벡터에서 지울 불값 설정
-					_vanishTime++;
-					if (_vanishTime % 20 == 0)
-					{
-						_isDeadVanish = true;
-						_vanishTime = 1;
-					}
-				}
-				else
-				{
-					_status = _previousStatus;
-				}				
+				_status = _previousStatus;
 			}
 	
 			
@@ -354,7 +341,7 @@ void minion2::move()
 			if (_isDead && !_jump->getIsJumping())
 			{
 				_vanishTime++;
-				if (_vanishTime % 50 == 0)
+				if (_vanishTime % 20 == 0)
 				{
 					_isDeadVanish = true;
 					_vanishTime = 1;
@@ -383,7 +370,7 @@ void minion2::move()
 			if (_isDead)
 			{
 				_vanishTime++;
-				if (_vanishTime % 50 == 0)
+				if (_vanishTime % 20 == 0)
 				{
 					_isDeadVanish = true;
 					_vanishTime = 1;
