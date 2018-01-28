@@ -27,7 +27,6 @@ void gameCollision::update()
 	//enemyDetectPlayer();
 	PlayerMeetNPC();
 
-
 	//collisionPlayerMapRight();
 	//collisionPlayerMapLeft();
 	//collisionPlayerMapDown(); 
@@ -103,14 +102,14 @@ void gameCollision::enemyDead()
 	}
 }
 
-//void gameCollision::enemyDetectPlayer()
-//{
-//	for (int i = 0; i != _enemy->getVEnemy().size(); ++i)
-//	{
-//		_enemy->getVEnemy()[i]->setPlayerDistance(_player->getX());
-//		_enemy->getVEnemy()[i]->setPlayerStatus(_player->getAction());
-//	}
-//}
+void gameCollision::enemyDetectPlayer()
+{
+	for (int i = 0; i != _enemy->getVEnemy().size(); ++i)
+	{
+		//_enemy->getVEnemy()[i]->getPlayerX(_player->getX());
+		//_enemy->getVEnemy()[i]->getPlayerStatus(_player->getPlayerAction());
+	}
+}
 
 void gameCollision::PlayerMeetNPC()
 {
@@ -123,7 +122,7 @@ void gameCollision::PlayerMeetNPC()
 		}
 		else
 		{
-			_store->getVNpc()[i]->setIsCollision(true);
+			_store->getVNpc()[i]->setIsCollision(false);
 		}
 	}
 }
