@@ -119,9 +119,29 @@ public:
 	inline void setSMMemoryAddressLink(stageManager* sm) { _SM = sm; }
 	inline void setGameCollisinMemoryAddressLink(gameCollision* gc) { _GC = gc; }
 	inline void setPause(bool pause) { _pause = pause; }
-	inline RECT getPlayerRc() { return _playerRC; }
+	inline RECT getPlayerRC() { return _playerRC; }
+	inline RECT getAttackRC() { return _attackRC; }
 	//IDLE = 0, MOVE = 1, ATTACK = 2, JUMP = 3, ROOTING = 4, DAMAGED = 5, DIE = 6
 	inline int getPlayerAction() { return _action; }
+	inline void setAttackReaction() 
+	{
+		if (_downwardThrust == true)
+		{
+			_jumpPower = 4;
+			_jumpCounter = 30;
+		}
+		else
+		{
+			if (_direction == RIGHT)
+			{
+				_x -= 2;
+			}
+			else if (_direction == LEFT)
+			{
+				_x += 2;
+			}
+		}
+	}
 	inline void setDamagePlayer() 
 	{ 
 		if (_invincibility == false)
