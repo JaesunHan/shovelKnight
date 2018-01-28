@@ -124,7 +124,7 @@ void gameCollision::PlayerMeetNPC()
 	RECT temp;
 	for (int i = 0; i != _store->getVNpc().size(); ++i)
 	{
-<<<<<<< HEAD
+
 
 
 
@@ -142,10 +142,9 @@ void gameCollision::PlayerMeetNPC()
 
 
 
-		if (IntersectRect(&temp, &_player->getPlayerRc(), &_store->getVNpc()[i]->getRect()))
-=======
+
 		if (IntersectRect(&temp, &_player->getPlayerRC(), &_store->getVNpc()[i]->getRect()))
->>>>>>> d4eeb7e78dd05bb4629681b712b5805b94a114b5
+
 		{
 			_store->getVNpc()[i]->isCollision(true);
 		}
