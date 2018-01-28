@@ -15,7 +15,7 @@ enum ENEMYSTATUS
 	ENEMY_LEFT_BACK_MOVE,
 	ENEMY_LEFT_JUMP,
 	ENEMY_RIGHT_JUMP,
-	ENMEY_LEFT_ATTACK,
+	ENEMY_LEFT_ATTACK,
 	ENEMY_RIGHT_ATTACK,
 	ENEMY_LEFT_JUMP_ATTACK,
 	ENEMY_RIGHT_JUMP_ATTACK,
@@ -48,12 +48,12 @@ protected:
 
 	char* _imgFileName;			//이미지 파일 이름(경로 포함)
 	float _x, _y;				//적의 중점좌표
-	//float _jumpPower;			//점프 파워
-	float _gravity;			//적용할 중력
+	float _gravity;				//적용할 중력
 	int _width, _height;		//적의 가로, 세로 크기(렉트를 만들 때 사용할 가로세로크기이다.)
 	float _angle;               //이동 각도
 
-	float _playerDistance;		//플레이어와의 거리
+	float _getPlayerX;             //플레이어 x좌표 get
+	int _playerStatus;          //플레이어 상태
 	float _speed;				//스피드
 	bool _isDead;				//죽었는지 여부
 	bool _isDeadVanish;			//죽고 벡터에서 지울 불값
@@ -62,7 +62,7 @@ protected:
 	bool _isJump;               //점프여부
 	int _jumpCount;             //점프카운트
 	int _directionCount;        //방향전환 카운트
-	bool _isPlayerFind;         //플레이어 발견
+	bool _isHit;                //플레이어 어택 충돌
 	int _enemyHp;               //적 체력
 
 	ENEMYTYPE _enemyType;       //에너미타입
@@ -86,7 +86,7 @@ public:
 
 	virtual HRESULT init(float x, float y) = 0;
 	virtual void move() = 0;
-	bool isPlayerFind(float playerX, float playerY, int distance);
+	bool isPlayerFind(float enemyX, int distance);
 
 	//==================================== Start 게터 세터 작성하기===================================
 
@@ -107,14 +107,15 @@ public:
 	//적 상태 접근자 & 설정자
 	ENEMYSTATUS getStatus() { return _status; }   	
 	void setStatus(ENEMYSTATUS status) { _status = status; }
-	bool getIsDeadVanish() { return _isDeadVanish; }   //죽고 사라지는 불값
-	ENEMYTYPE getEnemyType() { return _enemyType; }    //에네미타입
+	bool getIsDeadVanish() { return _isDeadVanish; }					//죽고 사라지는 불값
+	ENEMYTYPE getEnemyType() { return _enemyType; }						//에네미타입
 
-	//플레이어 발견 접근자
-	void setPlayerFind(bool playerFind) { _isPlayerFind = playerFind; }
+	//플레이어 참조 접근자
+	void getPlayerX(float playerX) { _getPlayerX = playerX; }			//플레이어 X    get
+	void getPlayerStatus(int status) { _playerStatus = status; }        //플레이어 상태 get
 
 	//데미지 설정자
-	void setEnemyDamage(int damage) { _enemyHp -= damage; }
+	void setEnemyDamage(bool damage) { _isHit = damage; }
 
 	//==================================== End 게터 세터 작성하기===================================
 
