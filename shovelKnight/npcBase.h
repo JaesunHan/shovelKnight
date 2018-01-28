@@ -99,11 +99,19 @@ public:
 	int getSkillUnlockLv() { return _skillUnlockLv; }
 	void setSkillUnlockLv(int asd) { _skillUnlockLv = asd; }
 
+
 	int _money;
 	void setMoney(int asd) { _money = asd; }
 
+	//돈감소
 	int _minusMoney;
 	int getMinusMoney() { return _minusMoney; }
+
+	//체력상인용 체력겟셋
+	int _setMaxHp;
+	void setMaxHp(int setMaxHp) { _setMaxHp = setMaxHp; }
+	int getMaxHp() { return _setMaxHp; }
+
 
 
 	//==================================== End 게터 세터 작성하기===================================

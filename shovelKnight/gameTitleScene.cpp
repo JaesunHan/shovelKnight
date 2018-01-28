@@ -131,7 +131,7 @@ void gameTitleScene::render()
 }
 void gameTitleScene::draw()	  
 {
-	//백그라운드 이미지 출력
+	//백그라운드 이미지 출력ckrrkr
 	_backgroundImg->render(getMemDC(), 0, 0);
 	//삽 이미지가 출력될 수 있는ㄴ 위치 렉트 출력하기
 	if (KEYMANAGER->isStayKeyDown('G'))
