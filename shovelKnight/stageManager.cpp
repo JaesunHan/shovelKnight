@@ -51,10 +51,15 @@ void stageManager::update()
 			if (IntersectRect(&temp, &_PM->getPlayerRc(), &_mapTransition[i].rc))
 			{
 				_transitionNum = i;
-				if (_mapTransition[i].direction != 0)
+				if (_mapTransition[i].direction == 1)
 				{
 					_PM->setPlayerPause(true);
 					_PM->setX(_PM->getX() - _currentMapWidth + 400);
+				}
+				if (_mapTransition[i].direction == 3)
+				{
+					_PM->setPlayerPause(true);
+					_PM->setX(_PM->getX() + 400);
 				}
 				if (_mapTransition[i].direction == 0) _warpTransition = true;
 				else _warpTransition = false;
@@ -308,30 +313,34 @@ void stageManager::transition()
 
 void stageManager::renderTransitionTiles()
 {
-	for (int i = _transverseTileNum - 25; i < _transverseTileNum; ++i)						//¸Ê °¡·Î Å¸ÀÏ °¹¼ö
+	if (_mapTransition[_transitionNum].direction == 1)
 	{
-		for (int j = 0; j < _verticalTileNum; ++j)						//¸Ê ¼¼·Î Å¸ÀÏ °¹¼ö
+		for (int i = _transverseTileNum - 25; i < _transverseTileNum; ++i)
 		{
-			if (_vTileNum[(i * _verticalTileNum) + j] == 0) continue;
-			if ((_vTileNum[(i * _verticalTileNum) + j] / 10000) == 1)
+			for (int j = 0; j < _verticalTileNum; ++j)
 			{
-				CAMERAMANAGER->renderTile(getMemDC(), IMAGEMANAGER->findImage("tile1"), i - (_transverseTileNum - 25), j,
-					(_vTileNum[(i * _verticalTileNum) + j] / 100) % 100,
-					_vTileNum[(i * _verticalTileNum) + j] % 100, 16);
+				if (_vTileNum[(i * _verticalTileNum) + j] == 0) continue;
+				if ((_vTileNum[(i * _verticalTileNum) + j] / 10000) == 1)
+				{
+					CAMERAMANAGER->renderTile(getMemDC(), IMAGEMANAGER->findImage("tile1"), i - (_transverseTileNum - 25), j,
+						(_vTileNum[(i * _verticalTileNum) + j] / 100) % 100,
+						_vTileNum[(i * _verticalTileNum) + j] % 100, 16);
+				}
+			}
+		}
+		for (int i = 0; i < 25; ++i)
+		{
+			for (int j = 0; j < 15; ++j)
+			{
+				if (_vTransitionTileNum[(i * _verticalTileNum) + j] == 0) continue;
+				if ((_vTransitionTileNum[(i * _verticalTileNum) + j] / 10000) == 1)
+				{
+					CAMERAMANAGER->renderTile(getMemDC(), IMAGEMANAGER->findImage("tempTile1"), i + 25, j,
+						(_vTileNum[(i * _verticalTileNum) + j] / 100) % 100,
+						_vTileNum[(i * _verticalTileNum) + j] % 100, 16);
+				}
 			}
 		}
 	}
-	for (int i = 0; i < 25; ++i)
-	{
-		for (int j = 0; j < 15; ++j)
-		{
-			if (_vTransitionTileNum[(i * _verticalTileNum) + j] == 0) continue;
-			if ((_vTransitionTileNum[(i * _verticalTileNum) + j] / 10000) == 1)
-			{
-				CAMERAMANAGER->renderTile(getMemDC(), IMAGEMANAGER->findImage("tempTile1"), i + 25, j,
-					(_vTileNum[(i * _verticalTileNum) + j] / 100) % 100,
-					_vTileNum[(i * _verticalTileNum) + j] % 100, 16);
-			}
-		}
-	}
+	
 }
