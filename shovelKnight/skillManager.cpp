@@ -139,10 +139,6 @@ void skillManager::Fire(SKILL_FIRE chartype, SKILL skill, float x, float y)
 		break;
 	}
 
-	ITEM_MOVE_GRAVITY,
-		ITEM_MOVE_STOP,
-		ITEM_MOVE_PETROL,
-
 	sk->fire(chartype, x, y);
 
 	_vSkill.push_back(sk);

@@ -62,48 +62,38 @@ void itemBase::eatItem()
 
 void itemBase::fire(ITEM_FIRE itemFire, FPOINT pt)
 {
-	switch (_moveType)
+	switch (itemFire)
 	{
-	case ITEM_MOVE_GRAVITY:
-		switch (itemFire)
-		{
-		case ITEM_FIRE_NULL:
-			_speed = 0;
-			break;
-		case ITEM_FIRE_CENTER: case ITEM_FIRE_LEFT: case ITEM_FIRE_RIGHT:
-			_speed = RND->getFromFloatTo(5.f, 6.f);
-			break;
-		}
-
-		switch (itemFire)
-		{
-		case ITEM_FIRE_NULL:
-			_angle = 0;
-			break;
-		case ITEM_FIRE_CENTER:
-			_angle = RND->getFromFloatTo(PI16 * 3, PI16 * 13);
-			break;
-		case ITEM_FIRE_LEFT:
-			_angle = RND->getFromFloatTo(PI16 * 10, PI16 * 13);
-			break;
-		case ITEM_FIRE_RIGHT:
-			_angle = RND->getFromFloatTo(PI16 * 3, PI16 * 6);
-			break;
-		}
-		_gravity = 0.3f;
-		_stats = ITEM_STATS_GRAVITY;
+	case ITEM_FIRE_NULL:
+		_speed = 0;
 		break;
-	case ITEM_MOVE_STOP:
-		break;
-	case ITEM_MOVE_PETROL:
+	case ITEM_FIRE_CENTER: case ITEM_FIRE_LEFT: case ITEM_FIRE_RIGHT:
+		_speed = RND->getFromFloatTo(5.f, 6.f);
 		break;
 	}
-	
-	//1.7ch
+
+	switch (itemFire)
+	{
+	case ITEM_FIRE_NULL:
+		_angle = 0;
+		break;
+	case ITEM_FIRE_CENTER:
+		_angle = RND->getFromFloatTo(PI16 * 3, PI16 * 13);
+		break;
+	case ITEM_FIRE_LEFT:
+		_angle = RND->getFromFloatTo(PI16 * 10, PI16 * 13);
+		break;
+	case ITEM_FIRE_RIGHT:
+		_angle = RND->getFromFloatTo(PI16 * 3, PI16 * 6);
+		break;
+	}
+
 	
 
 	_pt = pt;
 
+	_gravity = 0.3f;
+	_stats = ITEM_STATS_GRAVITY;
 	_img = IMAGEMANAGER->findImage(_imgName);
 	_imgWidth =	_img->getFrameWidth();
 	_imgHeight =_img->getFrameHeight();

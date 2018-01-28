@@ -16,10 +16,6 @@ private:
 	skillManager* _skill;
 	playerManager* _player;
 
-
-
-	bool _playerMeetNPC;
-
 public:
 	gameCollision();
 	~gameCollision();
