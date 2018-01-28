@@ -56,44 +56,24 @@ void itemManager::release()
 
 void itemManager::update()
 {
-	if (KEYMANAGER->isOnceKeyDown('Z'))
-	{
-		Fire(ITEM_FIRE_LEFT, ITEM_APPLE, WINSIZEX / 2, WINSIZEY / 2);
-	}
-	
-	if (KEYMANAGER->isOnceKeyDown('X'))//
+	if (KEYMANAGER->isOnceKeyDown('Z'))//
 	{
 		Fire(ITEM_FIRE_NULL, ITEM_GEMS_DIAPINK, WINSIZEX / 2, WINSIZEY / 2);
 	}
 	
-	if (KEYMANAGER->isOnceKeyDown('C'))//
+	if (KEYMANAGER->isOnceKeyDown('X'))//
 	{
 		Fire(ITEM_FIRE_NULL, ITEM_GEMS_DIARED, WINSIZEX / 2, WINSIZEY / 2);
 	}
 	
-	if (KEYMANAGER->isOnceKeyDown('V'))//
+	if (KEYMANAGER->isOnceKeyDown('C'))//
 	{
 		Fire(ITEM_FIRE_NULL, ITEM_GEMS_EMERALD, WINSIZEX / 2, WINSIZEY / 2);
 	}
 	
-	if (KEYMANAGER->isOnceKeyDown('B'))
-	{
-		Fire(ITEM_FIRE_LEFT, ITEM_GEMS_MONEY, WINSIZEX / 2, WINSIZEY / 2);
-	}
-	
-	if (KEYMANAGER->isOnceKeyDown('N'))
-	{
-		Fire(ITEM_FIRE_LEFT, ITEM_GEMS_SAPPHIRE, WINSIZEX / 2, WINSIZEY / 2);
-	}
-	
-	if (KEYMANAGER->isOnceKeyDown('M'))//
+	if (KEYMANAGER->isOnceKeyDown('V'))//
 	{
 		Fire(ITEM_FIRE_NULL, ITEM_MONEYBUNCH, WINSIZEX / 2, WINSIZEY / 2);
-	}
-	
-	if (KEYMANAGER->isOnceKeyDown('L'))
-	{
-		Fire(ITEM_FIRE_LEFT, ITEM_GEMS_SILVER, WINSIZEX / 2, WINSIZEY / 2);
 	}
 
 

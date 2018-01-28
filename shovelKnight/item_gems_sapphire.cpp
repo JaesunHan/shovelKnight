@@ -18,7 +18,6 @@ HRESULT item_gems_sapphire::init()
 	sprintf(str, "%s%s", _imgName, ".bmp");
 
 	_img = IMAGEMANAGER->addFrameImage(_imgName, str, 9, 12, 1, 1);
-	itemBase::init();
 
 	return S_OK;
 }
