@@ -27,6 +27,7 @@ private:
 	int _currentMapWidth = 0;
 	int _nextMapWidth = 0;
 	int _transitionCounter = 0;
+	int _transitionMapTransverseTileNum = 0;
 	bool _mapLoaded = false;
 	bool _transition = false;
 	bool _nextMap;
