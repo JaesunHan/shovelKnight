@@ -15,6 +15,7 @@ BardKnight::~BardKnight()
 
 HRESULT BardKnight::init()
 {
+	npcBase::init();
 	//==========가격 세팅 변수===========//
 	_bgmPrice = 100;								//브금체인지 가격
 	_effectSoundPrice = 500;						//이펙트사운드 체인지 가격
@@ -46,7 +47,7 @@ HRESULT BardKnight::init()
 	_rc = RectMakeCenter(_x, _y, _width, _height);	//상점NPC 렉트
 	_npcType = BARDKNIGHT;							//NPC타입
 
-	_isCollision = false;							//플레이어와 충돌했는가? true : 그렇다, false : 아니다
+	_isCollisionNpc = false;							//플레이어와 충돌했는가? true : 그렇다, false : 아니다
 	_isAppear = true;								//기본상태로 맵에서 등장하지 않는다.
 
 	int arrIDLE1[26];
@@ -97,4 +98,8 @@ void BardKnight::draw()
 void BardKnight::update()
 {
 	npcBase::update();
+}
+
+void BardKnight::isCollision(bool collision)
+{
 }

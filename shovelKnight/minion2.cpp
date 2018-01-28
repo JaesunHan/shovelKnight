@@ -61,6 +61,8 @@ HRESULT minion2::init(float x, float y)
 	_jumpTime = 1;
 	_isJump = false;
 	_jumpCount = 1;
+	_enemyHp = 2;
+	_isHit = false;
 
 	_rc = RectMakeCenter(_x, _y, _img->getFrameWidth(), _height);
 

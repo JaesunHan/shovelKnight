@@ -60,8 +60,8 @@ HRESULT skeleton::init(float x, float y)
 	_gravity = 0.0f;
 	_directionCount = 1;
 	_angle = 0.0f;
+	_enemyHp = 3;
 	_isHit = false;
-
 
 	_anim = KEYANIMANAGER->findAnimation("skeletonLeftIdle");
 

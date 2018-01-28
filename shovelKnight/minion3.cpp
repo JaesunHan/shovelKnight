@@ -50,6 +50,8 @@ HRESULT minion3::init(float x, float y)
 	_gravity = 0.0f;
 	_directionCount = 1;
 	_angle = 0.0f;
+	_enemyHp = 2;
+	_isHit = false;
 
 
 	_anim = KEYANIMANAGER->findAnimation("drakeLeftMove");

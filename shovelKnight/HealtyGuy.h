@@ -32,7 +32,7 @@ public:
 	int _stock;										//몇번이나 상점에서 구매했는지 확인 변수
 	bool _isSellChicken;							//치킨팔렸니
 	bool _isSellDragonTail;							//용꼬리 팔렸니
-	bool _isCollision;								//NPC와 충돌
+	//bool _isCollisionNpc;								//NPC와 충돌
 
 	//==========스킬 스토어 관련 함수===============//
 	void sellHpItem();								//스킬 파는 함수 
@@ -40,5 +40,7 @@ public:
 	virtual void render();
 	virtual void draw();
 	virtual void update();
+
+	virtual void isCollision(bool collision);
 };
 

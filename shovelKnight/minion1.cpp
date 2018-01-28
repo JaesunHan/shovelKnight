@@ -57,7 +57,8 @@ HRESULT minion1::init(float x, float y)
 	_gravity = 0.0f;
 	_isJump = false;
 	_jumpCount = 1;
-
+	_enemyHp = 1;
+	_isHit = false;
 
 	_anim = KEYANIMANAGER->findAnimation("beetoLeftMove");
 
@@ -72,6 +73,13 @@ HRESULT minion1::init(float x, float y)
 
 void minion1::update()
 {
+	ENEMYSTATUS previousStatus = _status; //직전 에너미 상태 저장
+
+
+	//상태값에 따른 에니메이션 및 움직임
+	move();
+
+
 	//============================================================= 픽셀충돌: 바닥충돌	
 	_pixelC->pixelCollisonY(_rc);  //바닥상태 검출
 
@@ -95,11 +103,11 @@ void minion1::update()
 	{
 		if (_direction)  //현상태가 오른쪽이면
 		{
-			_status = ENEMY_LEFT_MOVE;
+			_status = ENEMY_RIGHT_MOVE;
 		}
 		else            //현상태가 왼쪽이면
 		{
-			_status = ENEMY_RIGHT_MOVE;
+			_status = ENEMY_LEFT_MOVE;
 		}
 
 		_pixelC->setDirectionChange(false);  //초기화
@@ -108,19 +116,63 @@ void minion1::update()
 
 
 
+	//피격상태일 경우 이전상태로 변경
+	if (_status == ENEMY_LEFT_HIT || _status == ENEMY_RIGHT_HIT)
+	{
+		if (!_anim->isPlay())_status = previousStatus;
+	}
 
-	//상태값에 따른 에니메이션 및 움직임
-	move();
+	//데미지 설정
+	if (_isHit)
+	{
+		if (_direction)  //현상태가 오른쪽이면
+		{
+			_status = ENEMY_RIGHT_HIT;
+		}
+		else            //현상태가 왼쪽이면
+		{
+			_status = ENEMY_LEFT_HIT;
+		}
+
+		_enemyHp--;
+		_isHit = false;
+	}
 
 
+
+	//hp=0일경우 상태 변경
+	if (_enemyHp <= 0)
+	{
+		if (_playerStatus == 2) //플레이어가 점프상태일 경우
+		{
+			if (_direction)
+			{
+				_status = ENEMY_RIGHT_DEAD;
+			}
+			else
+			{
+				_status = ENEMY_LEFT_DEAD;
+			}
+		}
+		else //플레이어가 바닥에서 공격할 경우
+		{
+			if (_direction)
+			{
+				_status = ENEMY_RIGHT_JUMP_DEAD;
+			}
+			else
+			{
+				_status = ENEMY_LEFT_JUMP_DEAD;
+			}
+		}
+
+	}
 
 }
 
+
 void minion1::move()
 {
-
-
-
 	//상태값에 따른 에니메이션 및 움직임
 	switch (_status)
 	{
