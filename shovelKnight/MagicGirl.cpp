@@ -96,7 +96,7 @@ void MagicGirl::isCollision(bool collision)
 			////
 
 
-			TTTextOut(300, 300, "으앙충돌", 0);
+			TTTextOut(500, 300, "으앙충돌", 0);
 			if (KEYMANAGER->isOnceKeyDown('O'))				//O눌렀을때
 			{
 				//TTTextOut(300, 300, "으앙충돌", 0);
@@ -136,7 +136,10 @@ void MagicGirl::isCollision(bool collision)
 				}
 			}
 
+			if (KEYMANAGER->isOnceKeyDown('P'))
+			{
 
+			}
 			//NO했을때는 텍스트 아웃으로
 			//"어 그...그래? 안녕 ㅃㅃ " 다이얼로그 출력 ㅃㅃ
 			//_isCollisionNpc == false;
@@ -169,6 +172,8 @@ void MagicGirl::draw()
 void MagicGirl::update()
 {
 	npcBase::update();
-	
-	
+<<<<<<< HEAD
+=======
+
+>>>>>>> a48ceef96cbbb73efae9a4c4e612783bbbe9e453
 }
