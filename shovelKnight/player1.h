@@ -13,5 +13,6 @@ public:
 	void render();
 
 	void control2();
+	void attack();
 };
 
