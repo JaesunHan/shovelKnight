@@ -112,7 +112,7 @@ void player1::render()
 			CAMERAMANAGER->getX(_playerRC.left),
 			CAMERAMANAGER->getY(_playerRC.top),
 			CAMERAMANAGER->getX(_playerRC.right),
-			CAMERAMANAGER->getY(_playerRC.bottom))
+			CAMERAMANAGER->getY(_playerRC.bottom));
 	}
 	//TTTextOut(300, 0, "playerX", _x);
 	//TTTextOut(300, 20, "playerY", _y);
