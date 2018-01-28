@@ -105,6 +105,15 @@ void player1::render()
 	int testy = _y;
 	wsprintf(testY, "playerY : %d", testy);
 	TextOut(getMemDC(), 200, 20, testY, strlen(testY));
+
+	if (KEYMANAGER->isToggleKey(VK_TAB))
+	{
+		Rectangle(getMemDC(),
+			CAMERAMANAGER->getX(_playerRC.left),
+			CAMERAMANAGER->getY(_playerRC.top),
+			CAMERAMANAGER->getX(_playerRC.right),
+			CAMERAMANAGER->getY(_playerRC.bottom))
+	}
 	//TTTextOut(300, 0, "playerX", _x);
 	//TTTextOut(300, 20, "playerY", _y);
 }
