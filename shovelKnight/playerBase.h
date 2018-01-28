@@ -41,6 +41,7 @@ enum PLAYERACTION
 };
 
 class stageManager;
+class gameCollision;
 
 class playerBase : public gameNode
 {
@@ -83,6 +84,7 @@ protected :
 	bool				_isDead;				//ав╬ЗЁд?
 
 	stageManager* _SM;
+	gameCollision* _GC;
 
 public:
 	playerBase();
@@ -114,6 +116,7 @@ public:
 	inline int getSkillUnlockLv() { return _skillUnlockLv; }
 	inline void setSkillUnlockLv(int increaseLv) { _skillUnlockLv += increaseLv; }
 	inline void setSMMemoryAddressLink(stageManager* sm) { _SM = sm; }
+	inline void setGameCollisinMemoryAddressLink(gameCollision* gc) { _GC = gc; }
 	inline void setPause(bool pause) { _pause = pause; }
 	inline RECT getPlayerRc() { return _playerRC; }
 	//IDLE = 0, MOVE = 1, ATTACK = 2, JUMP = 3, ROOTING = 4, DAMAGED = 5, DIE = 6
