@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "playerManager.h"
 #include "stageManager.h"
+#include "gameCollision.h"
 
 playerManager::playerManager()
 {
@@ -16,6 +17,7 @@ HRESULT playerManager::init()
 	_p1 = new player1;
 	_p1->init();
 	_p1->setSMMemoryAddressLink(_SM);
+	_p1->setGameCollisinMemoryAddressLink(_GC);
 
 	return S_OK;
 }

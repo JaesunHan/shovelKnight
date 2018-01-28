@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "playerBase.h"
 #include "stageManager.h"
-
+#include "gameCollision.h"
 
 playerBase::playerBase()
 {
@@ -101,7 +101,7 @@ void playerBase::control()
 
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
-
+		_GC->PlayerMeetNPC();
 	}
 
 	if (KEYMANAGER->isOnceKeyDown('K'))
@@ -349,3 +349,4 @@ void playerBase::frameCounter(float frameMax, float counterMax)
 		_counter = 0;
 	}
 }
+

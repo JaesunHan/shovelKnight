@@ -32,8 +32,12 @@ HRESULT gamePlayScene::init()
 	_stage->setPlayerManagerMemoryAddressLink(_player);
 	_stage->setStoreManagerMemoryAddressLink(_Store);
 	_player->setStageManagerMemoryAddressLink(_stage);
+<<<<<<< HEAD
 	_Store->playerSetMMemoryAddressLink(_player);
 
+=======
+	_player->setGameCollisinMemoryAddressLink(_gameCollision);
+>>>>>>> dfd5e6ba3b77e3989e34c40e7f20bff90390ebf2
 
 	_enemy->init();
 	_gameObject->init();
@@ -79,8 +83,8 @@ void gamePlayScene::render()
 	_stage->render();
 	_Store->render();
 	_gameObject->render();
-	_player->render();
 	_enemy->render();
+	_player->render();
 	_item->render();
 	_skill->render();
 	_gameCollision->render();
