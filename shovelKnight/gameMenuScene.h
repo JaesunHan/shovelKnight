@@ -6,6 +6,7 @@
 
 #define MAXPLAYERLIST 10
 
+class gamePlayScene;
 struct playerList
 {
 	int pNum;			//저장되어 있는 캐릭터슬롯 번호
@@ -56,7 +57,8 @@ private:
 
 	image* _testScript;
 
-
+	//플레이 그라운드가 가지고 있는 게임플ㄹ레이 씬의 정보를 저장할 변수
+	gamePlayScene* _GPS;
 public:
 
 	HRESULT init();
@@ -81,6 +83,9 @@ public:
 	//인트형을 ini 파일에 저장하기 위한 함수
 	//							저장할 ini파일이름, 서브젝트 네임,			타이틀,			저장할 인트형 데이터
 	void addNsaveINTDataInINIFile(char* fileName, char subjectName[256], char title[256], int data);
+
+	//플레이 그라운드가 가지고 있는 게임플레이씬의 정복 가져오기
+	void setGamePlaySceneAdressLink(gamePlayScene* gps) { _GPS = gps; }
 
 	gameMenuScene();
 	~gameMenuScene();
