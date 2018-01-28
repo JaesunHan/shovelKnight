@@ -55,32 +55,6 @@ void skillManager::release()
 
 void skillManager::update()
 {
-	if (KEYMANAGER->isOnceKeyDown('Z'))
-	{
-		Fire(SKILL_FIRE_CENTER, SKILL_FIREBALL, WINSIZEX / 2, WINSIZEY / 2);
-	}
-
-	if (KEYMANAGER->isOnceKeyDown('X'))
-	{
-		Fire(SKILL_FIRE_CENTER, SKILL_BUBBLE, WINSIZEX / 2, WINSIZEY / 2);
-	}
-
-	if (KEYMANAGER->isOnceKeyDown('C'))
-	{
-		Fire(SKILL_FIRE_CENTER, SKILL_DARKKNIGHT_FIREBALL, WINSIZEX / 2, WINSIZEY / 2);
-	}
-
-	if (KEYMANAGER->isOnceKeyDown('V'))
-	{
-		Fire(SKILL_FIRE_CENTER, SKILL_DIRTBLOCKFX, WINSIZEX / 2, WINSIZEY / 2);
-	}
-
-	if (KEYMANAGER->isOnceKeyDown('B'))
-	{
-		Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, WINSIZEX / 2, WINSIZEY / 2);
-	}
-
-
 	if (_vSkill.size())	
 	{
 		for (int i = 0; i != _vSkill.size();)
@@ -169,3 +143,10 @@ void skillManager::Fire(SKILL_FIRE chartype, SKILL skill, float x, float y)
 
 	_vSkill.push_back(sk);
 }
+/*
+
+if (KEYMANAGER->isOnceKeyDown('Z'))
+{
+Fire(SKILL_FIRE_CENTER, SKILL_FIREBALL, WINSIZEX / 2, WINSIZEY / 2);
+}
+*/

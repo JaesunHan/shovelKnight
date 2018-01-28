@@ -345,6 +345,9 @@
     <ClInclude Include="skeleton.h">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClInclude>
+    <ClInclude Include="item_gems_silver.h">
+      <Filter>playGround\gamePlayScene\item\unit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -571,6 +574,9 @@
     </ClCompile>
     <ClCompile Include="skeleton.cpp">
       <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="item_gems_silver.cpp">
+      <Filter>playGround\gamePlayScene\item\unit</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
