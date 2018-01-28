@@ -126,6 +126,7 @@ public:
 	{ 
 		if (_invincibility == false)
 		{
+			_jumpPower = 2;
 			_counter = 0;
 			_currentHP--;
 			_isDamaged = true;
