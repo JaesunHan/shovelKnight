@@ -154,7 +154,6 @@ void playerBase::control()
 		_shineFrameX = 0;
 		_shineCounter = 0;
 	}
-
 	_playerRC = RectMake(_x - HIT_BOX_WIDTH / 2, _y - HIT_BOX_HEIGHT, HIT_BOX_WIDTH, HIT_BOX_HEIGHT);
 }
 
@@ -303,6 +302,61 @@ void playerBase::pixelCollision()
 		{
 			_ltBlock = true;
 		}
+	}
+	if (_isDamaged == true)	//데미지 입었을때 픽셀콜리젼
+	{
+		_rtBlock = false;
+		_ltBlock = false;
+		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 2, _playerRC.bottom - 1);
+		R = GetRValue(color);
+		G = GetGValue(color);
+		B = GetBValue(color);
+		if (R == 0 && G == 255 && B == 0)
+		{
+			_rtBlock = true;
+		}
+		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 2, _playerRC.top + 1);
+		R = GetRValue(color);
+		G = GetGValue(color);
+		B = GetBValue(color);
+		if (R == 0 && G == 255 && B == 0)
+		{
+			_rtBlock = true;
+		}
+		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 2, (_playerRC.top + _playerRC.bottom) / 2);
+		R = GetRValue(color);
+		G = GetGValue(color);
+		B = GetBValue(color);
+		if (R == 0 && G == 255 && B == 0)
+		{
+			_rtBlock = true;
+		}
+		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 2, _playerRC.bottom - 1);
+		R = GetRValue(color);
+		G = GetGValue(color);
+		B = GetBValue(color);
+		if (R == 0 && G == 255 && B == 0)
+		{
+			_ltBlock = true;
+		}
+		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 2, _playerRC.top + 1);
+		R = GetRValue(color);
+		G = GetGValue(color);
+		B = GetBValue(color);
+		if (R == 0 && G == 255 && B == 0)
+		{
+			_ltBlock = true;
+		}
+		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 2, (_playerRC.top + _playerRC.bottom) / 2);
+		R = GetRValue(color);
+		G = GetGValue(color);
+		B = GetBValue(color);
+		if (R == 0 && G == 255 && B == 0)
+		{
+			_ltBlock = true;
+		}
+		if (_x <= 6) _ltBlock = true;
+		if (_x >= IMAGEMANAGER->findImage("bgMap")->getWidth() - 6) _rtBlock = true;
 	}
 	//바닥에서 벗어나면 떨어져라
 	color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 1, _playerRC.bottom + 1);
