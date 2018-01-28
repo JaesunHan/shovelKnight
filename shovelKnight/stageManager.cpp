@@ -53,11 +53,15 @@ void stageManager::update()
 				_transitionNum = i;
 				if (_mapTransition[i].direction == 1)
 				{
+					_cameraX = 200;
+					_cameraY = 120;
 					_PM->setPlayerPause(true);
 					_PM->setX(_PM->getX() - _currentMapWidth + 400);
 				}
 				if (_mapTransition[i].direction == 3)
 				{
+					_cameraX = 600;
+					_cameraY = 120;
 					_PM->setPlayerPause(true);
 					_PM->setX(_PM->getX() + 400);
 				}
@@ -73,15 +77,30 @@ void stageManager::update()
 		if (_transition == true)
 		{
 			CAMERAMANAGER->setSingleFocus(_cameraX, _cameraY, 800);
-			_cameraX += 5;
-			_PM->setX(_PM->getX() + 0.5f);
-			if (_cameraX >= 600)
+			if (_mapTransition[_transitionNum].direction == 1)
 			{
-				_cameraX = 200;
-				_PM->setX(_PM->getX() - 400);
-				_PM->setPlayerPause(false);
-				_mapLoaded = false;
-				_transition = false;
+				_cameraX += 5;
+				_PM->setX(_PM->getX() + 0.5f);
+				if (_cameraX >= 600)
+				{
+					//_cameraX = 200;
+					_PM->setX(_PM->getX() - 400);
+					_PM->setPlayerPause(false);
+					_mapLoaded = false;
+					_transition = false;
+				}
+			}
+			if (_mapTransition[_transitionNum].direction == 3)
+			{
+				_cameraX -= 5;
+				_PM->setX(_PM->getX() - 0.5f);
+				if (_cameraX <= 200)
+				{
+					_PM->setX(_PM->getX() + _nextMapWidth - 400);
+					_PM->setPlayerPause(false);
+					_mapLoaded = false;
+					_transition = false;
+				}
 			}
 		}
 	}
@@ -255,6 +274,7 @@ void stageManager::transition()
 		int maxLayer = INIDATA->loadDataInterger(mapName, "imageTotal", "maxNum");
 		int maxTile = INIDATA->loadDataInterger(mapName, "tileTotal", "maxNum");
 		_maxFrameImage = INIDATA->loadDataInterger(mapName, "frameIamgeTotal", "maxNum");
+		_nextMapWidth = INIDATA->loadDataInterger(mapName, "mapImage", "width");
 
 		for (int i = 0; i < maxLayer; ++i)
 		{
