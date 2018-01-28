@@ -173,5 +173,8 @@ void MagicGirl::draw()
 void MagicGirl::update()
 {
 	npcBase::update();
+<<<<<<< HEAD
 
+=======
+>>>>>>> d4eeb7e78dd05bb4629681b712b5805b94a114b5
 }

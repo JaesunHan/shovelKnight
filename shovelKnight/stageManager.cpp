@@ -50,7 +50,7 @@ void stageManager::update()
 		for (int i = 0; i < 4; ++i)
 		{
 			RECT temp;
-			if (IntersectRect(&temp, &_PM->getPlayerRc(), &_mapTransition[i].rc))
+			if (IntersectRect(&temp, &_PM->getPlayerRC(), &_mapTransition[i].rc))
 			{
 				_transitionNum = i;
 				if (_mapTransition[i].direction == 1)

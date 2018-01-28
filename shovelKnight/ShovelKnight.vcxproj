@@ -188,7 +188,6 @@
     <ClInclude Include="npcBase.h" />
     <ClInclude Include="pixelCollision.h" />
     <ClInclude Include="skeleton.h" />
-    <ClInclude Include="skill_A.h" />
     <ClInclude Include="skill_enemyDeadFx.h" />
     <ClInclude Include="StoreManager.h" />
     <ClInclude Include="dirtBlock.h" />
@@ -270,7 +269,6 @@
     <ClCompile Include="npcBase.cpp" />
     <ClCompile Include="pixelCollision.cpp" />
     <ClCompile Include="skeleton.cpp" />
-    <ClCompile Include="skill_A.cpp" />
     <ClCompile Include="skill_enemyDeadFx.cpp" />
     <ClCompile Include="StoreManager.cpp" />
     <ClCompile Include="dirtBlock.cpp" />

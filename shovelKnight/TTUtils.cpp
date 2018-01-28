@@ -309,6 +309,24 @@ namespace Æ®À©Å×ÀÏÀö
 
 	}
 
+	void TTTextOut(int x, int y, string str, RECT rc, BOOL backGround)
+	{
+		char* str2 = new char[str.size() + 1 + 7];
+		char* str3 = new char[str.size() + 1 + 7];
+		char* str4 = new char[str.size() + 1 + 7];
+		char* str5 = new char[str.size() + 1 + 7];
+
+		sprintf(str2, "%s%s", str.c_str(), ".left");
+		sprintf(str3, "%s%s", str.c_str(), ".top");
+		sprintf(str4, "%s%s", str.c_str(), ".right");
+		sprintf(str5, "%s%s", str.c_str(), ".bottom");
+
+		TTTextOut(x, y, str2, rc.left, backGround);
+		TTTextOut(x, y+ 20, str3, rc.top, backGround);
+		TTTextOut(x, y+ 40, str4, rc.right, backGround);
+		TTTextOut(x, y+ 60, str5, rc.bottom, backGround);
+	}
+
 
 	void TTTextOut(string stri, float f)
 	{
