@@ -48,14 +48,15 @@ void dialogueManager::render(HDC hdc, float x, float y, int width , int height)
 	}
 	_scriptwindow->render(hdc, x, y);
 	SetTextColor(hdc, RGB(_r, _g, _b));
-	RECT rcScriptArea = { x, y, width, height };
+	RECT rcScriptArea = { x+150, y, width, height };
+	if (_cnt >= strlen (_scriptStr))	_cnt = strlen(_scriptStr);
 	DrawText(hdc, _scriptStr, _cnt, &rcScriptArea, DT_SINGLELINE | DT_VCENTER);
 }
 
 void dialogueManager::setScriptNScriptWindow(string script, image* scriptWindow, int r, int g, int b)
 {
 	_cnt = 0;
-	wsprintf(_scriptStr, "%s", script);
+	wsprintf(_scriptStr, "%s", script.c_str());
 	_scriptwindow = scriptWindow;
 
 	_r = r;

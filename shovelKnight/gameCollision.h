@@ -36,6 +36,7 @@ public:
 	void enemyDead();
 	void enemyDetectPlayer();
 	void PlayerMeetNPC();
+	void PlayerMeetEnemy();
 };
 
 
