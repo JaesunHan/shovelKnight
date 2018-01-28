@@ -45,7 +45,7 @@ image* imageManager::addImage(string strKey, int width, int height)
 	return img;
 }
 
-image* imageManager::addImage(string strKey, const char* fileName, int width, int height, BOOL trans, COLORREF transColor, BOOL alphablend)
+image* imageManager::addImage(string strKey, const char* fileName, int width, int height, bool trans, COLORREF transColor, BOOL alphablend)
 {
 	image* img = findImage(strKey);
 
@@ -66,7 +66,7 @@ image* imageManager::addImage(string strKey, const char* fileName, int width, in
 	return img;
 }
 
-image* imageManager::addImage(string strKey, const char* fileName, float x, float y, int width, int height, BOOL trans, COLORREF transColor, BOOL alphablend)
+image* imageManager::addImage(string strKey, const char* fileName, float x, float y, int width, int height, bool trans, COLORREF transColor, BOOL alphablend)
 {
 	image* img = findImage(strKey);
 
@@ -88,7 +88,7 @@ image* imageManager::addImage(string strKey, const char* fileName, float x, floa
 }
 
 
-image* imageManager::addFrameImage(string strKey, const char* fileName, float x, float y, int width, int height, int frameX, int frameY, BOOL trans, COLORREF transColor, BOOL alphablend)
+image* imageManager::addFrameImage(string strKey, const char* fileName, float x, float y, int width, int height, int frameX, int frameY, bool trans, COLORREF transColor, BOOL alphablend)
 {
 	image* img = findImage(strKey);
 
@@ -109,7 +109,7 @@ image* imageManager::addFrameImage(string strKey, const char* fileName, float x,
 	return img;
 }
 
-image* imageManager::addFrameImage(string strKey, const char* fileName, int width, int height, int frameX, int frameY, BOOL trans, COLORREF transColor, BOOL alphablend)
+image* imageManager::addFrameImage(string strKey, const char* fileName, int width, int height, int frameX, int frameY, bool trans, COLORREF transColor, BOOL alphablend)
 {
 	image* img = findImage(strKey);
 
@@ -203,27 +203,6 @@ void imageManager::render(string strKey, HDC hdc, int destX, int destY, int sour
 	image* img = findImage(strKey);
 
 	if (img) img->render(hdc, destX, destY, sourX, sourY, sourWidth, sourHeight);
-}
-
-void imageManager::frameRender(string strKey, HDC hdc, int destX, int destY)
-{
-	image* img = findImage(strKey);
-
-	if (img) img->frameRender(hdc, destX, destY);
-}
-
-void imageManager::frameRender(string strKey, HDC hdc, int destX, int destY, int currentFrameX, int currentFrameY)
-{
-	image* img = findImage(strKey);
-
-	if (img) img->frameRender(hdc, destX, destY, currentFrameX, currentFrameY);
-}
-
-void imageManager::loopRender(string strKey, HDC hdc, const LPRECT drawArea, int offSetX, int offSetY)
-{
-	image* img = findImage(strKey);
-
-	if (img) img->loopRender(hdc, drawArea, offSetX, offSetY);
 }
 
 void imageManager::alphaRender(string strKey, HDC hdc, BYTE alpha)

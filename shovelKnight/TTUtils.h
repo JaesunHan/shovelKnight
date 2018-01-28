@@ -4,8 +4,6 @@
 
 #define MAZEN COLORREF RGB(255,0,255)
 #define MINT COLORREF RGB(0,255,0)
-#define BMP LPCSTR(".bmp")
-
 
 
 namespace 트윈테일쟝
@@ -108,7 +106,5 @@ namespace 트윈테일쟝
 
 	//문자+숫자 시키기	strcat Not String
 	void strcat_ns(string& str, float f);
-
-	void strcat_TT(char* str1, size_t buffer, const char* str2);
 }
 

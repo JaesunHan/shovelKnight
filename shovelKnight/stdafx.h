@@ -15,7 +15,6 @@
 #include <io.h>
 #include <math.h>
 #include <conio.h>
-#include <assert.h>
 
 
 #include "commonMacroFunction.h"
@@ -34,11 +33,9 @@
 #include "database.h"
 #include "cameraManager.h"
 #include "dialogueManager.h"
-#include "TTUtils.h"
 
 using namespace std;
 using namespace HEPTA_UTIL;
-using namespace 트윈테일쟝;
 
 //=======================================================
 // ## 윈도우 설정 디파인 ## 2017.11.08 ##
@@ -65,9 +62,8 @@ using namespace 트윈테일쟝;
 #define CAMERAMANAGER	cameraManager::getSingleton()
 #define DIALOGUEMANAGER dialogueManager::getSingleton()
 
-#define BGMAP HDC (imageManager::getSingleton()->findImage("bgMap")->getMemDC())
-#define BACKBUFFER HDC (imageManager::getSingleton()->findImage("backBuffer")->getMemDC())
-
+#include "TTUtils.h"
+using namespace 트윈테일쟝;
 
 //=======================================================
 // ## 매크로 ## 2017.11.15 ##

@@ -9,20 +9,22 @@ item_apple::item_apple()
 
 item_apple::~item_apple()
 {
+	IMAGEMANAGER->addImage("image/item/drop/apple", "image/item/drop/apple.bmp", 12, 11, true, MAZEN);
 }
 
 HRESULT item_apple::init()
 {
-	_imgName = "image/item/apple";
-	char* str = new char[strlen(_imgName) + 5];
-	sprintf(str, "%s%s", _imgName, ".bmp");
-
-	_img = IMAGEMANAGER->addFrameImage(_imgName, str, 12, 11, 1, 1);
-	itemBase::init();
-
 	return S_OK;
 }
 
 void item_apple::release()
+{
+}
+
+void item_apple::update()
+{
+}
+
+void item_apple::render()
 {
 }

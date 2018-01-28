@@ -286,8 +286,8 @@ namespace Æ®À©Å×ÀÏÀö
 
 			char* str2 = new char[str.size() + 3 + buffer + 1];
 			sprintf(str2, "%s : %.2f", str.c_str(), num);
-			if (!backGround) SetBkMode((imageManager::getSingleton()->findImage("backbuffer")->getMemDC()), TRANSPARENT);
-			TextOut((imageManager::getSingleton()->findImage("backbuffer")->getMemDC()), x, y, str2, strlen(str2));
+			if (!backGround) SetBkMode(IMAGEMANAGER->findImage("backbuffer")->getMemDC(), TRANSPARENT);
+			TextOut(IMAGEMANAGER->findImage("backbuffer")->getMemDC(), x, y, str2, strlen(str2));
 		}
 		else
 		{
@@ -376,13 +376,6 @@ namespace Æ®À©Å×ÀÏÀö
 		strcat_s(str3, strlen(str3) + strlen(str2) + 1, str2);
 
 		str = str3;
-	}
-
-	void strcat_TT(char* str1, size_t buffer, const char* str2)
-	{
-		int len = strlen(str1);
-		assert(buffer > (len + strlen(str2)));
-		strcpy_s(str1 + len, buffer - len, str2);
 	}
 
 }
