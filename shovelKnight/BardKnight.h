@@ -33,7 +33,7 @@ public:
 	int _stock;										//몇번이나 상점에서 구매했는지 확인 변수
 	bool _isSellBgm;								//브금 팔렸는지
 	bool _isSellEffectSound;						//이펙트 사운드 팔렸는지
-	bool _isCollision;								//NPC와 충돌
+	//bool _isCollisionNpc;								//NPC와 충돌
 
 	//==========스킬 스토어 관련 함수===============//
 	void changeBGM();								//스킬 파는 함수
@@ -42,6 +42,8 @@ public:
 	virtual void render();
 	virtual void draw();
 	virtual void update();
+
+	virtual void isCollision(bool collision);
 	
 };
 

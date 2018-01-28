@@ -34,6 +34,7 @@ HRESULT npcBase::init()
 	//좌표값, 이미지 기본세팅은 아예 NPC각 클래스에서 세팅되어있으니
 	//실제 불러올때는 NPC타입이랑 _isAppear만 받아서 할수 있지 않을까. 
 	//_isAppear = appaear;
+	_minusMoney = 0;
 
 	return S_OK;
 }
@@ -55,4 +56,21 @@ void npcBase::draw()
 {
 	//_img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
 	//CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
+}
+
+//void npcBase::collisionSignalFromCollisionManager(bool collision)
+//{
+//	//콜리전 매니저에서 받아오는걸로. 
+//	//콜리전 매니저에서 이넘값으로 받아오고
+//	//해당 이넘값으로 충돌이 확인되면 w키를 눌러 대화가 가능해지는것으로 구현할것
+//
+//	if (collision)
+//	{
+//		isCollision();
+//	}
+//
+//}
+
+void npcBase::isCollision(bool collision)
+{
 }

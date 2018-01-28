@@ -56,7 +56,10 @@ HRESULT boss1::init(float x, float y)
 	_directionCount = 1;
 	_direction = false;
 	_movePatternCount = 1;
-
+	_playerFind = false;
+	_enemyHp = 7;
+	_isHit = false;
+	_previousStatus = _status;
 
 	_anim = KEYANIMANAGER->findAnimation("dragonLeftStop");
 
@@ -66,8 +69,19 @@ HRESULT boss1::init(float x, float y)
 
 void boss1::update()
 {
+
+	ENEMYSTATUS previousStatus = _status; //직전 에너미 상태 저장
+
+
+	//상태값에 따른 에니메이션 및 움직임
+	move();
+
+	//플레이어가 일정거리 안으로 들어오면
+	if (isPlayerFind(_x, 200)) _playerFind = true;
+	_direction = false;  //예외처리: 방향 무조건 왼쪽으로
+
 	//공격 움직임 패턴
-	if (isPlayerFind(_x, 100)) //플레이어를 발견하면
+	if (_playerFind) //플레이어를 발견하면
 	{
 		_directionCount++;
 
@@ -87,10 +101,38 @@ void boss1::update()
 				_directionCount = 1;
 			break;
 		}
+
+		
+		//피격상태일 경우 이전상태로 변경
+		if (_status == ENEMY_LEFT_HIT || _status == ENEMY_RIGHT_HIT)
+		{
+			if (!_anim->isPlay())_status = previousStatus;		
+		}
 	}
 
-	//상태값에 따른 에니메이션 및 움직임
-	move();
+
+	//데미지 설정
+	if (_isHit)
+	{
+		_enemyHp--;
+		_isHit = false;
+	}
+
+	//hp=0일경우 상태 변경
+	if (_enemyHp <= 0)
+	{
+		if (_direction)
+		{
+			_status = ENEMY_RIGHT_DEAD;
+		}
+		else
+		{
+			_status = ENEMY_LEFT_DEAD;
+		}
+		
+	}
+
+
 }
 
 void boss1::render()
