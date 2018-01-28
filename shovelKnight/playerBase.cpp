@@ -61,8 +61,8 @@ HRESULT playerBase::init(float startX, float startY)
 	_isDead = false;
 	_isJumping = true;
 	_maxAti = false;
-
-
+	_delay = 0;
+	_jumpCount = 0;
 	return S_OK;
 }
 void playerBase::release()
@@ -81,10 +81,15 @@ void playerBase::update()
 
 	_time += TIMEMANAGER->getElapsedTime();
 	
+	if (_delay > 0)
+	{
+		_delay -= TIMEMANAGER->getElapsedTime();
+	}
 	while (_time > TIMECOUNT)
 	{
 		_time -= TIMECOUNT;
-		if (_action == PLAYERACTION_DIE || _action == PLAYERACTION_MOVE || _action == PLAYERACTION_ATTACK||_action == PLAYERACTION_IDLE)
+		if (_action == PLAYERACTION_DIE || _action == PLAYERACTION_MOVE || _action == PLAYERACTION_ATTACK||
+			_action == PLAYERACTION_IDLE||_action == PLAYERACTION_DAMAGED)
 		{
 
 			if (_image->getMaxFrameX()>1) _currentFrameX++;
@@ -103,11 +108,6 @@ void playerBase::update()
 void playerBase::render() 
 {
 	HDC hdc = getMemDC();
-	Rectangle(hdc,
-		CAMERAMANAGER->getX(_rc.left),
-		CAMERAMANAGER->getY(_rc.top),
-		CAMERAMANAGER->getX(_rc.right),
-		CAMERAMANAGER->getY(_rc.bottom));
 	TTTextOut(300, 10, "top", _rc.top);
 	TTTextOut(300, 25, "bottom", _rc.bottom);
 	TTTextOut(300, 40, "left", _rc.left);
@@ -149,6 +149,8 @@ void playerBase::imageSetting()
 		case PLAYERACTION_DIE:
 			_image = IMAGEMANAGER->findImage("shovelDead");
 		break;
+		case PLAYERACTION_DOWNATTACK :
+			_image = IMAGEMANAGER->findImage("shovelDownAttack");
 	}
 
 
@@ -156,31 +158,41 @@ void playerBase::imageSetting()
 
 void playerBase::collision()
 {
-	probeY = _y - 1;
+	probeY = _y;
 	HDC hdc = IMAGEMANAGER->findImage("bgMap")->getMemDC();
 	
-
-
 	COLORREF color = GetPixel(hdc, _x, probeY);
 	int r = GetRValue(color);
 	int g = GetGValue(color);
 	int b = GetBValue(color);
 
+	//땅과 충돌했을떄
 	if ((r == 0 && g == 255 && b == 0))
 	{
-		if (_action == PLAYERACTION_JUMP) _action = PLAYERACTION_IDLE;
+		while (!(r == 0 && g == 255 && b == 0))
+		{
+			probeY++;
+		}
+		if (_action == PLAYERACTION_JUMP||_action ==PLAYERACTION_DOWNATTACK)
+		{
+			_action = PLAYERACTION_IDLE;
+			_currentFrameX = 0;
+		}
 		_jumpPower = 0;
-		_maxAti = false;
-		_state = PLAYERSTATE_ONLAND;
 		_isJumping = false;
+		_maxAti = false;
+		_jumpCount = 0;
+		_y = probeY+1;
+		_state = PLAYERSTATE_ONLAND;
+		
 	}
 
-	//if ((r == 255 && g == 0 && b == 255))
-	//{
-
-	//	_jumpPower = 0;
-	//	_state = PLAYERSTATE_INAIR;
-	//	//_isJump = false;
-	//}
+	//공중에 있을때
+	if ((r == 255 && g == 0 && b == 255))
+	{
+		_state = PLAYERSTATE_INAIR;
+	}
 
 }
+
+

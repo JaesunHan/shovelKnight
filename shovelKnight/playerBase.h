@@ -7,13 +7,13 @@
 #define DOWNATTACK_DAMAGE_BOX_WIDTH 6
 #define	DOWNATTACK_DAMAGE_BOX_HEIGHT 10
 #define ACCELERATION 0.5f
-#define MAXSPEED 2.0f
-#define TIMECOUNT 0.05f
-#define MAXATTITUDE 30
-#define GRAVITY 0.04f
-#define JUMPPOWER 1.0f
+#define MAXSPEED 1.5f
+#define TIMECOUNT 0.07f
+#define MAXATTITUDE 35
+#define GRAVITY 0.1f
+#define JUMPPOWER 3.0f
 #define friction 0.5f
-
+#define DELAYTIME 0.3f
 
 enum PLAYER_SKILL
 {
@@ -121,6 +121,7 @@ protected:
 	float				_jumpPower;				//점프파워
 	float				_gravity;				//중력값
 	float				_moveSpeed;				//이동속도
+	float				_delay;
 	bool				_rtBlock;				//오른쪽 막힘
 	bool				_ltBlock;				//왼쪽막힘
 	bool				_isDamaged;				//맞았는지
@@ -128,7 +129,7 @@ protected:
 	bool				_skillUsed;				//스킬발동했는지
 	bool				_isDead;				//죽었냐?
 	bool				_maxAti;
-	int					probeY;
+	float				probeY;
 
 public:
 	playerBase();
@@ -164,6 +165,9 @@ public:
 	inline void setState(PLAYERSTATE state) { _state = state; }
 	inline PLAYERACTION getAction() { return _action; }
 	inline void setAction(PLAYERACTION action) { _action = action; }
+	inline float getJumpPower() { return _jumpPower; }
+	inline void setJumpPower(float jumpPower) { _jumpPower = jumpPower; }
+
 
 	inline RECT getPlayerRc() { return _rc; }
 	inline void setPlayerRc(RECT rc) { _rc = rc; }
