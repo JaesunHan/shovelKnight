@@ -39,12 +39,19 @@ public:
 	int _effectSoundRectButtonX;			//이펙트사운드버튼X좌표
 	int _bgmSoundRectButtonX;				//볼륨사운드버튼X좌표
 
+	float _effectVol;						//이펙트 볼륨
+	float _bgmVol;							//배경음 볼륨
+
+	float _eV;								//이펙트 볼륨 계산
+	float _bV;								//배경음 볼륨 계산
+
 	HRESULT init();
 	void update();
 	void release();
 	void render(HDC hdc);
 	void draw(HDC hdc);
-	
+	void effectVolumeControl();					//이펙트볼륨컨트롤
+	void bgmVolumeControl();					//배경음볼륨컨트롤
 
 
 	soundMenu();
