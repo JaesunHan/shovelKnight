@@ -163,12 +163,12 @@ void playerBase::control()
 	}
 	if (KEYMANAGER->isOnceKeyDown('L'))
 	{
-		switch (_currentSkill)
-		{
-		case(1):
-			
-			break;
-		}
+		//switch (_currentSkill)
+		//{
+		//case(1):
+		//	
+		//	break;
+		//}
 	}
 
 	if (_action == IDLE)
