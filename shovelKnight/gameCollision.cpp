@@ -65,47 +65,50 @@ void gameCollision::render()
 void gameCollision::enemyDead()
 {
 	//몬스터에 따라 죽는게 다르므로 스위치로 나눔
+
+
+	//드래곤은 머리만 공격
+	//드레곤 데나는 폭팔이펙트 여러번, 카운트로 적용
 	for (int i = 0; i != _enemy->getVEnemy().size(); ++i)
 	{
 		switch (_enemy->getVEnemy()[i]->getEnemyType())
 		{
 		case ENEMY_BEETO:
-			if (_enemy->getVEnemy()[i]->getIsDeadVanish() )
+			if (_enemy->getVEnemy()[i]->getIsDeadVanish())
 			{
 				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
 			}
 			break;
 		case ENEMY_BLORB:
-			if (_enemy->getVEnemy()[i]->getStatus() == ENEMY_LEFT_DEAD ||
-				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
+			if (_enemy->getVEnemy()[i]->getIsDeadVanish())
 			{
 				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
 			}
 			break;
 		case ELEMY_DRAKE:
-			if (_enemy->getVEnemy()[i]->getStatus() == ENEMY_LEFT_DEAD ||
-				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
+			if (_enemy->getVEnemy()[i]->getIsDeadVanish())
 			{
 				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
 			}
 			break;
 		case ENEMY_SKELETON:
-			if (_enemy->getVEnemy()[i]->getStatus() == ENEMY_LEFT_DEAD ||
-				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
+			if (_enemy->getVEnemy()[i]->getIsDeadVanish())
 			{
 				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
 			}
 			break;
 		case ENEMY_DRAGON:
 			if (_enemy->getVEnemy()[i]->getStatus() == ENEMY_LEFT_DEAD ||
-				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
+				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD ||
+				_enemy->getVEnemy()[i]->getIsDeadVanish())
 			{
 				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
 			}
 			break;
 		case ENEMY_BLACKKNIGHT:
 			if (_enemy->getVEnemy()[i]->getStatus() == ENEMY_LEFT_DEAD ||
-				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
+				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD ||
+				_enemy->getVEnemy()[i]->getIsDeadVanish())
 			{
 				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
 			}
@@ -122,14 +125,22 @@ void gameCollision::PlayerMeetNPC()
 
 
 
-
-
 		//_store->getVNpc()[i]->setSkillUnlockLv(_player->getSkillUnlockLv());
-		_store->getVNpc()[i]->setMoney(_player->getMoney());
-		_player->setMoney(_store->getVNpc()[i]->getMinusMoney());
 		_player->setSkillUnlockLv(_store->getVNpc()[i]->getSkillUnlockLv());
 
+
+<<<<<<< HEAD
+		//_store->getVNpc()[i]->setSkillUnlockLv(_player->getSkillUnlockLv());
+=======
+>>>>>>> 4327e17711d65b666586b5ca359892a3914dd217
+		_store->getVNpc()[i]->setMoney(_player->getMoney());
+		_player->setMoney(_store->getVNpc()[i]->getMinusMoney());
+		_store->getVNpc()[i]->setMinusMoney(0);
+		//_store->getVNpc()[i]->
+
 		_player->setMaxHP(_store->getVNpc()[i]->getMaxHp());
+		_store->getVNpc()[i]->setMaxHp(0);
+
 		_store->getVNpc()[i]->setMaxHp(_player->getMaxHP());
 		
 
@@ -138,7 +149,10 @@ void gameCollision::PlayerMeetNPC()
 
 
 
-		if (IntersectRect(&temp, &_player->getPlayerRC(), &_store->getVNpc()[i]->getRect()))
+		if (IntersectRect(
+			&temp, 
+			&_player->getPlayerRC(), 
+			&_store->getVNpc()[i]->getRect()))
 
 		{
 			_store->getVNpc()[i]->isCollision(true);
@@ -165,10 +179,22 @@ void gameCollision::PlayerAndEnemy()
 		{
 			_player->setDamagePlayer();
 		}
-		if (IntersectRect(&temp, &_player->getAttackRC(), &_enemy->getVEnemy()[i]->getRect()))
+
+		if (_enemy->getVEnemy()[i]->getEnemyType() == ENEMY_DRAGON)
 		{
-			_enemy->getVEnemy()[i]->setEnemyDamage();
-			_player->setPlayerReaction();
+			if (IntersectRect(&temp, &_player->getAttackRC(), &_enemy->getVEnemy()[i]->getRect()))
+			{
+				_player->setPlayerReaction();
+			}
+		}
+		else
+		{
+
+			if (IntersectRect(&temp, &_player->getAttackRC(), &_enemy->getVEnemy()[i]->getRect()))
+			{
+				_enemy->getVEnemy()[i]->setEnemyDamage();
+				_player->setPlayerReaction();
+			}
 		}
 
 		

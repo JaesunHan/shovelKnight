@@ -47,7 +47,7 @@ void itemBase::update()
 
 void itemBase::render()
 {
-	CAMERAMANAGER->aniRenderObject(BACKBUFFER, _img, _ani, _rc.left, _rc.top);
+	CAMERAMANAGER->aniRenderObject(BGMAP, _img, _ani, _rc.left, _rc.top);
 }
 
 void itemBase::reRect()
