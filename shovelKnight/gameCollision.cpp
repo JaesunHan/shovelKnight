@@ -25,7 +25,6 @@ void gameCollision::release()
 void gameCollision::update()
 {
 	enemyDead();
-	enemyDetectPlayer();
 	if(KEYMANAGER->isOnceKeyDown(0x31) || _playerMeetNPC) PlayerMeetNPC();
 	PlayerAndEnemy();
 	
@@ -71,8 +70,7 @@ void gameCollision::enemyDead()
 		switch (_enemy->getVEnemy()[i]->getEnemyType())
 		{
 		case ENEMY_BEETO:
-			if (_enemy->getVEnemy()[i]->getStatus() == ENEMY_LEFT_DEAD ||
-				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
+			if (_enemy->getVEnemy()[i]->getIsDeadVanish() )
 			{
 				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
 			}
@@ -113,15 +111,6 @@ void gameCollision::enemyDead()
 			}
 			break;
 		}
-	}
-}
-
-void gameCollision::enemyDetectPlayer()
-{
-	for (int i = 0; i != _enemy->getVEnemy().size(); ++i)
-	{
-		_enemy->getVEnemy()[i]->getPlayerX(_player->getX());
-		_enemy->getVEnemy()[i]->getPlayerStatus(_player->getPlayerAction());
 	}
 }
 
@@ -167,19 +156,28 @@ void gameCollision::PlayerAndEnemy()
 {
 	for (int i = 0; i != _enemy->getVEnemy().size(); ++i)
 	{
+		_enemy->getVEnemy()[i]->getPlayerX(_player->getX());
+		_enemy->getVEnemy()[i]->getPlayerStatus(_player->getPlayerAction());
+
 		RECT temp;
 
 		if (IntersectRect(&temp, &_player->getPlayerRC(), &_enemy->getVEnemy()[i]->getRect()))
 		{
 			_player->setDamagePlayer();
-			_player->setPlayerReaction();
 		}
 		if (IntersectRect(&temp, &_player->getAttackRC(), &_enemy->getVEnemy()[i]->getRect()))
 		{
 			_enemy->getVEnemy()[i]->setEnemyDamage();
 			_player->setPlayerReaction();
 		}
+
+		
 	}
+}
+
+void gameCollision::EnemyAction()
+{
+
 }
 
 //void gameCollision::collisionPlayerMapDown()

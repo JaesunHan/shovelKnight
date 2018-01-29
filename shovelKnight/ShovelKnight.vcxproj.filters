@@ -345,10 +345,6 @@
     <ClInclude Include="item_gems_silver.h">
       <Filter>playGround\gamePlayScene\item\unit</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="bossBlackKnight.h">
-      <Filter>playGround\gamePlayScene\enemy</Filter>
-=======
     <ClInclude Include="dialogueManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
@@ -357,7 +353,6 @@
     </ClInclude>
     <ClInclude Include="graphicUI.h">
       <Filter>playGround\gamePlayScene\UI</Filter>
->>>>>>> 5d0d7c11d6b546d563ed6ded66313fb3614a0613
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -583,10 +578,6 @@
     <ClCompile Include="item_gems_silver.cpp">
       <Filter>playGround\gamePlayScene\item\unit</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="bossBlackKnight.cpp">
-      <Filter>playGround\gamePlayScene\enemy</Filter>
-=======
     <ClCompile Include="playGround+sound.cpp">
       <Filter>playGround</Filter>
     </ClCompile>
@@ -598,7 +589,6 @@
     </ClCompile>
     <ClCompile Include="graphicUI.cpp">
       <Filter>playGround\gamePlayScene\UI</Filter>
->>>>>>> 5d0d7c11d6b546d563ed6ded66313fb3614a0613
     </ClCompile>
   </ItemGroup>
 </Project>
