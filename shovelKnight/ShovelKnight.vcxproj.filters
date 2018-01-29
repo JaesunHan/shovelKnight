@@ -366,6 +366,9 @@
     <ClInclude Include="tresureBox.h">
       <Filter>playGround\gamePlayScene\gameObject</Filter>
     </ClInclude>
+    <ClInclude Include="frontObjectManager.h">
+      <Filter>playGround\gamePlayScene\stageManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -613,6 +616,9 @@
     </ClCompile>
     <ClCompile Include="tresureBox.cpp">
       <Filter>playGround\gamePlayScene\gameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="frontObjectManager.cpp">
+      <Filter>playGround\gamePlayScene\stageManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

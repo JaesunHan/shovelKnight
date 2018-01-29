@@ -159,6 +159,7 @@
     <ClInclude Include="effectManager.h" />
     <ClInclude Include="enemyBase.h" />
     <ClInclude Include="enemyManager.h" />
+    <ClInclude Include="frontObjectManager.h" />
     <ClInclude Include="gameCollision.h" />
     <ClInclude Include="gameMenuScene.h" />
     <ClInclude Include="gameNode.h" />
@@ -245,6 +246,7 @@
     <ClCompile Include="effectManager.cpp" />
     <ClCompile Include="enemyBase.cpp" />
     <ClCompile Include="enemyManager.cpp" />
+    <ClCompile Include="frontObjectManager.cpp" />
     <ClCompile Include="gameCollision.cpp" />
     <ClCompile Include="gameMenuScene.cpp" />
     <ClCompile Include="gameNode.cpp" />
