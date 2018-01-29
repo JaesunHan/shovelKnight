@@ -40,6 +40,7 @@ HRESULT player1::init()
 	IMAGEMANAGER->addFrameImage("Shine", ".\\image\\shovelKnight\\shovelKnightShine.bmp", 102, 62, 3, 2, true, RGB(255, 0, 255), true);
 	IMAGEMANAGER->addFrameImage("Dead", ".\\image\\shovelKnight\\shovelKnightDead.bmp", 126, 68, 3, 2, true, RGB(255, 0, 255), true);
 	IMAGEMANAGER->addFrameImage("Damaged", ".\\image\\shovelKnight\\shovelKnightDamaged.bmp", 40, 76, 1, 2, true, RGB(255, 0, 255), true);
+	IMAGEMANAGER->addFrameImage("Hanging", ".\\image\\shovelKnight\\shovelKnightClimb.bmp", 48, 76, 2, 2, true, RGB(255, 0, 255), true);
 
 	return S_OK;
 }
@@ -127,16 +128,21 @@ void player1::render()
 				_counter = 0;
 			}
 		}
+		if (_action == HANG)
+		{
+			CAMERAMANAGER->frameRenderObject(getMemDC(), IMAGEMANAGER->findImage("Hanging"), _x - 12, _y - 38, 0, _frameX);
+			frameCounter(2, 5);
+		}
 	}
 
-	char testX[128];
-	int testx = _x;
-	wsprintf(testX, "playerX : %d", testx);
-	TextOut(getMemDC(), 200, 100, testX, strlen(testX));
-	char testY[128];
-	int testy = _y;
-	wsprintf(testY, "playerY : %d", testy);
-	TextOut(getMemDC(), 200, 120, testY, strlen(testY));
+	//char testX[128];
+	//int testx = _x;
+	//wsprintf(testX, "playerX : %d", testx);
+	//TextOut(getMemDC(), 200, 100, testX, strlen(testX));
+	//char testY[128];
+	//int testy = _y;
+	//wsprintf(testY, "playerY : %d", testy);
+	//TextOut(getMemDC(), 200, 120, testY, strlen(testY));
 
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
@@ -160,6 +166,7 @@ void player1::control2()
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
 		if (_state == INAIR) _downwardThrust = true;
+		if (_state == HANG) _y += SPEED;
 	}
 	if (KEYMANAGER->isOnceKeyDown('R'))
 	{

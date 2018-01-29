@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "gamePlayScene.h"
-
+#include "gameMenuScene.h"
 
 gamePlayScene::gamePlayScene()
 {

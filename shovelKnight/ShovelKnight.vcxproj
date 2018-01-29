@@ -161,7 +161,9 @@
     <ClInclude Include="gameMenuScene.h" />
     <ClInclude Include="gameNode.h" />
     <ClInclude Include="gamePlayScene.h" />
+    <ClInclude Include="gamePlayUI.h" />
     <ClInclude Include="gameTitleScene.h" />
+    <ClInclude Include="graphicUI.h" />
     <ClInclude Include="HealtyGuy.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
@@ -184,7 +186,6 @@
     <ClInclude Include="minion1.h" />
     <ClInclude Include="minion2.h" />
     <ClInclude Include="minion3.h" />
-    <ClInclude Include="motherAction.h" />
     <ClInclude Include="npcBase.h" />
     <ClInclude Include="pixelCollision.h" />
     <ClInclude Include="skeleton.h" />
@@ -243,7 +244,9 @@
     <ClCompile Include="gameMenuScene.cpp" />
     <ClCompile Include="gameNode.cpp" />
     <ClCompile Include="gamePlayScene.cpp" />
+    <ClCompile Include="gamePlayUI.cpp" />
     <ClCompile Include="gameTitleScene.cpp" />
+    <ClCompile Include="graphicUI.cpp" />
     <ClCompile Include="HealtyGuy.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
@@ -266,9 +269,9 @@
     <ClCompile Include="minion1.cpp" />
     <ClCompile Include="minion2.cpp" />
     <ClCompile Include="minion3.cpp" />
-    <ClCompile Include="motherAction.cpp" />
     <ClCompile Include="npcBase.cpp" />
     <ClCompile Include="pixelCollision.cpp" />
+    <ClCompile Include="playGround+sound.cpp" />
     <ClCompile Include="skeleton.cpp" />
     <ClCompile Include="skill_enemyDeadFx.cpp" />
     <ClCompile Include="StoreManager.cpp" />

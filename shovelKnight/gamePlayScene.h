@@ -11,6 +11,8 @@
 
 #include "gameCollision.h"
 
+
+class gameMenuScene;
 class gamePlayScene : public gameNode
 {
 private:
@@ -25,6 +27,8 @@ private:
 	gameCollision* _gameCollision;
 	stageManager* _stage;
 
+	playerList _playerInfo;
+
 public:
 	gamePlayScene();
 	~gamePlayScene();
@@ -33,6 +37,10 @@ public:
 	inline string getSceneName() { return _sceneName; }
 	inline void setSceneName(string sn) { _sceneName = sn; }
 	//================================= End 게터 세터 ==============================
+
+	//================================= Start 게임 메뉴씬으로부터 플레이어 정보 받아오기 ==================
+	inline void setPlayerInfo(playerList p) { _playerInfo = p; }
+	//================================= End	게임 메뉴씬으로부터 플레이어 정보 받아오기 ====================
 
 	HRESULT init();
 	void release();

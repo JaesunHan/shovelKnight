@@ -6,7 +6,7 @@
 #define ATTACK_DAMAGE_BOX_HEIGHT 6
 #define DOWNATTACK_DAMAGE_BOX_WIDTH 6
 #define	DOWNATTACK_DAMAGE_BOX_HEIGHT 10
-#define SPEED 2.0f
+#define SPEED 1.7f
 #define GRAVITY 0.2f
 #define JUMPPOWER 3.0f
 
@@ -35,6 +35,7 @@ enum PLAYERACTION
 	MOVE,
 	ATTACK,
 	JUMP,
+	HANGING,
 	ROOTING,
 	DAMAGED,
 	DIE
@@ -63,7 +64,7 @@ protected :
 	int					_maxHP;					//최대 체력
 	int					_currentMP;				//현재 마나
 	int					_maxMP;					//최대 마나
-	int					_money;					//소지금액
+	int	_money = 40000;							//소지금액
 	int					_skill;					//스킬넘버
 	int					_alpha;					//알파값
 	float				_x, _y;					//이동좌표	
@@ -99,6 +100,7 @@ public:
 	void control();
 	void physics();
 	void pixelCollision();
+	void hangPixelDetect();
 	void frameCounter(float frameMax, float counterMax);
 
 
