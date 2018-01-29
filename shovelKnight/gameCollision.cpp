@@ -26,8 +26,9 @@ void gameCollision::update()
 {
 	enemyDead();
 	enemyDetectPlayer();
-	if(KEYMANAGER->isOnceKeyDown('1') || _playerMeetNPC) PlayerMeetNPC();
-
+	if(KEYMANAGER->isOnceKeyDown(0x31) || _playerMeetNPC) PlayerMeetNPC();
+	PlayerAndEnemy();
+	
 	//collisionPlayerMapRight();
 	//collisionPlayerMapLeft();
 	//collisionPlayerMapDown(); 
@@ -51,10 +52,15 @@ void gameCollision::render()
 
 		RECT rc2 = _store->getVNpc()[i]->getRect();
 
-		TTTextOut(300, 300, "rc2", rc2);
+		TTTextOut(200, 200, "", rc2);
 	}
-
-	TTTextOut(400, 300, "rc", rc);
+	TTTextOut(300, 200, "", rc);
+	for (int i = 0; i != _item->getVSkill().size(); ++i)
+	{
+		TTTextOut(300, 0, "", _item->getVSkill()[i]->getAdd().x);
+		TTTextOut(300, 20, "", _item->getVSkill()[i]->getAdd().y);
+		TTTextOut(300, 40, "", _item->getVSkill()[i]->getGravity());
+	}
 }
 
 void gameCollision::enemyDead()
@@ -142,20 +148,22 @@ void gameCollision::PlayerMeetNPC()
 
 
 
+
 		if (IntersectRect(&temp, &_player->getPlayerRC(), &_store->getVNpc()[i]->getRect()))
 
 		{
 			_store->getVNpc()[i]->isCollision(true);
+			_playerMeetNPC = true;
 		}
 		else
 		{
 			_store->getVNpc()[i]->isCollision(false);
+			_playerMeetNPC = false;
 		}
 	}
-	_playerMeetNPC = true;
 }
 
-void gameCollision::PlayerMeetEnemy()
+void gameCollision::PlayerAndEnemy()
 {
 	for (int i = 0; i != _enemy->getVEnemy().size(); ++i)
 	{
@@ -163,8 +171,13 @@ void gameCollision::PlayerMeetEnemy()
 
 		if (IntersectRect(&temp, &_player->getPlayerRC(), &_enemy->getVEnemy()[i]->getRect()))
 		{
-			//_player->setDamagePlayer();
-			//_enemy->getVEnemy()[i]->setEnemyDamage();
+			_player->setDamagePlayer();
+			_player->setPlayerReaction();
+		}
+		if (IntersectRect(&temp, &_player->getAttackRC(), &_enemy->getVEnemy()[i]->getRect()))
+		{
+			_enemy->getVEnemy()[i]->setEnemyDamage();
+			_player->setPlayerReaction();
 		}
 	}
 }
