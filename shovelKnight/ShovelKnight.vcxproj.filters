@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="헤더 파일">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
@@ -105,6 +101,10 @@
     </Filter>
     <Filter Include="playGround\gamePlayScene\UI">
       <UniqueIdentifier>{ad1c826f-6ba2-490a-acf7-341d34446264}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -353,6 +353,12 @@
     </ClInclude>
     <ClInclude Include="graphicUI.h">
       <Filter>playGround\gamePlayScene\UI</Filter>
+<<<<<<< HEAD
+    </ClInclude>
+    <ClInclude Include="bossBlackKnight.h">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+=======
+>>>>>>> a22c9a16a6d160872974e8b518ddfd2cc43324ef
     </ClInclude>
     <ClInclude Include="bossBlackKnight.h">
       <Filter>헤더 파일</Filter>
@@ -592,6 +598,12 @@
     </ClCompile>
     <ClCompile Include="graphicUI.cpp">
       <Filter>playGround\gamePlayScene\UI</Filter>
+<<<<<<< HEAD
+    </ClCompile>
+    <ClCompile Include="bossBlackKnight.cpp">
+      <Filter>playGround\gamePlayScene\enemy</Filter>
+=======
+>>>>>>> a22c9a16a6d160872974e8b518ddfd2cc43324ef
     </ClCompile>
     <ClCompile Include="bossBlackKnight.cpp">
       <Filter>소스 파일</Filter>

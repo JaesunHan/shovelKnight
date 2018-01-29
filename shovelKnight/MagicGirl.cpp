@@ -92,8 +92,10 @@ void MagicGirl::stockCount()
 
 void MagicGirl::isCollision(bool collision)
 {
-	if (collision)
+	if (_isAppear)
 	{
+		if (collision)
+		{
 			//텍스트 아웃으로 "너 이거 살래? Yes or No(bool값<-변수 하나 추가해야함 1.25)
 			//아래는 Yes 선택했을때의 함수
 			char* str1 = "Welcome, Welcome My friend";
@@ -107,7 +109,7 @@ void MagicGirl::isCollision(bool collision)
 			//char* str = str1;
 			//if(strlen(str)==strlen(str1) && stats = 0) str = str2;
 			////
-	
+
 			_textOut = true;
 			_npcStatus = NPCTALK;
 			TTTextOut(500, 300, "으앙충돌", 0);
@@ -157,9 +159,9 @@ void MagicGirl::isCollision(bool collision)
 			//NO했을때는 텍스트 아웃으로
 			//"어 그...그래? 안녕 ㅃㅃ " 다이얼로그 출력 ㅃㅃ
 			//_isCollisionNpc == false;
-		
-		}
 
+		}
+	}
 }
 
 void MagicGirl::magicGirlImageControl()
