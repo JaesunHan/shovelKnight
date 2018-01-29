@@ -62,6 +62,7 @@ HRESULT HealtyGuy::init()
 
 	_anim = KEYANIMANAGER->findAnimation("헬스가이아이들");		//NPC 애니메이션
 
+	_setMaxHp = 8;
 	return S_OK;
 }
 
@@ -113,9 +114,11 @@ void HealtyGuy::isCollision(bool collision)
 			_textOut = true;
 			
 
-			if (KEYMANAGER->isOnceKeyDown('O'))				//O눌렀을때
-			{
+			//if (KEYMANAGER->isOnceKeyDown('O'))				//O눌렀을때
+			//{
 				//TTTextOut(300, 300, "으앙충돌", 0);
+			if (KEYMANAGER->isOnceKeyDown('2'))
+			{
 				if (!_stock)					//한번도 상점에서 구매를 하지 않았으면(stock =0)
 				{
 					if (_money >= 1000)				//1000원보다 돈이 많다면
@@ -147,8 +150,12 @@ void HealtyGuy::isCollision(bool collision)
 					}
 
 				}
+				//}
+				else
+				{
+					_textOut = false;
+				}
 			}
-
 			if (KEYMANAGER->isOnceKeyDown('P'))
 			{
 
@@ -158,9 +165,6 @@ void HealtyGuy::isCollision(bool collision)
 			//_isCollisionNpc == false;
 
 		}
-		else
-		{
-			_textOut = false;
-		}
+		
 	}
 }
