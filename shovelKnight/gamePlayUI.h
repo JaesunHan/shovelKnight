@@ -16,7 +16,7 @@ public:
 
 	HRESULT init();
 	void update();
-	void release();
+	void release(HDC hdc);
 	//	void render();
 	void draw(HDC hdc);
 

@@ -65,6 +65,17 @@ void dialogueManager::setScriptNScriptWindow(string script, image* scriptWindow,
 	_b = b;
 }
 
+void dialogueManager::setScript(string script, int r, int g, int b)
+{
+	_cnt = 0;
+
+	wsprintf(_scriptStr, "%s", script.c_str());
+	
+	_r = r;
+	_g = g;
+	_b = b;
+}
+
 time_t dialogueManager::getTime()
 {
 	time_t timer;

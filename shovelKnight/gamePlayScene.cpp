@@ -59,6 +59,7 @@ void gamePlayScene::release()
 	_player->release();
 	_gameCollision->release();
 	_stage->release();
+	//_gamePlayUI();
 }
 
 void gamePlayScene::update()

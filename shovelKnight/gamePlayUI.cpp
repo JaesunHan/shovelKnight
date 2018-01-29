@@ -29,9 +29,9 @@ void gamePlayUI::update()
 {
 
 }
-void gamePlayUI::release()
+void gamePlayUI::release(HDC hdc)
 {
-
+	draw(hdc);
 }
 //void gamePlayUI::render() 
 //{
