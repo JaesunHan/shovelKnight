@@ -128,10 +128,10 @@ void player1::render()
 				_counter = 0;
 			}
 		}
-		if (_action == HANG)
+		if (_action == HANGING)
 		{
 			CAMERAMANAGER->frameRenderObject(getMemDC(), IMAGEMANAGER->findImage("Hanging"), _x - 12, _y - 38, 0, _frameX);
-			frameCounter(2, 5);
+			frameCounter(2, 10);
 		}
 	}
 
@@ -167,6 +167,7 @@ void player1::control2()
 	{
 		if (_state == INAIR) _downwardThrust = true;
 		if (_state == HANG) _y += SPEED;
+		hangPixelDetectDown();
 	}
 	if (KEYMANAGER->isOnceKeyDown('R'))
 	{

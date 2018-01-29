@@ -101,6 +101,8 @@ public:
 	void physics();
 	void pixelCollision();
 	void hangPixelDetect();
+	bool hangPixelDetectUp();
+	void hangPixelDetectDown();
 	void frameCounter(float frameMax, float counterMax);
 
 
