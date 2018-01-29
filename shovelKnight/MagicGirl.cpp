@@ -45,8 +45,8 @@ HRESULT MagicGirl::init()
 	_height = _img->getFrameHeight();				//세로크기
 	_rc = RectMakeCenter(_x, _y, _width, _height);	//상점NPC 렉트
 	_npcType = MAGICGIRL;							//NPC타입
-
-	_isCollisionNpc = false;							//플레이어와 충돌했는가? true : 그렇다, false : 아니다
+	_npcStatus = NPCIDLE;							//NPC상태 기본은 IDLE
+	_isCollisionNpc = false;						//플레이어와 충돌했는가? true : 그렇다, false : 아니다
 
 	_isAppear = true;								//기본상태로 맵에서 등장한다.
 	//_showshowshowshow = 0;
@@ -58,9 +58,20 @@ HRESULT MagicGirl::init()
 	}
 	KEYANIMANAGER->addArrayFrameAnimation("매직걸아이들", "magicGIRLIDLE", arrIDLE1, 46, 3, true);
 	
+	int arrBow[6];
+	for (int i = 0; i < 6; ++i)
+	{
+		arrBow[i] = i;
+	}
+	KEYANIMANAGER->addArrayFrameAnimation("매직걸인사", "magicGirlBow", arrBow, 6, 3, true);
+
 
 	_anim = KEYANIMANAGER->findAnimation("매직걸아이들");		//NPC 애니메이션
+	_anim2 = KEYANIMANAGER->findAnimation("매직걸인사");
 	KEYANIMANAGER->start("매직걸아이들");
+	KEYANIMANAGER->start("매직걸인사");
+
+	_textOut = false;
 	return S_OK;
 }
 
@@ -76,6 +87,8 @@ void MagicGirl::sellSkill()
 void MagicGirl::stockCount()
 {
 }
+
+
 
 void MagicGirl::isCollision(bool collision)
 {
@@ -94,8 +107,9 @@ void MagicGirl::isCollision(bool collision)
 			//char* str = str1;
 			//if(strlen(str)==strlen(str1) && stats = 0) str = str2;
 			////
-
-
+	
+			_textOut = true;
+			_npcStatus = NPCTALK;
 			TTTextOut(500, 300, "으앙충돌", 0);
 			if (KEYMANAGER->isOnceKeyDown('O'))				//O눌렀을때
 			{
@@ -143,8 +157,30 @@ void MagicGirl::isCollision(bool collision)
 			//NO했을때는 텍스트 아웃으로
 			//"어 그...그래? 안녕 ㅃㅃ " 다이얼로그 출력 ㅃㅃ
 			//_isCollisionNpc == false;
-
+		
 		}
+
+}
+
+void MagicGirl::magicGirlImageControl()
+{
+
+	switch (_npcStatus)
+	{
+	case NPCIDLE:
+		_anim = KEYANIMANAGER->findAnimation("매직걸아이들");		//NPC 애니메이션
+															//KEYANIMANAGER->start("매직걸아이들");
+		break;
+
+	case NPCTALK:
+		_img = IMAGEMANAGER->findImage("magicGirlBow");
+		_anim2 = KEYANIMANAGER->findAnimation("매직걸인사");		//NPC 애니메이션
+															//KEYANIMANAGER->start("매직걸인사");
+		break;
+
+	case NPCUNDERATTACKED:
+		break;
+	}
 
 }
 
@@ -162,16 +198,32 @@ void MagicGirl::render()
 				CAMERAMANAGER->getY(_rc.bottom));
 		}
 	}
+	if (_textOut)
+	{
+		TTTextOut(500, 200, "매직걸에서플레이어돈", _money);
+	}
 }
 
 void MagicGirl::draw()
 {
 	//_img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
-	CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
+	switch (_npcStatus)
+	{
+	case NPCIDLE: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
+		break;
+	case NPCTALK: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim2, _rc.left, _rc.top);
+		break;
+	case NPCUNDERATTACKED:
+		break;
+	default: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
+		break;
+	}
+	
+	
 }
 
 void MagicGirl::update()
 {
 	npcBase::update();
-
+	magicGirlImageControl();
 }

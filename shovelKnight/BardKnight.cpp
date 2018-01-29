@@ -62,7 +62,7 @@ HRESULT BardKnight::init()
 	return S_OK;
 
 	_isChange = false;
-
+	_textOut = false;						//테스트용
 }
 
 void BardKnight::changeBGM()
@@ -90,6 +90,10 @@ void BardKnight::render()
 				CAMERAMANAGER->getX(_rc.right),
 				CAMERAMANAGER->getY(_rc.bottom));
 		}
+	}
+	if (_textOut==true)
+	{
+		TTTextOut(500, 100, "바드나이트에서플레이어돈", _money);
 	}
 }
 
@@ -133,7 +137,7 @@ void BardKnight::isCollision(bool collision)
 
 		TTTextOut(500, 300, "으앙충돌1", 0);
 		
-
+		_textOut = true;
 		_isChange = true;
 		soundChange();
 		//if (KEYMANAGER->isOnceKeyDown('O'))				//O눌렀을때

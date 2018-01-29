@@ -53,7 +53,8 @@ HRESULT HealtyGuy::init()
 
 
 	_isCollisionNpc = false;							//플레이어와 충돌했는가? true : 그렇다, false : 아니다
-	_isAppear = true;								//기본상태로 맵에서 등장하지 않는다.
+	_isAppear = true;									//기본상태로 맵에서 등장하지 않는다.
+	_textOut = false;
 
 	int arrIDLE1[] = { 0,1 };
 	KEYANIMANAGER->addArrayFrameAnimation("헬스가이아이들", "HealtyGuyIdle", arrIDLE1, 2, 2, true);
@@ -81,6 +82,10 @@ void HealtyGuy::render()
 				CAMERAMANAGER->getX(_rc.right),
 				CAMERAMANAGER->getY(_rc.bottom));
 		}
+	}
+	if (_textOut)
+	{
+		TTTextOut(500, 300, "플레이어돈", _money);
 	}
 }
 
@@ -113,8 +118,9 @@ void HealtyGuy::isCollision(bool collision)
 		//if(strlen(str)==strlen(str1) && stats = 0) str = str2;
 		////
 
+		_textOut = true;
+		TTTextOut(500, 300, "헬스가이에서플레이어돈", _money);
 
-		TTTextOut(500, 300, "으앙충돌2", 0);
 		if (KEYMANAGER->isOnceKeyDown('O'))				//O눌렀을때
 		{
 			//TTTextOut(300, 300, "으앙충돌", 0);

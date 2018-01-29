@@ -36,6 +36,7 @@ public:
 	bool _isSellEffectSound;						//이펙트 사운드 팔렸는지
 	//bool _isCollisionNpc;								//NPC와 충돌
 	bool _isChange;						
+	bool _textOut;									//텍스트 아웃 테스트용
 	//==========스킬 스토어 관련 함수===============//
 	void changeBGM();								//스킬 파는 함수
 	void changeEffectSound();
