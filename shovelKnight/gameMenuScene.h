@@ -14,6 +14,7 @@ struct playerList
 	int characterkind;	//캐릭터 종류 : 0번은 삽기사
 	TCHAR name[128];			//캐릭터의 닉넴
 	int hp;				//HP
+	int maxHp;			//maxHp
 	int mana;			//마나
 	int money;			//가지고 있는 돈
 	int suit;			//0 번이 기본수트

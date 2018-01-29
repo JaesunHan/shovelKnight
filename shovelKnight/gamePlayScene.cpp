@@ -22,6 +22,7 @@ HRESULT gamePlayScene::init()
 	_player = new playerManager;
 	_gameCollision = new gameCollision;
 	_stage = new stageManager;
+	_gamePlayUI = new gamePlayUI;
 
 	_gameCollision->getEmemyMemoryAdress(_enemy);
 	_gameCollision->getGameObjectMemoryAdress(_gameObject);
@@ -42,7 +43,7 @@ HRESULT gamePlayScene::init()
 	_player->init();
 	_gameCollision->init();
 	_stage->init();
-
+	_gamePlayUI->init();
 
 
 	return S_OK;
