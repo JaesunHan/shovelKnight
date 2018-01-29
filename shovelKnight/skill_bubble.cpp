@@ -33,15 +33,16 @@ void skill_Bubble::update()
 	switch (_stats)
 	{
 	case SKILL_STATS_LOOP_L:
-		if (_isRight) _x += speed;
-		else if (!_isRight) _x -= speed;
-		reRect();
-		if (getDistance(_x, 0, _saveX, 0) > 100)
+		if (_startX - 200 > _x)
 		{
-			_ani = KEYANIMANAGER->findAnimation(_outName);
-			_stats = SKILL_STATS_OUT;
-			_ani->start();
+			_y -= speed / 2;
 		}
+		else
+		{
+			if (_isRight) _x += speed;
+			else if (!_isRight) _x -= speed;
+		}
+		reRect();
 		break;
 	case SKILL_STATS_OUT:
 		break;
@@ -51,7 +52,8 @@ void skill_Bubble::update()
 
 void skill_Bubble::fire(SKILL_FIRE charType, float x, float y)
 {
-	skillBase::fire(charType, x, y);
+	skillBase::fire(charType, x - 50, y + 30);
+	_startX = x - 50;
 
 	{
 		string str2, str3;
@@ -95,7 +97,7 @@ void skill_Bubble::fire(SKILL_FIRE charType, float x, float y)
 	_ani = KEYANIMANAGER->findAnimation(_loopNameL);
 	_stats = SKILL_STATS_LOOP_L;
 
-	_isRight = RND->getInt(2);
+	_isRight = false;
 	_isFire = true;
 	_ani->start();
 }

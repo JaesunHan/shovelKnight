@@ -14,6 +14,11 @@ gameCollision::~gameCollision()
 HRESULT gameCollision::init()
 {
 	_playerMeetNPC = false;
+	_countDragonEffect = 0;
+	_dragonTime = 0;
+
+	_countDragonAttackEffect;
+	_dragonAttackTime;
 
 	return S_OK;
 }
@@ -25,7 +30,7 @@ void gameCollision::release()
 void gameCollision::update()
 {
 	enemyDead();
-	if(KEYMANAGER->isOnceKeyDown(0x31) || _playerMeetNPC) PlayerMeetNPC();
+	if (KEYMANAGER->isOnceKeyDown(0x31) || _playerMeetNPC) PlayerMeetNPC();
 	PlayerAndEnemy();
 	
 	//collisionPlayerMapRight();
@@ -37,34 +42,19 @@ void gameCollision::update()
 	//플레이어와 스킬의 충돌	 
 	//적과 스킬의 충돌
 	//플레이어와 item의 충돌
+	//플레이어와 스킬의 충돌
 
 }
 
 void gameCollision::render()
 {
 
-	RECT rc = _player->getPlayerRC();
-
-	for (int i = 0; i < _store->getVNpc().size(); ++i)
-	{
-		if (_store->getVNpc()[i]->getNpcType() != MAGICGIRL) continue;
-
-		RECT rc2 = _store->getVNpc()[i]->getRect();
-
-		TTTextOut(200, 200, "", rc2);
-	}
-	TTTextOut(300, 200, "", rc);
-	for (int i = 0; i != _item->getVSkill().size(); ++i)
-	{
-		TTTextOut(300, 0, "", _item->getVSkill()[i]->getAdd().x);
-		TTTextOut(300, 20, "", _item->getVSkill()[i]->getAdd().y);
-		TTTextOut(300, 40, "", _item->getVSkill()[i]->getGravity());
-	}
 }
 
 void gameCollision::enemyDead()
 {
 	//몬스터에 따라 죽는게 다르므로 스위치로 나눔
+
 
 
 	//드래곤은 머리만 공격
@@ -102,7 +92,41 @@ void gameCollision::enemyDead()
 				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD ||
 				_enemy->getVEnemy()[i]->getIsDeadVanish())
 			{
-				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
+
+				_dragonTime += TIMEMANAGER->getElapsedTime();
+
+				while (_dragonTime > 0.2f)
+				{
+					_dragonTime -= 0.2f;
+					++_countDragonEffect;
+
+				}
+
+				if (_countDragonEffect > 0)
+				{
+					RECT rc3 = _enemy->getVEnemy()[i]->getBoss1TrunkRect();
+					_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX,
+						RND->getFromFloatTo(rc3.left, rc3.right),
+						RND->getFromFloatTo(rc3.top, rc3.top + ((rc3.top + rc3.bottom) / 6)));
+					--_countDragonEffect;
+				}
+			}
+			if (_enemy->getVEnemy()[i]->getStatus() == ENEMY_LEFT_ATTACK)
+			{
+				_dragonAttackTime += TIMEMANAGER->getElapsedTime();
+
+				if (_dragonAttackTime > 0.25f && _countDragonAttackEffect != 0)
+				{
+					if(_countDragonAttackEffect == 2) _skill->Fire(SKILL_FIRE_DRAGON, SKILL_BUBBLE, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY()+20);
+					else _skill->Fire(SKILL_FIRE_DRAGON, SKILL_BUBBLE, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
+					_countDragonAttackEffect--;
+					_dragonAttackTime -= 0.25;
+				}
+			}
+			else
+			{
+				_countDragonAttackEffect = 3;
+				_dragonAttackTime = 0;
 			}
 			break;
 		case ENEMY_BLACKKNIGHT:
@@ -110,6 +134,7 @@ void gameCollision::enemyDead()
 				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD ||
 				_enemy->getVEnemy()[i]->getIsDeadVanish())
 			{
+				
 				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
 			}
 			break;
@@ -129,7 +154,6 @@ void gameCollision::PlayerMeetNPC()
 		_store->getVNpc()[i]->setMoney(_player->getMoney());
 		_player->setMoney(_store->getVNpc()[i]->getMinusMoney());
 		_store->getVNpc()[i]->setMinusMoney(0);
-		//_store->getVNpc()[i]->
 
 		_player->setMaxHP(_store->getVNpc()[i]->getMaxHp());
 		_store->getVNpc()[i]->setMaxHp(0);
@@ -169,9 +193,23 @@ void gameCollision::PlayerAndEnemy()
 
 		if (_enemy->getVEnemy()[i]->getEnemyType() == ENEMY_DRAGON)
 		{
+			if (IntersectRect(&temp, &_player->getAttackRC(), &_enemy->getVEnemy()[i]->getBoss1TrunkRect()))
+			{
+				_player->setPlayerReaction();
+			}
 			if (IntersectRect(&temp, &_player->getAttackRC(), &_enemy->getVEnemy()[i]->getRect()))
 			{
 				_player->setPlayerReaction();
+				_enemy->getVEnemy()[i]->setEnemyDamage();
+			}
+		}
+		else if (_enemy->getVEnemy()[i]->getEnemyType() == ENEMY_SKELETON)
+		{
+			if (IntersectRect(&temp, &_player->getAttackRC(), &_enemy->getVEnemy()[i]->getRect()))
+			{
+				_enemy->getVEnemy()[i]->setEnemyDamage();
+				_player->setPlayerReaction();
+				_player->setDamagePlayer();
 			}
 		}
 		else
@@ -190,4 +228,8 @@ void gameCollision::PlayerAndEnemy()
 void gameCollision::EnemyAction()
 {
 
+}
+
+void gameCollision::PlayerAndSkill()
+{
 }

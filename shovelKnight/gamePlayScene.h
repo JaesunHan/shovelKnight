@@ -33,6 +33,7 @@ private:
 
 	playerList _playerInfo;
 
+	int _selectPlayerIdx;
 public:
 	gamePlayScene();
 	~gamePlayScene();
@@ -43,7 +44,7 @@ public:
 	//================================= End 게터 세터 ==============================
 
 	//================================= Start 게임 메뉴씬으로부터 플레이어 정보 받아오기 ==================
-	inline void setPlayerInfo(playerList p) { _playerInfo = p; }
+	void setPlayerIdx(int* idx) { _selectPlayerIdx = *idx;  _gamePlayUI->setPlayerIdx(&_selectPlayerIdx); }
 	//================================= End	게임 메뉴씬으로부터 플레이어 정보 받아오기 ====================
 
 	HRESULT init();

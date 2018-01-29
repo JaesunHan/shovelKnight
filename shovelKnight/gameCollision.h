@@ -19,6 +19,11 @@ private:
 
 
 	bool _playerMeetNPC;
+	int _countDragonEffect;
+	float _dragonTime;
+
+	int _countDragonAttackEffect;
+	float _dragonAttackTime;
 
 public:
 	gameCollision();
@@ -41,6 +46,8 @@ public:
 	void PlayerMeetNPC();
 	void PlayerAndEnemy();
 	void EnemyAction();
+
+	void PlayerAndSkill();
 };
 
 
