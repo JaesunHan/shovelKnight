@@ -36,6 +36,7 @@ HRESULT BardKnight::init()
 	IMAGEMANAGER->addFrameImage("BardKnightJump", "./image/npc/bardKnight_jump.bmp", 798, 52, 14, 1, true, RGB(255, 0, 255), false);
 	IMAGEMANAGER->addFrameImage("BardKnightPlaying", "./image/npc/bardKnight_playing.bmp", 720, 39, 16, 1, true, RGB(255, 0, 255), false);
 
+	
 
 
 	_x = 400 / 2;
@@ -74,11 +75,22 @@ HRESULT BardKnight::init()
 
 	_testScript = new image;
 	_testScript = IMAGEMANAGER->addImage("scriptWindow", "./image/UI/Script_window.bmp", 0, 0, 800, 96, true, RGB(255, 0, 255));
-	DIALOGUEMANAGER->setScriptNScriptWindow("힘세고 좋은 아침, 묻는다면 나는 바드나이트 음악을 사겠나?", _testScript, 255, 255, 255);
-	//DIALOGUEMANAGER->setScriptNScriptWindow("사려면 O키를, 안사려면 K키를 누르게", _testScript, 255, 255, 255);
-	DIALOGUEMANAGER->setScript("사려면 O키를 안사려면 K키를누르게",255,255,255);
+	DIALOGUEMANAGER->setScriptWindow(_testScript);
+	
+	
+	//_testScript1 = new image;
+	//_testScript1 = IMAGEMANAGER->addImage("scriptWindow", "./image/UI/Script_window.bmp", 0, 0, 800, 96, true, RGB(255, 0, 255));
+	//DIALOGUEMANAGER->setScript("사려면 O키를 안사려면 K키를누르게",255,255,255);
+	
+
+	_vDialog.push_back("힘세고 좋은 아침, 묻는다면 나는 바드나이트 음악을 사겠나?");
+	_vDialog.push_back("사려면 O키를 안사려면 K키를누르게");
+
+
+	_idx = 0;
 	_isChange = false;
 	_textOut = false;
+	_isReturn = false;
 	return S_OK;
 
 	
@@ -102,6 +114,12 @@ void BardKnight::isCollision(bool collision)
 		if (collision)
 		{
 			
+			_idx = 0;
+		
+			if (_isReturn)
+			{
+				DIALOGUEMANAGER->setScript(_vDialog[_idx], 255, 255, 255);
+			}
 			//soundChange();
 			//텍스트 아웃으로 "너 이거 살래? Yes or No(bool값<-변수 하나 추가해야함 1.25)
 			//아래는 Yes 선택했을때의 함수
@@ -109,7 +127,7 @@ void BardKnight::isCollision(bool collision)
 		
 			
 
-			_textOut = true;
+			//_textOut = true;
 			
 
 			_isChange = true;
@@ -213,12 +231,13 @@ void BardKnight::render()
 				CAMERAMANAGER->getX(_rc.right),
 				CAMERAMANAGER->getY(_rc.bottom));
 		}
+		DIALOGUEMANAGER->render(getMemDC(), 0, 0, 800, 96);
 
 
 		if (_textOut == true)
 		{
 			TTTextOut(500, 100, "바드나이트에서플레이어돈", _money);
-			DIALOGUEMANAGER->render(getMemDC(), 0, 0, 800, 96);
+			
 		}
 	}
 }
@@ -247,4 +266,10 @@ void BardKnight::update()
 	npcBase::update();
 	bardKnightImageControl();
 	DIALOGUEMANAGER->update();
+
+	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
+	{
+		_isReturn = true;
+		_idx += 1;	
+	}
 }

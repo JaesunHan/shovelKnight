@@ -56,6 +56,7 @@ protected:
 
 	int _stock;				//몇번 구매했는지 확인하는 변수
 	bool _buyYesorNo;		//상점 열었을때 살래말래?
+	bool _isReturn;			//엔터 눌렀느냐
 
 	//===============다이얼로그 변수==================//
 	image* _testScript;		
@@ -64,6 +65,14 @@ protected:
 	image* _testScript3;
 	image* _testScript4;
 	image* _testScript5;
+
+
+	//===========다이얼로그용 벡터 선언===============//
+	typedef vector<string> vDialog;
+	typedef vector<string>::iterator viDialog;
+
+	vDialog _vDialog;									//npc벡터
+	viDialog _viDialog;									//npc벡터이터레이터
 
 public:
 	npcBase();
