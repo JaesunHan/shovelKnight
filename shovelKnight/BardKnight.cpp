@@ -82,7 +82,7 @@ HRESULT BardKnight::init()
 	//_testScript1 = IMAGEMANAGER->addImage("scriptWindow", "./image/UI/Script_window.bmp", 0, 0, 800, 96, true, RGB(255, 0, 255));
 	//DIALOGUEMANAGER->setScript("사려면 O키를 안사려면 K키를누르게",255,255,255);
 	
-
+	_isCollisionPlayer = false;
 	_vDialog.push_back("힘세고 좋은 아침, 묻는다면 나는 바드나이트 음악을 사겠나?");
 	_vDialog.push_back("사려면 O키를 안사려면 K키를누르게");
 
@@ -113,13 +113,14 @@ void BardKnight::isCollision(bool collision)
 	{
 		if (collision)
 		{
+			_isCollisionPlayer = collision;
 			
-			_idx = 0;
+			//_idx = 0;
 		
-			if (_isReturn)
-			{
-				DIALOGUEMANAGER->setScript(_vDialog[_idx], 255, 255, 255);
-			}
+			//if (_isReturn)
+			//{
+			//	DIALOGUEMANAGER->setScript(_vDialog[_idx], 255, 255, 255);
+			//}
 			//soundChange();
 			//텍스트 아웃으로 "너 이거 살래? Yes or No(bool값<-변수 하나 추가해야함 1.25)
 			//아래는 Yes 선택했을때의 함수
@@ -182,6 +183,7 @@ void BardKnight::isCollision(bool collision)
 		else
 		{
 			_textOut = false;
+			_isCollisionPlayer = false;
 		}
 	}
 }
@@ -231,7 +233,11 @@ void BardKnight::render()
 				CAMERAMANAGER->getX(_rc.right),
 				CAMERAMANAGER->getY(_rc.bottom));
 		}
-		DIALOGUEMANAGER->render(getMemDC(), 0, 0, 800, 96);
+		//콜리션 상태일 때만 다이어로그 출력
+		if (_isCollisionPlayer)
+		{
+			DIALOGUEMANAGER->render(getMemDC(), 0, 0, 800, 96);
+		}
 
 
 		if (_textOut == true)
@@ -265,11 +271,16 @@ void BardKnight::update()
 {
 	npcBase::update();
 	bardKnightImageControl();
-	DIALOGUEMANAGER->update();
-
-	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
+	//콜리션 상태일 때만 업데이트 돈다.
+	if(_isCollisionPlayer)
 	{
-		_isReturn = true;
+		DIALOGUEMANAGER->update();
+	}
+	if (KEYMANAGER->isOnceKeyDown(VK_RETURN) && _isCollisionPlayer)
+	{
+		DIALOGUEMANAGER->setScript(_vDialog[_idx], 255, 255, 255);
+		//_isReturn = true;
 		_idx += 1;	
+		if (_idx >= _vDialog.size())	_idx = 0;
 	}
 }

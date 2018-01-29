@@ -30,7 +30,7 @@ void gameCollision::release()
 void gameCollision::update()
 {
 	enemyDead();
-	if (KEYMANAGER->isOnceKeyDown(0x31) || _playerMeetNPC) PlayerMeetNPC();
+	if (KEYMANAGER->isOnceKeyDown('Q') || _playerMeetNPC) PlayerMeetNPC();
 	PlayerAndEnemy();
 	
 	//collisionPlayerMapRight();
