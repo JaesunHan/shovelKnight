@@ -106,9 +106,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="playGround\gamePlayScene\gameObject\unit">
-      <UniqueIdentifier>{c9a4d5fe-434e-4bff-aed8-d5f7e8cedcd5}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -276,6 +273,9 @@
     <ClInclude Include="TTUtils.h">
       <Filter>2DGameFramework\utils</Filter>
     </ClInclude>
+    <ClInclude Include="dirtBlock.h">
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
+    </ClInclude>
     <ClInclude Include="stageManager.h">
       <Filter>playGround\gamePlayScene\stageManager</Filter>
     </ClInclude>
@@ -356,21 +356,15 @@
     </ClInclude>
     <ClInclude Include="bossBlackKnight.h">
       <Filter>playGround\gamePlayScene\enemy</Filter>
-<<<<<<< HEAD
-=======
-    </ClInclude>
-    <ClInclude Include="dirtBlock.h">
-      <Filter>playGround\gamePlayScene\gameObject\unit</Filter>
-    </ClInclude>
-    <ClInclude Include="tresureBox.h">
-      <Filter>playGround\gamePlayScene\gameObject\unit</Filter>
     </ClInclude>
     <ClInclude Include="checkPoint.h">
-      <Filter>playGround\gamePlayScene\gameObject\unit</Filter>
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
     </ClInclude>
     <ClInclude Include="dirtPile.h">
-      <Filter>playGround\gamePlayScene\gameObject\unit</Filter>
->>>>>>> 474235aedf5d4fdb713f54304d9ff7822cdc7dc6
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="tresureBox.h">
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -524,6 +518,9 @@
     <ClCompile Include="TTUtils.cpp">
       <Filter>2DGameFramework\utils</Filter>
     </ClCompile>
+    <ClCompile Include="dirtBlock.cpp">
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
+    </ClCompile>
     <ClCompile Include="stageManager.cpp">
       <Filter>playGround\gamePlayScene\stageManager</Filter>
     </ClCompile>
@@ -607,21 +604,15 @@
     </ClCompile>
     <ClCompile Include="bossBlackKnight.cpp">
       <Filter>playGround\gamePlayScene\enemy</Filter>
-<<<<<<< HEAD
-=======
-    </ClCompile>
-    <ClCompile Include="dirtBlock.cpp">
-      <Filter>playGround\gamePlayScene\gameObject\unit</Filter>
-    </ClCompile>
-    <ClCompile Include="tresureBox.cpp">
-      <Filter>playGround\gamePlayScene\gameObject\unit</Filter>
     </ClCompile>
     <ClCompile Include="checkPoint.cpp">
-      <Filter>playGround\gamePlayScene\gameObject\unit</Filter>
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
     </ClCompile>
     <ClCompile Include="dirtPile.cpp">
-      <Filter>playGround\gamePlayScene\gameObject\unit</Filter>
->>>>>>> 474235aedf5d4fdb713f54304d9ff7822cdc7dc6
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="tresureBox.cpp">
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
