@@ -26,10 +26,10 @@ void minion3::enemyInitSet()
 	KEYANIMANAGER->addArrayFrameAnimation("drakeLeftMove", "drake", leftMove, 3, 4, true);
 
 	int rightHit[] = { 12, 13, 14 };
-	KEYANIMANAGER->addArrayFrameAnimation("drakeRightHit", "drake", rightHit, 3, 10, false);
+	KEYANIMANAGER->addArrayFrameAnimation("drakeRightHit", "drake", rightHit, 3, 4, false);
 
 	int leftHit[] = { 15, 16, 17 };
-	KEYANIMANAGER->addArrayFrameAnimation("drakeLeftHit", "drake", leftHit, 3, 10, false);
+	KEYANIMANAGER->addArrayFrameAnimation("drakeLeftHit", "drake", leftHit, 3, 4, false);
 
 	//=========================================================================================
 
@@ -210,11 +210,11 @@ void minion3::move()
 		break;
 		case ENEMY_RIGHT_HIT:
 
-			_anim = KEYANIMANAGER->findAnimation("drakeLeftHit");
-			if (!_anim->isPlay())
+			_anim = KEYANIMANAGER->findAnimation("drakeRightHit");
+			if (!_anim->isPlay() && !_isHitPlay)
 			{
 				_anim->start();
-				_speed = DRAKESPEED * 5;
+				_speed = DRAKESPEED * 7;
 				_speed -= 0.4;
 				_x -= _speed;
 				_isHitPlay = true;
@@ -234,11 +234,11 @@ void minion3::move()
 		break;
 		case ENEMY_LEFT_HIT:
 
-			_anim = KEYANIMANAGER->findAnimation("drakeRightHit");
-			if (!_anim->isPlay())
+			_anim = KEYANIMANAGER->findAnimation("drakeLeftHit");
+			if (!_anim->isPlay() && !_isHitPlay)
 			{
 				_anim->start();
-				_speed = DRAKESPEED * 5;
+				_speed = DRAKESPEED * 7;
 				_speed -= 0.4;
 				_x += _speed;
 				_isHitPlay = true;
@@ -261,8 +261,8 @@ void minion3::move()
 			if (!_anim->isPlay() && !_isDead)
 			{
 				_anim->start();
-				_speed = DRAKESPEED * 10;
-				_speed -= 0.4;
+				_speed = DRAKESPEED * 5;
+				_speed -= 0.1;
 				_x += _speed;
 				_isDead = true;
 			}
@@ -286,8 +286,8 @@ void minion3::move()
 			if (!_anim->isPlay() && !_isDead)
 			{
 				_anim->start();
-				_speed = DRAKESPEED * 10;
-				_speed -= 0.4;
+				_speed = DRAKESPEED * 5;
+				_speed -= 0.1;
 				_x -= _speed;
 				_isDead = true;
 			}

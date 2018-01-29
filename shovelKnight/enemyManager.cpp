@@ -210,6 +210,7 @@ void enemyManager::stageEnemySet(int stageNum)
 		setEnemy(ENEMY_BEETO, 300, 200);
 		setEnemy(ENEMY_BLORB, 350, 200);
 		setEnemy(ELEMY_DRAKE, 300, 150, ENEMY_LEFT_FOWARD);
+		setEnemy(ELEMY_DRAKE, 200, 200, ENEMY_PATROL);
 		setEnemy(ENEMY_SKELETON, 350, 120);
 		setEnemy(ENEMY_DRAGON, 400, 179.5);
 	}
