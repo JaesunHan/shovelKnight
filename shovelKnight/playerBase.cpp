@@ -2,6 +2,7 @@
 #include "playerBase.h"
 #include "stageManager.h"
 #include "gameCollision.h"
+#include "skillManager.h"
 
 playerBase::playerBase()
 {
@@ -140,6 +141,36 @@ void playerBase::control()
 		if (_state == ONLAND) _jumpCounter = 0;
 	}
 	
+	if (KEYMANAGER->isOnceKeyDown('U'))
+	{
+		while (true)
+		{
+			_currentSkill--;
+			if (_currentSkill < 0) _currentSkill == 3;
+			if (_currentSkill == 1 && _fireBall == true) break;
+			if (_currentSkill == 0) break;
+		}
+	}
+	if (KEYMANAGER->isOnceKeyDown('I'))
+	{
+		while (true)
+		{
+			_currentSkill++;
+			if (_currentSkill > 3) _currentSkill == 0;
+			if (_currentSkill == 1 && _fireBall == true) break;
+			if (_currentSkill == 0) break;
+		}
+	}
+	if (KEYMANAGER->isOnceKeyDown('L'))
+	{
+		switch (_currentSkill)
+		{
+		case(1):
+			
+			break;
+		}
+	}
+
 	if (_action == IDLE)
 	{
 		_shineCounter++;
@@ -165,6 +196,7 @@ void playerBase::control()
 		_shineFrameX = 0;
 		_shineCounter = 0;
 	}
+
 	_playerRC = RectMake(_x - HIT_BOX_WIDTH / 2, _y - HIT_BOX_HEIGHT, HIT_BOX_WIDTH, HIT_BOX_HEIGHT);
 }
 
