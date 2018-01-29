@@ -8,6 +8,7 @@
 #include "skillManager.h"
 #include "playerManager.h"
 #include "stageManager.h"
+#include "frontObjectManager.h"
 
 #include "gameCollision.h"
 
@@ -29,6 +30,7 @@ private:
 	playerManager* _player;
 	gameCollision* _gameCollision;
 	stageManager* _stage;
+	frontObjectManager* _object;
 	gamePlayUI* _gamePlayUI;				//게임 플레이하는 동안 출력될 UI 
 
 	playerList _playerInfo;

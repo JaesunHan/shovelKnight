@@ -23,6 +23,7 @@ HRESULT gamePlayScene::init()
 	_gameCollision = new gameCollision;
 	_stage = new stageManager;
 	_gamePlayUI = new gamePlayUI;
+	_object = new frontObjectManager;
 
 	_gameCollision->getEmemyMemoryAdress(_enemy);
 	_gameCollision->getGameObjectMemoryAdress(_gameObject);
@@ -32,8 +33,12 @@ HRESULT gamePlayScene::init()
 	_gameCollision->getPlayerMemoryAdress(_player);
 	_stage->setPlayerManagerMemoryAddressLink(_player);
 	_stage->setStoreManagerMemoryAddressLink(_Store);
+	_stage->setFrontObjectManagerMemoryAddressLink(_object);
 	_player->setStageManagerMemoryAddressLink(_stage);
 	_player->setGameCollisinMemoryAddressLink(_gameCollision);
+	_player->setGamePlayUIMemoryAddressLink(_gamePlayUI);
+	_object->setPlayerManagerMemoryAddressLink(_player);
+	_object->setStageManagerMemoryAddressLink(_stage);
 
 	_enemy->init();
 	_gameObject->init();
@@ -44,6 +49,7 @@ HRESULT gamePlayScene::init()
 	_gameCollision->init();
 	_stage->init();
 	_gamePlayUI->init();
+	_object->init();
 
 
 	return S_OK;
@@ -60,6 +66,7 @@ void gamePlayScene::release()
 	_gameCollision->release();
 	_stage->release();
 	_gamePlayUI->release();
+	_object->release();
 }
 
 void gamePlayScene::update()
@@ -74,6 +81,7 @@ void gamePlayScene::update()
 	_skill->update();
 	_gameCollision->update();
 	_gamePlayUI->update();
+	_object->update();
 }
 
 void gamePlayScene::render()
@@ -85,6 +93,7 @@ void gamePlayScene::render()
 	_gameObject->render();
 	_enemy->render();
 	_player->render();
+	_object->render();
 	_item->render();
 	_skill->render();
 	_gameCollision->render();

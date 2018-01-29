@@ -4,6 +4,7 @@
 
 class playerManager;
 class StoreManager;
+class frontObjectManager;
 
 struct tagMAPTRANSITION
 {
@@ -46,6 +47,7 @@ private:
 	tagMAPTRANSITION _mapTransition[4];
 	playerManager* _PM;
 	StoreManager* _storeM;
+	frontObjectManager* _FOM;
 public:
 
 	HRESULT init();
@@ -58,9 +60,10 @@ public:
 	void transition();
 	void renderTransitionTiles();
 
-	void setPlayerManagerMemoryAddressLink(playerManager* pm) { _PM = pm; }
-	void setStoreManagerMemoryAddressLink(StoreManager* sm) { _storeM = sm; }
-	void setLayer2LoopX(float loopx) { _loopX2 += loopx; }
+	inline void setPlayerManagerMemoryAddressLink(playerManager* pm) { _PM = pm; }
+	inline void setStoreManagerMemoryAddressLink(StoreManager* sm) { _storeM = sm; }
+	inline void setFrontObjectManagerMemoryAddressLink(frontObjectManager* object) { _FOM = object; }
+	inline void setLayer2LoopX(float loopx) { _loopX2 += loopx; }
 
 
 	stageManager();

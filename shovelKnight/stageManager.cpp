@@ -2,6 +2,7 @@
 #include "stageManager.h"
 #include "playerManager.h"
 #include "StoreManager.h"
+#include "frontObjectManager.h"
 #include <vector>
 
 
@@ -292,6 +293,7 @@ void stageManager::loadData()
 			_vTileNum.push_back(atoi(vTemp[i].c_str()));
 		}
 
+		_FOM->setMapNumber(_mapNum);
 		_mapLoaded = true;
 	}
 }

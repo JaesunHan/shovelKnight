@@ -3,6 +3,7 @@
 #include "stageManager.h"
 #include "gameCollision.h"
 #include "skillManager.h"
+#include "gamePlayUI.h"
 
 playerBase::playerBase()
 {

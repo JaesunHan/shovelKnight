@@ -4,6 +4,7 @@
 class stageManager;
 class gameCollision;
 class skillManager;
+class gamePlayUI;
 
 class playerManager
 {
@@ -12,6 +13,7 @@ private :
 	stageManager* _SM;
 	gameCollision* _GC;
 	skillManager* _skillM;
+	gamePlayUI* _GPU;
 public:
 	playerManager();
 	~playerManager();
@@ -36,6 +38,7 @@ public:
 	inline void setStageManagerMemoryAddressLink(stageManager* sm) { _SM = sm; }
 	inline void setGameCollisinMemoryAddressLink(gameCollision* gc) { _GC = gc; }
 	inline void setSkillManagerMemoryAddressLink(skillManager* skillm) { _skillM = skillm; }
+	inline void setGamePlayUIMemoryAddressLink(gamePlayUI* gpu) { _GPU = gpu; }
 	inline void setPlayerPause(bool pause) { _p1->setPause(pause); }
 	//IDLE = 0, MOVE = 1, ATTACK = 2, JUMP = 3, ROOTING = 4, DAMAGED = 5, DIE = 6
 	inline int getPlayerAction() { return _p1->getPlayerAction(); }

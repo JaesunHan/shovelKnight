@@ -44,6 +44,7 @@ enum PLAYERACTION
 class stageManager;
 class gameCollision;
 class skillManager;
+class gamePlayUI;
 
 class playerBase : public gameNode
 {
@@ -90,6 +91,7 @@ protected :
 	stageManager* _SM;
 	gameCollision* _GC;
 	skillManager* _skillM;
+	gamePlayUI* _GPU;
 
 public:
 	playerBase();
@@ -135,6 +137,7 @@ public:
 	inline void setSMMemoryAddressLink(stageManager* sm) { _SM = sm; }
 	inline void setGameCollisinMemoryAddressLink(gameCollision* gc) { _GC = gc; }
 	inline void setSkillManagerMemoryAddressLink(skillManager* skillm) { _skillM = skillm; }
+	inline void setGamePlayUIMemoryAddressLink(gamePlayUI* gpu) { _GPU = gpu; }
 	inline void setPause(bool pause) { _pause = pause; }
 	inline RECT getPlayerRC() { return _playerRC; }
 	inline RECT getAttackRC() { return _attackRC; }
@@ -167,6 +170,7 @@ public:
 			_state = INAIR;
 			_counter = 0;
 			_currentHP--;
+			//_GPU->setLife(_currentHP);
 			_isDamaged = true;
 			_invincibilityCounter = 0;
 			_invincibility = true;
