@@ -37,6 +37,7 @@ void skill_dirtBlockFx::update()
 	case SKILL_STATS_OUT:
 		break;
 	}
+	reRect();
 }
 
 void skill_dirtBlockFx::fire(SKILL_FIRE charType, float x, float y)

@@ -62,5 +62,8 @@ public:
 	virtual void setMoveType(ITEM_MOVE_TYPE moveType) { _moveType = moveType; }
 	
 	virtual void fire(ITEM_FIRE itemFire, FPOINT pt);
+
+	virtual FPOINT getAdd() { return _add; }
+	virtual float getGravity() { return _gravity; }
 };
 

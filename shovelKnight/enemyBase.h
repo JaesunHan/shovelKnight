@@ -122,6 +122,7 @@ public:
 	void getPlayerStatus(int status) { _playerStatus = status; }        //플레이어 상태 get
 
 	//데미지 설정자
+	int getEnemyHp() { return _enemyHp; }
 	void setEnemyDamage() { _isHit = true; }
 
 	//==================================== End 게터 세터 작성하기===================================
