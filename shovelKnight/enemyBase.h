@@ -38,6 +38,13 @@ enum ENEMYTYPE
 	ENEMY_BLACKKNIGHT
 };
 
+enum PATTERNTYPE
+{
+	ENEMY_BASIC,
+	ENEMY_PATROL,
+	ENEMY_LEFT_FOWARD,
+	ENEMY_RIGHT_FOWARD
+};
 
 class enemyBase : public gameNode
 {
@@ -47,42 +54,46 @@ protected:
 	string _imgKeyString;			//이미지 매니저에 등록할 이미지 키값
 
 	ENEMYSTATUS _status;			//에너미 상태
-	RECT _attackRect;
+	ENEMYSTATUS _previousStatus;    //에너미 이전상태
+	ENEMYTYPE _enemyType;			//에너미타입
 
-	RECT _ImageRc;                   //보스1이미지렉트
-	RECT _trunkRc;                   //보스1충돌렉트: 몸통
+	RECT _attackRect;               //공격 렉트
+	RECT _rc;						//혹시 사용하게될지도 모를 렉트(충돌용)
+	RECT _ImageRc;                  //보스1이미지렉트
+	RECT _trunkRc;                  //보스1충돌렉트: 몸통
 
 	char* _imgFileName;				//이미지 파일 이름(경로 포함)
 	float _x, _y;					//적의 중점좌표
 	float _gravity;					//적용할 중력
 	int _width, _height;			//적의 가로, 세로 크기(렉트를 만들 때 사용할 가로세로크기이다.)
 	float _angle;					//이동 각도
+	int _enemyHp;					//적 체력
+	float _speed;					//적 스피드
+	bool _direction;				//적 방향
 
 	float _getPlayerX;				//플레이어 x좌표 get
 	int _playerStatus;				//플레이어 상태
 	bool _playerFind;				//플레이어 발견
-	float _speed;					//스피드
+
 	bool _isDead;					//죽었는지 여부
 	bool _isDeadVanish;				//죽고 벡터에서 지울 불값
 	int _vanishTime;				//죽었을때 사라지게할 여유타임 카운트
-	bool _direction;				//방향
+
 	bool _isJump;					//점프여부
 	int _jumpCount;					//점프카운트
+
 	int _directionCount;			//방향전환 카운트
-	bool _isHit;					//플레이어 어택 충돌
-	int _enemyHp;					//적 체력
 	bool _isCountStop;				//패턴카운트 스톱
-	ENEMYSTATUS _previousStatus;    //에너미 이전상태
+
 	bool _isAttack;					//attack 상태
+	bool _isHit;					//플레이어 어택 충돌
 	bool _isHitDelayTime;           //hit 지연시간 불값
 	int _delayCount;                //hit 지연시간 카운트
 
+	int _patternTypeNum;            //패턴타입
 
 
-	ENEMYTYPE _enemyType;			//에너미타입
-
-
-	RECT _rc;						//혹시 사용하게될지도 모를 렉트(충돌용)
+	
 
 	jump* _jump;					//액션: 점프
 	pixelCollision* _pixelC;		//액션: 픽셀충돌
@@ -99,6 +110,9 @@ public:
 	virtual void draw();
 
 	virtual HRESULT init(float x, float y) = 0;
+	virtual HRESULT init(float x, float y, int patternType) = 0;
+	virtual void enemyInitSet() = 0;
+	virtual void enemyPattern(int _patternTypeNum) = 0;
 	virtual void move() = 0;
 	bool isPlayerFind(float enemyX, int distance);
 

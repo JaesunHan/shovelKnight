@@ -11,12 +11,10 @@ boss1::~boss1()
 {
 }
 
-HRESULT boss1::init(float x, float y)
+void boss1::enemyInitSet()
 {
 	_enemyType = ENEMY_DRAGON;
 
-	_x = x;
-	_y = y;
 	_speed = 0.0f;
 
 	_img = IMAGEMANAGER->addFrameImage("dragon", ".//image//monster//bubbleDragon.bmp", _x, _y, 1074, 356, 6, 4, true, RGB(255, 0, 255));
@@ -65,10 +63,30 @@ HRESULT boss1::init(float x, float y)
 	_delayCount = 1;
 
 	_anim = KEYANIMANAGER->findAnimation("dragonLeftStop");
+}
 
+HRESULT boss1::init(float x, float y)
+{
+	_x = x;
+	_y = y;
+	_patternTypeNum = ENEMY_BASIC;
+	enemyInitSet();
 
 	return S_OK;
 }
+
+
+HRESULT boss1::init(float x, float y, int patternType)
+{
+	_x = x;
+	_y = y;
+	_patternTypeNum = patternType;
+
+	enemyInitSet();
+
+	return S_OK;
+}
+
 
 void boss1::update()
 {
@@ -84,29 +102,9 @@ void boss1::update()
 	if (isPlayerFind(_x, 200)) _playerFind = true;
 	_direction = false;  //예외처리: 방향 무조건 왼쪽으로
 
-	//공격 움직임 패턴
-	if (_playerFind) //플레이어를 발견하면
-	{
-		_directionCount++;
 
-		switch (_directionCount)
-		{
-			case 100:
-				_status = ENEMY_LEFT_MOVE;
-			break;
-			case 200:
-				_status = ENEMY_LEFT_ATTACK;
-			break;
-			case 250:
-				_status = ENEMY_LEFT_BACK_MOVE;
-			break;
-			case 350:
-				_status = ENEMY_LEFT_ATTACK;
-				_directionCount = 1;
-			break;
-		}
-
-	}
+	//에너미 패턴 설정
+	enemyPattern(_patternTypeNum);
 
 
 	//데미지 설정
@@ -252,4 +250,43 @@ void boss1::move()
 	_ImageRc = RectMakeCenter(_x, _y, _width, _height);
 	_rc = RectMakeCenter(_x - DRAGONHEADRECTX, _y + DRAGONHEADRECTY, 40, 25);
 	_trunkRc = RectMakeCenter(_x + DRAGONTRUNKRECTX, _y + DRAGONTRUNKRECTY, 85, 60);
+}
+
+void boss1::enemyPattern(int _patternTypeNum)
+{
+	switch (_patternTypeNum)
+	{
+		case ENEMY_BASIC:
+			if (_playerFind) //플레이어를 발견하면
+			{
+				_directionCount++;
+
+				switch (_directionCount)
+				{
+				case 100:
+					_status = ENEMY_LEFT_MOVE;
+					break;
+				case 200:
+					_status = ENEMY_LEFT_ATTACK;
+					break;
+				case 250:
+					_status = ENEMY_LEFT_BACK_MOVE;
+					break;
+				case 350:
+					_status = ENEMY_LEFT_ATTACK;
+					_directionCount = 1;
+					break;
+				}
+			}
+		break;
+		case ENEMY_PATROL:
+
+		break;
+		case ENEMY_LEFT_FOWARD:
+
+		break;
+		case ENEMY_RIGHT_FOWARD:
+
+		break;
+	}
 }
