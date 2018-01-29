@@ -104,6 +104,18 @@ void stageManager::update()
 					_transition = false;
 				}
 			}
+			if (_mapTransition[_transitionNum].direction == 4)
+			{
+				_cameraY -= 3;
+				_PM->setY(_PM->getY() - 0.5f);
+				if (_cameraY <= 120)
+				{
+					_PM->setY(_PM->getY() + _nextMapWidth - 400);
+					_PM->setPlayerPause(false);
+					_mapLoaded = false;
+					_transition = false;
+				}
+			}
 		}
 	}
 	if (_warpTransition == true)
@@ -170,6 +182,7 @@ void stageManager::loadData()
 		_transverseTileNum = INIDATA->loadDataInterger(mapName, mapImage, "transverseNum");
 		_verticalTileNum = INIDATA->loadDataInterger(mapName, mapImage, "verticalNum");
 		_currentMapWidth = INIDATA->loadDataInterger(mapName, mapImage, "width");
+		_currentMapHeight = INIDATA->loadDataInterger(mapName, mapImage, "height");
 		if (IMAGEMANAGER->findImage(key)) IMAGEMANAGER->deleteImage(key);
 		IMAGEMANAGER->addImage(key, directory,
 			INIDATA->loadDataInterger(mapName, mapImage, "width"),
@@ -280,6 +293,7 @@ void stageManager::transition()
 		int maxTile = INIDATA->loadDataInterger(mapName, "tileTotal", "maxNum");
 		_maxFrameImage = INIDATA->loadDataInterger(mapName, "frameIamgeTotal", "maxNum");
 		_nextMapWidth = INIDATA->loadDataInterger(mapName, "mapImage", "width");
+		_nextMapHeight = INIDATA->loadDataInterger(mapName, "mapImage", "height");
 		_transitionMapTransverseTileNum = INIDATA->loadDataInterger(mapName, "mapImage", "transverseNum");
 
 		for (int i = 0; i < maxLayer; ++i)
