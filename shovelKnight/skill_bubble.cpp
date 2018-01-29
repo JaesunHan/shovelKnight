@@ -51,7 +51,7 @@ void skill_Bubble::update()
 
 void skill_Bubble::fire(SKILL_FIRE charType, float x, float y)
 {
-	skillBase::fire(charType, x, y);
+	skillBase::fire(charType, x - 50, y + 30);
 
 	{
 		string str2, str3;
@@ -95,7 +95,7 @@ void skill_Bubble::fire(SKILL_FIRE charType, float x, float y)
 	_ani = KEYANIMANAGER->findAnimation(_loopNameL);
 	_stats = SKILL_STATS_LOOP_L;
 
-	_isRight = RND->getInt(2);
+	_isRight = false;
 	_isFire = true;
 	_ani->start();
 }

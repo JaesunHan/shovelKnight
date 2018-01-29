@@ -58,14 +58,50 @@ void stageManager::update()
 					_cameraX = 200;
 					_cameraY = 120;
 					_PM->setPlayerPause(true);
-					_PM->setX(_PM->getX() - _currentMapWidth + 400);
+					while (1)
+					{
+						if (_PM->getX() > 400) _PM->setX(_PM->getX() - 400);
+						if (_PM->getY() > 240) _PM->setY(_PM->getY() - 240);
+						if (_PM->getX() < 400 && _PM->getY() < 240) break;
+					}
+				}
+				if (_mapTransition[i].direction == 2)
+				{
+					_cameraX = 200;
+					_cameraY = 120;
+					_PM->setPlayerPause(true);
+					while (1)
+					{
+						if (_PM->getX() > 400) _PM->setX(_PM->getX() - 400);
+						if (_PM->getY() > 240) _PM->setY(_PM->getY() - 240);
+						if (_PM->getX() < 400 && _PM->getY() < 240) break;
+					}
 				}
 				if (_mapTransition[i].direction == 3)
 				{
 					_cameraX = 600;
 					_cameraY = 120;
 					_PM->setPlayerPause(true);
-					_PM->setX(_PM->getX() + 400);
+					while (1)
+					{
+						if (_PM->getX() > 800) _PM->setX(_PM->getX() - 400);
+						if (_PM->getX() < 400) _PM->setX(_PM->getX() + 400);
+						if (_PM->getY() > 240) _PM->setY(_PM->getY() - 240);
+						if (_PM->getX() > 400 && _PM->getX() < 800 && _PM->getY() < 240) break;
+					}
+				}
+				if (_mapTransition[i].direction == 4)
+				{
+					_cameraX = 200;
+					_cameraY = 360;
+					_PM->setPlayerPause(true);
+					while (1)
+					{
+						if (_PM->getX() > 400) _PM->setX(_PM->getX() - 400);
+						if (_PM->getY() > 480) _PM->setY(_PM->getY() - 240);
+						if (_PM->getY() < 240) _PM->setY(_PM->getY() + 240);
+						if (_PM->getX() < 400 && _PM->getY() > 240 && _PM->getY() < 480) break;
+					}
 				}
 				if (_mapTransition[i].direction == 0) _warpTransition = true;
 				else _warpTransition = false;
@@ -110,7 +146,7 @@ void stageManager::update()
 				_PM->setY(_PM->getY() - 0.5f);
 				if (_cameraY <= 120)
 				{
-					_PM->setY(_PM->getY() + _nextMapWidth - 400);
+					_PM->setY(_PM->getY() + _nextMapHeight - 240);
 					_PM->setPlayerPause(false);
 					_mapLoaded = false;
 					_transition = false;
@@ -311,7 +347,8 @@ void stageManager::transition()
 		}
 
 		IMAGEMANAGER->deleteImage("bgMap");
-		IMAGEMANAGER->addImage("bgMap", ".\\image\\stage\\transitionMap2.bmp", 800, 240, true, RGB(255, 0, 255), false);
+		if (_mapTransition[_transitionNum].direction == 1 || _mapTransition[_transitionNum].direction == 3) IMAGEMANAGER->addImage("bgMap", ".\\image\\stage\\transitionMap2.bmp", 800, 240, true, RGB(255, 0, 255), false);
+		if (_mapTransition[_transitionNum].direction == 2 || _mapTransition[_transitionNum].direction == 4) IMAGEMANAGER->addImage("bgMap", ".\\image\\stage\\transitionMap3.bmp", 400, 480, true, RGB(255, 0, 255), false);
 
 		for (int i = 0; i < maxTile; ++i)
 		{

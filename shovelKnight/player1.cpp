@@ -59,6 +59,7 @@ void player1::update()
 		physics();
 		pixelCollision();
 		attack();
+		invincibilityCount();
 		CAMERAMANAGER->setSingleFocus(_x, _y, WINSIZEX);
 	}
 	if (_currentHP <= 0 && _isDead == false)
