@@ -142,7 +142,6 @@ void gameCollision::PlayerMeetNPC()
 
 
 
-
 		if (IntersectRect(&temp, &_player->getPlayerRC(), &_store->getVNpc()[i]->getRect()))
 
 		{

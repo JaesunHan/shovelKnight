@@ -197,10 +197,9 @@ void stageManager::loadData()
 			GetPrivateProfileString(_T(frameImage), _T("key"), NULL, key, 255, _T(iniDir));
 			GetPrivateProfileString(_T(frameImage), _T("directory"), NULL, directory, 255, _T(iniDir));
 			if (IMAGEMANAGER->findImage(key)) IMAGEMANAGER->deleteImage(key);
-
-			_frameImage = IMAGEMANAGER->addFrameImage("frameImage1", ".\\image\\stage\\shopFrameImageMiddle.bmp", 3200, 480, 4, 1, true, RGB(255, 0, 255), false);
+			_frameImage = IMAGEMANAGER->addFrameImage(key, directory, 3200, 480, 4, 1, true, RGB(255, 0, 255), false);
 			int arr[] = { 0, 1, 2, 3 };
-			KEYANIMANAGER->addArrayFrameAnimation("frameBG", "frameImage1", arr, 4, 5, true);
+			KEYANIMANAGER->addArrayFrameAnimation("frameBG", key, arr, 4, 5, true);
 			KEYANIMANAGER->start("frameBG");
 		}
 

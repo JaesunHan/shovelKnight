@@ -173,4 +173,5 @@ void MagicGirl::draw()
 void MagicGirl::update()
 {
 	npcBase::update();
+
 }

@@ -56,6 +56,7 @@ void dialogueManager::render(HDC hdc, float x, float y, int width , int height)
 void dialogueManager::setScriptNScriptWindow(string script, image* scriptWindow, int r, int g, int b)
 {
 	_cnt = 0;
+	
 	wsprintf(_scriptStr, "%s", script.c_str());
 	_scriptwindow = scriptWindow;
 

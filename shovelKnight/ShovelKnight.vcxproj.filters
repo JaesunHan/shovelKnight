@@ -584,6 +584,7 @@
     <ClCompile Include="item_gems_silver.cpp">
       <Filter>playGround\gamePlayScene\item\unit</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="graphicUI.cpp">
       <Filter>playGround\gamePlayScene\UI</Filter>
     </ClCompile>
@@ -592,6 +593,10 @@
     </ClCompile>
     <ClCompile Include="dialogueManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
+=======
+    <ClCompile Include="playGround+sound.cpp">
+      <Filter>playGround</Filter>
+>>>>>>> 46161d312dd9cde1cdab87ec300c45dd283a3a26
     </ClCompile>
   </ItemGroup>
 </Project>
