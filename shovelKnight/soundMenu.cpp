@@ -92,16 +92,28 @@ void soundMenu::update()
 		{
 			_isSoundMenuRender = false;
 		}
+		if (!SOUNDMANAGER->isPlaySound("可记急琶"))
+		{
+			SOUNDMANAGER->play("可记急琶", _eV, false);
+		}
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 	{
 		if (_indexSoundRc == 3) _indexSoundRc = 0;
 		else _indexSoundRc++;
+		if (!SOUNDMANAGER->isPlaySound("可记框流捞扁"))
+		{
+			SOUNDMANAGER->play("可记框流捞扁", _eV, false);
+		}
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_UP))
 	{
 		if (_indexSoundRc == 0) _indexSoundRc = 3;
 		else _indexSoundRc--;
+		if (!SOUNDMANAGER->isPlaySound("可记框流捞扁"))
+		{
+			SOUNDMANAGER->play("可记框流捞扁", _eV, false);
+		}
 	}
 
 	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))

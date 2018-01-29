@@ -94,11 +94,19 @@ void optionMenu::update()
 		{
 			if (_indexRc == 5) _indexRc = 0;
 			else _indexRc++;
+			if (!SOUNDMANAGER->isPlaySound("可记框流捞扁"))
+			{
+				SOUNDMANAGER->play("可记框流捞扁", 0.3f);
+			}
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_UP))
 		{
 			if (_indexRc == 0) _indexRc = 5;
 			else _indexRc--;
+			if (!SOUNDMANAGER->isPlaySound("可记框流捞扁"))
+			{
+				SOUNDMANAGER->play("可记框流捞扁", 0.3f);
+			}
 		}
 
 		if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
@@ -106,11 +114,19 @@ void optionMenu::update()
 			if (_indexRc == 0)
 			{
 				_isOptionRender = false;
+				if (!SOUNDMANAGER->isPlaySound("可记急琶"))
+				{
+					SOUNDMANAGER->play("可记急琶", 0.3f);
+				}
 			}
 			if (_indexRc == 3)
 			{
 				_isSoundMenu = true;
 				_sm->setIsOptionRender(true);
+				if (!SOUNDMANAGER->isPlaySound("可记急琶"))
+				{
+					SOUNDMANAGER->play("可记急琶", 0.3f);
+				}
 			}
 		}
 	}

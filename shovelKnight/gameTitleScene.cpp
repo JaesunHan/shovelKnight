@@ -77,12 +77,20 @@ void gameTitleScene::update()
 		{
 			++_shovelIdx;
 			if (_shovelIdx >= MAXBTN - 1)	_shovelIdx = MAXBTN - 1;
+			if (!SOUNDMANAGER->isPlaySound("옵션움직이기"))
+			{
+				SOUNDMANAGER->play("옵션움직이기", _effectSoundVolume);
+			}
 		}
 		//위로 이동
 		if (KEYMANAGER->isOnceKeyDown(VK_UP))
 		{
 			--_shovelIdx;
 			if (_shovelIdx <= 0)	_shovelIdx = 0;
+			if (!SOUNDMANAGER->isPlaySound("옵션움직이기"))
+			{
+				SOUNDMANAGER->play("옵션움직이기", _effectSoundVolume);
+			}
 		}
 
 		if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
@@ -109,8 +117,12 @@ void gameTitleScene::update()
 			//옵션 버튼 누름
 			else if (_shovelIdx == 2)
 			{
-				_isOption = true; // 옵션 눌렀구나! 
 				_op->setIsOptionRender(true);
+				if (!SOUNDMANAGER->isPlaySound("옵션선택"))
+				{
+					SOUNDMANAGER->play("옵션선택", _effectSoundVolume);
+				}
+
 			}
 			//안쓸거임
 			else if (_shovelIdx == 3)
