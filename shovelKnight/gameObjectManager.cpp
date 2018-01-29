@@ -35,7 +35,7 @@ void gameObjectManager::release()
 
 void gameObjectManager::update()
 {
-	if(KEYMANAGER->isOnceKeyDown('P')) settingObject(100, 100, OBJ_DIRTBLOCK);
+	settingObject(100, 100, OBJ_DIRTBLOCK);
 
 
 	for (int i = 0; i < _vObj.size(); ++i)

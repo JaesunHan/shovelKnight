@@ -4,15 +4,16 @@
 class gameObjectBase:public gameNode
 {
 protected:
-	float _x, _y;
-	int _dur;
-	bool _isDelete;
-	bool _collision;
-	int _currentFrameX;
-	int _currentFrameY;
-	image* _image;
-	RECT _rc;
-	COLORREF _color;
+	float _x, _y;			//좌표(좌상)
+	int _dur;				//내구도
+	bool _isDelete;			//지워주는지
+	int _currentFrameX;		//프레임
+	int _currentFrameY;		//
+	bool _isOn;				//체크포인트 켜졌는지
+	bool _isCheck;			//체크 완료
+	image* _image;			//이미지
+	RECT _rc;				//
+	COLORREF _color;		//픽셀박스 컬러
 
 public:
 	gameObjectBase();
