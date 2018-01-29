@@ -230,7 +230,6 @@ void skeleton::draw()
 		CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left - 19, _rc.top - 9);
 	}
 
-	TTTextOut(CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_y - 30), "HP", _enemyHp);
 
 }
 	

@@ -130,8 +130,8 @@ void enemyManager::setEnemy(ENEMYTYPE enemyType, float enemyX, float enemyY)
 		break;
 		case ENEMY_BLACKKNIGHT:
 
-			//minion = new boss2;
-			//minion->init(enemyX, enemyY);
+			minion = new bossBlackKnight;
+			minion->init(enemyX, enemyY);
 
 		break;
 	}
@@ -180,8 +180,8 @@ void enemyManager::setEnemy(ENEMYTYPE enemyType, float enemyX, float enemyY, int
 		break;
 	case ENEMY_BLACKKNIGHT:
 
-		//minion = new boss2;
-		//minion->init(enemyX, enemyY, patternType);
+		minion = new bossBlackKnight;
+		minion->init(enemyX, enemyY, patternType);
 
 		break;
 	}
@@ -207,12 +207,13 @@ void enemyManager::stageEnemySet(int stageNum)
 
 	if (_enemyIsOn[0]) 		//stage1
 	{
-		setEnemy(ENEMY_BEETO, 300, 200);
-		setEnemy(ENEMY_BLORB, 350, 200);
-		setEnemy(ELEMY_DRAKE, 300, 150, ENEMY_LEFT_FOWARD);
-		setEnemy(ELEMY_DRAKE, 200, 200, ENEMY_PATROL);
-		setEnemy(ENEMY_SKELETON, 350, 120);
-		setEnemy(ENEMY_DRAGON, 400, 179.5);
+		//setEnemy(ENEMY_BEETO, 300, 200);
+		//setEnemy(ENEMY_BLORB, 350, 200);
+		//setEnemy(ELEMY_DRAKE, 300, 150, ENEMY_LEFT_FOWARD);
+		//setEnemy(ELEMY_DRAKE, 200, 200, ENEMY_PATROL);
+		//setEnemy(ENEMY_SKELETON, 350, 120);
+		//setEnemy(ENEMY_DRAGON, 400, 179.5);
+		setEnemy(ENEMY_BLACKKNIGHT, 350, 120);
 	}
 	if (_enemyIsOn[1])  //stage2
 	{

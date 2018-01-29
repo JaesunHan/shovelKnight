@@ -5,6 +5,7 @@
 #include "minion3.h"
 #include "skeleton.h"
 #include "boss1.h"
+#include "bossBlackKnight.h"
 
 #include <vector>
 

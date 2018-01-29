@@ -1,7 +1,7 @@
 #pragma once
 #include "enemyBase.h"
 
-#define BEETOSPEED 1
+#define BLACKKNIGHTSPEED 2
 #define DELAYTIME 70  //피격후 쿨타임
 #define HITCOUNT  10  //피격상태 유지 카운트
 #define DEADCOUNT 50  //데드상태 유지 카운트
