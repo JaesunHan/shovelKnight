@@ -65,6 +65,9 @@ HRESULT minion2::init(float x, float y)
 	_isHit = false;
 	_previousStatus = _status;
 	_playerStatus = 0;
+	_isHitDelayTime = false;
+	_delayCount = 1;
+
 
 	_rc = RectMakeCenter(_x, _y, _img->getFrameWidth(), _height);
 
@@ -125,8 +128,11 @@ void minion2::update()
 
 
 	//데미지 설정
-	if (_isHit)
+	if (_isHit && !_isHitDelayTime)
 	{
+		_enemyHp--;
+		_isHitDelayTime = true;
+
 		if (_direction)  //현상태가 오른쪽이면
 		{
 			_status = ENEMY_RIGHT_HIT;
@@ -136,8 +142,17 @@ void minion2::update()
 			_status = ENEMY_LEFT_HIT;
 		}
 
-		_enemyHp--;
-		_isHit = false;
+	}
+
+	if (_isHitDelayTime)
+	{
+		_delayCount++;
+
+		if (_delayCount % DELAYTIME == 0)
+		{
+			_isHitDelayTime = false;
+			_isHit = false;
+		}
 	}
 
 
@@ -302,7 +317,7 @@ void minion2::move()
 			if (_isDead && _jump->getIsJumping() == false)
 			{
 				_vanishTime++;
-				if (_vanishTime % 10 == 0)
+				if (_vanishTime % DEADCOUNT == 0)
 				{
 					_isDeadVanish = true;
 					_vanishTime = 1;
@@ -334,7 +349,7 @@ void minion2::move()
 			if (_isDead && !_jump->getIsJumping())
 			{
 				_vanishTime++;
-				if (_vanishTime % 10 == 0)
+				if (_vanishTime % DEADCOUNT == 0)
 				{
 					_isDeadVanish = true;
 					_vanishTime = 1;
