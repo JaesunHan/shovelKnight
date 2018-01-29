@@ -6,7 +6,7 @@
 class minion3 : public enemyBase
 {
 private:
-
+	bool _isHitPlay;
 
 public:
 	minion3();

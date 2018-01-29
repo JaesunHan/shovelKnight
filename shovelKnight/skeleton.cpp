@@ -69,6 +69,7 @@ HRESULT skeleton::init(float x, float y)
 	_enemyHp = 3;
 	_isHit = false;
 	_isCountStop = false;
+	_playerFind = false;
 
 	_anim = KEYANIMANAGER->findAnimation("skeletonLeftIdle");
 
@@ -83,6 +84,24 @@ HRESULT skeleton::init(float x, float y)
 
 void skeleton::update()
 {
+
+	//============================================================ 피격 테스트
+	if (KEYMANAGER->isOnceKeyDown('P'))
+	{
+		_isHit = true;
+	}
+	//============================================================
+
+
+	if (_status != ENEMY_LEFT_HIT && _status != ENEMY_RIGHT_HIT)
+	{
+		_previousStatus = _status; //직전 에너미 상태 저장
+	}
+
+	//상태값에 따른 에니메이션 및 움직임
+	move();
+
+
 	//============================================================= 픽셀충돌: 바닥충돌	
 	_pixelC->pixelCollisonY(_rc);  //바닥상태 검출
 
@@ -117,14 +136,10 @@ void skeleton::update()
 	}
 	//=============================================================
 
-	ENEMYSTATUS previousStatus = _status; //직전 에너미 상태 저장
 
-
-	//상태값에 따른 에니메이션 및 움직임
-	move();
 
 	//플레이어가 일정거리 안으로 들어오면
-	if (isPlayerFind(_x, 150)) _playerFind = true;
+	if (isPlayerFind(_x, 100)) _playerFind = true;
 
 	//공격 움직임 패턴
 	if (_playerFind) //플레이어를 발견하면
@@ -146,7 +161,7 @@ void skeleton::update()
 			}
 
 			//플레이어와의 거리가 가까울 경우 공격
-			if (isPlayerFind(_x, 50))
+			if (isPlayerFind(_x, 20))
 			{
 				_status = ENEMY_RIGHT_ATTACK;
 				_isCountStop = false;
@@ -169,7 +184,7 @@ void skeleton::update()
 			}
 
 			//플레이어와의 거리가 가까울 경우 공격
-			if (isPlayerFind(_x, 50))
+			if (isPlayerFind(_x, 20))
 			{
 				_status = ENEMY_RIGHT_ATTACK;
 				_isCountStop = false;
@@ -177,12 +192,6 @@ void skeleton::update()
 
 		}
 
-
-		//피격상태일 경우 이전상태로 변경
-		if (_status == ENEMY_LEFT_HIT || _status == ENEMY_RIGHT_HIT)
-		{
-			if (!_anim->isPlay())_status = previousStatus;
-		}
 	}
 
 
@@ -194,11 +203,11 @@ void skeleton::update()
 
 		if (_direction)
 		{
-			_status == ENEMY_RIGHT_HIT;
+			_status = ENEMY_RIGHT_HIT;
 		}
 		else
 		{
-			_status == ENEMY_LEFT_HIT;
+			_status = ENEMY_LEFT_HIT;
 		}
 	}
 
@@ -206,17 +215,30 @@ void skeleton::update()
 	//hp=0일경우 상태 변경
 	if (_enemyHp <= 0)
 	{
-		if (_direction)
+		if (_playerStatus == 3) //플레이어가 점프상태일 경우
 		{
-			_status = ENEMY_RIGHT_DEAD;
+			if (_direction)
+			{
+				_status = ENEMY_RIGHT_JUMP_DEAD;
+			}
+			else
+			{
+				_status = ENEMY_LEFT_JUMP_DEAD;
+			}
 		}
-		else
+		else //플레이어가 바닥에서 공격할 경우
 		{
-			_status = ENEMY_LEFT_DEAD;
+			if (_direction)
+			{
+				_status = ENEMY_RIGHT_DEAD;
+			}
+			else
+			{
+				_status = ENEMY_LEFT_DEAD;
+			}
 		}
 
 	}
-
 
 }
 
@@ -296,32 +318,23 @@ void skeleton::move()
 			if (!_anim->isPlay())
 			{
 				_anim->start();
-				_isHit = true;
-				_jump->jumping(&_x, &_y, 5.0f, 0.7f);
+				_jump->jumping(&_x, &_y, 2.0f, 0.7f);
 			}
 
 			//움직임: 뒤로 점핑하면서 죽기
-			if (_isHit && _jump->getIsJumping() == true)
+			if (_jump->getIsJumping())
 			{
-				_speed = SKELETONSPEED * 2;
+				_speed = SKELETONSPEED * 5;
+				_speed -= 0.4;
 				_x -= _speed;
 				_jump->update();
 			}
+			else
+			{
+				_status = _previousStatus;
+			}
 
-			//----------------------------------- hit action후 상태변경
-			//if (!_anim->isPlay() && _isHit)
-			//{
-			//	if (_direction)
-			//	{
-			//		_status = ENEMY_RIGHT_MOVE;
-			//		_isHit = false;
-			//	}
-			//	else
-			//	{
-			//		_status = ENEMY_LEFT_MOVE;
-			//		_isHit = false;
-			//	}
-			//}
+
 
 		break;
 		case ENEMY_LEFT_HIT:
@@ -330,32 +343,23 @@ void skeleton::move()
 			if (!_anim->isPlay())
 			{
 				_anim->start();
-				_isHit = true;
-				_jump->jumping(&_x, &_y, 5.0f, 0.7f);
+				_jump->jumping(&_x, &_y, 2.0f, 0.7f);
 			}
 
 			//움직임: 뒤로 점핑하면서 죽기
-			if (_isHit && _jump->getIsJumping() == true)
+			if (_jump->getIsJumping())
 			{
-				_speed = SKELETONSPEED * 2;
+				_speed = SKELETONSPEED * 5;
+				_speed -= 0.4;
 				_x += _speed;
 				_jump->update();
 			}
+			else
+			{
+				_status = _previousStatus;
+			}
 
-			//----------------------------------- hit action후 상태변경
-			//if (!_anim->isPlay() && _isHit)
-			//{
-			//	if (_direction)
-			//	{
-			//		_status = ENEMY_RIGHT_MOVE;
-			//		_isHit = false;
-			//	}
-			//	else
-			//	{
-			//		_status = ENEMY_LEFT_MOVE;
-			//		_isHit = false;
-			//	}
-			//}
+
 
 		break;
 		case ENEMY_LEFT_DEAD:
@@ -367,13 +371,13 @@ void skeleton::move()
 			{
 				_anim->start();
 				_isDead = true;
-				_jump->jumping(&_x, &_y, 7.0f, 0.7f);
+				_jump->jumping(&_x, &_y, 2.0f, 0.7f);
 			}
 
 			//움직임: 뒤로 점핑하면서 죽기
 			if (_isDead && _jump->getIsJumping() == true)
 			{
-				_speed = SKELETONSPEED;
+				_speed = SKELETONSPEED * 5;
 				_x += _speed;
 				_jump->update();
 			}
@@ -404,7 +408,7 @@ void skeleton::move()
 			//움직임: 뒤로 점핑하면서 죽기
 			if (_isDead && _jump->getIsJumping() == true)
 			{
-				_speed = SKELETONSPEED;
+				_speed = SKELETONSPEED * 5;
 				_x -= _speed;
 				_jump->update();
 			}
@@ -420,6 +424,35 @@ void skeleton::move()
 				}
 			}
 
+		break;
+		case ENEMY_LEFT_JUMP_DEAD: ENEMY_RIGHT_JUMP_DEAD:
+			if (_direction)
+			{
+				_anim = KEYANIMANAGER->findAnimation("skeletonRightHit");
+			}
+			else
+			{
+				_anim = KEYANIMANAGER->findAnimation("skeletonLeftHit");
+			}
+
+
+			//에니메이션
+			if (!_anim->isPlay() && !_isDead)
+			{
+				_anim->start();
+				_isDead = true;
+			}
+
+			//벡터에서 지울 불값 설정
+			if (_isDead)
+			{
+				_vanishTime++;
+				if (_vanishTime % 10 == 0)
+				{
+					_isDeadVanish = true;
+					_vanishTime = 1;
+				}
+			}
 		break;
 	}
 

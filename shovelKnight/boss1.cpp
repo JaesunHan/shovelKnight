@@ -27,6 +27,7 @@ HRESULT boss1::init(float x, float y)
 	_headRc = RectMakeCenter(_x - DRAGONHEADRECTX, _y + DRAGONHEADRECTY, 40, 25);
 	_trunkRc = RectMakeCenter(_x + DRAGONTRUNKRECTX, _y + DRAGONTRUNKRECTY, 85, 60);
 
+
 	_status = ENEMY_LEFT_IDLE;
 
 	//========================================================================================= 에니메이션
@@ -41,10 +42,10 @@ HRESULT boss1::init(float x, float y)
 	KEYANIMANAGER->addArrayFrameAnimation("dragonLeftBackMove", "dragon", leftBackMove, 6, 6, false);
 
 	int leftHit[] = { 18, 19, 20 };
-	KEYANIMANAGER->addArrayFrameAnimation("dragonLeftHit", "dragon", leftHit, 3, 4, false);
+	KEYANIMANAGER->addArrayFrameAnimation("dragonLeftHit", "dragon", leftHit, 3, 20, false);
 
 	int leftAttack[] = { 21, 22, 23 };
-	KEYANIMANAGER->addArrayFrameAnimation("dragonLeftAttack", "dragon", leftAttack, 3, 4, false);
+	KEYANIMANAGER->addArrayFrameAnimation("dragonLeftAttack", "dragon", leftAttack, 3, 10, false);
 
 	//=========================================================================================
 
@@ -69,9 +70,18 @@ HRESULT boss1::init(float x, float y)
 
 void boss1::update()
 {
+	//============================================================ 피격 테스트
+	//if (KEYMANAGER->isOnceKeyDown('P'))
+	//{
+	//	_isHit = true;
+	//}
+	//============================================================
 
-	ENEMYSTATUS previousStatus = _status; //직전 에너미 상태 저장
 
+	if (_status != ENEMY_LEFT_HIT && _status != ENEMY_RIGHT_HIT)
+	{
+		_previousStatus = _status; //직전 에너미 상태 저장
+	}
 
 	//상태값에 따른 에니메이션 및 움직임
 	move();
@@ -102,18 +112,13 @@ void boss1::update()
 			break;
 		}
 
-		
-		//피격상태일 경우 이전상태로 변경
-		if (_status == ENEMY_LEFT_HIT || _status == ENEMY_RIGHT_HIT)
-		{
-			if (!_anim->isPlay())_status = previousStatus;		
-		}
 	}
 
 
 	//데미지 설정
 	if (_isHit)
 	{
+		_status = ENEMY_LEFT_HIT;
 		_enemyHp--;
 		_isHit = false;
 	}
@@ -121,15 +126,7 @@ void boss1::update()
 	//hp=0일경우 상태 변경
 	if (_enemyHp <= 0)
 	{
-		if (_direction)
-		{
-			_status = ENEMY_RIGHT_DEAD;
-		}
-		else
-		{
-			_status = ENEMY_LEFT_DEAD;
-		}
-		
+		_status = ENEMY_LEFT_DEAD;	
 	}
 
 
@@ -196,22 +193,26 @@ void boss1::move()
 		case ENEMY_LEFT_HIT:
 
 			_anim = KEYANIMANAGER->findAnimation("dragonLeftHit");
-			if (!_anim->isPlay()) _anim->start();
-
-			if (_direction)
+			if (!_anim->isPlay())
 			{
+				_anim->start();
 				_x += _speed;
 			}
 			else
 			{
-				_x -= _speed;
+				_jumpCount++;  //에니메이션 플레이 여유타임
+				if (_jumpCount % 10 == 0)
+				{
+					_status = _previousStatus;
+					_jumpCount = 1;
+				}
 			}
 
 
 		break;
 		case ENEMY_LEFT_DEAD:
 
-			//_anim = KEYANIMANAGER->findAnimation("");
+			_anim = KEYANIMANAGER->findAnimation("dragonLeftHit");
 
 			//에니메이션
 			if (!_anim->isPlay() && !_isDead)
@@ -221,10 +222,10 @@ void boss1::move()
 			}
 
 			//벡터에서 지울 불값 설정
-			if (_isDead && _jump->getIsJumping() == false)
+			if (_isDead)
 			{
 				_vanishTime++;
-				if (_vanishTime % 20 == 0)
+				if (_vanishTime % 50 == 0)
 				{
 					_isDeadVanish = true;
 					_vanishTime = 1;
