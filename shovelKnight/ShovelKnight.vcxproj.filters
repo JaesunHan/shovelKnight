@@ -104,7 +104,7 @@
       <UniqueIdentifier>{de5f9949-860d-4dfe-aebf-ebb1262a4d81}</UniqueIdentifier>
     </Filter>
     <Filter Include="playGround\gamePlayScene\UI">
-      <UniqueIdentifier>{24b92361-21fb-495b-afdd-8f6a553ea661}</UniqueIdentifier>
+      <UniqueIdentifier>{ad1c826f-6ba2-490a-acf7-341d34446264}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -231,9 +231,6 @@
     <ClInclude Include="commonMacroFunction.h">
       <Filter>헤더 파일\Function</Filter>
     </ClInclude>
-    <ClInclude Include="motherAction.h">
-      <Filter>playGround</Filter>
-    </ClInclude>
     <ClInclude Include="MagicGirl.h">
       <Filter>playGround\gamePlayScene\npc</Filter>
     </ClInclude>
@@ -348,14 +345,14 @@
     <ClInclude Include="item_gems_silver.h">
       <Filter>playGround\gamePlayScene\item\unit</Filter>
     </ClInclude>
-    <ClInclude Include="graphicUI.h">
-      <Filter>playGround\gamePlayScene\UI</Filter>
+    <ClInclude Include="dialogueManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
     <ClInclude Include="gamePlayUI.h">
       <Filter>playGround\gamePlayScene\UI</Filter>
     </ClInclude>
-    <ClInclude Include="dialogueManager.h">
-      <Filter>2DGameFramework\Manager</Filter>
+    <ClInclude Include="graphicUI.h">
+      <Filter>playGround\gamePlayScene\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -466,9 +463,6 @@
     </ClCompile>
     <ClCompile Include="gameCollision.cpp">
       <Filter>playGround\gamePlayScene\gameCollision</Filter>
-    </ClCompile>
-    <ClCompile Include="motherAction.cpp">
-      <Filter>playGround</Filter>
     </ClCompile>
     <ClCompile Include="MagicGirl.cpp">
       <Filter>playGround\gamePlayScene\npc</Filter>
@@ -584,19 +578,17 @@
     <ClCompile Include="item_gems_silver.cpp">
       <Filter>playGround\gamePlayScene\item\unit</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="graphicUI.cpp">
-      <Filter>playGround\gamePlayScene\UI</Filter>
+    <ClCompile Include="playGround+sound.cpp">
+      <Filter>playGround</Filter>
+    </ClCompile>
+    <ClCompile Include="dialogueManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
     <ClCompile Include="gamePlayUI.cpp">
       <Filter>playGround\gamePlayScene\UI</Filter>
     </ClCompile>
-    <ClCompile Include="dialogueManager.cpp">
-      <Filter>2DGameFramework\Manager</Filter>
-=======
-    <ClCompile Include="playGround+sound.cpp">
-      <Filter>playGround</Filter>
->>>>>>> 46161d312dd9cde1cdab87ec300c45dd283a3a26
+    <ClCompile Include="graphicUI.cpp">
+      <Filter>playGround\gamePlayScene\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
