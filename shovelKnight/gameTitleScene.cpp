@@ -63,12 +63,13 @@ HRESULT gameTitleScene::init()
 void gameTitleScene::update() 
 {
 	//옵션이 선택되었으면 업데이트를 합시당
-	if (_isOption)
+	if (_op->getIsOptionRender())
 	{
 		_op->update();
 	}
 	else
 	{
+		_op->setIsOptionRender(false);
 		//타이틀 사운드 재생을 위한 함수 
 		soundPlay();
 		//삽 이미지가 아래로 이동
@@ -76,12 +77,20 @@ void gameTitleScene::update()
 		{
 			++_shovelIdx;
 			if (_shovelIdx >= MAXBTN - 1)	_shovelIdx = MAXBTN - 1;
+			if (!SOUNDMANAGER->isPlaySound("옵션움직이기"))
+			{
+				SOUNDMANAGER->play("옵션움직이기", _effectSoundVolume);
+			}
 		}
 		//위로 이동
 		if (KEYMANAGER->isOnceKeyDown(VK_UP))
 		{
 			--_shovelIdx;
 			if (_shovelIdx <= 0)	_shovelIdx = 0;
+			if (!SOUNDMANAGER->isPlaySound("옵션움직이기"))
+			{
+				SOUNDMANAGER->play("옵션움직이기", _effectSoundVolume);
+			}
 		}
 
 		if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
@@ -103,11 +112,17 @@ void gameTitleScene::update()
 			//안쓸거임
 			else if (_shovelIdx == 1)
 			{
+
 			}
 			//옵션 버튼 누름
 			else if (_shovelIdx == 2)
 			{
-				_isOption = true; // 옵션 눌렀구나! 
+				_op->setIsOptionRender(true);
+				if (!SOUNDMANAGER->isPlaySound("옵션선택"))
+				{
+					SOUNDMANAGER->play("옵션선택", _effectSoundVolume);
+				}
+
 			}
 			//안쓸거임
 			else if (_shovelIdx == 3)
@@ -131,6 +146,13 @@ void gameTitleScene::render()
 }
 void gameTitleScene::draw()	  
 {
+	if (_op->getIsOptionRender())
+	{
+		_backgroundImg->render(getMemDC(), 0, 0);
+		_op->render(getMemDC());
+	}
+	else
+	{
 	//백그라운드 이미지 출력ckrrkr
 	_backgroundImg->render(getMemDC(), 0, 0);
 	//삽 이미지가 출력될 수 있는ㄴ 위치 렉트 출력하기
@@ -144,14 +166,12 @@ void gameTitleScene::draw()
 	}
 	//삽 출력
 	_shovelImg->render(getMemDC(), _rcBtn[_shovelIdx].left, _rcBtn[_shovelIdx].top);
+	}
+
 	
 	
 	//옵션이 선택되었으면 랜더를 합시당
-	if (_isOption)
-	{
-		_op->render(getMemDC());
-	}
-
+	
 }
 
 void gameTitleScene::setScript()

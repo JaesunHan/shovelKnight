@@ -41,6 +41,8 @@ public:
 	void getSkillMemoryAdress(skillManager* skill) { _skill = skill; }
 	void getPlayerMemoryAdress(playerManager* player) { _player = player; }
 
+	bool getPlayerMeetNPC() {	return _playerMeetNPC;	}
+
 
 	void enemyDead();
 	void PlayerMeetNPC();

@@ -130,8 +130,58 @@ void enemyManager::setEnemy(ENEMYTYPE enemyType, float enemyX, float enemyY)
 		break;
 		case ENEMY_BLACKKNIGHT:
 
-			//minion = new boss2;
-			//minion->init(enemyX, enemyY);
+			minion = new bossBlackKnight;
+			minion->init(enemyX, enemyY);
+
+		break;
+	}
+
+
+	_vEnemy.push_back(minion);
+
+}
+
+//                          에네미 종류          X좌표         Y좌표         움직임 패턴   
+void enemyManager::setEnemy(ENEMYTYPE enemyType, float enemyX, float enemyY, int patternType)
+{
+	enemyBase* minion;
+
+	switch (enemyType)
+	{
+	case ENEMY_BEETO:
+
+		minion = new minion1;
+		minion->init(enemyX, enemyY, patternType);
+
+		break;
+	case ENEMY_BLORB:
+
+		minion = new minion2;
+		minion->init(enemyX, enemyY, patternType);
+
+		break;
+	case ELEMY_DRAKE:
+
+		minion = new minion3;
+		minion->init(enemyX, enemyY, patternType);
+
+		break;
+	case ENEMY_SKELETON:
+
+		minion = new skeleton;
+		minion->init(enemyX, enemyY, patternType);
+
+		break;
+	case ENEMY_DRAGON:
+
+		minion = new boss1;
+		minion->init(enemyX, enemyY, patternType);
+
+		break;
+	case ENEMY_BLACKKNIGHT:
+
+		minion = new bossBlackKnight;
+		minion->init(enemyX, enemyY, patternType);
 
 		break;
 	}
@@ -157,11 +207,13 @@ void enemyManager::stageEnemySet(int stageNum)
 
 	if (_enemyIsOn[0]) 		//stage1
 	{
-		setEnemy(ENEMY_BEETO, 300, 200);
-		setEnemy(ENEMY_BLORB, 350, 200);
-		setEnemy(ELEMY_DRAKE, 300, 150);
-		setEnemy(ENEMY_SKELETON, 350, 120);
-		setEnemy(ENEMY_DRAGON, 400, 179.5);
+		//setEnemy(ENEMY_BEETO, 300, 200);
+		//setEnemy(ENEMY_BLORB, 350, 200);
+		//setEnemy(ELEMY_DRAKE, 300, 150, ENEMY_LEFT_FOWARD);
+		//setEnemy(ELEMY_DRAKE, 200, 200, ENEMY_PATROL);
+		//setEnemy(ENEMY_SKELETON, 350, 120);
+		//setEnemy(ENEMY_DRAGON, 400, 179.5);
+		setEnemy(ENEMY_BLACKKNIGHT, 350, 120);
 	}
 	if (_enemyIsOn[1])  //stage2
 	{

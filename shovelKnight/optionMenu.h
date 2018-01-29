@@ -40,9 +40,9 @@ public:
 
 	RECT _rcOption[selectRect];			//뒤로, 게임, 조작, 사운드, 그래픽, 데이터 삭제를 선택하기 위한 렉트를 깐다.
 	int _indexRc;						//인덱스 RC
-
+	
 	bool _isSoundMenu;					//사운드메뉴 그리기용
-
+	bool _isOptionRender;				//옵션창이 렌더되느냐
 
 	HRESULT init();
 	void update();
@@ -54,6 +54,8 @@ public:
 	
 	
 	inline bool getIsSoundMenu() { return _isSoundMenu; }
+	inline bool getIsOptionRender() { return _isOptionRender; }
+	inline void setIsOptionRender(bool opt) { _isOptionRender = opt; }
 
 	optionMenu();
 	~optionMenu();

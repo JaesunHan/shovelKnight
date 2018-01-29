@@ -14,6 +14,7 @@ soundMenu::~soundMenu()
 
 HRESULT soundMenu::init()
 {
+	_isSoundMenuRender = false;
 	_imgKeyString = "option_Sound";
 	_imgFileName = "./image/title/option_Sound.bmp";
 	menuBase::init(_imgKeyString, _imgFileName, WINSIZEX / 2 - 534 / 2, WINSIZEY / 2 - 320 / 2, 534, 320);
@@ -85,15 +86,34 @@ HRESULT soundMenu::init()
 }
 void soundMenu::update() 
 {
+	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
+	{
+		if (_indexSoundRc == 0)
+		{
+			_isSoundMenuRender = false;
+		}
+		if (!SOUNDMANAGER->isPlaySound("可记急琶"))
+		{
+			SOUNDMANAGER->play("可记急琶", _eV, false);
+		}
+	}
 	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 	{
 		if (_indexSoundRc == 3) _indexSoundRc = 0;
 		else _indexSoundRc++;
+		if (!SOUNDMANAGER->isPlaySound("可记框流捞扁"))
+		{
+			SOUNDMANAGER->play("可记框流捞扁", _eV, false);
+		}
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_UP))
 	{
 		if (_indexSoundRc == 0) _indexSoundRc = 3;
 		else _indexSoundRc--;
+		if (!SOUNDMANAGER->isPlaySound("可记框流捞扁"))
+		{
+			SOUNDMANAGER->play("可记框流捞扁", _eV, false);
+		}
 	}
 
 	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))

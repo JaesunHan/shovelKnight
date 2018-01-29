@@ -18,6 +18,7 @@ HRESULT dialogueManager::init(float dt)
 
 	_elapsedTime = 0;
 	//_language = lan;
+	ZeroMemory(_scriptStr, sizeof(_scriptStr));
 
 	return S_OK;
 }
@@ -49,7 +50,7 @@ void dialogueManager::render(HDC hdc, float x, float y, int width , int height)
 	_scriptwindow->render(hdc, x, y);
 	SetTextColor(hdc, RGB(_r, _g, _b));
 	RECT rcScriptArea = { x+150, y, width, height };
-	if (_cnt >= strlen (_scriptStr))	_cnt = strlen(_scriptStr);
+	if (_cnt >= strlen(_scriptStr))	_cnt = strlen(_scriptStr);
 	DrawText(hdc, _scriptStr, _cnt, &rcScriptArea, DT_SINGLELINE | DT_VCENTER);
 }
 

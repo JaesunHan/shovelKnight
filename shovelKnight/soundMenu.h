@@ -45,6 +45,8 @@ public:
 	float _eV;								//이펙트 볼륨 계산
 	float _bV;								//배경음 볼륨 계산
 
+	bool _isSoundMenuRender;
+
 	HRESULT init();
 	void update();
 	void release();
@@ -53,6 +55,9 @@ public:
 	void effectVolumeControl();					//이펙트볼륨컨트롤
 	void bgmVolumeControl();					//배경음볼륨컨트롤
 
+
+	inline bool getIsOptionRender() { return _isSoundMenuRender; }
+	inline void setIsOptionRender(bool soundMenu) { _isSoundMenuRender = soundMenu; }
 
 	soundMenu();
 	~soundMenu();

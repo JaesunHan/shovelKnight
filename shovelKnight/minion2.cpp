@@ -9,13 +9,10 @@ minion2::~minion2()
 {
 }
 
-
-HRESULT minion2::init(float x, float y)
+void minion2::enemyInitSet()
 {
 	_enemyType = ENEMY_BLORB;
 
-	_x = x;
-	_y = y;
 	_speed = 0.0f;
 
 	_img = IMAGEMANAGER->addFrameImage("blorb", ".//image//monster//Blorb.bmp", _x, _y, 80, 162, 4, 6, true, RGB(255, 0, 255));
@@ -78,9 +75,32 @@ HRESULT minion2::init(float x, float y)
 
 	_pixelC = new pixelCollision;
 	_pixelC->init(_rc, _x, _y);
+}
+
+
+HRESULT minion2::init(float x, float y)
+{
+	_x = x;
+	_y = y;
+	_patternTypeNum = ENEMY_BASIC;
+
+	enemyInitSet();
+
 
 	return S_OK;
 }
+
+HRESULT minion2::init(float x, float y, int patternType)
+{
+	_x = x;
+	_y = y;
+	_patternTypeNum = patternType;
+
+	enemyInitSet();
+
+	return S_OK;
+}
+
 
 void minion2::update()
 {
@@ -92,6 +112,8 @@ void minion2::update()
 	//상태값에 따른 에니메이션 및 움직임
 	move();
 
+	//에너미 패턴 설정
+	enemyPattern(_patternTypeNum);
 
 	//============================================================= 픽셀충돌: 바닥충돌	
 	_pixelC->pixelCollisonY(_rc);  //바닥상태 검출
@@ -135,11 +157,11 @@ void minion2::update()
 
 		if (_direction)  //현상태가 오른쪽이면
 		{
-			_status = ENEMY_RIGHT_HIT;
+			_status = ENEMY_LEFT_HIT;
 		}
 		else            //현상태가 왼쪽이면
 		{
-			_status = ENEMY_LEFT_HIT;
+			_status = ENEMY_RIGHT_HIT;
 		}
 
 	}
@@ -395,4 +417,25 @@ void minion2::move()
 
 	//렉트위치 update
 	_rc = RectMakeCenter(_x, _y, _width, _height);
+}
+
+
+void minion2::enemyPattern(int _patternTypeNum)
+{
+	switch (_patternTypeNum)
+	{
+		case ENEMY_BASIC:
+
+		break;
+		case ENEMY_PATROL:
+
+		break;
+		case ENEMY_LEFT_FOWARD:
+
+		break;
+		case ENEMY_RIGHT_FOWARD:
+
+		break;
+	}
+
 }

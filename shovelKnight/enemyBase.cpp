@@ -12,16 +12,6 @@ enemyBase::~enemyBase()
 
 }
 
-HRESULT enemyBase::init(float x, float y)
-{
-	_jump = new jump;
-	_jump->init();
-
-	_pixelC = new pixelCollision;
-	_pixelC->init(_rc, _x, _y);
-
-	return S_OK;
-}
 
 HRESULT enemyBase::init(string imgKeyString, char* imgFileName, float x, float y, int totalWidth, int totalHeight, int frameX, int frameY)
 {

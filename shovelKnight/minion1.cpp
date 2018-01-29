@@ -11,13 +11,10 @@ minion1::~minion1()
 {
 }
 
-
-HRESULT minion1::init(float x, float y)
+void minion1::enemyInitSet()
 {
 	_enemyType = ENEMY_BEETO;
 
-	_x = x;
-	_y = y;
 	_speed = 0.0f;
 
 	_img = IMAGEMANAGER->addFrameImage("beeto", ".//image//monster//Beeto.bmp", _x, _y, 104, 64, 4, 4, true, RGB(255, 0, 255));
@@ -36,7 +33,7 @@ HRESULT minion1::init(float x, float y)
 
 	int rightMove[] = { 0, 1, 2, 3 };
 	KEYANIMANAGER->addArrayFrameAnimation("beetoRightMove", "beeto", rightMove, 4, 4, true);
-	
+
 	int leftMove[] = { 4, 5, 6, 7 };
 	KEYANIMANAGER->addArrayFrameAnimation("beetoLeftMove", "beeto", leftMove, 4, 4, true);
 
@@ -71,9 +68,30 @@ HRESULT minion1::init(float x, float y)
 
 	_pixelC = new pixelCollision;
 	_pixelC->init(_rc, _x, _y);
+}
+
+HRESULT minion1::init(float x, float y)
+{
+	_x = x;
+	_y = y;
+	_patternTypeNum = ENEMY_BASIC;
+	enemyInitSet();
 
 	return S_OK;
 }
+
+
+HRESULT minion1::init(float x, float y, int patternType)
+{
+	_x = x;
+	_y = y;
+	_patternTypeNum = patternType;
+
+	enemyInitSet();
+
+	return S_OK;
+}
+
 
 void minion1::update()
 {
@@ -85,6 +103,8 @@ void minion1::update()
 	//상태값에 따른 에니메이션 및 움직임
 	move();
 
+	//에너미 패턴 설정
+	enemyPattern(_patternTypeNum);
 
 	//============================================================= 픽셀충돌: 바닥충돌	
 	_pixelC->pixelCollisonY(_rc);  //바닥상태 검출
@@ -304,3 +324,21 @@ void minion1::move()
 }
 
 
+void minion1::enemyPattern(int _patternTypeNum)
+{
+	switch (_patternTypeNum)
+	{
+		case ENEMY_BASIC:
+
+		break;
+		case ENEMY_PATROL:
+
+		break;
+		case ENEMY_LEFT_FOWARD:
+
+		break;
+		case ENEMY_RIGHT_FOWARD:
+
+		break;
+	}
+}

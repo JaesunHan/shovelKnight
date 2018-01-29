@@ -16,6 +16,7 @@ optionMenu::~optionMenu()
 
 HRESULT optionMenu::init()
 {
+	_isOptionRender = false;// 초기화로 false해야 꺼진다.
 	//이미지 초기화 
 	_imgKeyString = "option_main";
 	_imgFileName = "./image/title/option_main.bmp";
@@ -76,38 +77,59 @@ HRESULT optionMenu::init()
 	_sm->init();
 	_isSoundMenu = false;
 
-
+	//_isOptionRender = true;
 	return S_OK;
 }
+
 void optionMenu::update() 
-{
-	if (_isSoundMenu)
+{	//옵션이 선택되었으면 업데이트를 합니다.
+	if (_sm->getIsOptionRender())
 	{
 		_sm->update();
 	}
-	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+	else
 	{
-		if (_indexRc == 5) _indexRc = 0;
-		else _indexRc++;
-	}
-	if (KEYMANAGER->isOnceKeyDown(VK_UP))
-	{
-		if (_indexRc == 0) _indexRc = 5;
-		else _indexRc--;
-	}
-
-	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
-	{
-		if (_indexRc == 0)
+		_sm->setIsOptionRender(false);
+		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 		{
-			
+			if (_indexRc == 5) _indexRc = 0;
+			else _indexRc++;
+			if (!SOUNDMANAGER->isPlaySound("옵션움직이기"))
+			{
+				SOUNDMANAGER->play("옵션움직이기", 0.3f);
+			}
 		}
-		if (_indexRc == 3)
+		if (KEYMANAGER->isOnceKeyDown(VK_UP))
 		{
-			_isSoundMenu = true;
+			if (_indexRc == 0) _indexRc = 5;
+			else _indexRc--;
+			if (!SOUNDMANAGER->isPlaySound("옵션움직이기"))
+			{
+				SOUNDMANAGER->play("옵션움직이기", 0.3f);
+			}
+		}
+
+		if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
+		{
+			if (_indexRc == 0)
+			{
+				_isOptionRender = false;
+				if (!SOUNDMANAGER->isPlaySound("옵션선택"))
+				{
+					SOUNDMANAGER->play("옵션선택", 0.3f);
+				}
+			}
+			if (_indexRc == 3)
+			{
+				_isSoundMenu = true;
+				_sm->setIsOptionRender(true);
+				if (!SOUNDMANAGER->isPlaySound("옵션선택"))
+				{
+					SOUNDMANAGER->play("옵션선택", 0.3f);
+				}
+			}
 		}
 	}
-
 	switch (_indexRc)
 	{
 	case 0: case 1: case 2:
@@ -129,9 +151,10 @@ void optionMenu::release()
 }
 void optionMenu::render(HDC hdc)
 {
-	draw(hdc);
-	
 
+		draw(hdc);
+	
+	
 
 	
 }
@@ -162,7 +185,7 @@ void optionMenu::draw(HDC hdc)
 		_letterBoxEm2->aniRender(hdc, _rcOption[0].left - 5, _rcOption[0].top + _indexRc * 32, _letterBoxAni3);
 	}
 
-	if (_isSoundMenu == true)
+	if (_sm->getIsOptionRender())
 	{
 		_sm->render(hdc);
 	}
@@ -177,7 +200,7 @@ void optionMenu::showLetterBox()
 {
 	switch (_letterBoxEnum)
 	{
-	default: _letterBox = IMAGEMANAGER->findImage("2글자박스");
+		default: _letterBox = IMAGEMANAGER->findImage("2글자박스");
 		break;
 
 	}
