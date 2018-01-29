@@ -30,15 +30,14 @@ void skillBase::render()
 {
 	if (!_isFire) return;
 
-	_img->aniRender(IMAGEMANAGER->findImage("backBuffer")->getMemDC(),
-		_x,
-		_y, _ani);
+	CAMERAMANAGER->aniRenderObject(BACKBUFFER, _img, _ani, _rc.left, _rc.top);
 }
 
 void skillBase::fire(SKILL_FIRE charType, float x, float y)
 {
 	_saveX = _x = x;
 	_y = y;
+	reRect();
 
 	_isFire = true;
 }
