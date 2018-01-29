@@ -76,7 +76,7 @@ void playerBase::control()
 		_counter = 0;
 		_action = MOVE;
 	}
-	if (_ltBlock == false)
+	if (_ltBlock == false && _state != HANG)
 	{
 		if (_ltMoving == true)
 		{
@@ -87,7 +87,7 @@ void playerBase::control()
 			}
 		}
 	}
-	if (_rtBlock == false)
+	if (_rtBlock == false && _state != HANG)
 	{
 		if (_rtMoving == true)
 		{
@@ -102,6 +102,11 @@ void playerBase::control()
 	if (KEYMANAGER->isStayKeyDown('W'))
 	{
 		_GC->PlayerMeetNPC();
+		hangPixelDetect();
+		if (_state == HANG)
+		{
+			_y -= SPEED;
+		}
 	}
 
 	if (KEYMANAGER->isOnceKeyDown('K'))
@@ -113,6 +118,12 @@ void playerBase::control()
 			_action = JUMP;
 			_isAttacking = false;
 			_jumpPower = JUMPPOWER;
+		}
+		if (_state == HANG)
+		{
+			_state = INAIR;
+			_action = JUMP;
+			_jumpPower = 0;
 		}
 	}
 	if (_jumpKeyDown == true)
@@ -404,3 +415,14 @@ void playerBase::frameCounter(float frameMax, float counterMax)
 	}
 }
 
+void playerBase::hangPixelDetect()
+{
+	COLORREF color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _x, _y - 1);
+	int R = GetRValue(color);
+	int G = GetGValue(color);
+	int B = GetBValue(color);
+	if (R == 255 && G == 0 && B == 0)
+	{
+		_state = HANG;
+	}
+}
