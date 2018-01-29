@@ -65,7 +65,8 @@ void enemyBase::render()
 	draw();
 
 	TTTextOut(CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_y - 10), "ศýฦฎ", _isHit);
-
+	TTTextOut(CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_y - 20), "ป๓ลย", _status);
+	//TTTextOut(CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_rc.bottom + 5), "มยวฅ", _rc.bottom);
 }
 
 void enemyBase::draw()

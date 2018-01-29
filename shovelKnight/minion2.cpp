@@ -38,10 +38,10 @@ HRESULT minion2::init(float x, float y)
 	KEYANIMANAGER->addArrayFrameAnimation("blorbLeftMove", "blorb", leftMove, 4, 4, true);
 
 	int rightHit[] = { 16, 17, 18, 19 };
-	KEYANIMANAGER->addArrayFrameAnimation("blorbRightHit", "blorb", rightHit, 4, 4, false);
+	KEYANIMANAGER->addArrayFrameAnimation("blorbRightHit", "blorb", rightHit, 4, 20, false);
 
 	int leftHit[] = { 20, 21, 22, 23 };
-	KEYANIMANAGER->addArrayFrameAnimation("blorbLeftHit", "blorb", leftHit, 4, 4, false);
+	KEYANIMANAGER->addArrayFrameAnimation("blorbLeftHit", "blorb", leftHit, 4, 20, false);
 
 	int rightDead[] = { 8, 9, 10, 11 };
 	KEYANIMANAGER->addArrayFrameAnimation("blorbRightDead", "blorb", rightDead, 4, 4, false);
@@ -82,14 +82,14 @@ HRESULT minion2::init(float x, float y)
 void minion2::update()
 {
 	//============================================================ 피격 테스트
-	if (KEYMANAGER->isOnceKeyDown('P'))
-	{
-		_isHit = true;
-	}
+	//if (KEYMANAGER->isOnceKeyDown('P'))
+	//{
+	//	_isHit = true;
+	//}
 	//============================================================
 
 	
-	if (!_status == ENEMY_LEFT_HIT && !_status == ENEMY_RIGHT_HIT)
+	if (_status != ENEMY_LEFT_HIT && _status != ENEMY_RIGHT_HIT)
 	{
 		_previousStatus = _status; //직전 에너미 상태 저장
 	}
@@ -151,32 +151,32 @@ void minion2::update()
 
 
 	//hp=0일경우 상태 변경
-	//if (_enemyHp <= 0)
-	//{
-	//	if (_playerStatus == 3) //플레이어가 점프상태일 경우
-	//	{
-	//		if (_direction)
-	//		{
-	//			_status = ENEMY_RIGHT_JUMP_DEAD;
-	//		}
-	//		else
-	//		{
-	//			_status = ENEMY_LEFT_JUMP_DEAD;
-	//		}
-	//	}
-	//	else //플레이어가 바닥에서 공격할 경우
-	//	{
-	//		if (_direction)
-	//		{
-	//			_status = ENEMY_RIGHT_DEAD;
-	//		}
-	//		else
-	//		{
-	//			_status = ENEMY_LEFT_DEAD;
-	//		}
-	//	}
+	if (_enemyHp <= 0)
+	{
+		if (_playerStatus == 3) //플레이어가 점프상태일 경우
+		{
+			if (_direction)
+			{
+				_status = ENEMY_RIGHT_JUMP_DEAD;
+			}
+			else
+			{
+				_status = ENEMY_LEFT_JUMP_DEAD;
+			}
+		}
+		else //플레이어가 바닥에서 공격할 경우
+		{
+			if (_direction)
+			{
+				_status = ENEMY_RIGHT_DEAD;
+			}
+			else
+			{
+				_status = ENEMY_LEFT_DEAD;
+			}
+		}
 
-	//}
+	}
 
 
 
@@ -186,8 +186,6 @@ void minion2::update()
 void minion2::draw()
 {
 	CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top - 18);
-
-	TTTextOut(CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_rc.top - 30), "상태", _status, true);
 }
 
 
@@ -255,6 +253,7 @@ void minion2::move()
 			if (_jump->getIsJumping())
 			{
 				_speed = BLORBSPEED * 5;
+				_speed -= 0.4;
 				_x -= _speed;
 				_jump->update();
 			}
@@ -278,25 +277,13 @@ void minion2::move()
 			if (_jump->getIsJumping())
 			{
 				_speed = BLORBSPEED * 5;
+				_speed -= 0.4;
 				_x += _speed;
 				_jump->update();
 			}
 			else
 			{
-				if (_enemyHp <= 0)
-				{
-					//벡터에서 지울 불값 설정
-					_vanishTime++;
-					if (_vanishTime % 20 == 0)
-					{
-						_isDeadVanish = true;
-						_vanishTime = 1;
-					}
-				}
-				else
-				{
-					_status = _previousStatus;
-				}				
+				_status = _previousStatus;
 			}
 	
 			
@@ -309,13 +296,14 @@ void minion2::move()
 			{
 				_anim->start();
 				_isDead = true;
-				_jump->jumping(&_x, &_y, 7.0f, 0.7f);
+				_jump->jumping(&_x, &_y, 5.0f, 0.7f);
 			}
 	
 			//움직임: 뒤로 점핑하면서 죽기
 			if (_isDead && _jump->getIsJumping() == true)
 			{
-				_speed = BLORBSPEED;
+				_speed = BLORBSPEED * 3;
+				_speed -= 0.4;
 				_x += _speed;
 				_jump->update();
 			}
@@ -323,7 +311,7 @@ void minion2::move()
 			if (_isDead && _jump->getIsJumping() == false)
 			{
 				_vanishTime++;
-				if (_vanishTime % 20 == 0)
+				if (_vanishTime % 10 == 0)
 				{
 					_isDeadVanish = true;
 					_vanishTime = 1;
@@ -339,13 +327,14 @@ void minion2::move()
 			{
 				_anim->start();
 				_isDead = true;
-				_jump->jumping(&_x, &_y, 7.0f, 0.7f);
+				_jump->jumping(&_x, &_y, 5.0f, 0.7f);
 			}
 	
 			//움직임: 뒤로 점핑하면서 죽기
 			if (_isDead && _jump->getIsJumping())
 			{
-				_speed = BLORBSPEED;
+				_speed = BLORBSPEED * 3;
+				_speed -= 0.4;
 				_x -= _speed;
 				_jump->update();
 			}
@@ -354,7 +343,7 @@ void minion2::move()
 			if (_isDead && !_jump->getIsJumping())
 			{
 				_vanishTime++;
-				if (_vanishTime % 50 == 0)
+				if (_vanishTime % 10 == 0)
 				{
 					_isDeadVanish = true;
 					_vanishTime = 1;
@@ -383,7 +372,7 @@ void minion2::move()
 			if (_isDead)
 			{
 				_vanishTime++;
-				if (_vanishTime % 50 == 0)
+				if (_vanishTime % 10 == 0)
 				{
 					_isDeadVanish = true;
 					_vanishTime = 1;
