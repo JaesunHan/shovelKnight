@@ -110,7 +110,7 @@ public:
 	//돈감소
 	int _minusMoney;
 	int getMinusMoney() { return _minusMoney; }
-	void setMinusMone(int minusMoney) { _minusMoney = minusMoney; }
+	void setMinusMoney(int minusMoney) { _minusMoney = minusMoney; }
 
 
 	//체력상인용 체력겟셋
@@ -118,6 +118,7 @@ public:
 	void setMaxHp(int setMaxHp) { _setMaxHp = setMaxHp; }
 	int getMaxHp() { return _setMaxHp; }
 
+	
 
 
 	//==================================== End 게터 세터 작성하기===================================

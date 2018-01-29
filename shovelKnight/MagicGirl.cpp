@@ -99,16 +99,16 @@ void MagicGirl::isCollision(bool collision)
 		if (collision)
 		{
 			
-			//다이얼로그로 
-			//마법상점에 온걸 환영해	
-			//너가 살수 있는 스킬은 파이어볼이야 
-			//살래?
-			if (_buyYesorNo == true)
-			{
-				_textOut = true;
-				_npcStatus = NPCTALK;
-				if (KEYMANAGER->isOnceKeyDown('O'))				//산다고 했을때
-				{
+			////다이얼로그로 
+			////마법상점에 온걸 환영해	
+			////너가 살수 있는 스킬은 파이어볼이야 
+			////살래?
+			//if (_buyYesorNo == true)
+			//{
+			_textOut = true;
+			//	_npcStatus = NPCTALK;
+			//	if (KEYMANAGER->isOnceKeyDown('O'))				//산다고 했을때
+			//	{
 					if (!_stock)					//한번도 상점에서 구매를 하지 않았으면
 					{
 						if (_skillUnlockLv == 0)			//플레이어 스킬이 0(삽질)만 있다면
@@ -135,9 +135,12 @@ void MagicGirl::isCollision(bool collision)
 				//"어 그...그래? 안녕 ㅃㅃ " 다이얼로그 출력 ㅃㅃ
 			}
 			
-
-		}
-	}
+			else
+			{
+				_textOut = false;
+			}
+		//}
+	//}
 }
 
 void MagicGirl::magicGirlImageControl()
@@ -178,7 +181,8 @@ void MagicGirl::render()
 	}
 	if (_textOut)
 	{
-		TTTextOut(500, 200, "매직걸에서플레이어돈", _money);
+		TTTextOut(500, 400, "매직걸에서플레이어돈", _money);
+		TTTextOut(500, 300, "스킬", _skillUnlockLv);
 	}
 }
 

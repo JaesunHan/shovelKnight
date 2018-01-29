@@ -150,9 +150,10 @@ void BardKnight::isCollision(bool collision)
 			////NO했을때는 텍스트 아웃으로
 			////"어 그...그래? 안녕 ㅃㅃ " 다이얼로그 출력 ㅃㅃ
 			////_isCollisionNpc == false;
-
-
-
+		}
+		else
+		{
+			_textOut = false;
 		}
 	}
 }
