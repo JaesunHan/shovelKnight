@@ -8,8 +8,8 @@ public:
 	virtual HRESULT init();
 	virtual void update();
 	virtual void release();
-	virtual void render();
-	virtual void draw();
+	virtual void render(HDC hdc);
+	virtual void draw(HDC hdc);
 
 	graphicUI();
 	~graphicUI();

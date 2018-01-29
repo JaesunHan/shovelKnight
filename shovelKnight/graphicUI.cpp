@@ -25,11 +25,11 @@ void graphicUI::release()
 {
 
 }
-void graphicUI::render()   
+void graphicUI::render(HDC hdc)   
 {
-	draw();
+	draw(hdc);
 }
-void graphicUI::draw()	   
+void graphicUI::draw(HDC hdc)	   
 {
 
 }

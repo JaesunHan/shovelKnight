@@ -44,7 +44,7 @@ public:
 	//================================= End 게터 세터 ==============================
 
 	//================================= Start 게임 메뉴씬으로부터 플레이어 정보 받아오기 ==================
-	void setPlayerIdx(int* idx) { _selectPlayerIdx = *idx;  _gamePlayUI->setPlayerIdx(&_selectPlayerIdx); }
+	void setPlayerIdx(int* idx) { _selectPlayerIdx = *idx;  _gamePlayUI->setPlayerInfo(&_selectPlayerIdx); }
 	//================================= End	게임 메뉴씬으로부터 플레이어 정보 받아오기 ====================
 
 	HRESULT init();
