@@ -57,6 +57,14 @@ protected:
 	int _stock;				//몇번 구매했는지 확인하는 변수
 	bool _buyYesorNo;		//상점 열었을때 살래말래?
 
+	//===============다이얼로그 변수==================//
+	image* _testScript;		
+	image* _testScript1;
+	image* _testScript2;
+	image* _testScript3;
+	image* _testScript4;
+	image* _testScript5;
+
 public:
 	npcBase();
 	~npcBase();

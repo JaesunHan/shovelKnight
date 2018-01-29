@@ -24,6 +24,7 @@ public:
 	~BardKnight();
 
 
+
 	//==========가격 세팅 변수===========//
 	int _bgmPrice;									//배경음 가격
 	int _effectSoundPrice;							//이펙트 사운드 가격  -> 삽질 사운드만 

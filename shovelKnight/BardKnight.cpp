@@ -65,14 +65,20 @@ HRESULT BardKnight::init()
 	}
 	KEYANIMANAGER->addArrayFrameAnimation("바드나이트점프", "BardKnightJump", arrJump, 14, 6, true);
 	
-	_isChange = false;
-	_textOut = false;						//테스트용
-
+	//테스트용
 	_anim = KEYANIMANAGER->findAnimation("바드나이트아이들");		//NPC 애니메이션
 	_anim2 = KEYANIMANAGER->findAnimation("바드나이트점프");		//NPC 애니메이션
-
 	KEYANIMANAGER->start("바드나이트아이들");
 	KEYANIMANAGER->start("바드나이트점프");
+	
+
+	_testScript = new image;
+	_testScript = IMAGEMANAGER->addImage("scriptWindow", "./image/UI/Script_window.bmp", 0, 0, 800, 96, true, RGB(255, 0, 255));
+	DIALOGUEMANAGER->setScriptNScriptWindow("힘세고 좋은 아침, 묻는다면 나는 바드나이트 음악을 사겠나?", _testScript, 255, 255, 255);
+	//DIALOGUEMANAGER->setScriptNScriptWindow("사려면 O키를, 안사려면 K키를 누르게", _testScript, 255, 255, 255);
+	DIALOGUEMANAGER->setScript("사려면 O키를 안사려면 K키를누르게",255,255,255);
+	_isChange = false;
+	_textOut = false;
 	return S_OK;
 
 	
@@ -95,18 +101,22 @@ void BardKnight::isCollision(bool collision)
 	{
 		if (collision)
 		{
-
+			
 			//soundChange();
 			//텍스트 아웃으로 "너 이거 살래? Yes or No(bool값<-변수 하나 추가해야함 1.25)
 			//아래는 Yes 선택했을때의 함수
 		
 		
-			TTTextOut(500, 300, "으앙충돌1", 0);
+			
 
 			_textOut = true;
+			
+
 			_isChange = true;
-			soundChange();
+			
 			_npcStatus = NPCTALK;
+
+			soundChange();
 			//if (KEYMANAGER->isOnceKeyDown('O'))				//O눌렀을때
 			//{
 			//	//TTTextOut(300, 300, "으앙충돌", 0);
@@ -203,10 +213,13 @@ void BardKnight::render()
 				CAMERAMANAGER->getX(_rc.right),
 				CAMERAMANAGER->getY(_rc.bottom));
 		}
-	}
-	if (_textOut == true)
-	{
-		TTTextOut(500, 100, "바드나이트에서플레이어돈", _money);
+
+
+		if (_textOut == true)
+		{
+			TTTextOut(500, 100, "바드나이트에서플레이어돈", _money);
+			DIALOGUEMANAGER->render(getMemDC(), 0, 0, 800, 96);
+		}
 	}
 }
 
@@ -224,6 +237,7 @@ void BardKnight::draw()
 	default: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
 		break;
 	}
+	
 }
 
 
@@ -231,4 +245,6 @@ void BardKnight::draw()
 void BardKnight::update()
 {
 	npcBase::update();
+	bardKnightImageControl();
+	DIALOGUEMANAGER->update();
 }

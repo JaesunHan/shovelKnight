@@ -58,9 +58,21 @@ HRESULT HealtyGuy::init()
 
 	int arrIDLE1[] = { 0,1 };
 	KEYANIMANAGER->addArrayFrameAnimation("헬스가이아이들", "HealtyGuyIdle", arrIDLE1, 2, 2, true);
-	KEYANIMANAGER->start("헬스가이아이들");
+	
+	int arrGood[4];
+	for (int i = 0; i < 4; ++i)
+	{
+		arrGood[i] = i;
+	}
+	KEYANIMANAGER->addArrayFrameAnimation("헬스가이굿", "HealtyGuyGood", arrGood, 4, 3, true);
+	
 
 	_anim = KEYANIMANAGER->findAnimation("헬스가이아이들");		//NPC 애니메이션
+	_anim2 = KEYANIMANAGER->findAnimation("헬스가이굿");
+
+	KEYANIMANAGER->start("헬스가이아이들");
+	KEYANIMANAGER->start("헬스가이굿");
+
 
 	_setMaxHp = 8;
 	return S_OK;
@@ -70,37 +82,7 @@ void HealtyGuy::sellHpItem()
 {
 }
 
-void HealtyGuy::render()
-{
-	if (_isAppear == true)
-	{
-		draw();
 
-		if (KEYMANAGER->isToggleKey(VK_TAB))
-		{
-			Rectangle(getMemDC(), CAMERAMANAGER->getX(_rc.left),
-				CAMERAMANAGER->getY(_rc.top),
-				CAMERAMANAGER->getX(_rc.right),
-				CAMERAMANAGER->getY(_rc.bottom));
-		}
-	}
-	if (_textOut)
-	{
-		TTTextOut(500, 300, "플레이어돈", _money);
-		TTTextOut(500, 200, "플레이어최대체력",_setMaxHp);
-	}
-}
-
-void HealtyGuy::draw()
-{
-	//_img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
-	CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
-}
-
-void HealtyGuy::update()
-{
-	npcBase::update();
-}
 
 void HealtyGuy::isCollision(bool collision)
 {
@@ -113,7 +95,7 @@ void HealtyGuy::isCollision(bool collision)
 		
 			_textOut = true;
 			
-
+			_npcStatus = NPCTALK;
 			//if (KEYMANAGER->isOnceKeyDown('O'))				//O눌렀을때
 			//{
 				//TTTextOut(300, 300, "으앙충돌", 0);
@@ -167,4 +149,69 @@ void HealtyGuy::isCollision(bool collision)
 		}
 		
 	}
+}
+
+void HealtyGuy::HealtyGuyImageControl()
+{
+
+	switch (_npcStatus)
+	{
+	case NPCIDLE:
+		_anim = KEYANIMANAGER->findAnimation("헬스가이아이들");		//NPC 애니메이션
+															//KEYANIMANAGER->start("매직걸아이들");
+		break;
+
+	case NPCTALK:
+		_img = IMAGEMANAGER->findImage("HealtyGuyGood");
+		_anim2 = KEYANIMANAGER->findAnimation("헬스가이굿");		//NPC 애니메이션
+															//KEYANIMANAGER->start("매직걸인사");
+		break;
+
+	case NPCUNDERATTACKED:
+		break;
+	}
+
+}
+
+void HealtyGuy::render()
+{
+	if (_isAppear == true)
+	{
+		draw();
+
+		if (KEYMANAGER->isToggleKey(VK_TAB))
+		{
+			Rectangle(getMemDC(), CAMERAMANAGER->getX(_rc.left),
+				CAMERAMANAGER->getY(_rc.top),
+				CAMERAMANAGER->getX(_rc.right),
+				CAMERAMANAGER->getY(_rc.bottom));
+		}
+	}
+	if (_textOut)
+	{
+		TTTextOut(500, 300, "플레이어돈", _money);
+		TTTextOut(500, 200, "플레이어최대체력", _setMaxHp);
+	}
+}
+
+void HealtyGuy::draw()
+{
+	//_img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
+	switch (_npcStatus)
+	{
+	case NPCIDLE: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
+		break;
+	case NPCTALK: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim2, _rc.left, _rc.top);
+		break;
+	case NPCUNDERATTACKED:
+		break;
+	default: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
+		break;
+	}
+}
+
+void HealtyGuy::update()
+{
+	npcBase::update();
+	HealtyGuyImageControl();
 }

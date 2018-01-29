@@ -43,5 +43,6 @@ public:
 	virtual void update();
 
 	virtual void isCollision(bool collision);
+	void HealtyGuyImageControl();
 };
 
