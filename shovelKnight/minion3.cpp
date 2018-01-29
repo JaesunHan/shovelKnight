@@ -21,8 +21,6 @@ HRESULT minion3::init(float x, float y)
 
 	_img = IMAGEMANAGER->addFrameImage("drake", ".//image//monster//Divedrake.bmp", _x, _y, 111, 256, 3, 8, true, RGB(255, 0, 255));
 
-	_rc = RectMakeCenter(_x, _y, _img->getFrameWidth(), _img->getFrameHeight());
-
 	_status = ENEMY_LEFT_MOVE;
 
 	//========================================================================================= 에니메이션
@@ -41,8 +39,8 @@ HRESULT minion3::init(float x, float y)
 
 	//=========================================================================================
 
-	_width = _img->getFrameWidth();
-	_height = _img->getFrameHeight();
+	_width = 24;
+	_height = 15;
 	_isDead = false;
 	_isDeadVanish = false;
 	_vanishTime = 1;
@@ -58,6 +56,8 @@ HRESULT minion3::init(float x, float y)
 	_isHitPlay = false; //타격 에니메이션 플레이 여부
 	_isHitDelayTime = false;
 	_delayCount = 1;
+
+	_rc = RectMakeCenter(_x, _y, _width, _height);
 
 	_anim = KEYANIMANAGER->findAnimation("drakeLeftMove");
 
@@ -164,6 +164,14 @@ void minion3::update()
 
 	}
 
+
+}
+
+
+void minion3::draw()
+{
+
+	CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left - 9, _rc.top - 9);
 
 }
 

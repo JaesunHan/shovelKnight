@@ -6,9 +6,9 @@
 #define DRAGONHEADRECTY	 32
 #define DRAGONTRUNKRECTX 25
 #define DRAGONTRUNKRECTY 14.5
-#define DELAYTIME	70
+#define DELAYTIME	50
 #define HITCOUNT	10
-#define DEADCOUNT	50
+#define DEADCOUNT	30
 
 class boss1 : public enemyBase
 {

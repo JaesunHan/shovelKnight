@@ -255,7 +255,7 @@ void skeleton::draw()
 {
 	if (_direction)
 	{
-		CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left + 19, _rc.top - 9);
+		CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left - 5, _rc.top - 9);
 	}
 	else
 	{

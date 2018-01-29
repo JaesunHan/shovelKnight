@@ -135,11 +135,11 @@ void minion2::update()
 
 		if (_direction)  //현상태가 오른쪽이면
 		{
-			_status = ENEMY_RIGHT_HIT;
+			_status = ENEMY_LEFT_HIT;
 		}
 		else            //현상태가 왼쪽이면
 		{
-			_status = ENEMY_LEFT_HIT;
+			_status = ENEMY_RIGHT_HIT;
 		}
 
 	}
