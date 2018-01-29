@@ -86,6 +86,7 @@ void HealtyGuy::render()
 	if (_textOut)
 	{
 		TTTextOut(500, 300, "플레이어돈", _money);
+		TTTextOut(500, 200, "플레이어최대체력",_setMaxHp);
 	}
 }
 
@@ -102,69 +103,71 @@ void HealtyGuy::update()
 
 void HealtyGuy::isCollision(bool collision)
 {
-	if (collision)
+	if (_isAppear)
 	{
-		//텍스트 아웃으로 "너 이거 살래? Yes or No(bool값<-변수 하나 추가해야함 1.25)
-		//아래는 Yes 선택했을때의 함수
-		char* str1 = "Welcome, Welcome My friend";
-		char* str2 = "you wanna buy some weed?:P";
-		char* str3 = "if u OK press 'O', or not press 'P'";
-		char* str4 = "get the fuck off!!!!";
-
-		////init
-		//int stats = 0;
-		//
-		//char* str = str1;
-		//if(strlen(str)==strlen(str1) && stats = 0) str = str2;
-		////
-
-		_textOut = true;
-		TTTextOut(500, 300, "헬스가이에서플레이어돈", _money);
-
-		if (KEYMANAGER->isOnceKeyDown('O'))				//O눌렀을때
+		if (collision)
 		{
-			//TTTextOut(300, 300, "으앙충돌", 0);
-			if (!_stock)					//한번도 상점에서 구매를 하지 않았으면(stock =0)
+			//텍스트 아웃으로 "너 이거 살래? Yes or No(bool값<-변수 하나 추가해야함 1.25)
+			//아래는 Yes 선택했을때의 함수
+			char* str1 = "Welcome, Welcome My friend";
+			char* str2 = "you wanna buy some weed?:P";
+			char* str3 = "if u OK press 'O', or not press 'P'";
+			char* str4 = "get the fuck off!!!!";
+
+			////init
+			//int stats = 0;
+			//
+			//char* str = str1;
+			//if(strlen(str)==strlen(str1) && stats = 0) str = str2;
+			////
+
+			_textOut = true;
+			TTTextOut(500, 300, "헬스가이에서플레이어돈", _money);
+
+			if (KEYMANAGER->isOnceKeyDown('O'))				//O눌렀을때
 			{
-				if (_money >= 1000)				//1000원보다 돈이 많다면
+				//TTTextOut(300, 300, "으앙충돌", 0);
+				if (!_stock)					//한번도 상점에서 구매를 하지 않았으면(stock =0)
+				{
+					if (_money >= 1000)				//1000원보다 돈이 많다면
 					{
-						
 						_minusMoney -= 1000;						//플레이어 골드에서 1000원을 감소하고
 						_setMaxHp += 2;
 						_stock = 1;						//한번 구매했으니까 stock을 1로 반환해준다.
 					}
-				if (_money < 1000)						//플레이어 골드가 1000원보다 작다면
+					if (_money < 1000)						//플레이어 골드가 1000원보다 작다면
 					{
 						//str = str4;
 					}
-				
 
-			}
 
-			if (_stock == 1)							//한번도 상점에서 구매를 하지 않았으면
-			{
-				if (_money >= 3000)						//3000원보다 돈이 많다면
-				{	
-
-					_minusMoney -= 3000;				//플레이어 골드에서 1000원을 감소하고
-					_setMaxHp += 2;
-					_stock = 2;							//한번 구매했으니까 stock을 1로 반환해준다.
 				}
-				if (_money < 3000)						//플레이어 골드가 1000원보다 작다면
+
+				if (_stock == 1)							//한번도 상점에서 구매를 하지 않았으면
 				{
-					//str = str4;
+					if (_money >= 3000)						//3000원보다 돈이 많다면
+					{
+
+						_minusMoney -= 3000;				//플레이어 골드에서 1000원을 감소하고
+						_setMaxHp += 2;
+						_stock = 2;							//한번 구매했으니까 stock을 1로 반환해준다.
+					}
+					if (_money < 3000)						//플레이어 골드가 1000원보다 작다면
+					{
+						//str = str4;
+					}
+
 				}
+			}
+
+			if (KEYMANAGER->isOnceKeyDown('P'))
+			{
 
 			}
+			//NO했을때는 텍스트 아웃으로
+			//"어 그...그래? 안녕 ㅃㅃ " 다이얼로그 출력 ㅃㅃ
+			//_isCollisionNpc == false;
+
 		}
-
-		if (KEYMANAGER->isOnceKeyDown('P'))
-		{
-
-		}
-		//NO했을때는 텍스트 아웃으로
-		//"어 그...그래? 안녕 ㅃㅃ " 다이얼로그 출력 ㅃㅃ
-		//_isCollisionNpc == false;
-
 	}
 }
