@@ -578,5 +578,8 @@
     <ClCompile Include="item_gems_silver.cpp">
       <Filter>playGround\gamePlayScene\item\unit</Filter>
     </ClCompile>
+    <ClCompile Include="playGround+sound.cpp">
+      <Filter>playGround</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

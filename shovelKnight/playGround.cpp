@@ -16,6 +16,8 @@ HRESULT playGround::init()
 {
 	gameNode::init(true);
 
+	addSound();
+
 	_GTS = new gameTitleScene;
 	SCENEMANAGER->addScene(_GTS->getSceneName(), _GTS);
 	
