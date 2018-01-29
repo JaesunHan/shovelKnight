@@ -20,7 +20,7 @@ HRESULT gameObjectManager::init()
 	IMAGEMANAGER->addFrameImage("tresureBox", ".//image//object//tresureBox.bmp", 90, 23, 2, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("dirtBlock", ".//image//object//dirtBlock.bmp", 32, 32, true, RGB(255, 0, 255));
 
-	
+
 
 
 
@@ -35,7 +35,6 @@ void gameObjectManager::release()
 
 void gameObjectManager::update()
 {
-	settingObject(100, 100, OBJ_DIRTBLOCK);
 
 
 	for (int i = 0; i < _vObj.size(); ++i)
