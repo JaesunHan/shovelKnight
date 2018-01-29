@@ -60,6 +60,9 @@ HRESULT minion1::init(float x, float y)
 	_enemyHp = 1;
 	_isHit = false;
 	_previousStatus = _status;
+	_isHitDelayTime = false;
+	_delayCount = 1;
+
 
 	_anim = KEYANIMANAGER->findAnimation("beetoLeftMove");
 
@@ -119,8 +122,11 @@ void minion1::update()
 
 
 	//데미지 설정
-	if (_isHit)
+	if (_isHit && !_isHitDelayTime)
 	{
+		_enemyHp--;
+		_isHitDelayTime = true;
+
 		if (_direction)  //현상태가 오른쪽이면
 		{
 			_status = ENEMY_RIGHT_HIT;
@@ -130,8 +136,17 @@ void minion1::update()
 			_status = ENEMY_LEFT_HIT;
 		}
 
-		_enemyHp--;
-		_isHit = false;
+	}
+
+	if (_isHitDelayTime)
+	{
+		_delayCount++;
+
+		if (_delayCount % DELAYTIME == 0)
+		{
+			_isHitDelayTime = false;
+			_isHit = false;
+		}
 	}
 
 
@@ -212,7 +227,7 @@ void minion1::move()
 			if (_isDead && _jump->getIsJumping() == false)
 			{
 				_vanishTime++;
-				if (_vanishTime % 20 == 0)
+				if (_vanishTime % DEADCOUNT == 0)
 				{
 					_isDeadVanish = true;
 					_vanishTime = 1;
@@ -271,7 +286,7 @@ void minion1::move()
 			if (_isDead)
 			{
 				_vanishTime++;
-				if (_vanishTime % 20 == 0)
+				if (_vanishTime % DEADCOUNT == 0)
 				{
 					_isDeadVanish = true;
 					_vanishTime = 1;

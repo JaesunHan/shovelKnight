@@ -2,6 +2,9 @@
 #include "enemyBase.h"
 
 #define DRAKESPEED 2.0f
+#define DELAYTIME 70
+#define HITCOUNT  10
+#define DEADCOUNT 20
 
 class minion3 : public enemyBase
 {

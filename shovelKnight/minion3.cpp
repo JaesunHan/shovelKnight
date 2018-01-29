@@ -34,10 +34,10 @@ HRESULT minion3::init(float x, float y)
 	KEYANIMANAGER->addArrayFrameAnimation("drakeLeftMove", "drake", leftMove, 3, 4, true);
 
 	int rightHit[] = { 12, 13, 14 };
-	KEYANIMANAGER->addArrayFrameAnimation("drakeRightHit", "drake", rightHit, 3, 20, false);
+	KEYANIMANAGER->addArrayFrameAnimation("drakeRightHit", "drake", rightHit, 3, 10, false);
 
 	int leftHit[] = { 15, 16, 17 };
-	KEYANIMANAGER->addArrayFrameAnimation("drakeLeftHit", "drake", leftHit, 3, 20, false);
+	KEYANIMANAGER->addArrayFrameAnimation("drakeLeftHit", "drake", leftHit, 3, 10, false);
 
 	//=========================================================================================
 
@@ -56,6 +56,8 @@ HRESULT minion3::init(float x, float y)
 	_previousStatus = _status;
 	_playerStatus = 0;
 	_isHitPlay = false; //타격 에니메이션 플레이 여부
+	_isHitDelayTime = false;
+	_delayCount = 1;
 
 	_anim = KEYANIMANAGER->findAnimation("drakeLeftMove");
 
@@ -106,8 +108,11 @@ void minion3::update()
 
 
 	//데미지 설정
-	if (_isHit)
+	if (_isHit && !_isHitDelayTime)
 	{
+		_enemyHp--;
+		_isHitDelayTime = true;
+
 		if (_direction)  //현상태가 오른쪽이면
 		{
 			_status = ENEMY_RIGHT_HIT;
@@ -116,11 +121,19 @@ void minion3::update()
 		{
 			_status = ENEMY_LEFT_HIT;
 		}
-
-		_enemyHp--;
-		_isHit = false;
 	}
 
+
+	if (_isHitDelayTime)
+	{
+		_delayCount++;
+
+		if (_delayCount % DELAYTIME == 0)
+		{
+			_isHitDelayTime = false;
+			_isHit = false;
+		}
+	}
 
 
 	//hp=0일경우 상태 변경
@@ -204,7 +217,7 @@ void minion3::move()
 			if (!_anim->isPlay())
 			{
 				_anim->start();
-				_speed = DRAKESPEED * 10;
+				_speed = DRAKESPEED * 5;
 				_speed -= 0.4;
 				_x -= _speed;
 				_isHitPlay = true;
@@ -213,10 +226,9 @@ void minion3::move()
 			if (!_anim->isPlay() && _isHitPlay)
 			{
 				_jumpCount++;  //에니메이션 플레이 여유타임
-				if (_jumpCount % 20 == 0)
+				if (_jumpCount % HITCOUNT == 0)
 				{
 					_status = _previousStatus;
-					_isHitPlay = false;
 					_jumpCount = 1;
 				}
 			}
@@ -229,7 +241,7 @@ void minion3::move()
 			if (!_anim->isPlay())
 			{
 				_anim->start();
-				_speed = DRAKESPEED * 10;
+				_speed = DRAKESPEED * 5;
 				_speed -= 0.4;
 				_x += _speed;
 				_isHitPlay = true;
@@ -237,10 +249,9 @@ void minion3::move()
 			else
 			{
 				_jumpCount++;  //에니메이션 플레이 여유타임
-				if (_jumpCount % 20 == 0)
+				if (_jumpCount % HITCOUNT == 0)
 				{
 					_status = _previousStatus;
-					_isHitPlay = false;
 					_jumpCount = 1;
 				}
 			}
@@ -263,7 +274,7 @@ void minion3::move()
 			if (_isDead)
 			{
 				_vanishTime++;
-				if (_vanishTime % 15 == 0)
+				if (_vanishTime % DEADCOUNT == 0)
 				{
 					_isDeadVanish = true;
 					_vanishTime = 1;
@@ -288,7 +299,7 @@ void minion3::move()
 			if (_isDead)
 			{
 				_vanishTime++;
-				if (_vanishTime % 15 == 0)
+				if (_vanishTime % DEADCOUNT == 0)
 				{
 					_isDeadVanish = true;
 					_vanishTime = 1;

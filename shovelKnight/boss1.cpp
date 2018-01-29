@@ -61,6 +61,8 @@ HRESULT boss1::init(float x, float y)
 	_enemyHp = 7;
 	_isHit = false;
 	_previousStatus = _status;
+	_isHitDelayTime = false;
+	_delayCount = 1;
 
 	_anim = KEYANIMANAGER->findAnimation("dragonLeftStop");
 
@@ -108,12 +110,26 @@ void boss1::update()
 
 
 	//데미지 설정
-	if (_isHit)
+	if (_isHit && !_isHitDelayTime)
 	{
-		_status = ENEMY_LEFT_HIT;
 		_enemyHp--;
-		_isHit = false;
+		_isHitDelayTime = true;
+
+		_status = ENEMY_LEFT_HIT;
 	}
+
+
+	if (_isHitDelayTime)
+	{
+		_delayCount++;
+
+		if (_delayCount % DELAYTIME == 0)
+		{
+			_isHitDelayTime = false;
+			_isHit = false;
+		}
+	}
+
 
 	//hp=0일경우 상태 변경
 	if (_enemyHp <= 0)
@@ -197,7 +213,7 @@ void boss1::move()
 			else
 			{
 				_jumpCount++;  //에니메이션 플레이 여유타임
-				if (_jumpCount % 10 == 0)
+				if (_jumpCount % HITCOUNT == 0)
 				{
 					_status = _previousStatus;
 					_jumpCount = 1;
@@ -221,7 +237,7 @@ void boss1::move()
 			if (_isDead)
 			{
 				_vanishTime++;
-				if (_vanishTime % 50 == 0)
+				if (_vanishTime % DEADCOUNT == 0)
 				{
 					_isDeadVanish = true;
 					_vanishTime = 1;

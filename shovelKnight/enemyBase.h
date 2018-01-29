@@ -73,6 +73,10 @@ protected:
 	int _enemyHp;					//적 체력
 	bool _isCountStop;				//패턴카운트 스톱
 	ENEMYSTATUS _previousStatus;    //에너미 이전상태
+	bool _isAttack;					//attack 상태
+	bool _isHitDelayTime;           //hit 지연시간 불값
+	int _delayCount;                //hit 지연시간 카운트
+
 
 
 	ENEMYTYPE _enemyType;			//에너미타입
