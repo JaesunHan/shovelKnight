@@ -24,8 +24,8 @@ HRESULT enemyManager::init()
 		setEnemy(ENEMY_BEETO, 200, 70);
 		setEnemy(ENEMY_BLORB, 300, 200);
 		setEnemy(ELEMY_DRAKE, 400, 150);
-		setEnemy(ENEMY_DRAGON, 400, 200);
-		setEnemy(ENEMY_SKELETON, 200, 150);
+		setEnemy(ENEMY_DRAGON, 400, 179.5);
+		setEnemy(ENEMY_SKELETON, 350, 150);
 	}
 	//====================================
 
@@ -49,31 +49,20 @@ void enemyManager::update()
 	}
 
 	//데드 TEST
-	//for (int i = 0; i < _vEnemy.size(); i++)
-	//{
-	//	if (KEYMANAGER->isOnceKeyDown('1'))
-	//	{
-	//		if (_vEnemy[i]->getStatus() == ENEMY_LEFT_MOVE)
-	//		{
-	//			_vEnemy[i]->setStatus(ENEMY_LEFT_DEAD);
-	//		}
-	//		else if (_vEnemy[i]->getStatus() == ENEMY_RIGHT_MOVE)
-	//		{
-	//			_vEnemy[i]->setStatus(ENEMY_RIGHT_DEAD);
-	//		}
-	//	}
-	//	//죽었으면 벡터에서 지우기
-	//	if (_vEnemy[i]->getIsDeadVanish() == true)
-	//	{
-	//		removeEnemy(i);
-	//	}
-	//}
+	for (int i = 0; i < _vEnemy.size(); i++)
+	{
+		//죽었으면 벡터에서 지우기
+		if (_vEnemy[i]->getIsDeadVanish() == true)
+		{
+			removeEnemy(i);
+		}
+	}
 	//화면밖으로 사라지면 제거
-	//for (int i = 0; i < _vDragon.size(); i++)
-	//{
-	//	if (_vDragon[i]->getRect().right < 0)
-	//		removeBossDragon(i);
-	//}
+	for (int i = 0; i < _vEnemy.size(); i++)
+	{
+		if (_vEnemy[i]->getRect().right < 0)
+			removeEnemy(i);
+	}
 	//-------------------------------------------------------------- 
 	//============================================================================ 적 move end
 }

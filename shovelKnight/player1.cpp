@@ -54,7 +54,7 @@ void player1::update()
 	if (_pause == false)
 	{
 		control2();
-		control();
+		if (_isDamaged == false) control();
 		physics();
 		pixelCollision();
 		attack();
@@ -64,6 +64,7 @@ void player1::update()
 	{
 		_isDead = true;
 	}
+	_playerRC = RectMake(_x - HIT_BOX_WIDTH / 2, _y - HIT_BOX_HEIGHT, HIT_BOX_WIDTH, HIT_BOX_HEIGHT);
 }
 
 void player1::render() 
@@ -82,9 +83,8 @@ void player1::render()
 	else if(_isDamaged == true)
 	{
 		_counter++;
-		if (_playerRC.left > 0 && _playerRC.right < IMAGEMANAGER->findImage("bgMap")->getWidth()) _x += (_direction * 2 - 1) * 0.5f;
 		if (_counter % 2 == 0) CAMERAMANAGER->frameRenderObject(getMemDC(), IMAGEMANAGER->findImage("Damaged"), _x - 20, _y - 38, 0, _direction);
-		if (_counter > 40)
+		if (_counter > 35)
 		{
 			_isDamaged = false;
 		}
@@ -105,7 +105,7 @@ void player1::render()
 		{
 			if (_downwardThrust == true)
 			{
-				CAMERAMANAGER->frameRenderObject(getMemDC(), IMAGEMANAGER->findImage("DownwardThrust"), _x - 12, _y - 35, 0, _direction);
+				CAMERAMANAGER->frameRenderObject(getMemDC(), IMAGEMANAGER->findImage("DownwardThrust"), _x - 12, _y - 31, 0, _direction);
 			}
 			else if (_jumpPower >= 0) CAMERAMANAGER->frameRenderObject(getMemDC(), IMAGEMANAGER->findImage("Jump"), _x - 17, _y - 34, 0, _direction);
 			else if (_jumpPower < 0) CAMERAMANAGER->frameRenderObject(getMemDC(), IMAGEMANAGER->findImage("Jump"), _x - 17, _y - 34, 1, _direction);
@@ -132,19 +132,19 @@ void player1::render()
 	char testX[128];
 	int testx = _x;
 	wsprintf(testX, "playerX : %d", testx);
-	TextOut(getMemDC(), 200, 0, testX, strlen(testX));
+	TextOut(getMemDC(), 200, 100, testX, strlen(testX));
 	char testY[128];
 	int testy = _y;
 	wsprintf(testY, "playerY : %d", testy);
-	TextOut(getMemDC(), 200, 20, testY, strlen(testY));
+	TextOut(getMemDC(), 200, 120, testY, strlen(testY));
 
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
-		Rectangle(getMemDC(),
-			CAMERAMANAGER->getX(_playerRC.left),
-			CAMERAMANAGER->getY(_playerRC.top),
-			CAMERAMANAGER->getX(_playerRC.right),
-			CAMERAMANAGER->getY(_playerRC.bottom));
+		//Rectangle(getMemDC(),
+		//	CAMERAMANAGER->getX(_playerRC.left),
+		//	CAMERAMANAGER->getY(_playerRC.top),
+		//	CAMERAMANAGER->getX(_playerRC.right),
+		//	CAMERAMANAGER->getY(_playerRC.bottom));
 		Rectangle(getMemDC(),
 			CAMERAMANAGER->getX(_attackRC.left),
 			CAMERAMANAGER->getY(_attackRC.top),
@@ -163,11 +163,15 @@ void player1::control2()
 	}
 	if (KEYMANAGER->isOnceKeyDown('R'))
 	{
-		//_jumpPower = 3;
-		//_state = INAIR;
-		//_isDamaged = true;
+		_jumpPower = 3;
+		_state = INAIR;
+		_isDamaged = true;
 		_counter = 0;
-		_isDead = true;
+		//_isDead = true;
+	}
+	if (_rtBlock == false && _ltBlock == false && _isDamaged == true)
+	{
+		_x += (_direction * 2 - 1) * 0.5f;
 	}
 }
 
@@ -175,18 +179,22 @@ void player1::attack()
 {
 	if (_isDamaged == false && _isDead == false)
 	{
-		if (_action == ATTACK)
+		if (_action == JUMP && _downwardThrust == true)
+		{
+			_attackRC = RectMakeCenter(_x + (_direction * 2 - 1), _y, 8, 9);
+		}
+		else if (_action == ATTACK)
 		{
 			switch (_frameX)
 			{
 			case(0):
-				_attackRC = RectMakeCenter(_x + (-14) * (_direction * 2 - 1), _y - 7, 10, 8);
+				_attackRC = RectMakeCenter(_x + (-9) * (_direction * 2 - 1), _y - 4, 10, 8);
 				break;
 			case(1):
-				_attackRC = RectMakeCenter(_x + (-26) * (_direction * 2 - 1), _y - 11, 10, 8);
+				_attackRC = RectMakeCenter(_x + (-27) * (_direction * 2 - 1), _y - 11, 10, 8);
 				break;
 			case(2):
-				_attackRC = RectMakeCenter(_x + (-21) * (_direction * 2 - 1), _y - 20, 10, 8);
+				_attackRC = RectMakeCenter(_x + (-16) * (_direction * 2 - 1), _y - 22, 10, 8);
 				break;
 			case(3):
 				_attackRC = RectMakeCenter(_x + (13) * (_direction * 2 - 1), _y - 24, 10, 8);

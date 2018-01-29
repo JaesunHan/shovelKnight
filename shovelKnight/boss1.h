@@ -27,5 +27,9 @@ public:
 	void render();
 	void move();
 
+	//충돌렉트 게터
+	RECT getBoss1HeadRect() { return _headRc; }   //머리렉트
+	RECT getBoss1TrunkRect() { return _trunkRc; }  //몸통렉트
+
 };
 

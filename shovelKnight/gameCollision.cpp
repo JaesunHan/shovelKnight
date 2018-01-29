@@ -13,6 +13,7 @@ gameCollision::~gameCollision()
 
 HRESULT gameCollision::init()
 {
+	_playerMeetNPC = false;
 
 	return S_OK;
 }
@@ -25,6 +26,7 @@ void gameCollision::update()
 {
 	enemyDead();
 	enemyDetectPlayer();
+	if(KEYMANAGER->isOnceKeyDown('1') || _playerMeetNPC) PlayerMeetNPC();
 
 	//collisionPlayerMapRight();
 	//collisionPlayerMapLeft();
@@ -40,9 +42,8 @@ void gameCollision::update()
 
 void gameCollision::render()
 {
-	PlayerMeetNPC();
 
-	RECT rc = _player->getPlayerRc();
+	RECT rc = _player->getPlayerRC();
 
 	for (int i = 0; i < _store->getVNpc().size(); ++i)
 	{
@@ -50,12 +51,10 @@ void gameCollision::render()
 
 		RECT rc2 = _store->getVNpc()[i]->getRect();
 
-		TTTextOut(300, 300, "RC2left", rc2.left);
-		TTTextOut(300, 320, "RC2Top", rc2.top);
+		TTTextOut(300, 300, "rc2", rc2);
 	}
 
-	TTTextOut(400, 10, "PLeft", rc.left);
-	TTTextOut(400, 30, "PLetop", rc.top);
+	TTTextOut(400, 300, "rc", rc);
 }
 
 void gameCollision::enemyDead()
@@ -70,7 +69,6 @@ void gameCollision::enemyDead()
 				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
 			{
 				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
-				_enemy->removeEnemy(i);
 			}
 			break;
 		case ENEMY_BLORB:
@@ -78,7 +76,6 @@ void gameCollision::enemyDead()
 				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
 			{
 				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
-				_enemy->removeEnemy(i);
 			}
 			break;
 		case ELEMY_DRAKE:
@@ -86,7 +83,6 @@ void gameCollision::enemyDead()
 				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
 			{
 				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
-				_enemy->removeEnemy(i);
 			}
 			break;
 		case ENEMY_SKELETON:
@@ -94,7 +90,6 @@ void gameCollision::enemyDead()
 				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
 			{
 				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
-				_enemy->removeEnemy(i);
 			}
 			break;
 		case ENEMY_DRAGON:
@@ -102,7 +97,6 @@ void gameCollision::enemyDead()
 				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
 			{
 				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
-				_enemy->removeEnemy(i);
 			}
 			break;
 		case ENEMY_BLACKKNIGHT:
@@ -110,7 +104,6 @@ void gameCollision::enemyDead()
 				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD)
 			{
 				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
-				_enemy->removeEnemy(i);
 			}
 			break;
 		}
@@ -135,18 +128,23 @@ void gameCollision::PlayerMeetNPC()
 
 
 
+
 		_store->getVNpc()[i]->setSkillUnlockLv(_player->getSkillUnlockLv());
 		_store->getVNpc()[i]->setMoney(_player->getMoney());
 		_player->setMoney(_store->getVNpc()[i]->getMinusMoney());
 		_player->setSkillUnlockLv(_store->getVNpc()[i]->getSkillUnlockLv());
 
+		_player->setMaxHP(_store->getVNpc()[i]->getMaxHp());
+		_store->getVNpc()[i]->setMaxHp(_player->getMaxHP());
 		
 
 
 
 
 
-		if (IntersectRect(&temp, &_player->getPlayerRc(), &_store->getVNpc()[i]->getRect()))
+
+		if (IntersectRect(&temp, &_player->getPlayerRC(), &_store->getVNpc()[i]->getRect()))
+
 		{
 			_store->getVNpc()[i]->isCollision(true);
 		}
@@ -155,6 +153,7 @@ void gameCollision::PlayerMeetNPC()
 			_store->getVNpc()[i]->isCollision(false);
 		}
 	}
+	_playerMeetNPC = true;
 }
 
 void gameCollision::PlayerMeetEnemy()
@@ -163,10 +162,10 @@ void gameCollision::PlayerMeetEnemy()
 	{
 		RECT temp;
 
-		if (IntersectRect(&temp, &_player->getPlayerRc(), &_enemy->getVEnemy()[i]->getRect()))
+		if (IntersectRect(&temp, &_player->getPlayerRC(), &_enemy->getVEnemy()[i]->getRect()))
 		{
 			//_player->setDamagePlayer();
-			_enemy->getVEnemy()[i]->setEnemyDamage();
+			//_enemy->getVEnemy()[i]->setEnemyDamage();
 		}
 	}
 }

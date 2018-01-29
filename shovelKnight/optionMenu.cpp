@@ -2,6 +2,7 @@
 #include "optionMenu.h"
 
 
+
 optionMenu::optionMenu()
 {
 }
@@ -75,6 +76,7 @@ HRESULT optionMenu::init()
 	_sm->init();
 	_isSoundMenu = false;
 
+
 	return S_OK;
 }
 void optionMenu::update() 
@@ -96,6 +98,10 @@ void optionMenu::update()
 
 	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
 	{
+		if (_indexRc == 0)
+		{
+			
+		}
 		if (_indexRc == 3)
 		{
 			_isSoundMenu = true;

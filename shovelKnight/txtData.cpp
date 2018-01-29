@@ -69,7 +69,7 @@ vector<string> txtData::txtLoad(const char* loadFileName)
 {
 	HANDLE file;
 
-	char str[16384];
+	char str[16382];
 	DWORD read;
 
 	file = CreateFile(loadFileName, GENERIC_READ, 0, NULL,

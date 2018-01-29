@@ -38,7 +38,9 @@ public:
 	//IDLE = 0, MOVE = 1, ATTACK = 2, JUMP = 3, ROOTING = 4, DAMAGED = 5, DIE = 6
 	inline int getPlayerAction() { return _p1->getPlayerAction(); }
 	inline void setDamagePlayer() { _p1->setDamagePlayer(); }
-	RECT getPlayerRc() { return _p1->getPlayerRc(); }
+	inline void setPlayerReaction() { _p1->setAttackReaction(); }
+	inline RECT getPlayerRC() { return _p1->getPlayerRC(); }
+	inline RECT getAttackRC() { return _p1->getAttackRC(); }
 
 
 };

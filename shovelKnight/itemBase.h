@@ -15,6 +15,13 @@ enum ITEM_FIRE
 	ITEM_FIRE_RIGHT,
 };
 
+enum ITEM_MOVE_TYPE
+{
+	ITEM_MOVE_GRAVITY,
+	ITEM_MOVE_STOP,
+	ITEM_MOVE_PETROL,
+};
+
 class itemBase
 {
 protected:
@@ -23,10 +30,14 @@ protected:
 	float _gravity;
 	bool _isFire;
 	ITEM_STATS _stats;
+	ITEM_MOVE_TYPE _moveType;
 	char* _imgName;
 	char* _aniName;
 	float _speed;
 	float _angle;
+
+	float _time;
+	bool _petrol;
 
 	RECT _rc;
 	image* _img;
@@ -48,7 +59,8 @@ public:
 	virtual void eatItem();
 
 	virtual void setImageName(char* img) { _imgName = img; }
-
+	virtual void setMoveType(ITEM_MOVE_TYPE moveType) { _moveType = moveType; }
+	
 	virtual void fire(ITEM_FIRE itemFire, FPOINT pt);
 };
 
