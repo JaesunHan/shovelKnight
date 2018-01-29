@@ -8,7 +8,7 @@ struct tagHPImage
 	image* hpFull[MAXHPIMAGE];		//2칸짜리 이미지
 	image* hpHalf[MAXHPIMAGE];		//한칸짜리 이미지
 	image* hpEmpty[MAXHPIMAGE];		//빈 칸 이미지
-	int hp;
+	int hp;	int maxHp;
 	float x, y; 
 };
 //마나 관련 구조체
@@ -58,7 +58,7 @@ class playerListMenu : public menuBase
 	//캐릭터 이름 을 저장할 변수
 	TCHAR _cName[128];
 	//체력 이미지
-	tagHPImage _hp;
+	tagHPImage _hp;	
 	//마나 이미지 및 수치
 	tagMana _mana;
 	//내 자금 이미지 및 수치
@@ -74,7 +74,7 @@ class playerListMenu : public menuBase
 	image* _halfHP;
 public:
 	HRESULT init();
-	HRESULT init(char name[128], int characterKind, int hp, int mana, int money, int suit, int weapon);
+	HRESULT init(char name[128], int characterKind, int hp, int maxHp, int mana, int money, int suit, int weapon);
 	void update();
 	void release();
 	void render(HDC hdc);

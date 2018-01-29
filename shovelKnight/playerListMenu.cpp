@@ -23,7 +23,7 @@ HRESULT playerListMenu::init()
 	return S_OK;
 }
 
-HRESULT playerListMenu::init(char name[128], int characterKind, int hp, int mana, int money, int suit, int weapon)
+HRESULT playerListMenu::init(char name[128], int characterKind, int hp, int maxHp, int mana, int money, int suit, int weapon)
 {
 	//백그라운드 이미지 초기화
 	_imgKeyString = "playerListMenu";
@@ -36,6 +36,7 @@ HRESULT playerListMenu::init(char name[128], int characterKind, int hp, int mana
 	wsprintf(_cName, "%s", name);
 	_characterKind = characterKind;
 	_hp.hp = hp;
+	_hp.maxHp = maxHp;
 	_mana.mana = mana;
 	_money.money = money;
 	
@@ -109,7 +110,7 @@ void playerListMenu::draw(HDC hdc)
 
 		//======================== Start hp 출력하기 ===================================================
 		//기본으로 빈거 4개 깔기
-		for (int i = 0; i < MAXHPIMAGE; ++i)
+		for (int i = 0; i < _hp.maxHp /2 ; ++i)
 		{
 			_emptyHP->render(hdc, _menuImg->getWidth() / 3 * 1 + 20 + 16 * i, _menuImg->getHeight() / 3 * 1 + 35);
 		}

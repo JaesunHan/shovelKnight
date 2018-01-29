@@ -75,13 +75,13 @@ void gameMenuScene::update()
 	{
 		--_pSlotIdx;
 		if (_pSlotIdx <= 0)	_pSlotIdx = 0;
-		DIALOGUEMANAGER->setScriptNScriptWindow("this is test Script "+_pSlotIdx, _testScript, 255, 255, 255);
+		//DIALOGUEMANAGER->setScriptNScriptWindow("this is test Script "+_pSlotIdx, _testScript, 255, 255, 255);
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 	{
 		++_pSlotIdx;
 		if (_pSlotIdx >= MAXPLAYERLIST - 1)	_pSlotIdx = MAXPLAYERLIST - 1;
-		DIALOGUEMANAGER->setScriptNScriptWindow("this is test Script 5", _testScript, 255, 255, 255);
+		//DIALOGUEMANAGER->setScriptNScriptWindow("this is test Script 5", _testScript, 255, 255, 255);
 	}
 
 	//타겟 박스가 현재 가리키는 리스트에 값이 존재하지 않으면 캐릭터 생성화면 객체를 업데이트
@@ -96,7 +96,7 @@ void gameMenuScene::update()
 		if (_plm[_pSlotIdx]->getHP() < 0)
 		{
 			//초기화하기
-			_plm[_pSlotIdx]->init(_vPList[_pSlotIdx].name, _vPList[_pSlotIdx].characterkind, _vPList[_pSlotIdx].hp, _vPList[_pSlotIdx].mana, _vPList[_pSlotIdx].money, _vPList[_pSlotIdx].suit, _vPList[_pSlotIdx].weapon);
+			_plm[_pSlotIdx]->init(_vPList[_pSlotIdx].name, _vPList[_pSlotIdx].characterkind, _vPList[_pSlotIdx].hp, _vPList[_pSlotIdx].maxHp, _vPList[_pSlotIdx].mana, _vPList[_pSlotIdx].money, _vPList[_pSlotIdx].suit, _vPList[_pSlotIdx].weapon);
 
 		}
 		else
@@ -115,15 +115,15 @@ void gameMenuScene::update()
 		{
 			//새로운 기본캐릭터를 생성하고 ini 파일에 저장하는 함수를 호출
 			createNewDefaultCharacter();
-			_plm[_pSlotIdx]->init(_vPList[_pSlotIdx].name, _vPList[_pSlotIdx].characterkind, _vPList[_pSlotIdx].hp, _vPList[_pSlotIdx].mana, _vPList[_pSlotIdx].money, _vPList[_pSlotIdx].suit, _vPList[_pSlotIdx].weapon);
+			_plm[_pSlotIdx]->init(_vPList[_pSlotIdx].name, _vPList[_pSlotIdx].characterkind, _vPList[_pSlotIdx].hp, _vPList[_pSlotIdx].maxHp, _vPList[_pSlotIdx].mana, _vPList[_pSlotIdx].money, _vPList[_pSlotIdx].suit, _vPList[_pSlotIdx].weapon);
 		}
 		else
 		{
-			_GPS->setPlayerInfo(_vPList[_pSlotIdx]);
 			SCENEMANAGER->changeScene(_GPS->getSceneName());
+			_GPS->setPlayerIdx(&_pSlotIdx);
 		}
 	}
-	DIALOGUEMANAGER->update();
+	//DIALOGUEMANAGER->update();
 }
 void gameMenuScene::release()
 {
@@ -151,7 +151,7 @@ void gameMenuScene::draw()
 		{
 			_plm[_pSlotIdx]->render(getMemDC());
 		}
-		DIALOGUEMANAGER->render(getMemDC(), 0, 0, 800, 96);
+		//DIALOGUEMANAGER->render(getMemDC(), 0, 0, 800, 96);
 	}
 	//플레이어리스트 넘머발 타겟 박스는 항상 마지막에 출력하기
 	for (int i = 0; i < MAXPLAYERLIST; ++i)
@@ -191,13 +191,7 @@ void gameMenuScene::loadPlayerListData()
 	{
 		makePlayerListData();
 	}
-	//playerNumber = 0, playerNumber = 1, .... 
-	//playerNumber 타이틀을 읽어와서 0 번이 저장되어있지 않으면
-	//파일에 내용이 아예 없는 거니까 이때 파일을 만들기
-	//if (INIDATA->loadDataInterger(fileName, "player1", "palyerNumber")==0)
-	//{
-	//	makePlayerListData();//파일 만드는 함수를 호출
-	//}
+
 	//파일에 있는 플레이어를 벡터에 담기
 	for (int i = 0; i < MAXPLAYERLIST; ++i)
 	{
@@ -209,6 +203,7 @@ void gameMenuScene::loadPlayerListData()
 		//p.name = INIDATA->loadDataString(fileName, subjectName, "Name");
 		p.characterkind = INIDATA->loadDataInterger(fileName, subjectName, "CharacterKind");
 		p.hp = INIDATA->loadDataInterger(fileName, subjectName, "HP");
+		p.maxHp = INIDATA->loadDataInterger(fileName, subjectName, "MaxHP");
 		p.money = INIDATA->loadDataInterger(fileName, subjectName, "Money");
 		p.mana = INIDATA->loadDataInterger(fileName, subjectName, "Mana");
 		p.suit = INIDATA->loadDataInterger(fileName, subjectName, "Suit");
@@ -227,6 +222,7 @@ void gameMenuScene::createNewDefaultCharacter()
 	wsprintf(p.name, "palyerNumber%d", _pSlotIdx);
 	p.characterkind = 0;
 	p.hp = 8;
+	p.maxHp = 8;
 	p.mana = 30;
 	p.money = 1000;
 	p.suit = 0;
@@ -247,28 +243,7 @@ void gameMenuScene::createNewDefaultCharacter()
 	addNsaveINTDataInINIFile(fileName, subjectName, "Money", _vPList[_pSlotIdx].money);
 	addNsaveINTDataInINIFile(fileName, subjectName, "Suit", _vPList[_pSlotIdx].suit);
 	addNsaveINTDataInINIFile(fileName, subjectName, "Weapon", _vPList[_pSlotIdx].weapon);
-
-
-	//INIDATA->addData(subjectName, "CharacterKind", _vPList[_pSlotIdx].characterkind);
-	//INIDATA->iniSave(fileName);
-	//INIDATA->addData(subjectName, "HP", _vPList[_pSlotIdx].hp);
-	//INIDATA->iniSave(fileName);
-	//INIDATA->addData(subjectName, "Mana", _vPList[_pSlotIdx].mana);
-	//INIDATA->iniSave(fileName);
-	//INIDATA->addData(subjectName, "Money", _vPList[_pSlotIdx].money);
-	//INIDATA->iniSave(fileName);
-	//INIDATA->addData(subjectName, "Suit", _vPList[_pSlotIdx].suit);
-	//INIDATA->iniSave(fileName);
-	//INIDATA->addData(subjectName, "Weapon", _vPList[_pSlotIdx].weapon);
-	//INIDATA->iniSave(fileName);
-	/*palyerNumber=0
-	Name=shovelknight0
-	CharacterKind=0
-	HP=5
-	Mana=30
-	Money=10000
-	Suit=0
-	Weapon=0*/
+	
 }
 void gameMenuScene::addNsaveINTDataInINIFile(char* fileName, char subjectName[256], char title[256], int data)
 {
