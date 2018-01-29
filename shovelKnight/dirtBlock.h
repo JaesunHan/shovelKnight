@@ -7,9 +7,8 @@ public:
 	dirtBlock();
 	~dirtBlock();
 
-	virtual HRESULT init()	= 0;
-	virtual void release()	= 0;
-	virtual void update()	= 0;
-	virtual void render()	= 0;
+	HRESULT init(float x,float y);
+	void update();
+	void render();
 };
 

@@ -22,10 +22,10 @@ HRESULT boss1::init(float x, float y)
 	_img = IMAGEMANAGER->addFrameImage("dragon", ".//image//monster//bubbleDragon.bmp", _x, _y, 1074, 356, 6, 4, true, RGB(255, 0, 255));
 
 	//이미지 렉트
-	_rc = RectMakeCenter(_x, _y, _img->getFrameWidth(), _img->getFrameHeight());
-	//충돌용 렉트
-	_headRc = RectMakeCenter(_x - DRAGONHEADRECTX, _y + DRAGONHEADRECTY, 40, 25);
-	_trunkRc = RectMakeCenter(_x + DRAGONTRUNKRECTX, _y + DRAGONTRUNKRECTY, 85, 60);
+	_ImageRc = RectMakeCenter(_x, _y, _img->getFrameWidth(), _img->getFrameHeight());
+	//충돌용 렉트	
+	_rc = RectMakeCenter(_x - DRAGONHEADRECTX, _y + DRAGONHEADRECTY, 40, 25);          //머리
+	_trunkRc = RectMakeCenter(_x + DRAGONTRUNKRECTX, _y + DRAGONTRUNKRECTY, 85, 60);   //몸통
 
 
 	_status = ENEMY_LEFT_IDLE;
@@ -70,14 +70,6 @@ HRESULT boss1::init(float x, float y)
 
 void boss1::update()
 {
-	//============================================================ 피격 테스트
-	//if (KEYMANAGER->isOnceKeyDown('P'))
-	//{
-	//	_isHit = true;
-	//}
-	//============================================================
-
-
 	if (_status != ENEMY_LEFT_HIT && _status != ENEMY_RIGHT_HIT)
 	{
 		_previousStatus = _status; //직전 에너미 상태 저장
@@ -140,8 +132,8 @@ void boss1::render()
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
 		//머리 렉트
-		Rectangle(getMemDC(), CAMERAMANAGER->getX(_headRc.left), CAMERAMANAGER->getY(_headRc.top),
-			CAMERAMANAGER->getX(_headRc.right), CAMERAMANAGER->getY(_headRc.bottom));
+		Rectangle(getMemDC(), CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_rc.top),
+			CAMERAMANAGER->getX(_rc.right), CAMERAMANAGER->getY(_rc.bottom));
 		//몸통 렉트
 		Rectangle(getMemDC(), CAMERAMANAGER->getX(_trunkRc.left), CAMERAMANAGER->getY(_trunkRc.top),
 			CAMERAMANAGER->getX(_trunkRc.right), CAMERAMANAGER->getY(_trunkRc.bottom));
@@ -150,6 +142,10 @@ void boss1::render()
 	
 }
 
+void boss1::draw()
+{
+	CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _ImageRc.left, _ImageRc.top);
+}
 
 void boss1::move()
 {
@@ -237,7 +233,7 @@ void boss1::move()
 
 
 	//렉트위치 update
-	_rc = RectMakeCenter(_x, _y, _width, _height);
-	_headRc = RectMakeCenter(_x - DRAGONHEADRECTX, _y + DRAGONHEADRECTY, 40, 25);
+	_ImageRc = RectMakeCenter(_x, _y, _width, _height);
+	_rc = RectMakeCenter(_x - DRAGONHEADRECTX, _y + DRAGONHEADRECTY, 40, 25);
 	_trunkRc = RectMakeCenter(_x + DRAGONTRUNKRECTX, _y + DRAGONTRUNKRECTY, 85, 60);
 }
