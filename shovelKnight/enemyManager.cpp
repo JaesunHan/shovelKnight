@@ -40,14 +40,6 @@ void enemyManager::release()
 void enemyManager::update()
 {
 	//============================================================================ 적 move start
-	//-------------------------------------------------------------- 미니언 beeto
-	for (_viEnemy = _vEnemy.begin(); _viEnemy != _vEnemy.end(); ++_viEnemy)
-	{
-
-		(*_viEnemy)->update();
-	
-	}
-
 	//데드 TEST
 	for (int i = 0; i < _vEnemy.size(); i++)
 	{
@@ -57,6 +49,15 @@ void enemyManager::update()
 			removeEnemy(i);
 		}
 	}
+
+	//-------------------------------------------------------------- 미니언 beeto
+	for (_viEnemy = _vEnemy.begin(); _viEnemy != _vEnemy.end(); ++_viEnemy)
+	{
+
+		(*_viEnemy)->update();
+	
+	}
+
 	//화면밖으로 사라지면 제거
 	for (int i = 0; i < _vEnemy.size(); i++)
 	{
