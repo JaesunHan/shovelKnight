@@ -9,12 +9,10 @@ bossBlackKnight::~bossBlackKnight()
 {
 }
 
-HRESULT bossBlackKnight::init(float x, float y)	 
+void bossBlackKnight::enemyInitSet()
 {
 	_enemyType = ENEMY_SKELETON;
 
-	_x = x;
-	_y = y;
 	_speed = 0.0f;
 
 	_img = IMAGEMANAGER->addFrameImage("darkKnight", ".//image//monster//darkKnight.bmp", _x, _y, 608, 516, 8, 12, true, RGB(255, 0, 255));
@@ -78,10 +76,31 @@ HRESULT bossBlackKnight::init(float x, float y)
 
 	_jump = new jump;
 	_jump->init();
+}
 
+
+HRESULT bossBlackKnight::init(float x, float y)
+{
+	_x = x;
+	_y = y;
+	_patternTypeNum = ENEMY_BASIC;
+	enemyInitSet();
 
 	return S_OK;
 }
+
+
+HRESULT bossBlackKnight::init(float x, float y, int patternType)
+{
+	_x = x;
+	_y = y;
+	_patternTypeNum = patternType;
+
+	enemyInitSet();
+
+	return S_OK;
+}
+
 
 void bossBlackKnight::update()					 
 {
@@ -96,4 +115,23 @@ void bossBlackKnight::move()
 void bossBlackKnight::draw()					 
 {
 
+}
+
+void bossBlackKnight::enemyPattern(int _patternTypeNum)
+{
+	switch (_patternTypeNum)
+	{
+		case ENEMY_BASIC:
+
+		break;
+		case ENEMY_PATROL:
+
+		break;
+		case ENEMY_LEFT_FOWARD:
+
+		break;
+		case ENEMY_RIGHT_FOWARD:
+
+		break;
+	}
 }

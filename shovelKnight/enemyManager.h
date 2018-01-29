@@ -30,8 +30,9 @@ public:
 	void release();
 	void update();
 	void render();
-	
-	void stageEnemySet(int stageNum);
+
+
+	void stageEnemySet(int stageNum); 	//해당 스테이지에 에너미 셋팅
 
 
 	//에너미 생성&소멸 설정자
@@ -40,6 +41,7 @@ public:
 	//========================================= Start 미니언 셋팅 ========================================
 
 	void setEnemy(ENEMYTYPE enemyType, float enemyX, float enemyY);
+	void setEnemy(ENEMYTYPE enemyType, float enemyX, float enemyY, int patternType);
 	void removeEnemy(int arrNum);
 
 	//========================================== End 미니언 셋팅 =========================================

@@ -24,10 +24,13 @@ public:
 	~boss1();
 
 	HRESULT init(float x, float y);
+	HRESULT init(float x, float y, int patternType);
 	void update();
 	void render();
 	void move();
 	void draw();
 
+	void enemyInitSet();
+	void enemyPattern(int _patternTypeNum);
 };
 

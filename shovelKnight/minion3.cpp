@@ -5,30 +5,24 @@
 minion3::minion3()
 {
 }
-
-
 minion3::~minion3()
 {
 }
 
-HRESULT minion3::init(float x, float y)
+void minion3::enemyInitSet()
 {
 	_enemyType = ELEMY_DRAKE;
-
-	_x = x;
-	_y = y;
 	_speed = 0.0f;
-
 	_img = IMAGEMANAGER->addFrameImage("drake", ".//image//monster//Divedrake.bmp", _x, _y, 111, 256, 3, 8, true, RGB(255, 0, 255));
 
 	_status = ENEMY_LEFT_MOVE;
 
 	//========================================================================================= 에니메이션
 
-	int rightMove[] = { 0, 1, 2};
+	int rightMove[] = { 0, 1, 2 };
 	KEYANIMANAGER->addArrayFrameAnimation("drakeRightMove", "drake", rightMove, 3, 4, true);
 
-	int leftMove[] = { 3, 4, 5};
+	int leftMove[] = { 3, 4, 5 };
 	KEYANIMANAGER->addArrayFrameAnimation("drakeLeftMove", "drake", leftMove, 3, 4, true);
 
 	int rightHit[] = { 12, 13, 14 };
@@ -60,7 +54,30 @@ HRESULT minion3::init(float x, float y)
 	_rc = RectMakeCenter(_x, _y, _width, _height);
 
 	_anim = KEYANIMANAGER->findAnimation("drakeLeftMove");
+}
 
+HRESULT minion3::init(float x, float y)
+{
+	_x = x;
+	_y = y;
+
+	_patternTypeNum = ENEMY_BASIC;
+
+	enemyInitSet();
+
+
+
+	return S_OK;
+}
+
+HRESULT minion3::init(float x, float y, int patternType)
+{
+	_x = x;
+	_y = y;
+
+	_patternTypeNum = patternType;
+
+	enemyInitSet();
 
 	return S_OK;
 }
@@ -75,36 +92,8 @@ void minion3::update()
 	//상태값에 따른 에니메이션 및 움직임
 	move();
 
-
-	//좌우 움직임 패턴: 방향전환
-	if (_status != ENEMY_LEFT_HIT && _status != ENEMY_RIGHT_HIT)
-	{
-		_directionCount++;
-		if (_directionCount % 50 == 0)
-		{
-			if (_status == ENEMY_LEFT_MOVE)
-			{
-				_status = ENEMY_LEFT_IDLE;
-			}
-			else if (_status == ENEMY_RIGHT_MOVE)
-			{
-				_status = ENEMY_RIGHT_IDLE;
-			}
-		}
-		if (_directionCount % 120 == 0)
-		{
-			if (_status == ENEMY_LEFT_IDLE)
-			{
-				_status = ENEMY_RIGHT_MOVE;
-			}
-			else if (_status == ENEMY_RIGHT_IDLE)
-			{
-				_status = ENEMY_LEFT_MOVE;
-			}
-
-			_directionCount = 1;
-		}
-	}
+	//에너미 패턴 설정
+	enemyPattern(_patternTypeNum);
 
 
 	//데미지 설정
@@ -350,3 +339,52 @@ void minion3::move()
 	_rc = RectMakeCenter(_x, _y, _width, _height);
 }
 
+
+void minion3::enemyPattern(int _patternTypeNum)
+{
+	switch (_patternTypeNum)
+	{
+		case ENEMY_PATROL:
+			if (_status != ENEMY_LEFT_HIT && _status != ENEMY_RIGHT_HIT)
+			{
+				_directionCount++;
+				if (_directionCount % 50 == 0)
+				{
+					if (_status == ENEMY_LEFT_MOVE)
+					{
+						_status = ENEMY_LEFT_IDLE;
+					}
+					else if (_status == ENEMY_RIGHT_MOVE)
+					{
+						_status = ENEMY_RIGHT_IDLE;
+					}
+				}
+				if (_directionCount % 100 == 0)
+				{
+					if (_status == ENEMY_LEFT_IDLE)
+					{
+						_status = ENEMY_RIGHT_MOVE;
+					}
+					else if (_status == ENEMY_RIGHT_IDLE)
+					{
+						_status = ENEMY_LEFT_MOVE;
+					}
+
+					_directionCount = 1;
+				}
+			}
+		break;
+		case ENEMY_LEFT_FOWARD:
+			if (_status != ENEMY_LEFT_HIT && _status != ENEMY_RIGHT_HIT)
+			{
+				_status == ENEMY_LEFT_MOVE;
+			}
+		break;
+		case ENEMY_RIGHT_FOWARD:
+			if (_status != ENEMY_LEFT_HIT && _status != ENEMY_RIGHT_HIT)
+			{
+				_status == ENEMY_RIGHT_MOVE;
+			}
+		break;
+	}
+}

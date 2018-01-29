@@ -18,7 +18,11 @@ public:
 	~minion1();
 
 	HRESULT init(float x, float y);
+	HRESULT init(float x, float y, int patternType);
 	void update();
 	void move();
+
+	void enemyInitSet();
+	void enemyPattern(int _patternTypeNum);
 };
 
