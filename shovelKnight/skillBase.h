@@ -64,5 +64,7 @@ public:
 	void setStartName(char* str) { _startName = str; }
 	void setLoopName(char* str) { _loopNameL = str; }
 	void setOutName(char* str) { _outName = str; }
+
+	void asd(float a) {};
 };
 
