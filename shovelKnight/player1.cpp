@@ -61,11 +61,16 @@ void player1::update()
 		attack();
 		CAMERAMANAGER->setSingleFocus(_x, _y, WINSIZEX);
 	}
-	if (_currentHP == 0)
+	if (_currentHP <= 0 && _isDead == false)
 	{
+		_frameX = 0;
 		_isDead = true;
 	}
 	_playerRC = RectMake(_x - HIT_BOX_WIDTH / 2, _y - HIT_BOX_HEIGHT, HIT_BOX_WIDTH, HIT_BOX_HEIGHT);
+	if (KEYMANAGER->isOnceKeyDown('R'))
+	{
+		if (_isDead == true) SCENEMANAGER->changeScene("GameTitleScene");
+	}
 }
 
 void player1::render() 
@@ -74,7 +79,7 @@ void player1::render()
 	{
 		_counter++;
 		_pause = true;
-		CAMERAMANAGER->frameRenderObject(getMemDC(), IMAGEMANAGER->findImage("Dead"), _x - 21, _y - 30, _frameX, _direction);
+		CAMERAMANAGER->frameRenderObject(getMemDC(), IMAGEMANAGER->findImage("Dead"), _x - 21, _y - 26, _frameX, _direction);
 		if (_counter > 30 && _frameX < 2)
 		{
 			_frameX++;
@@ -169,11 +174,12 @@ void player1::control2()
 		if (_state == HANG) _y += SPEED;
 		hangPixelDetectDown();
 	}
-	if (KEYMANAGER->isOnceKeyDown('R'))
+	if (KEYMANAGER->isOnceKeyDown('Y'))
 	{
 		_jumpPower = 3;
 		_state = INAIR;
 		_isDamaged = true;
+		_currentHP--;
 		_counter = 0;
 		//_isDead = true;
 	}

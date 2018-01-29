@@ -43,6 +43,7 @@ enum PLAYERACTION
 
 class stageManager;
 class gameCollision;
+class skillManager;
 
 class playerBase : public gameNode
 {
@@ -58,8 +59,8 @@ protected :
 	int _counter = 0;
 	int _jumpCounter = 0;
 	int _shineCounter = 0;						//빛나기 위한 빛나기만을 위한 카운터
-	int					_currentSkill;			//현재 장착된 스킬
-	int					_skillUnlockLv;			//스킬 해금 단계
+	int _invincibilityCounter = 0;
+	int	_currentSkill = 0;			//현재 장착된 스킬
 	int					_currentHP;				//현재 체력
 	int					_maxHP;					//최대 체력
 	int					_currentMP;				//현재 마나
@@ -84,9 +85,11 @@ protected :
 	bool				_skillUsed;				//스킬발동했는지
 	bool				_isDead;				//죽었냐?
 	bool _invincibility = false;
+	bool _fireBall = false;	//파이어볼 스킬
 
 	stageManager* _SM;
 	gameCollision* _GC;
+	skillManager* _skillM;
 
 public:
 	playerBase();
@@ -104,6 +107,7 @@ public:
 	bool hangPixelDetectUp();
 	void hangPixelDetectDown();
 	void frameCounter(float frameMax, float counterMax);
+	void invincibilityCount();
 
 
 	inline float getPlayerX() { return _x; }
@@ -118,10 +122,19 @@ public:
 	inline void setMoney(int increaseMoney) { _money += increaseMoney; }
 	inline char* getName() { return _characterName; }
 	inline void setName(char* name) { _characterName = name; }
-	inline int getSkillUnlockLv() { return _skillUnlockLv; }
-	inline void setSkillUnlockLv(int increaseLv) { _skillUnlockLv += increaseLv; }
+	inline void setSkillUnlockLv(int skillLv) 
+	{ 
+		int skillLevel = skillLv; 
+		switch (skillLevel)
+		{
+		case(1):
+			_fireBall = true;
+			break;
+		}
+	}
 	inline void setSMMemoryAddressLink(stageManager* sm) { _SM = sm; }
 	inline void setGameCollisinMemoryAddressLink(gameCollision* gc) { _GC = gc; }
+	inline void setSkillManagerMemoryAddressLink(skillManager* skillm) { _skillM = skillm; }
 	inline void setPause(bool pause) { _pause = pause; }
 	inline RECT getPlayerRC() { return _playerRC; }
 	inline RECT getAttackRC() { return _attackRC; }
@@ -150,10 +163,12 @@ public:
 	{ 
 		if (_invincibility == false)
 		{
-			_jumpPower = 2;
+			_jumpPower = 3;
+			_state = INAIR;
 			_counter = 0;
 			_currentHP--;
 			_isDamaged = true;
+			_invincibilityCounter = 0;
 			_invincibility = true;
 		}
 	}

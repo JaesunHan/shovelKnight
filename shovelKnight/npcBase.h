@@ -55,7 +55,7 @@ protected:
 
 
 	int _stock;				//몇번 구매했는지 확인하는 변수
-	
+	bool _buyYesorNo;		//상점 열었을때 살래말래?
 
 public:
 	npcBase();
@@ -94,7 +94,7 @@ public:
 	//충돌했나 셋함수
 	//void setIsCollision(bool isCollision) { _isCollisionNpc = isCollision; }
 
-	virtual void isCollision(bool collision);
+	virtual void isCollision(bool collision) = 0;
 
 
 	//===========================================ㅈㅅ합니다========================================
@@ -110,12 +110,15 @@ public:
 	//돈감소
 	int _minusMoney;
 	int getMinusMoney() { return _minusMoney; }
+	void setMinusMoney(int minusMoney) { _minusMoney = minusMoney; }
+
 
 	//체력상인용 체력겟셋
 	int _setMaxHp;
 	void setMaxHp(int setMaxHp) { _setMaxHp = setMaxHp; }
 	int getMaxHp() { return _setMaxHp; }
 
+	
 
 
 	//==================================== End 게터 세터 작성하기===================================

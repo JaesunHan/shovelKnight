@@ -148,11 +148,13 @@
     <ClInclude Include="button.h" />
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="CharacterSelectMenu.h" />
+    <ClInclude Include="checkPoint.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="createCharacterMenu.h" />
     <ClInclude Include="database.h" />
     <ClInclude Include="dialogueManager.h" />
+    <ClInclude Include="dirtPile.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
     <ClInclude Include="enemyBase.h" />
@@ -219,6 +221,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="timeManager.h" />
     <ClInclude Include="timer.h" />
+    <ClInclude Include="tresureBox.h" />
     <ClInclude Include="TTUtils.h" />
     <ClInclude Include="txtData.h" />
     <ClInclude Include="utils.h" />
@@ -232,10 +235,12 @@
     <ClCompile Include="button.cpp" />
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="CharacterSelectMenu.cpp" />
+    <ClCompile Include="checkPoint.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="createCharacterMenu.cpp" />
     <ClCompile Include="database.cpp" />
     <ClCompile Include="dialogueManager.cpp" />
+    <ClCompile Include="dirtPile.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
     <ClCompile Include="enemyBase.cpp" />
@@ -304,6 +309,7 @@
     </ClCompile>
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />
+    <ClCompile Include="tresureBox.cpp" />
     <ClCompile Include="TTUtils.cpp" />
     <ClCompile Include="txtData.cpp" />
     <ClCompile Include="utils.cpp" />
