@@ -55,7 +55,7 @@ protected:
 
 
 	int _stock;				//몇번 구매했는지 확인하는 변수
-	
+	bool _buyYesorNo;		//상점 열었을때 살래말래?
 
 public:
 	npcBase();
@@ -110,6 +110,8 @@ public:
 	//돈감소
 	int _minusMoney;
 	int getMinusMoney() { return _minusMoney; }
+	void setMinusMone(int minusMoney) { _minusMoney = minusMoney; }
+
 
 	//체력상인용 체력겟셋
 	int _setMaxHp;

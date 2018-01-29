@@ -44,6 +44,7 @@ public:
 	virtual void render();
 	virtual void draw();
 	virtual void update();
+	void bardKnightImageControl();
 
 	virtual void isCollision(bool collision);
 	void soundChange();
