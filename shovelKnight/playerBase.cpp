@@ -461,6 +461,14 @@ void playerBase::hangPixelDetect()
 		_state = HANG;
 		_action = HANGING;
 	}
+	else 
+	{
+		if (_action == HANGING)
+		{
+			_state = ONLAND;
+			_action = IDLE;
+		}
+	}
 }
 
 bool playerBase::hangPixelDetectUp()
@@ -478,15 +486,37 @@ bool playerBase::hangPixelDetectUp()
 
 void playerBase::hangPixelDetectDown()
 {
-	COLORREF color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _x + 6, _y);
-	int R = GetRValue(color);
-	int G = GetGValue(color);
-	int B = GetBValue(color);
-	if (R == 0 && G == 255 && B == 0)
+	for (int i = 0; i < 3; ++i)
 	{
-		_state = ONLAND;
-		_action = IDLE;
+		COLORREF color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right, _playerRC.bottom + i);
+		int R = GetRValue(color);
+		int G = GetGValue(color);
+		int B = GetBValue(color);
+		if (R == 0 && G == 255 && B == 0)
+		{
+			_y = _playerRC.bottom + i;
+			_jumpPower = 0;
+			_jumpCounter = 0;
+			_jumpKeyDown = false;
+			_downwardThrust = false;
+			_state = ONLAND;
+			break;
+		}
 	}
+	//COLORREF color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _x + 6, _y + 3);
+	//int R = GetRValue(color);
+	//int G = GetGValue(color);
+	//int B = GetBValue(color);
+	//if (R == 0 && G == 255 && B == 0)
+	//{
+	//	_y += 3;
+	//	_jumpPower = 0;
+	//	_jumpCounter = 0;
+	//	_jumpKeyDown = false;
+	//	_downwardThrust = false;
+	//	_state = ONLAND;
+	//	_action = IDLE;
+	//}
 }
 
 void playerBase::invincibilityCount()
