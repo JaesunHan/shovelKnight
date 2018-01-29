@@ -45,6 +45,12 @@ void npcBase::release()
 void npcBase::update() 
 {
 	_rc = RectMakeCenter(_x, _y, _width, _height);
+
+
+	//for (_viDialog = _vDialog.begin(); _viDialog != _vDialog.end(); ++_viDialog)
+	//{
+		
+	//}
 }
 void npcBase::render() 
 {

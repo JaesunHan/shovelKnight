@@ -2,6 +2,9 @@
 #include "enemyBase.h"
 
 #define BLORBSPEED 1
+#define DELAYTIME 70
+#define HITCOUNT  10
+#define DEADCOUNT 10
 
 class minion2 : public enemyBase
 {

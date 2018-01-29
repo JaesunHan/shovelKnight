@@ -239,6 +239,7 @@ void gameMenuScene::createNewDefaultCharacter()
 	INIDATA->iniSave(fileName);
 	addNsaveINTDataInINIFile(fileName, subjectName, "CharacterKind", _vPList[_pSlotIdx].characterkind);
 	addNsaveINTDataInINIFile(fileName, subjectName, "HP", _vPList[_pSlotIdx].hp);
+	addNsaveINTDataInINIFile(fileName, subjectName, "MaxHP", _vPList[_pSlotIdx].maxHp);
 	addNsaveINTDataInINIFile(fileName, subjectName, "Mana", _vPList[_pSlotIdx].mana);
 	addNsaveINTDataInINIFile(fileName, subjectName, "Money", _vPList[_pSlotIdx].money);
 	addNsaveINTDataInINIFile(fileName, subjectName, "Suit", _vPList[_pSlotIdx].suit);

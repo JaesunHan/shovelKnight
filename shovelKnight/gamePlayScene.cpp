@@ -59,7 +59,7 @@ void gamePlayScene::release()
 	_player->release();
 	_gameCollision->release();
 	_stage->release();
-	//_gamePlayUI();
+	_gamePlayUI->release();
 }
 
 void gamePlayScene::update()
@@ -73,6 +73,7 @@ void gamePlayScene::update()
 	_Store->update();
 	_skill->update();
 	_gameCollision->update();
+	_gamePlayUI->update();
 }
 
 void gamePlayScene::render()
@@ -87,6 +88,7 @@ void gamePlayScene::render()
 	_item->render();
 	_skill->render();
 	_gameCollision->render();
+	_gamePlayUI->render(getMemDC());
 }
 
 void gamePlayScene::renderTestGround()

@@ -69,6 +69,9 @@ HRESULT skeleton::init(float x, float y)
 	_isCountStop = false;
 	_playerFind = false;
 	_isAttack = false;
+	_isHitDelayTime = false;
+	_delayCount = 1;
+
 
 	_rc = RectMakeCenter(_x, _y, _width, _height);
 	_anim = KEYANIMANAGER->findAnimation("skeletonLeftIdle");
@@ -84,7 +87,6 @@ HRESULT skeleton::init(float x, float y)
 
 void skeleton::update()
 {
-
 	if (_status != ENEMY_LEFT_HIT && _status != ENEMY_RIGHT_HIT)
 	{
 		_previousStatus = _status; //직전 에너미 상태 저장
@@ -191,10 +193,10 @@ void skeleton::update()
 
 
 	//데미지 설정
-	if (_isHit)
+	if (_isHit && !_isHitDelayTime)
 	{
 		_enemyHp--;
-		_isHit = false;
+		_isHitDelayTime = true;
 
 		if (_direction)
 		{
@@ -205,6 +207,18 @@ void skeleton::update()
 			_status = ENEMY_LEFT_HIT;
 		}
 	}
+
+	if (_isHitDelayTime)
+	{
+		_delayCount++;
+
+		if (_delayCount % DELAYTIME == 0)
+		{
+			_isHitDelayTime = false;
+			_isHit = false;
+		}
+	}
+
 
 
 	//hp=0일경우 상태 변경
@@ -239,8 +253,19 @@ void skeleton::update()
 
 void skeleton::draw()
 {
-	CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left - 19, _rc.top - 9);
+	if (_direction)
+	{
+		CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left + 19, _rc.top - 9);
+	}
+	else
+	{
+		CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left - 19, _rc.top - 9);
+	}
+
+	TTTextOut(CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_y - 30), "HP", _enemyHp);
+
 }
+	
 
 void skeleton::move()
 {
@@ -313,7 +338,6 @@ void skeleton::move()
 
 		break;
 		case ENEMY_RIGHT_HIT:
-
 			_anim = KEYANIMANAGER->findAnimation("skeletonRightHit");
 			if (!_anim->isPlay())
 			{
@@ -336,7 +360,6 @@ void skeleton::move()
 
 		break;
 		case ENEMY_LEFT_HIT:
-
 			_anim = KEYANIMANAGER->findAnimation("skeletonLeftHit");
 			if (!_anim->isPlay())
 			{
@@ -382,7 +405,7 @@ void skeleton::move()
 			if (_isDead && _jump->getIsJumping() == false)
 			{
 				_vanishTime++;
-				if (_vanishTime % 20 == 0)
+				if (_vanishTime % DEADCOUNT == 0)
 				{
 					_isDeadVanish = true;
 					_vanishTime = 1;
@@ -414,7 +437,7 @@ void skeleton::move()
 			if (_isDead && _jump->getIsJumping() == false)
 			{
 				_vanishTime++;
-				if (_vanishTime % 20 == 0)
+				if (_vanishTime % DEADCOUNT == 0)
 				{
 					_isDeadVanish = true;
 					_vanishTime = 1;
