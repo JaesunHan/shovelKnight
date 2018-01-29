@@ -49,6 +49,9 @@ protected:
 	ENEMYSTATUS _status;			//에너미 상태
 	RECT _attackRect;
 
+	RECT _ImageRc;                   //보스1이미지렉트
+	RECT _trunkRc;                   //보스1충돌렉트: 몸통
+
 	char* _imgFileName;				//이미지 파일 이름(경로 포함)
 	float _x, _y;					//적의 중점좌표
 	float _gravity;					//적용할 중력
@@ -124,6 +127,9 @@ public:
 	//데미지 설정자
 	int getEnemyHp() { return _enemyHp; }
 	void setEnemyDamage() { _isHit = true; }
+
+	//충돌렉트 게터
+	RECT getBoss1TrunkRect() { return _trunkRc; }  //몸통렉트
 
 	//==================================== End 게터 세터 작성하기===================================
 
