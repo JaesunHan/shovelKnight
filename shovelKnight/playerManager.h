@@ -32,7 +32,6 @@ public:
 	inline void setMaxMP(int increaseMP) { _p1->setPlayerMaxMP(increaseMP); }
 	inline int	getMoney() { return _p1->getMoney(); }
 	inline void setMoney(int increaseMoney) { _p1->setMoney(increaseMoney); }
-	inline int getSkillUnlockLv() { return _p1->getSkillUnlockLv(); }
 	inline void setSkillUnlockLv(int skillLv) { _p1->setSkillUnlockLv(skillLv); }
 	inline void setStageManagerMemoryAddressLink(stageManager* sm) { _SM = sm; }
 	inline void setGameCollisinMemoryAddressLink(gameCollision* gc) { _GC = gc; }
