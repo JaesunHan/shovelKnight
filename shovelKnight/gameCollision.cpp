@@ -124,7 +124,7 @@ void gameCollision::PlayerMeetNPC()
 
 
 
-		_store->getVNpc()[i]->setSkillUnlockLv(_player->getSkillUnlockLv());
+		//_store->getVNpc()[i]->setSkillUnlockLv(_player->getSkillUnlockLv());
 		_store->getVNpc()[i]->setMoney(_player->getMoney());
 		_player->setMoney(_store->getVNpc()[i]->getMinusMoney());
 		_player->setSkillUnlockLv(_store->getVNpc()[i]->getSkillUnlockLv());

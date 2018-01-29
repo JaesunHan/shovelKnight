@@ -71,6 +71,6 @@ void npcBase::draw()
 //
 //}
 
-void npcBase::isCollision(bool collision)
-{
-}
+//void npcBase::isCollision(bool collision)
+//{
+//}

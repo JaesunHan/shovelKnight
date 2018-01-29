@@ -94,7 +94,7 @@ public:
 	//충돌했나 셋함수
 	//void setIsCollision(bool isCollision) { _isCollisionNpc = isCollision; }
 
-	virtual void isCollision(bool collision);
+	virtual void isCollision(bool collision) = 0;
 
 
 	//===========================================ㅈㅅ합니다========================================
