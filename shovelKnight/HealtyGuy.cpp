@@ -158,5 +158,9 @@ void HealtyGuy::isCollision(bool collision)
 			//_isCollisionNpc == false;
 
 		}
+		else
+		{
+			_textOut = false;
+		}
 	}
 }
