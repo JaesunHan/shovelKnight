@@ -27,10 +27,11 @@ public:
 	//================== Start 씬에서 UI 로 변경된 정보를 보낼 때 세터를 호출한다 ================
 	void setPlayerIdx(int* idx) { _playerIdx = *idx; }
 	void setPlayerInfo(int* idx);
-	//void setGold(int gold) { _gold = gold; }
-	//void setItem(int item) { _item = item; }
-	//void setLife(int life) { _life = life; }
-	//void setBoss(int boss) { _boss = boss; }
+	void setGold(int gold) { _gold = gold; }
+	void setMana(int mana) { _mana = mana; }
+	void setLife(int life) { _life = life; }
+	void setMaxLife(int maxlife) { _maxLife = maxlife; }
+	void setBoss(int boss) { _boss = boss; }
 	//================== End 씬에서 UI 로 변경된 정보를 보낼 때 세터를 호출한다 ==================
 
 	gamePlayUI();
