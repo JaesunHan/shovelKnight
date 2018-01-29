@@ -34,6 +34,7 @@ void skill_enemyDeadFx::update()
 	case SKILL_STATS_OUT:
 		break;
 	}
+	reRect();
 }
 
 void skill_enemyDeadFx::fire(SKILL_FIRE charType, float x, float y)

@@ -28,14 +28,26 @@ void item_moneyBunch::release()
 
 void item_moneyBunch::update()
 {
+	_time += TIMEMANAGER->getElapsedTime();
+
+	while (_time > 1.8f)
+	{
+		_time -= 1.8f;
+		_petrol = !_petrol;
+
+	}
+
+	_ani->getNowPlayIndex();
+
 	if (_petrol)
 	{
-		_add.y += 0.1f;
+		_add.y += _gravity;
 	}
 	else
 	{
-		_add.y -= 0.1f;
+		_add.y -= _gravity;
 	}
 
 	_pt.y += _add.y;
+	reRect();
 }

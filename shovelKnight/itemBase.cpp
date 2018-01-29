@@ -47,7 +47,7 @@ void itemBase::update()
 
 void itemBase::render()
 {
-	_img->aniRender(BACKBUFFER, _rc.left, _rc.top, _ani);
+	CAMERAMANAGER->aniRenderObject(BACKBUFFER, _img, _ani, _rc.left, _rc.top);
 }
 
 void itemBase::reRect()
@@ -62,6 +62,33 @@ void itemBase::eatItem()
 
 void itemBase::fire(ITEM_FIRE itemFire, FPOINT pt)
 {
+	_pt = pt;
+
+	_img = IMAGEMANAGER->findImage(_imgName);
+	_imgWidth = _img->getFrameWidth();
+	_imgHeight = _img->getFrameHeight();
+
+	_pt = pt;
+	reRect();
+
+
+	int a = 0;
+	char* str = _imgName;
+	char* str2 = new char[strlen(str) + 1 + 4];
+
+	sprintf(str2, "%s%d", _imgName, a);
+
+	while (KEYANIMANAGER->findAnimation(str2) != NULL)
+	{
+		++a;
+		ZeroMemory(str2, sizeof(str2));
+		sprintf(str2, "%s%d", _imgName, a);
+	}
+
+	_ani = KEYANIMANAGER->addDefaultFrameAnimation(str2, _imgName, 5, true, true);
+	KEYANIMANAGER->start(str2);
+
+
 	switch (_moveType)
 	{
 	case ITEM_MOVE_GRAVITY:
@@ -93,44 +120,28 @@ void itemBase::fire(ITEM_FIRE itemFire, FPOINT pt)
 			}
 			_gravity = 0.3f;
 			_stats = ITEM_STATS_GRAVITY;
+			_add.x = +cosf(_angle) * _speed;
+			_add.y = -sinf(_angle) * _speed;
 		}
 		break;
 	case ITEM_MOVE_STOP:
+		_add.x = +cosf(_angle) * _speed;
+		_add.y = -sinf(_angle) * _speed;
 		break;
 	case ITEM_MOVE_PETROL:
-		_time = 0;
-		_petrol = false;
+		_time = 0.0f;
+		_petrol = true;
+		_gravity = 0.009f;
+		_add.x = 0;
+		_add.y = -0.5f;
 		break;
 	}
+
 	
 	//1.7ch
 	
 
-	_pt = pt;
-
-	_img = IMAGEMANAGER->findImage(_imgName);
-	_imgWidth =	_img->getFrameWidth();
-	_imgHeight =_img->getFrameHeight();
-
-	_pt = pt;
-	_add.x = +cosf(_angle) * _speed;
-	_add.y = -sinf(_angle) * _speed;
-
-
-	int a = 0;
-	char* str = _imgName;
-	char* str2 = new char[strlen(str) + 1 + 4];
-
-	sprintf(str2, "%s%d", _imgName, a);
-
-	while (KEYANIMANAGER->findAnimation(str2) != NULL)
-	{
-		++a;
-		ZeroMemory(str2, sizeof(str2));
-		sprintf(str2, "%s%d", _imgName, a);
-	}
-
-	_ani = KEYANIMANAGER->addDefaultFrameAnimation(str2, _imgName, 5, true, true);
+	
 }
 
 

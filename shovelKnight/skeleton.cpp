@@ -70,6 +70,7 @@ HRESULT skeleton::init(float x, float y)
 	_isHit = false;
 	_isCountStop = false;
 	_playerFind = false;
+	_isAttack = false;
 
 	_anim = KEYANIMANAGER->findAnimation("skeletonLeftIdle");
 
@@ -86,10 +87,10 @@ void skeleton::update()
 {
 
 	//============================================================ 피격 테스트
-	if (KEYMANAGER->isOnceKeyDown('P'))
-	{
-		_isHit = true;
-	}
+	//if (KEYMANAGER->isOnceKeyDown('P'))
+	//{
+	//	_isHit = true;
+	//}
 	//============================================================
 
 
@@ -141,57 +142,61 @@ void skeleton::update()
 	//플레이어가 일정거리 안으로 들어오면
 	if (isPlayerFind(_x, 100)) _playerFind = true;
 
-	//공격 움직임 패턴
-	if (_playerFind) //플레이어를 발견하면
-	{
-		if (!_isCountStop) _directionCount++;
 
-		if (_direction)
+	//공격 움직임 패턴
+	if (_status != ENEMY_LEFT_HIT && _status != ENEMY_RIGHT_HIT)
+	{
+		if (_playerFind) //플레이어를 발견하면
 		{
-			switch (_directionCount)
+			if (!_isCountStop) _directionCount++;
+
+			if (_direction)
 			{
+				switch (_directionCount)
+				{
 				case 50:
 					_status = ENEMY_RIGHT_MOVE;
 					_isCountStop = true;
-				break;
+					_isAttack = false;
+					break;
 				case 100:
 					_status = ENEMY_RIGHT_BACK_MOVE;
 					_directionCount = 1;
-				break;
-			}
+					break;
+				}
 
-			//플레이어와의 거리가 가까울 경우 공격
-			if (isPlayerFind(_x, 20))
+				//플레이어와의 거리가 가까울 경우 공격
+				if (isPlayerFind(_x, 30) && !_isAttack)
+				{
+					_status = ENEMY_RIGHT_ATTACK;
+					_isCountStop = false;
+					_isAttack = true;
+				}
+			}
+			else
 			{
-				_status = ENEMY_RIGHT_ATTACK;
-				_isCountStop = false;
+				switch (_directionCount)
+				{
+				case 50:
+					_status = ENEMY_LEFT_MOVE;
+					_isCountStop = true;
+					_isAttack = false;
+					break;
+				case 100:
+					_status = ENEMY_LEFT_BACK_MOVE;
+					_directionCount = 1;
+					break;
+				}
+
+				//플레이어와의 거리가 가까울 경우 공격
+				if (isPlayerFind(_x, 30) && !_isAttack)
+				{
+					_status = ENEMY_LEFT_ATTACK;
+					_isCountStop = false;
+					_isAttack = true;
+				}
 			}
-
-
 		}
-		else
-		{
-			switch (_directionCount)
-			{
-			case 50:
-				_status = ENEMY_RIGHT_MOVE;
-				_isCountStop = true;
-				break;
-			case 100:
-				_status = ENEMY_RIGHT_BACK_MOVE;
-				_directionCount = 1;
-				break;
-			}
-
-			//플레이어와의 거리가 가까울 경우 공격
-			if (isPlayerFind(_x, 20))
-			{
-				_status = ENEMY_RIGHT_ATTACK;
-				_isCountStop = false;
-			}
-
-		}
-
 	}
 
 
@@ -324,7 +329,7 @@ void skeleton::move()
 			//움직임: 뒤로 점핑하면서 죽기
 			if (_jump->getIsJumping())
 			{
-				_speed = SKELETONSPEED * 5;
+				_speed = SKELETONSPEED * 3;
 				_speed -= 0.4;
 				_x -= _speed;
 				_jump->update();
@@ -333,8 +338,6 @@ void skeleton::move()
 			{
 				_status = _previousStatus;
 			}
-
-
 
 		break;
 		case ENEMY_LEFT_HIT:
@@ -349,7 +352,7 @@ void skeleton::move()
 			//움직임: 뒤로 점핑하면서 죽기
 			if (_jump->getIsJumping())
 			{
-				_speed = SKELETONSPEED * 5;
+				_speed = SKELETONSPEED * 3;
 				_speed -= 0.4;
 				_x += _speed;
 				_jump->update();
@@ -358,7 +361,6 @@ void skeleton::move()
 			{
 				_status = _previousStatus;
 			}
-
 
 
 		break;
@@ -377,7 +379,7 @@ void skeleton::move()
 			//움직임: 뒤로 점핑하면서 죽기
 			if (_isDead && _jump->getIsJumping() == true)
 			{
-				_speed = SKELETONSPEED * 5;
+				_speed = SKELETONSPEED * 3;
 				_x += _speed;
 				_jump->update();
 			}
@@ -408,7 +410,7 @@ void skeleton::move()
 			//움직임: 뒤로 점핑하면서 죽기
 			if (_isDead && _jump->getIsJumping() == true)
 			{
-				_speed = SKELETONSPEED * 5;
+				_speed = SKELETONSPEED * 3;
 				_x -= _speed;
 				_jump->update();
 			}

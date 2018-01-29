@@ -75,13 +75,13 @@ void gameMenuScene::update()
 	{
 		--_pSlotIdx;
 		if (_pSlotIdx <= 0)	_pSlotIdx = 0;
-		//DIALOGUEMANAGER->setScriptNScriptWindow("this is test Script ", _testScript, 255, 255, 255);
+		DIALOGUEMANAGER->setScriptNScriptWindow("this is test Script "+_pSlotIdx, _testScript, 255, 255, 255);
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 	{
 		++_pSlotIdx;
 		if (_pSlotIdx >= MAXPLAYERLIST - 1)	_pSlotIdx = MAXPLAYERLIST - 1;
-		//DIALOGUEMANAGER->setScriptNScriptWindow("this is test Script ", _testScript, 255, 255, 255);
+		DIALOGUEMANAGER->setScriptNScriptWindow("this is test Script 5", _testScript, 255, 255, 255);
 	}
 
 	//타겟 박스가 현재 가리키는 리스트에 값이 존재하지 않으면 캐릭터 생성화면 객체를 업데이트
@@ -119,6 +119,7 @@ void gameMenuScene::update()
 		}
 		else
 		{
+			_GPS->setPlayerInfo(_vPList[_pSlotIdx]);
 			SCENEMANAGER->changeScene(_GPS->getSceneName());
 		}
 	}

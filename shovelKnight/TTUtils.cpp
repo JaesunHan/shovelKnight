@@ -286,8 +286,8 @@ namespace Æ®À©Å×ÀÏÀö
 
 			char* str2 = new char[str.size() + 3 + buffer + 1];
 			sprintf(str2, "%s : %.2f", str.c_str(), num);
-			if (!backGround) SetBkMode((imageManager::getSingleton()->findImage("backbuffer")->getMemDC()), TRANSPARENT);
-			TextOut((imageManager::getSingleton()->findImage("backbuffer")->getMemDC()), x, y, str2, strlen(str2));
+			if (!backGround) SetBkMode((imageManager::getSingleton()->findImage("backBuffer")->getMemDC()), TRANSPARENT);
+			TextOut((imageManager::getSingleton()->findImage("backBuffer")->getMemDC()), x, y, str2, strlen(str2));
 		}
 		else
 		{

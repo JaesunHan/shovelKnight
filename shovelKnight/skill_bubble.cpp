@@ -46,6 +46,7 @@ void skill_Bubble::update()
 	case SKILL_STATS_OUT:
 		break;
 	}
+	reRect();
 }
 
 void skill_Bubble::fire(SKILL_FIRE charType, float x, float y)

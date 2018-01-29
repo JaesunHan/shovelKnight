@@ -53,6 +53,7 @@ void skill_fireBall::update()
 	case SKILL_STATS_OUT:
 		break;
 	}
+	reRect();
 }
 
 void skill_fireBall::fire(SKILL_FIRE charType, float x, float y)

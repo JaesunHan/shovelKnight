@@ -75,6 +75,8 @@ void gamePlayScene::update()
 
 void gamePlayScene::render()
 {
+	renderTestGround();
+
 	_stage->render();
 	_Store->render();
 	_gameObject->render();
@@ -83,4 +85,18 @@ void gamePlayScene::render()
 	_item->render();
 	_skill->render();
 	_gameCollision->render();
+}
+
+void gamePlayScene::renderTestGround()
+{
+	RECT rc = { 0, 0, WINSIZEX, WINSIZEY };
+	HBRUSH hBrush = CreateSolidBrush(RGB(70, 70, 70));
+	HBRUSH oldBrush = (HBRUSH)SelectObject(BACKBUFFER, hBrush);
+	HPEN hPen = CreatePen(1, 2, RGB(70, 70, 70));
+	HPEN oldPen = (HPEN)SelectObject(BACKBUFFER, hPen);
+	RectangleMakeRect(BACKBUFFER, rc);
+	SelectObject(BACKBUFFER, oldBrush);
+	DeleteObject(hBrush);
+	SelectObject(BACKBUFFER, oldPen);
+	DeleteObject(hPen);
 }

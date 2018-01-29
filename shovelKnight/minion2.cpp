@@ -149,7 +149,6 @@ void minion2::update()
 	}
 
 
-
 	//hp=0일경우 상태 변경
 	if (_enemyHp <= 0)
 	{
