@@ -3,6 +3,9 @@
 
 class skill_Bubble : public skillBase
 {
+private:
+	float _startX = 0;
+
 public:
 	skill_Bubble();
 	~skill_Bubble();

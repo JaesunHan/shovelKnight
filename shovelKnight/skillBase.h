@@ -69,6 +69,12 @@ public:
 	void setLoopName(char* str) { _loopNameL = str; }
 	void setOutName(char* str) { _outName = str; }
 
+	virtual void goOut() {
+		_ani = KEYANIMANAGER->findAnimation(_outName);
+		_stats = SKILL_STATS_OUT;
+		_ani->start();
+	}
+
 	void asd(float a) {};
 };
 

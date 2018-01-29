@@ -17,6 +17,9 @@ HRESULT gameCollision::init()
 	_countDragonEffect = 0;
 	_dragonTime = 0;
 
+	_countDragonAttackEffect;
+	_dragonAttackTime;
+
 	return S_OK;
 }
 
@@ -27,7 +30,7 @@ void gameCollision::release()
 void gameCollision::update()
 {
 	enemyDead();
-	if(KEYMANAGER->isOnceKeyDown(0x31) || _playerMeetNPC) PlayerMeetNPC();
+	if (KEYMANAGER->isOnceKeyDown(0x31) || _playerMeetNPC) PlayerMeetNPC();
 	PlayerAndEnemy();
 	
 	//collisionPlayerMapRight();
@@ -46,10 +49,6 @@ void gameCollision::update()
 void gameCollision::render()
 {
 
-	RECT rc = _player->getPlayerRC();
-
-
-	if (tet) TTTextOut(200, 200, "충돌했드아", 0);
 }
 
 void gameCollision::enemyDead()
@@ -100,7 +99,7 @@ void gameCollision::enemyDead()
 				{
 					_dragonTime -= 0.2f;
 					++_countDragonEffect;
-					
+
 				}
 
 				if (_countDragonEffect > 0)
@@ -114,7 +113,20 @@ void gameCollision::enemyDead()
 			}
 			if (_enemy->getVEnemy()[i]->getStatus() == ENEMY_LEFT_ATTACK)
 			{
-				_skill->Fire(SKILL_FIRE_DRAGON, SKILL_BUBBLE, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
+				_dragonAttackTime += TIMEMANAGER->getElapsedTime();
+
+				if (_dragonAttackTime > 0.25f && _countDragonAttackEffect != 0)
+				{
+					if(_countDragonAttackEffect == 2) _skill->Fire(SKILL_FIRE_DRAGON, SKILL_BUBBLE, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY()+20);
+					else _skill->Fire(SKILL_FIRE_DRAGON, SKILL_BUBBLE, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
+					_countDragonAttackEffect--;
+					_dragonAttackTime -= 0.25;
+				}
+			}
+			else
+			{
+				_countDragonAttackEffect = 3;
+				_dragonAttackTime = 0;
 			}
 			break;
 		case ENEMY_BLACKKNIGHT:
@@ -142,7 +154,6 @@ void gameCollision::PlayerMeetNPC()
 		_store->getVNpc()[i]->setMoney(_player->getMoney());
 		_player->setMoney(_store->getVNpc()[i]->getMinusMoney());
 		_store->getVNpc()[i]->setMinusMoney(0);
-		//_store->getVNpc()[i]->
 
 		_player->setMaxHP(_store->getVNpc()[i]->getMaxHp());
 		_store->getVNpc()[i]->setMaxHp(0);

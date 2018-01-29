@@ -22,7 +22,8 @@ private:
 	int _countDragonEffect;
 	float _dragonTime;
 
-	bool tet;
+	int _countDragonAttackEffect;
+	float _dragonAttackTime;
 
 public:
 	gameCollision();
