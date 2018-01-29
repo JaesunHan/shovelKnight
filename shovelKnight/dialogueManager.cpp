@@ -83,3 +83,7 @@ time_t dialogueManager::getTime()
 
 	return timer;
 }
+void dialogueManager::setScriptWindow(image* scriptWindow)
+{
+	_scriptwindow = scriptWindow;
+}

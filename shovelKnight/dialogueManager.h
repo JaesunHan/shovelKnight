@@ -31,6 +31,7 @@ public:
 
 	void setScriptNScriptWindow(string script, image* scriptWindow, int r, int g, int b);
 	void setScript(string script, int r, int g, int b);
+	void setScriptWindow(image* scriptWindow);
 	//글자를 출력하는 시간 간격 지정하기
 	inline void setDialogueTime(float dt) { _dialogueTime = dt; }
 
