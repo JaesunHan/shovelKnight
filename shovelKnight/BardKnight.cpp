@@ -54,7 +54,7 @@ HRESULT BardKnight::init()
 	for (int i = 0; i < 26; ++i)
 	{
 		arrIDLE1[i] = i;
-	}
+	}										
 	KEYANIMANAGER->addArrayFrameAnimation("바드나이트아이들", "BardKnightIDLE", arrIDLE1, 26, 6, true);
 
 
@@ -228,13 +228,7 @@ void BardKnight::draw()
 
 
 
-
-
 void BardKnight::update()
 {
 	npcBase::update();
-
 }
-
-
-

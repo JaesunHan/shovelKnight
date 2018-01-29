@@ -65,7 +65,7 @@ HRESULT MagicGirl::init()
 	{
 		arrBow[i] = i;
 	}
-	KEYANIMANAGER->addArrayFrameAnimation("매직걸인사", "magicGirlBow", arrBow, 6, 3, true);
+	KEYANIMANAGER->addArrayFrameAnimation("매직걸인사", "magicGirlBow", arrBow, 6, 5, true);
 
 
 	_anim = KEYANIMANAGER->findAnimation("매직걸아이들");		//NPC 애니메이션
@@ -74,6 +74,8 @@ HRESULT MagicGirl::init()
 	KEYANIMANAGER->start("매직걸인사");
 
 	_textOut = false;
+
+	_skillUnlockLv = 0;
 	return S_OK;
 }
 
@@ -98,7 +100,7 @@ void MagicGirl::isCollision(bool collision)
 	{
 		if (collision)
 		{
-			
+
 			////다이얼로그로 
 			////마법상점에 온걸 환영해	
 			////너가 살수 있는 스킬은 파이어볼이야 
@@ -106,39 +108,40 @@ void MagicGirl::isCollision(bool collision)
 			//if (_buyYesorNo == true)
 			//{
 			_textOut = true;
-			//	_npcStatus = NPCTALK;
+			_npcStatus = NPCTALK;
 			//	if (KEYMANAGER->isOnceKeyDown('O'))				//산다고 했을때
 			//	{
-					if (!_stock)					//한번도 상점에서 구매를 하지 않았으면
+			if (!_stock)					//한번도 상점에서 구매를 하지 않았으면
+			{
+				if (_skillUnlockLv == 0)			//플레이어 스킬이 0(삽질)만 있다면
+				{
+					if (_money >= 1000)				//1000원보다 돈이 많다면
 					{
-						if (_skillUnlockLv == 0)			//플레이어 스킬이 0(삽질)만 있다면
-						{
-							if (_money >= 1000)				//1000원보다 돈이 많다면
-							{
-								_minusMoney -= 1000;						//플레이어 골드에서 1000원을 감소하고
-								_skillUnlockLv += 1;						//플레이어 스킬을 1로 바꿔준다 (파이어볼)
-								_stock = 1;									//한번 구매했으니까 stock을 1로 반환해준다.
-							}
-							if (_money < 1000)						//플레이어 골드가 1000원보다 작다면
-							{
-								//다이얼로그로 너 돈이 부족하네?	
-								
-							}
-						}
+						_minusMoney -= 1000;						//플레이어 골드에서 1000원을 감소하고
+						_skillUnlockLv += 1;						//플레이어 스킬을 1로 바꿔준다 (파이어볼)
+						_stock = 1;									//한번 구매했으니까 stock을 1로 반환해준다.
+					}
+					if (_money < 1000)						//플레이어 골드가 1000원보다 작다면
+					{
+						//다이얼로그로 너 돈이 부족하네?	
 
 					}
 				}
+
 			}
+		}
+		else
+		{
+			_textOut = false;
+		}
+			}
+
 			if (KEYMANAGER->isOnceKeyDown('P'))
 			{
 				//NO했을때는 텍스트 아웃으로
 				//"어 그...그래? 안녕 ㅃㅃ " 다이얼로그 출력 ㅃㅃ
 			}
 			
-			else
-			{
-				_textOut = false;
-			}
 		//}
 	//}
 }

@@ -139,7 +139,6 @@ void gameCollision::PlayerMeetNPC()
 		//_store->getVNpc()[i]->setSkillUnlockLv(_player->getSkillUnlockLv());
 		_player->setSkillUnlockLv(_store->getVNpc()[i]->getSkillUnlockLv());
 
-
 		_store->getVNpc()[i]->setMoney(_player->getMoney());
 		_player->setMoney(_store->getVNpc()[i]->getMinusMoney());
 		_store->getVNpc()[i]->setMinusMoney(0);
@@ -147,13 +146,7 @@ void gameCollision::PlayerMeetNPC()
 
 		_player->setMaxHP(_store->getVNpc()[i]->getMaxHp());
 		_store->getVNpc()[i]->setMaxHp(0);
-
-		_store->getVNpc()[i]->setMaxHp(_player->getMaxHP());
 		
-
-
-
-
 
 
 		if (IntersectRect(
