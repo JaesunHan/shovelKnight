@@ -11,8 +11,11 @@
 
 #include "gameCollision.h"
 
+#include "gameMenuScene.h"
 
-class gameMenuScene;
+#include "gamePlayUI.h"
+
+
 class gamePlayScene : public gameNode
 {
 private:
@@ -26,6 +29,7 @@ private:
 	playerManager* _player;
 	gameCollision* _gameCollision;
 	stageManager* _stage;
+	gamePlayUI* _gamePlayUI;				//게임 플레이하는 동안 출력될 UI 
 
 	playerList _playerInfo;
 

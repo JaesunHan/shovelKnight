@@ -87,6 +87,7 @@ public:
 	//플레이 그라운드가 가지고 있는 게임플레이씬의 정복 가져오기
 	void setGamePlaySceneAdressLink(gamePlayScene* gps) { _GPS = gps; }
 
+
 	gameMenuScene();
 	~gameMenuScene();
 };
