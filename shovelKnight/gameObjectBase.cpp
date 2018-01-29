@@ -35,7 +35,7 @@ void gameObjectBase::settingObj(float x, float y, int dur, bool isDelete, COLORR
 	_dur = dur;
 	_isDelete = isDelete;
 	_color = color;
-	_rc = RectMakeCenter(x, y, _image->getWidth(), _image->getHeight());
+	
 }
 void gameObjectBase::durAct()
 {
@@ -50,10 +50,10 @@ void gameObjectBase::collisionBox()
 	HBRUSH oBrush = (HBRUSH)SelectObject(hdc, brush);
 	HPEN pen = CreatePen(PS_SOLID, 1, _color);
 	HPEN oPen = (HPEN)SelectObject(hdc, pen);
-	Rectangle(hdc, CAMERAMANAGER->getX(_rc.left)
-		, CAMERAMANAGER->getY(_rc.top)
-		, CAMERAMANAGER->getX(_rc.right)
-		, CAMERAMANAGER->getY(_rc.bottom));
+	Rectangle(hdc, _rc.left
+		, _rc.top
+		, _rc.right
+		, _rc.bottom);
 	SelectObject(hdc, oBrush);
 	SelectObject(hdc, oPen);
 	DeleteObject(brush);
