@@ -17,6 +17,8 @@ enum SKILL_REACTION
 enum SKILL_FIRE
 {
 	SKILL_FIRE_CENTER,
+	SKILL_FIRE_DRAGON,
+	SKILL_FIRE_DARKKNIGHT,
 };
 
 class skillBase
@@ -39,6 +41,8 @@ protected:
 	char* _outName;
 
 	float _saveX;
+
+	bool _isHavePlayer;
 
 public:
 	skillBase();
