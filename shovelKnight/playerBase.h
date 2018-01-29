@@ -58,6 +58,7 @@ protected :
 	int _counter = 0;
 	int _jumpCounter = 0;
 	int _shineCounter = 0;						//빛나기 위한 빛나기만을 위한 카운터
+	int _invincibilityCounter = 0;
 	int					_currentSkill;			//현재 장착된 스킬
 	int					_skillUnlockLv;			//스킬 해금 단계
 	int					_currentHP;				//현재 체력
@@ -104,6 +105,7 @@ public:
 	bool hangPixelDetectUp();
 	void hangPixelDetectDown();
 	void frameCounter(float frameMax, float counterMax);
+	void invincibilityCount();
 
 
 	inline float getPlayerX() { return _x; }
@@ -150,10 +152,12 @@ public:
 	{ 
 		if (_invincibility == false)
 		{
-			_jumpPower = 2;
+			_jumpPower = 3;
+			_state = INAIR;
 			_counter = 0;
 			_currentHP--;
 			_isDamaged = true;
+			_invincibilityCounter = 0;
 			_invincibility = true;
 		}
 	}

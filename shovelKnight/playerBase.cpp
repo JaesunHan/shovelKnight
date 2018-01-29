@@ -139,7 +139,7 @@ void playerBase::control()
 		if (_state == INAIR) _jumpCounter = 30;
 		if (_state == ONLAND) _jumpCounter = 0;
 	}
-
+	
 	if (_action == IDLE)
 	{
 		_shineCounter++;
@@ -454,5 +454,18 @@ void playerBase::hangPixelDetectDown()
 	{
 		_state = ONLAND;
 		_action = IDLE;
+	}
+}
+
+void playerBase::invincibilityCount()
+{
+	if (_invincibility == true)
+	{
+		_invincibilityCounter++;
+		if (_invincibilityCounter > 60)
+		{
+			_invincibility = false;
+			_invincibilityCounter = 0;
+		}
 	}
 }
