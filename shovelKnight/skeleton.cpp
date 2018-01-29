@@ -9,12 +9,10 @@ skeleton::~skeleton()
 {
 }
 
-HRESULT skeleton::init(float x, float y)
+void skeleton::enemyInitSet()
 {
 	_enemyType = ENEMY_SKELETON;
 
-	_x = x;
-	_y = y;
 	_speed = 0.0f;
 
 	_img = IMAGEMANAGER->addFrameImage("skeleton", ".//image//monster//skeleton.bmp", _x, _y, 240, 185, 5, 5, true, RGB(255, 0, 255));
@@ -81,9 +79,32 @@ HRESULT skeleton::init(float x, float y)
 
 	_jump = new jump;
 	_jump->init();
+}
+
+HRESULT skeleton::init(float x, float y)
+{
+	_x = x;
+	_y = y;
+	_patternTypeNum = ENEMY_BASIC;
+
+	enemyInitSet();
+
+	
+	return S_OK;
+}
+
+
+HRESULT skeleton::init(float x, float y, int patternType)
+{
+	_x = x;
+	_y = y;
+	_patternTypeNum = patternType;
+
+	enemyInitSet();
 
 	return S_OK;
 }
+
 
 void skeleton::update()
 {
@@ -101,60 +122,7 @@ void skeleton::update()
 
 
 	//공격 움직임 패턴
-	if (_status != ENEMY_LEFT_HIT && _status != ENEMY_RIGHT_HIT)
-	{
-		if (_playerFind) //플레이어를 발견하면
-		{
-			if (!_isCountStop) _directionCount++;
-
-			if (_direction)
-			{
-				switch (_directionCount)
-				{
-				case 50:
-					_status = ENEMY_RIGHT_MOVE;
-					_isCountStop = true;
-					_isAttack = false;
-					break;
-				case 100:
-					_status = ENEMY_RIGHT_BACK_MOVE;
-					_directionCount = 1;
-					break;
-				}
-
-				//플레이어와의 거리가 가까울 경우 공격
-				if (isPlayerFind(_x, 30) && !_isAttack)
-				{
-					_status = ENEMY_RIGHT_ATTACK;
-					_isCountStop = false;
-					_isAttack = true;
-				}
-			}
-			else
-			{
-				switch (_directionCount)
-				{
-				case 50:
-					_status = ENEMY_LEFT_MOVE;
-					_isCountStop = true;
-					_isAttack = false;
-					break;
-				case 100:
-					_status = ENEMY_LEFT_BACK_MOVE;
-					_directionCount = 1;
-					break;
-				}
-
-				//플레이어와의 거리가 가까울 경우 공격
-				if (isPlayerFind(_x, 30) && !_isAttack)
-				{
-					_status = ENEMY_LEFT_ATTACK;
-					_isCountStop = false;
-					_isAttack = true;
-				}
-			}
-		}
-	}
+	enemyPattern(_patternTypeNum);
 
 
 	//============================================================= 픽셀충돌: 바닥충돌	
@@ -255,7 +223,7 @@ void skeleton::draw()
 {
 	if (_direction)
 	{
-		CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left + 19, _rc.top - 9);
+		CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left - 5, _rc.top - 9);
 	}
 	else
 	{
@@ -481,4 +449,78 @@ void skeleton::move()
 
 	//렉트위치 update
 	_rc = RectMakeCenter(_x, _y, _width, _height);
+}
+
+
+void skeleton::enemyPattern(int _patternTypeNum)
+{
+	switch (_patternTypeNum)
+	{
+		case ENEMY_BASIC:
+			if (_status != ENEMY_LEFT_HIT && _status != ENEMY_RIGHT_HIT)
+			{
+				if (_playerFind) //플레이어를 발견하면
+				{
+					if (!_isCountStop) _directionCount++;
+
+					if (_direction)
+					{
+						switch (_directionCount)
+						{
+						case 50:
+							_status = ENEMY_RIGHT_MOVE;
+							_isCountStop = true;
+							_isAttack = false;
+							break;
+						case 100:
+							_status = ENEMY_RIGHT_BACK_MOVE;
+							_directionCount = 1;
+							break;
+						}
+
+						//플레이어와의 거리가 가까울 경우 공격
+						if (isPlayerFind(_x, 30) && !_isAttack)
+						{
+							_status = ENEMY_RIGHT_ATTACK;
+							_isCountStop = false;
+							_isAttack = true;
+						}
+					}
+					else
+					{
+						switch (_directionCount)
+						{
+						case 50:
+							_status = ENEMY_LEFT_MOVE;
+							_isCountStop = true;
+							_isAttack = false;
+							break;
+						case 100:
+							_status = ENEMY_LEFT_BACK_MOVE;
+							_directionCount = 1;
+							break;
+						}
+
+						//플레이어와의 거리가 가까울 경우 공격
+						if (isPlayerFind(_x, 30) && !_isAttack)
+						{
+							_status = ENEMY_LEFT_ATTACK;
+							_isCountStop = false;
+							_isAttack = true;
+						}
+					}
+				}
+			}
+		break;
+		case ENEMY_PATROL:
+
+		break;
+		case ENEMY_LEFT_FOWARD:
+
+		break;
+		case ENEMY_RIGHT_FOWARD:
+
+		break;
+	}
+
 }

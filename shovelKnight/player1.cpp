@@ -54,10 +54,10 @@ void player1::update()
 {
 	if (_pause == false)
 	{
-		control2();
 		if (_isDamaged == false) control();
 		physics();
 		pixelCollision();
+		control2();
 		attack();
 		//invincibilityCount();
 		CAMERAMANAGER->setSingleFocus(_x, _y, WINSIZEX);
@@ -172,8 +172,12 @@ void player1::control2()
 	if (KEYMANAGER->isStayKeyDown('S'))
 	{
 		if (_state == INAIR) _downwardThrust = true;
-		if (_state == HANG) _y += SPEED;
-		hangPixelDetectDown();
+		hangPixelDetect();
+		if (_state == HANG)
+		{
+			_y += SPEED;
+			hangPixelDetectDown();
+		}
 	}
 	if (KEYMANAGER->isOnceKeyDown('Y'))
 	{

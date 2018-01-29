@@ -190,6 +190,11 @@ void gameCollision::PlayerAndEnemy()
 		{
 			_player->setDamagePlayer();
 		}
+		if (_enemy->getVEnemy()[i]->getEnemyType() == ENEMY_DRAGON &&
+			IntersectRect(&temp, &_player->getAttackRC(), &_enemy->getVEnemy()[i]->getBoss1TrunkRect()))
+		{
+			_player->setDamagePlayer();
+		}
 
 		if (_enemy->getVEnemy()[i]->getEnemyType() == ENEMY_DRAGON)
 		{
@@ -209,7 +214,6 @@ void gameCollision::PlayerAndEnemy()
 			{
 				_enemy->getVEnemy()[i]->setEnemyDamage();
 				_player->setPlayerReaction();
-				_player->setDamagePlayer();
 			}
 		}
 		else
