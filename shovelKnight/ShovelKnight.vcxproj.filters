@@ -353,9 +353,12 @@
     </ClInclude>
     <ClInclude Include="graphicUI.h">
       <Filter>playGround\gamePlayScene\UI</Filter>
+<<<<<<< HEAD
     </ClInclude>
     <ClInclude Include="bossBlackKnight.h">
       <Filter>playGround\gamePlayScene\enemy</Filter>
+=======
+>>>>>>> a22c9a16a6d160872974e8b518ddfd2cc43324ef
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -592,9 +595,12 @@
     </ClCompile>
     <ClCompile Include="graphicUI.cpp">
       <Filter>playGround\gamePlayScene\UI</Filter>
+<<<<<<< HEAD
     </ClCompile>
     <ClCompile Include="bossBlackKnight.cpp">
       <Filter>playGround\gamePlayScene\enemy</Filter>
+=======
+>>>>>>> a22c9a16a6d160872974e8b518ddfd2cc43324ef
     </ClCompile>
   </ItemGroup>
 </Project>

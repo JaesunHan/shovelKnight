@@ -105,7 +105,7 @@ void playerBase::control()
 		hangPixelDetect();
 		if (_state == HANG)
 		{
-			_y -= SPEED;
+			if (hangPixelDetectUp() == false) _y -= SPEED;
 		}
 	}
 
@@ -174,222 +174,225 @@ void playerBase::pixelCollision()
 	HDC hdc = IMAGEMANAGER->findImage("bgMap")->getMemDC();
 	COLORREF color, color2, color3;
 	int R, G, B, R2, G2, B2, R3, G3, B3;
-	if (_jumpPower <= 0)	//ÇÏ°­ ÁßÀÏ ¶§ ¶¥¿¡ ´êÀ¸¸é ¸ØÃç¶ó
+	if (_state != HANG)
 	{
-		for (int i = 0; i < 10; ++i)
+		if (_jumpPower <= 0)	//ÇÏ°­ ÁßÀÏ ¶§ ¶¥¿¡ ´êÀ¸¸é ¸ØÃç¶ó
 		{
-			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right, _playerRC.bottom + i);
-			R = GetRValue(color);
-			G = GetGValue(color);
-			B = GetBValue(color);
-			if ((R == 0 && G == 255 && B == 0) || (R == 0 && G == 0 && B == 255))
+			for (int i = 0; i < 10; ++i)
 			{
-				_y = _playerRC.bottom + i;
-				_jumpPower = 0;
-				_jumpCounter = 0;
-				_jumpKeyDown = false;
-				_downwardThrust = false;
-				_state = ONLAND;
-				break;
-			}
-			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left, _playerRC.bottom + i);
-			R = GetRValue(color);
-			G = GetGValue(color);
-			B = GetBValue(color);
-			if ((R == 0 && G == 255 && B == 0) || (R == 0 && G == 0 && B == 255))
-			{
-				_y = _playerRC.bottom + i;
-				_jumpPower = 0;
-				_jumpCounter = 0;
-				_jumpKeyDown = false;
-				_downwardThrust = false;
-				_state = ONLAND;
-				break;
-			}
-			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), (_playerRC.right + _playerRC.left) / 2, _playerRC.bottom + i);
-			R = GetRValue(color);
-			G = GetGValue(color);
-			B = GetBValue(color);
-			if ((R == 0 && G == 255 && B == 0) || (R == 0 && G == 0 && B == 255))
-			{
-				_y = _playerRC.bottom + i;
-				_jumpPower = 0;
-				_jumpCounter = 0;
-				_jumpKeyDown = false;
-				_downwardThrust = false;
-				_state = ONLAND;
-				break;
+				color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right, _playerRC.bottom + i);
+				R = GetRValue(color);
+				G = GetGValue(color);
+				B = GetBValue(color);
+				if ((R == 0 && G == 255 && B == 0) || (R == 0 && G == 0 && B == 255))
+				{
+					_y = _playerRC.bottom + i;
+					_jumpPower = 0;
+					_jumpCounter = 0;
+					_jumpKeyDown = false;
+					_downwardThrust = false;
+					_state = ONLAND;
+					break;
+				}
+				color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left, _playerRC.bottom + i);
+				R = GetRValue(color);
+				G = GetGValue(color);
+				B = GetBValue(color);
+				if ((R == 0 && G == 255 && B == 0) || (R == 0 && G == 0 && B == 255))
+				{
+					_y = _playerRC.bottom + i;
+					_jumpPower = 0;
+					_jumpCounter = 0;
+					_jumpKeyDown = false;
+					_downwardThrust = false;
+					_state = ONLAND;
+					break;
+				}
+				color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), (_playerRC.right + _playerRC.left) / 2, _playerRC.bottom + i);
+				R = GetRValue(color);
+				G = GetGValue(color);
+				B = GetBValue(color);
+				if ((R == 0 && G == 255 && B == 0) || (R == 0 && G == 0 && B == 255))
+				{
+					_y = _playerRC.bottom + i;
+					_jumpPower = 0;
+					_jumpCounter = 0;
+					_jumpKeyDown = false;
+					_downwardThrust = false;
+					_state = ONLAND;
+					break;
+				}
 			}
 		}
-	}
-	if (_jumpPower > 0)	//»ó½Â ÁßÀÏ ¶§ ¶¥¿¡ ´êÀ¸¸é ¸ØÃç¶ó
-	{
-		for (int i = 5; i > 0; --i)
+		if (_jumpPower > 0)	//»ó½Â ÁßÀÏ ¶§ ¶¥¿¡ ´êÀ¸¸é ¸ØÃç¶ó
 		{
-			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right, _playerRC.top + i);
+			for (int i = 5; i > 0; --i)
+			{
+				color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right, _playerRC.top + i);
+				R = GetRValue(color);
+				G = GetGValue(color);
+				B = GetBValue(color);
+				if (R == 0 && G == 255 && B == 0)
+				{
+					_y = _playerRC.bottom + i;
+					_jumpPower = 0;
+					break;
+				}
+				color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left, _playerRC.top + i);
+				R = GetRValue(color);
+				G = GetGValue(color);
+				B = GetBValue(color);
+				if (R == 0 && G == 255 && B == 0)
+				{
+					_y = _playerRC.bottom + i;
+					_jumpPower = 0;
+					break;
+				}
+				color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), (_playerRC.right + _playerRC.left) / 2, _playerRC.top + i);
+				R = GetRValue(color);
+				G = GetGValue(color);
+				B = GetBValue(color);
+				if (R == 0 && G == 255 && B == 0)
+				{
+					_y = _playerRC.bottom + i;
+					_jumpPower = 0;
+					break;
+				}
+			}
+		}
+		if (_rtMoving == true)	//¿À¸¥ÂÊ ÀÌµ¿ Áß¿¡ º®¿¡ ºÎµúÈ÷¸é ¸ØÃç¶ó
+		{
+			_rtBlock = false;
+			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 2, _playerRC.bottom - 1);
 			R = GetRValue(color);
 			G = GetGValue(color);
 			B = GetBValue(color);
 			if (R == 0 && G == 255 && B == 0)
 			{
-				_y = _playerRC.bottom + i;
-				_jumpPower = 0;
-				break;
+				_rtBlock = true;
 			}
-			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left, _playerRC.top + i);
+			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 2, _playerRC.top + 1);
 			R = GetRValue(color);
 			G = GetGValue(color);
 			B = GetBValue(color);
 			if (R == 0 && G == 255 && B == 0)
 			{
-				_y = _playerRC.bottom + i;
-				_jumpPower = 0;
-				break;
+				_rtBlock = true;
 			}
-			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), (_playerRC.right + _playerRC.left) / 2, _playerRC.top + i);
+			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 2, (_playerRC.top + _playerRC.bottom) / 2);
 			R = GetRValue(color);
 			G = GetGValue(color);
 			B = GetBValue(color);
 			if (R == 0 && G == 255 && B == 0)
 			{
-				_y = _playerRC.bottom + i;
-				_jumpPower = 0;
-				break;
+				_rtBlock = true;
 			}
 		}
-	}
-	if (_rtMoving == true)	//¿À¸¥ÂÊ ÀÌµ¿ Áß¿¡ º®¿¡ ºÎµúÈ÷¸é ¸ØÃç¶ó
-	{
-		_rtBlock = false;
-		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 2, _playerRC.bottom - 1);
+		if (_ltMoving == true)	//¿ÞÂÊ ÀÌµ¿ Áß¿¡ º®¿¡ ºÎµúÈ÷¸é ¸ØÃç¶ó
+		{
+			_ltBlock = false;
+			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 2, _playerRC.bottom - 1);
+			R = GetRValue(color);
+			G = GetGValue(color);
+			B = GetBValue(color);
+			if (R == 0 && G == 255 && B == 0)
+			{
+				_ltBlock = true;
+			}
+			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 2, _playerRC.top + 1);
+			R = GetRValue(color);
+			G = GetGValue(color);
+			B = GetBValue(color);
+			if (R == 0 && G == 255 && B == 0)
+			{
+				_ltBlock = true;
+			}
+			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 2, (_playerRC.top + _playerRC.bottom) / 2);
+			R = GetRValue(color);
+			G = GetGValue(color);
+			B = GetBValue(color);
+			if (R == 0 && G == 255 && B == 0)
+			{
+				_ltBlock = true;
+			}
+		}
+		if (_isDamaged == true)	//µ¥¹ÌÁö ÀÔ¾úÀ»¶§ ÇÈ¼¿ÄÝ¸®Á¯
+		{
+			_rtBlock = false;
+			_ltBlock = false;
+			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 2, _playerRC.bottom - 1);
+			R = GetRValue(color);
+			G = GetGValue(color);
+			B = GetBValue(color);
+			if (R == 0 && G == 255 && B == 0)
+			{
+				_rtBlock = true;
+			}
+			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 2, _playerRC.top + 1);
+			R = GetRValue(color);
+			G = GetGValue(color);
+			B = GetBValue(color);
+			if (R == 0 && G == 255 && B == 0)
+			{
+				_rtBlock = true;
+			}
+			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 2, (_playerRC.top + _playerRC.bottom) / 2);
+			R = GetRValue(color);
+			G = GetGValue(color);
+			B = GetBValue(color);
+			if (R == 0 && G == 255 && B == 0)
+			{
+				_rtBlock = true;
+			}
+			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 2, _playerRC.bottom - 1);
+			R = GetRValue(color);
+			G = GetGValue(color);
+			B = GetBValue(color);
+			if (R == 0 && G == 255 && B == 0)
+			{
+				_ltBlock = true;
+			}
+			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 2, _playerRC.top + 1);
+			R = GetRValue(color);
+			G = GetGValue(color);
+			B = GetBValue(color);
+			if (R == 0 && G == 255 && B == 0)
+			{
+				_ltBlock = true;
+			}
+			color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 2, (_playerRC.top + _playerRC.bottom) / 2);
+			R = GetRValue(color);
+			G = GetGValue(color);
+			B = GetBValue(color);
+			if (R == 0 && G == 255 && B == 0)
+			{
+				_ltBlock = true;
+			}
+			if (_x <= 6) _ltBlock = true;
+			if (_x >= IMAGEMANAGER->findImage("bgMap")->getWidth() - 6) _rtBlock = true;
+		}
+		//¹Ù´Ú¿¡¼­ ¹þ¾î³ª¸é ¶³¾îÁ®¶ó
+		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 1, _playerRC.bottom + 1);
 		R = GetRValue(color);
 		G = GetGValue(color);
 		B = GetBValue(color);
-		if (R == 0 && G == 255 && B == 0)
+		if (!(R == 0 && G == 255 && B == 0) && !(R == 0 && G == 0 && B == 255))
 		{
-			_rtBlock = true;
-		}
-		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 2, _playerRC.top + 1);
-		R = GetRValue(color);
-		G = GetGValue(color);
-		B = GetBValue(color);
-		if (R == 0 && G == 255 && B == 0)
-		{
-			_rtBlock = true;
-		}
-		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 2, (_playerRC.top + _playerRC.bottom) / 2);
-		R = GetRValue(color);
-		G = GetGValue(color);
-		B = GetBValue(color);
-		if (R == 0 && G == 255 && B == 0)
-		{
-			_rtBlock = true;
-		}
-	}
-	if (_ltMoving == true)	//¿ÞÂÊ ÀÌµ¿ Áß¿¡ º®¿¡ ºÎµúÈ÷¸é ¸ØÃç¶ó
-	{
-		_ltBlock = false;
-		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 2, _playerRC.bottom - 1);
-		R = GetRValue(color);
-		G = GetGValue(color);
-		B = GetBValue(color);
-		if (R == 0 && G == 255 && B == 0)
-		{
-			_ltBlock = true;
-		}
-		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 2, _playerRC.top + 1);
-		R = GetRValue(color);
-		G = GetGValue(color);
-		B = GetBValue(color);
-		if (R == 0 && G == 255 && B == 0)
-		{
-			_ltBlock = true;
-		}
-		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 2, (_playerRC.top + _playerRC.bottom) / 2);
-		R = GetRValue(color);
-		G = GetGValue(color);
-		B = GetBValue(color);
-		if (R == 0 && G == 255 && B == 0)
-		{
-			_ltBlock = true;
-		}
-	}
-	if (_isDamaged == true)	//µ¥¹ÌÁö ÀÔ¾úÀ»¶§ ÇÈ¼¿ÄÝ¸®Á¯
-	{
-		_rtBlock = false;
-		_ltBlock = false;
-		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 2, _playerRC.bottom - 1);
-		R = GetRValue(color);
-		G = GetGValue(color);
-		B = GetBValue(color);
-		if (R == 0 && G == 255 && B == 0)
-		{
-			_rtBlock = true;
-		}
-		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 2, _playerRC.top + 1);
-		R = GetRValue(color);
-		G = GetGValue(color);
-		B = GetBValue(color);
-		if (R == 0 && G == 255 && B == 0)
-		{
-			_rtBlock = true;
-		}
-		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 2, (_playerRC.top + _playerRC.bottom) / 2);
-		R = GetRValue(color);
-		G = GetGValue(color);
-		B = GetBValue(color);
-		if (R == 0 && G == 255 && B == 0)
-		{
-			_rtBlock = true;
-		}
-		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 2, _playerRC.bottom - 1);
-		R = GetRValue(color);
-		G = GetGValue(color);
-		B = GetBValue(color);
-		if (R == 0 && G == 255 && B == 0)
-		{
-			_ltBlock = true;
-		}
-		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 2, _playerRC.top + 1);
-		R = GetRValue(color);
-		G = GetGValue(color);
-		B = GetBValue(color);
-		if (R == 0 && G == 255 && B == 0)
-		{
-			_ltBlock = true;
-		}
-		color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 2, (_playerRC.top + _playerRC.bottom) / 2);
-		R = GetRValue(color);
-		G = GetGValue(color);
-		B = GetBValue(color);
-		if (R == 0 && G == 255 && B == 0)
-		{
-			_ltBlock = true;
-		}
-		if (_x <= 6) _ltBlock = true;
-		if (_x >= IMAGEMANAGER->findImage("bgMap")->getWidth() - 6) _rtBlock = true;
-	}
-	//¹Ù´Ú¿¡¼­ ¹þ¾î³ª¸é ¶³¾îÁ®¶ó
-	color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right + 1, _playerRC.bottom + 1);
-	R = GetRValue(color);
-	G = GetGValue(color);
-	B = GetBValue(color);
-	if (!(R == 0 && G == 255 && B == 0) && !(R == 0 && G == 0 && B == 255))
-	{
-		color2 = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 1, _playerRC.bottom + 1);
-		R2 = GetRValue(color2);
-		G2 = GetGValue(color2);
-		B2 = GetBValue(color2);
-		if (!(R2 == 0 && G2 == 255 && B2 == 0) && !(R == 0 && G == 0 && B == 255))
-		{
-			color3 = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), (_playerRC.right + _playerRC.left) / 2, _playerRC.bottom + 1);
-			R3 = GetRValue(color3);
-			G3 = GetGValue(color3);
-			B3 = GetBValue(color3);
+			color2 = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left - 1, _playerRC.bottom + 1);
+			R2 = GetRValue(color2);
+			G2 = GetGValue(color2);
+			B2 = GetBValue(color2);
 			if (!(R2 == 0 && G2 == 255 && B2 == 0) && !(R == 0 && G == 0 && B == 255))
 			{
-				_state = INAIR;
-				if (_action != ATTACK) _action = JUMP;
+				color3 = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), (_playerRC.right + _playerRC.left) / 2, _playerRC.bottom + 1);
+				R3 = GetRValue(color3);
+				G3 = GetGValue(color3);
+				B3 = GetBValue(color3);
+				if (!(R2 == 0 && G2 == 255 && B2 == 0) && !(R == 0 && G == 0 && B == 255))
+				{
+					_state = INAIR;
+					if (_action != ATTACK) _action = JUMP;
+				}
 			}
 		}
 	}
@@ -424,5 +427,32 @@ void playerBase::hangPixelDetect()
 	if (R == 255 && G == 0 && B == 0)
 	{
 		_state = HANG;
+		_action = HANGING;
+	}
+}
+
+bool playerBase::hangPixelDetectUp()
+{
+	COLORREF color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _x + 6, _y - 26);
+	int R = GetRValue(color);
+	int G = GetGValue(color);
+	int B = GetBValue(color);
+	if (R == 0 && G == 255 && B == 0)
+	{
+		return true;
+	}
+	else return false;
+}
+
+void playerBase::hangPixelDetectDown()
+{
+	COLORREF color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _x + 6, _y);
+	int R = GetRValue(color);
+	int G = GetGValue(color);
+	int B = GetBValue(color);
+	if (R == 0 && G == 255 && B == 0)
+	{
+		_state = ONLAND;
+		_action = IDLE;
 	}
 }

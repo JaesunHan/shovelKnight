@@ -37,14 +37,18 @@ class npcBase : public gameNode
 {
 protected:
 	image* _img;			// NPC 이미지
+	image* _img2;			// NPC 이미지2
 	string _imgKeyString;	//이미지 매니저에 등록할 이미지 키갑
 	char* _imgFileName;		//이미지 파일 이름(경로 포함)
 	animation* _anim;		//NPC 애니메이션
+	animation* _anim2;		//npc 애미메이션2
+
 	float _x, _y;			//중점좌표
 	int _width, _height;	//충돌 렉트를 만들 때 쓸 가로 세로 크기
 	
 	RECT _rc;				//상점NPC 렉트
 	NPCTYPE _npcType;		//NPC타입
+	NPCSTATUS _npcStatus;	//npc스테이터스
 
 	bool _isCollisionNpc;		//플레이어와 충돌했는가? true : 그렇다, false : 아니다
 	bool _isAppear;			//등장할때니? 아니니? (맵에서 등장하는지 아닌지 체크)
