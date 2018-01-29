@@ -357,6 +357,15 @@
     <ClInclude Include="bossBlackKnight.h">
       <Filter>playGround\gamePlayScene\enemy</Filter>
     </ClInclude>
+    <ClInclude Include="checkPoint.h">
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="dirtPile.h">
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="tresureBox.h">
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -595,6 +604,15 @@
     </ClCompile>
     <ClCompile Include="bossBlackKnight.cpp">
       <Filter>playGround\gamePlayScene\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="checkPoint.cpp">
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="dirtPile.cpp">
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="tresureBox.cpp">
+      <Filter>playGround\gamePlayScene\gameObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

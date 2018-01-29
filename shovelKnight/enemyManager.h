@@ -19,22 +19,23 @@ private:
 	vEnemy1		_vEnemy;
 	viEnemy1	_viEnemy;
 
-	bool _enemyIsOn[3];
+	bool _enemyIsOn[4];
+	int _stagSetNum;
 
 public:
 	enemyManager();
 	~enemyManager();
 
-	virtual HRESULT init();
-	virtual void release();
-	virtual void update();
-	virtual void render();
+	HRESULT init();
+	void release();
+	void update();
+	void render();
+	
+	void stageEnemySet(int stageNum);
 
 
 	//에너미 생성&소멸 설정자
-	void setStage1EnemyOn(bool isOn) { _enemyIsOn[0] = isOn; }
-	void setStage2EnemyOn(bool isOn) { _enemyIsOn[1] = isOn; }
-	void setStage3EnemyOn(bool isOn) { _enemyIsOn[2] = isOn; }
+	void setStageEnemyOn(int stageNum) { _stagSetNum = stageNum; }
 
 	//========================================= Start 미니언 셋팅 ========================================
 

@@ -19,8 +19,6 @@ HRESULT skeleton::init(float x, float y)
 
 	_img = IMAGEMANAGER->addFrameImage("skeleton", ".//image//monster//skeleton.bmp", _x, _y, 240, 185, 5, 5, true, RGB(255, 0, 255));
 
-	_rc = RectMakeCenter(_x, _y, _img->getFrameWidth(), _img->getFrameHeight());
-
 	_status = ENEMY_LEFT_IDLE;
 
 	//========================================================================================= 에니메이션
@@ -57,8 +55,8 @@ HRESULT skeleton::init(float x, float y)
 
 	//=========================================================================================
 
-	_width = _img->getFrameWidth();
-	_height = _img->getFrameHeight();
+	_width = 20;
+	_height = 29;
 	_isDead = false;
 	_isDeadVanish = false;
 	_vanishTime = 1;
@@ -72,6 +70,7 @@ HRESULT skeleton::init(float x, float y)
 	_playerFind = false;
 	_isAttack = false;
 
+	_rc = RectMakeCenter(_x, _y, _width, _height);
 	_anim = KEYANIMANAGER->findAnimation("skeletonLeftIdle");
 
 	_pixelC = new pixelCollision;
@@ -86,14 +85,6 @@ HRESULT skeleton::init(float x, float y)
 void skeleton::update()
 {
 
-	//============================================================ 피격 테스트
-	//if (KEYMANAGER->isOnceKeyDown('P'))
-	//{
-	//	_isHit = true;
-	//}
-	//============================================================
-
-
 	if (_status != ENEMY_LEFT_HIT && _status != ENEMY_RIGHT_HIT)
 	{
 		_previousStatus = _status; //직전 에너미 상태 저장
@@ -101,42 +92,6 @@ void skeleton::update()
 
 	//상태값에 따른 에니메이션 및 움직임
 	move();
-
-
-	//============================================================= 픽셀충돌: 바닥충돌	
-	_pixelC->pixelCollisonY(_rc);  //바닥상태 검출
-
-	if (_pixelC->getIsGround())     //상태값에 따른 에네미 상태적용
-	{
-		_gravity = 0.0f;
-		_y = _pixelC->getProbeY();
-	}
-	else
-	{
-		if (!_isJump && !_isDead) _gravity += 0.1f;
-		else _gravity = 0.0f;
-	}
-	//중력적용
-	_y += _gravity;
-	//============================================================= 픽셀충돌: 벽
-	_pixelC->pixelCollisonX(_rc, _direction);  //벽 검출
-
-
-	if (_pixelC->getDirectionChange())  //벽에 부딪치면
-	{
-		if (_direction)  //현상태가 오른쪽이면
-		{
-			_status = ENEMY_LEFT_MOVE;
-		}
-		else            //현상태가 왼쪽이면
-		{
-			_status = ENEMY_RIGHT_MOVE;
-		}
-
-		_pixelC->setDirectionChange(false);  //초기화
-	}
-	//=============================================================
-
 
 
 	//플레이어가 일정거리 안으로 들어오면
@@ -200,6 +155,41 @@ void skeleton::update()
 	}
 
 
+	//============================================================= 픽셀충돌: 바닥충돌	
+	_pixelC->pixelCollisonY(_rc);  //바닥상태 검출
+
+	if (_pixelC->getIsGround())     //상태값에 따른 에네미 상태적용
+	{
+		_gravity = 0.0f;
+		_y = _pixelC->getProbeY();
+	}
+	else
+	{
+		if (!_isJump && !_isDead) _gravity += 0.1f;
+		else _gravity = 0.0f;
+	}
+	//중력적용
+	_y += _gravity;
+	//============================================================= 픽셀충돌: 벽
+	_pixelC->pixelCollisonX(_rc, _direction);  //벽 검출
+
+
+	if (_pixelC->getDirectionChange())  //벽에 부딪치면
+	{
+		if (_direction)  //현상태가 오른쪽이면
+		{
+			_status = ENEMY_LEFT_MOVE;
+		}
+		else            //현상태가 왼쪽이면
+		{
+			_status = ENEMY_RIGHT_MOVE;
+		}
+
+		_pixelC->setDirectionChange(false);  //초기화
+	}
+	//=============================================================
+
+
 	//데미지 설정
 	if (_isHit)
 	{
@@ -245,6 +235,11 @@ void skeleton::update()
 
 	}
 
+}
+
+void skeleton::draw()
+{
+	CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left - 19, _rc.top - 9);
 }
 
 void skeleton::move()

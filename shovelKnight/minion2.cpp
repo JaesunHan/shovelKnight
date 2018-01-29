@@ -81,14 +81,6 @@ HRESULT minion2::init(float x, float y)
 
 void minion2::update()
 {
-	//============================================================ 피격 테스트
-	//if (KEYMANAGER->isOnceKeyDown('P'))
-	//{
-	//	_isHit = true;
-	//}
-	//============================================================
-
-	
 	if (_status != ENEMY_LEFT_HIT && _status != ENEMY_RIGHT_HIT)
 	{
 		_previousStatus = _status; //직전 에너미 상태 저장
