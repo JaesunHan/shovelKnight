@@ -109,20 +109,9 @@ void HealtyGuy::isCollision(bool collision)
 		{
 			//텍스트 아웃으로 "너 이거 살래? Yes or No(bool값<-변수 하나 추가해야함 1.25)
 			//아래는 Yes 선택했을때의 함수
-			char* str1 = "Welcome, Welcome My friend";
-			char* str2 = "you wanna buy some weed?:P";
-			char* str3 = "if u OK press 'O', or not press 'P'";
-			char* str4 = "get the fuck off!!!!";
-
-			////init
-			//int stats = 0;
-			//
-			//char* str = str1;
-			//if(strlen(str)==strlen(str1) && stats = 0) str = str2;
-			////
-
+		
 			_textOut = true;
-			TTTextOut(500, 300, "헬스가이에서플레이어돈", _money);
+			
 
 			if (KEYMANAGER->isOnceKeyDown('O'))				//O눌렀을때
 			{

@@ -32,7 +32,9 @@ HRESULT MagicGirl::init()
 	
 	_imgKeyString = "magicGIRLIDLE";				//이미지 매니저에 등록할 이미지 키갑
 	_imgFileName = "./image/npc/magicGirlFull.bmp";		//이미지 파일 이름(경로 포함)
-		
+
+
+
 	//npc이미지
 	_img = IMAGEMANAGER->addFrameImage(_imgKeyString, _imgFileName, 1610, 50, 46, 1, true, RGB(255,0,255), false);											// NPC 이미지
 	IMAGEMANAGER->addFrameImage("magicGirlBow", "./image/npc/magicGirlThankYou.bmp", 186, 53, 6, 1, true, RGB(255, 0, 255), false);
@@ -96,69 +98,43 @@ void MagicGirl::isCollision(bool collision)
 	{
 		if (collision)
 		{
-			//텍스트 아웃으로 "너 이거 살래? Yes or No(bool값<-변수 하나 추가해야함 1.25)
-			//아래는 Yes 선택했을때의 함수
-			char* str1 = "Welcome, Welcome My friend";
-			char* str2 = "you wanna buy some weed?:P";
-			char* str3 = "if u OK press 'O', or not press 'P'";
-			char* str4 = "get the fuck off!!!!";
-
-			////init
-			//int stats = 0;
-			//
-			//char* str = str1;
-			//if(strlen(str)==strlen(str1) && stats = 0) str = str2;
-			////
-
-			_textOut = true;
-			_npcStatus = NPCTALK;
-			TTTextOut(500, 300, "으앙충돌", 0);
-			if (KEYMANAGER->isOnceKeyDown('O'))				//O눌렀을때
+			
+			//다이얼로그로 
+			//마법상점에 온걸 환영해	
+			//너가 살수 있는 스킬은 파이어볼이야 
+			//살래?
+			if (_buyYesorNo == true)
 			{
-				//TTTextOut(300, 300, "으앙충돌", 0);
-				if (!_stock)					//한번도 상점에서 구매를 하지 않았으면
+				_textOut = true;
+				_npcStatus = NPCTALK;
+				if (KEYMANAGER->isOnceKeyDown('O'))				//산다고 했을때
 				{
-					if (_skillUnlockLv == 0)			//플레이어 스킬이 0(삽질)만 있다면
+					if (!_stock)					//한번도 상점에서 구매를 하지 않았으면
 					{
-						if (_money >= 1000)				//1000원보다 돈이 많다면
+						if (_skillUnlockLv == 0)			//플레이어 스킬이 0(삽질)만 있다면
 						{
-							_minusMoney -= 1000;						//플레이어 골드에서 1000원을 감소하고
-							_skillUnlockLv += 1;						//플레이어 스킬을 1로 바꿔준다 (파이어볼)
-							_stock = 1;						//한번 구매했으니까 stock을 1로 반환해준다.
+							if (_money >= 1000)				//1000원보다 돈이 많다면
+							{
+								_minusMoney -= 1000;						//플레이어 골드에서 1000원을 감소하고
+								_skillUnlockLv += 1;						//플레이어 스킬을 1로 바꿔준다 (파이어볼)
+								_stock = 1;									//한번 구매했으니까 stock을 1로 반환해준다.
+							}
+							if (_money < 1000)						//플레이어 골드가 1000원보다 작다면
+							{
+								//다이얼로그로 너 돈이 부족하네?	
+								
+							}
 						}
-						if (_money < 1000)						//플레이어 골드가 1000원보다 작다면
-						{
-							//str = str4;
-						}
-					}
 
-				}
-
-				if (_stock == 1)							//한번도 상점에서 구매를 하지 않았으면
-				{
-					if (_skillUnlockLv == 1)					//플레이어 스킬이 1, 파이어볼이라면 
-					{
-						if (_money >= 3000)					//3000원보다 돈이 많다면
-						{
-							_minusMoney -= 3000;						//플레이어 골드에서 3000원을 감소하고 
-							_skillUnlockLv += 1;					//플레이어 스킬을 2로 바꿔준다 (선더볼트)
-							_stock = 2;						//한번 구매했으니까 stock을 1로 반환해준다.
-						}
-						if (_money < 3000)						//플레이어 골드가 3000원보다 작다면
-						{
-							//str = str4;
-						}
 					}
 				}
 			}
-
 			if (KEYMANAGER->isOnceKeyDown('P'))
 			{
-
+				//NO했을때는 텍스트 아웃으로
+				//"어 그...그래? 안녕 ㅃㅃ " 다이얼로그 출력 ㅃㅃ
 			}
-			//NO했을때는 텍스트 아웃으로
-			//"어 그...그래? 안녕 ㅃㅃ " 다이얼로그 출력 ㅃㅃ
-			//_isCollisionNpc == false;
+			
 
 		}
 	}
