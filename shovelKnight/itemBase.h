@@ -36,7 +36,6 @@ protected:
 	float _speed;
 	float _angle;
 
-	float _time;
 	bool _petrol;
 
 	RECT _rc;
@@ -44,6 +43,9 @@ protected:
 	animation* _ani;
 	int _imgWidth;
 	int _imgHeight;
+
+	float _stopTop;
+	float _stopBottom;
 
 
 public:

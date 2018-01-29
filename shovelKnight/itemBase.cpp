@@ -47,7 +47,7 @@ void itemBase::update()
 
 void itemBase::render()
 {
-	CAMERAMANAGER->aniRenderObject(BGMAP, _img, _ani, _rc.left, _rc.top);
+	CAMERAMANAGER->aniRenderObject(BACKBUFFER, _img, _ani, _rc.left, _rc.top);
 }
 
 void itemBase::reRect()
@@ -129,13 +129,16 @@ void itemBase::fire(ITEM_FIRE itemFire, FPOINT pt)
 		_add.y = -sinf(_angle) * _speed;
 		break;
 	case ITEM_MOVE_PETROL:
-		_time = 0.0f;
 		_petrol = true;
-		_gravity = 0.009f;
 		_add.x = 0;
 		_add.y = -0.5f;
+
+		int qwe = 20;
+		_stopTop = pt.y - qwe;
+		_stopBottom = pt.y + qwe;
 		break;
 	}
+
 
 	
 	//1.7ch
