@@ -83,6 +83,7 @@ HRESULT BardKnight::init()
 	//DIALOGUEMANAGER->setScript("사려면 O키를 안사려면 K키를누르게",255,255,255);
 	
 	_isCollisionPlayer = false;
+	
 	_vDialog.push_back("힘세고 좋은 아침, 묻는다면 나는 바드나이트 음악을 사겠나?");
 	_vDialog.push_back("사려면 O키를 안사려면 K키를누르게");
 
@@ -278,6 +279,7 @@ void BardKnight::update()
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_RETURN) && _isCollisionPlayer)
 	{
+		//인덱스값으로 다이얼로그 벡터에 있는 값을 빼낸다
 		DIALOGUEMANAGER->setScript(_vDialog[_idx], 255, 255, 255);
 		//_isReturn = true;
 		_idx += 1;	

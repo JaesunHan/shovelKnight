@@ -195,7 +195,7 @@ void gameCollision::PlayerMeetNPC()
 		_player->setSkillUnlockLv(_store->getVNpc()[i]->getSkillUnlockLv());
 
 		_store->getVNpc()[i]->setMoney(_player->getMoney());
-		_player->setMoney(_store->getVNpc()[i]->getMinusMoney());
+		
 		_store->getVNpc()[i]->setMinusMoney(0);
 
 		//_store->getVNpc()[i]->setMaxHp(0);
@@ -211,9 +211,32 @@ void gameCollision::PlayerMeetNPC()
 		{
 			_store->getVNpc()[i]->isCollision(true);
 			_playerMeetNPC = true;
-			_player->setMaxHP(2);
-			_store->getVNpc()[i]->setMaxHp(_player->getMaxHP());
-
+			//만약 지금 충돌한 애가 헬스가이면
+			if (_store->getVNpc()[i]->getNpcType() == HEALTYGUY)
+			{	//1000원보다 소지금이 많으면
+				if (_player->getMoney() >= 1000)
+				{
+					//1000원빼고 
+					_player->setMoney(-1000);
+					_store->getVNpc()[i]->setMaxHp(_player->getMaxHP());
+					_player->setMaxHP(2);
+				}
+				if(_player->getMoney() < 1000)
+				{
+					return;
+				}
+			}
+			
+			if (_store->getVNpc()[i]->getNpcType() == MAGICGIRL)
+			{
+				if (_player->getMoney() >= 1000)
+				{
+					//1000원빼고 
+					_player->setMoney(-1000);
+					_player->setSkillUnlockLv(1);
+				}
+				
+			}
 
 		}
 		else
