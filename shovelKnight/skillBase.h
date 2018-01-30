@@ -53,10 +53,10 @@ protected:
 	bool _isRight;
 	SKILL_STATS _stats;
 
-	char* _startName;
-	char* _loopNameL;
-	char* _loopNameR;
-	char* _outName;
+	string _startName;
+	string _loopNameL;
+	string _loopNameR;
+	string _outName;
 
 	float _saveX;
 
@@ -65,9 +65,8 @@ protected:
 	SKILL_TYPE _skillType;
 
 protected:
-	char* getStartName() { return _startName; }
-	char* getLoopNameL() { return _loopNameL; }
-	char* getOutName() { return _outName; }
+	string getStartName() { return _startName; }
+	string getOutName() { return _outName; }
 
 	void setStartName(char* str) { _startName = str; }
 	void setLoopNameL(char* str) { _loopNameL = str; }
@@ -99,6 +98,8 @@ public:
 	virtual SKILL_TYPE getSkillType() { return _skillType; }
 
 	virtual RECT getRect() { return _rc; }
+
+	virtual string getLoopNameL() { return _loopNameL; }
 
 	static void goLoopL(void* obj);
 	static void goLoopR(void* obj);
