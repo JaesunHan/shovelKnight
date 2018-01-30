@@ -30,13 +30,13 @@ enum SKILL_DAMAGE
 	SKILL_DAMAGE_ENEMY,
 };
 
-enum SKILL
+enum SKILL_TYPE
 {
-	SKILL_BUBBLE,
-	SKILL_DARKKNIGHT_FIREBALL,
-	SKILL_DIRTBLOCKFX,
-	SKILL_FIREBALL,
-	SKILL_ENEMYDEADFX,
+	SKILL_TYPE_BUBBLE,
+	SKILL_TYPE_DARKKNIGHT_FIREBALL,
+	SKILL_TYPE_DIRTBLOCKFX,
+	SKILL_TYPE_FIREBALL,
+	SKILL_TYPE_ENEMYDEADFX,
 };
 
 class skillBase
@@ -61,6 +61,8 @@ protected:
 	float _saveX;
 
 	SKILL_DAMAGE _skillWhoDamage;
+
+	SKILL_TYPE _skillType;
 
 protected:
 	char* getStartName() { return _startName; }
@@ -93,6 +95,8 @@ public:
 	virtual void setIsHavePlayer(SKILL_DAMAGE re) { _skillWhoDamage = re; }
 
 	virtual void setPlusSaveX(float x) { _saveX += x; }
+
+	virtual SKILL_TYPE getSkillType() { return _skillType; }
 
 	virtual RECT getRect() { return _rc; }
 

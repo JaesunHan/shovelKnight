@@ -47,7 +47,7 @@ public:
 	bool getPlayerMeetNPC() {	return _playerMeetNPC;	}
 
 
-	void enemyDead();
+	void enemyDeadAndAttack();
 	void PlayerMeetNPC();
 	void PlayerAndEnemy();
 	void EnemyAction();

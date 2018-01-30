@@ -69,20 +69,20 @@ void skill_darkKnight_fireBall::fire(SKILL_FIRE charType, float x, float y)
 		char str7[128];
 
 		itoa(num, str7, 10);
-		char* str5 = "skillFireBallLoop";
+		char str5[128] = "skillFireBallLoop";
 
 		strcat(str5, str7);
 
 
 		while (KEYANIMANAGER->findAnimation(str5) != NULL)
 		{
-			str5 = LPSTR_To_String("skillFireBallLoop");
+			ZeroMemory(str5, sizeof(str5));
 			++num;
 			itoa(num, str7, 10);
 			strcat(str5, str7);
 
 		}
-		char* str0 = new char[strlen(str5) + 1];
+		char str0[128];
 
 		strcpy(str0, str5);
 		char* str9;
@@ -123,6 +123,7 @@ void skill_darkKnight_fireBall::fire(SKILL_FIRE charType, float x, float y)
 		_x -= variable;
 	}
 
+	_skillType = SKILL_TYPE_DARKKNIGHT_FIREBALL;
 
 	_isFire = true;
 	_ani->start();

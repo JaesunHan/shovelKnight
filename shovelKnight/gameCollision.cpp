@@ -34,13 +34,15 @@ void gameCollision::release()
 
 void gameCollision::update()
 {
-	enemyDead();
+	enemyDeadAndAttack();
 	if (KEYMANAGER->isOnceKeyDown('Q') || _playerMeetNPC) PlayerMeetNPC();
 	PlayerAndEnemy();
+	PlayerAndSkill();
 
 	if (KEYMANAGER->isOnceKeyDown('F'))
 	{
-		_skill->Fire(SKILL_FIRE_CENTER, SKILL_DARKKNIGHT_FIREBALL, 200, 200);
+		_skill->Fire(SKILL_FIRE_DARKKNIGHT_LEFT, SKILL_TYPE_DARKKNIGHT_FIREBALL, WINSIZEX / 2 - 30, WINSIZEY / 2 - 30);
+
 	}
 	
 	//collisionPlayerMapRight();
@@ -61,7 +63,7 @@ void gameCollision::render()
 
 }
 
-void gameCollision::enemyDead()
+void gameCollision::enemyDeadAndAttack()
 {
 	//몬스터에 따라 죽는게 다르므로 스위치로 나눔
 
@@ -76,25 +78,25 @@ void gameCollision::enemyDead()
 		case ENEMY_BEETO:
 			if (_enemy->getVEnemy()[i]->getIsDeadVanish())
 			{
-				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
+				_skill->Fire(SKILL_FIRE_CENTER, SKILL_TYPE_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
 			}
 			break;
 		case ENEMY_BLORB:
 			if (_enemy->getVEnemy()[i]->getIsDeadVanish())
 			{
-				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
+				_skill->Fire(SKILL_FIRE_CENTER, SKILL_TYPE_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
 			}
 			break;
 		case ELEMY_DRAKE:
 			if (_enemy->getVEnemy()[i]->getIsDeadVanish())
 			{
-				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
+				_skill->Fire(SKILL_FIRE_CENTER, SKILL_TYPE_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
 			}
 			break;
 		case ENEMY_SKELETON:
 			if (_enemy->getVEnemy()[i]->getIsDeadVanish())
 			{
-				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
+				_skill->Fire(SKILL_FIRE_CENTER, SKILL_TYPE_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
 			}
 			break;
 		case ENEMY_DRAGON:
@@ -115,7 +117,7 @@ void gameCollision::enemyDead()
 				if (_countDragonEffect > 0)
 				{
 					RECT rc3 = _enemy->getVEnemy()[i]->getBoss1TrunkRect();
-					_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX,
+					_skill->Fire(SKILL_FIRE_CENTER, SKILL_TYPE_ENEMYDEADFX,
 						RND->getFromFloatTo(rc3.left, rc3.right),
 						RND->getFromFloatTo(rc3.top, rc3.top + ((rc3.top + rc3.bottom) / 6)));
 					--_countDragonEffect;
@@ -129,10 +131,10 @@ void gameCollision::enemyDead()
 				{
 					if (_countDragonAttackEffect == 2)
 					{
-						_skill->Fire(SKILL_FIRE_DRAGON_LEFT, SKILL_BUBBLE, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY() + 20);
+						_skill->Fire(SKILL_FIRE_DRAGON_LEFT, SKILL_TYPE_BUBBLE, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY() + 20);
 						_skill->getVSkill()[_skill->getVSkill().size() - 1]->setPlusSaveX(-20);
 					}
-					else _skill->Fire(SKILL_FIRE_DRAGON_LEFT, SKILL_BUBBLE, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
+					else _skill->Fire(SKILL_FIRE_DRAGON_LEFT, SKILL_TYPE_BUBBLE, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
 					_countDragonAttackEffect--;
 					_dragonAttackTime -= 0.25;
 				}
@@ -159,7 +161,7 @@ void gameCollision::enemyDead()
 				if (_countDarkknightEffect > 0)
 				{
 					RECT rc3 = _enemy->getVEnemy()[i]->getRect();
-					_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX,
+					_skill->Fire(SKILL_FIRE_CENTER, SKILL_TYPE_ENEMYDEADFX,
 						RND->getFromFloatTo(rc3.left, rc3.right),
 						RND->getFromFloatTo(rc3.top, rc3.top + ((rc3.top + rc3.bottom) / 6)));
 					--_countDarkknightEffect;
@@ -173,7 +175,21 @@ void gameCollision::enemyDead()
 				if (_darkknightAttackTime > 1.f && _countDarkknightAttackEffect != 0)
 				{
 
-					_skill->Fire(SKILL_FIRE_DARKKNIGHT_LEFT, SKILL_DARKKNIGHT_FIREBALL,
+					_skill->Fire(SKILL_FIRE_DARKKNIGHT_LEFT, SKILL_TYPE_DARKKNIGHT_FIREBALL,
+						_enemy->getVEnemy()[i]->getX(),
+						_enemy->getVEnemy()[i]->getY());
+					_countDarkknightAttackEffect--;
+					_darkknightAttackTime -= 1.f;
+				}
+			}
+			else if (_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_ATTACK)
+			{
+				_darkknightAttackTime += TIMEMANAGER->getElapsedTime();
+
+				if (_darkknightAttackTime > 1.f && _countDarkknightAttackEffect != 0)
+				{
+
+					_skill->Fire(SKILL_FIRE_DARKKNIGHT_RIGHT, SKILL_TYPE_DARKKNIGHT_FIREBALL,
 						_enemy->getVEnemy()[i]->getX(),
 						_enemy->getVEnemy()[i]->getY());
 					_countDarkknightAttackEffect--;
@@ -288,28 +304,48 @@ void gameCollision::EnemyAction()
 
 void gameCollision::PlayerAndSkill()
 {
-	for (int i = 0; i != _skill->getVSkill().size(); ++i)
+	if (_skill->getVSkill().size())
 	{
-		RECT rc;
-		if (_skill->getVSkill()[i]->getIsHavePlayer() == SKILL_DAMAGE_PLAYER
-			|| _skill->getVSkill()[i]->getIsHavePlayer() == SKILL_DAMAGE_PLAYER_AND_ENEMY
-			&& IntersectRect(&rc, &_player->getPlayerRC(), &_skill->getVSkill()[i]->getRect()))
+		for (int i = 0; i != _skill->getVSkill().size(); ++i)
 		{
-			_skill->getVSkill()[i]->goOut;
-			_player->setDamagePlayer();
-		}
-		for (int j = 0; j != _enemy->getVEnemy().size(); ++j)
-		{
+			RECT rc;
 			if (_skill->getVSkill()[i]->getIsHavePlayer() == SKILL_DAMAGE_PLAYER
-				|| _skill->getVSkill()[i]->getIsHavePlayer() == SKILL_DAMAGE_PLAYER_AND_ENEMY
-				&& IntersectRect(&rc, &_enemy->getVEnemy()[j]->getRect(), &_skill->getVSkill()[i]->getRect()))
+				|| _skill->getVSkill()[i]->getIsHavePlayer() == SKILL_DAMAGE_PLAYER_AND_ENEMY)
 			{
-				_skill->getVSkill()[i]->goOut;
-				_enemy->getVEnemy()[i]->setEnemyDamage();
+				if (IntersectRect(
+					&rc,
+					&_player->getPlayerRC(),
+					&_skill->getVSkill()[i]->getRect()))
+				{
+					if (_skill->getVSkill()[i]->getSkillType() == SKILL_TYPE_BUBBLE)
+					{
+						_skill->getVSkill()[i]->goOut(_skill->getVSkill()[i]);
+						_player->setDamagePlayer();
+					}
+					else
+					{
+						_skill->getVSkill()[i]->isOut(_skill->getVSkill()[i]);
+						_player->setDamagePlayer();
+					}
+					if (_skill->getVSkill()[i]);
+				}
 			}
-			
+
+			for (int j = 0; j != _enemy->getVEnemy().size(); ++j)
+			{
+				if ((_skill->getVSkill()[i]->getIsHavePlayer() == SKILL_DAMAGE_ENEMY
+					|| _skill->getVSkill()[i]->getIsHavePlayer() == SKILL_DAMAGE_PLAYER_AND_ENEMY))
+				{
+					if (IntersectRect(&rc, &_enemy->getVEnemy()[j]->getRect(), &_skill->getVSkill()[i]->getRect()))
+					{
+						_skill->getVSkill()[i]->goOut(_skill->getVSkill()[i]);
+						_enemy->getVEnemy()[i]->setEnemyDamage();
+					}
+				}
+
+			}
+
+
 		}
-
-
 	}
 }

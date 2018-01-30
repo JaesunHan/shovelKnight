@@ -96,6 +96,7 @@ void skill_Bubble::fire(SKILL_FIRE charType, float x, float y)
 
 	_ani = KEYANIMANAGER->findAnimation(_loopNameL);
 	_stats = SKILL_STATS_LOOP_L;
+	_skillType = SKILL_TYPE_BUBBLE;
 
 	_isRight = false;
 	_isFire = true;
