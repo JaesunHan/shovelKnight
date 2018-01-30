@@ -35,7 +35,7 @@ HRESULT HealtyGuy::init()
 
 	//NPC 이미지
 	_img = IMAGEMANAGER->addFrameImage(_imgKeyString, _imgFileName, 70, 47, 2, 1, true, RGB(255, 0, 255), false);											// NPC 이미지
-	IMAGEMANAGER->addFrameImage("HealtyGuyGood", "./image/npc/healthGuyGood.bmp", 168, 67, 4, 1, true, RGB(255, 0, 255), false);
+	IMAGEMANAGER->addFrameImage("HealtyGuyGood", "./image/npc/healthGuyGood1.bmp", 168, 90, 4, 1, true, RGB(255, 0, 255), false);
 	IMAGEMANAGER->addFrameImage("HealtyGuyCook", "./image/npc/healthGuyBackCook.bmp", 897, 43, 23, 1, true, RGB(255, 0, 255), false);
 
 
@@ -106,7 +106,7 @@ void HealtyGuy::isCollision(bool collision)
 					if (_money >= 1000)				//1000원보다 돈이 많다면
 					{
 						_minusMoney -= 1000;						//플레이어 골드에서 1000원을 감소하고
-						_setMaxHp += 2;
+						//_setMaxHp += 2;
 						_stock = 1;						//한번 구매했으니까 stock을 1로 반환해준다.
 					}
 					if (_money < 1000)						//플레이어 골드가 1000원보다 작다면
@@ -123,7 +123,7 @@ void HealtyGuy::isCollision(bool collision)
 					{
 
 						_minusMoney -= 3000;				//플레이어 골드에서 1000원을 감소하고
-						_setMaxHp += 2;
+						//_setMaxHp += 2;
 						_stock = 2;							//한번 구매했으니까 stock을 1로 반환해준다.
 					}
 					if (_money < 3000)						//플레이어 골드가 1000원보다 작다면

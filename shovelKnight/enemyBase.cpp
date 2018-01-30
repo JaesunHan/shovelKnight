@@ -54,8 +54,8 @@ void enemyBase::render()
 	//필요하다면 자식클래스의 draw() 함수에서 부모클래스의 draw()를 호출하도록 하자
 	draw();
 
-	TTTextOut(CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_y - 10), "힛트", _isHit);
-	TTTextOut(CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_y - 20), "상태", _status);
+	//TTTextOut(CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_y - 10), "힛트", _isHit);
+	//TTTextOut(CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_y - 20), "상태", _status);
 	//TTTextOut(CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_rc.bottom + 5), "좌표", _rc.bottom);
 }
 
@@ -89,3 +89,7 @@ bool enemyBase::isPlayerFind(float enemyX, int distance)
 	return false;
 }
 
+void enemyBase::attackCollisionRect()
+{
+
+}

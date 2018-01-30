@@ -23,5 +23,6 @@ public:
 
 	inline void enemyInitSet();
 	inline void enemyPattern(int _patternTypeNum);
+	virtual void attackCollisionRect();
 };
 
