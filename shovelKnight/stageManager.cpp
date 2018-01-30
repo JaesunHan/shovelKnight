@@ -23,7 +23,7 @@ HRESULT stageManager::init()
 	_mapLoaded = false;
 	_transition = false;
 
-	_mapNum = 1;
+	_mapNum = 2;
 
 	_loopX1 = 0;
 	_loopX2 = 100;

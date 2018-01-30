@@ -68,7 +68,8 @@ void player1::update()
 		_frameX = 0;
 		_isDead = true;
 	}
-	_playerRC = RectMake(_x - HIT_BOX_WIDTH / 2, _y - HIT_BOX_HEIGHT, HIT_BOX_WIDTH, HIT_BOX_HEIGHT);
+	if (_downwardThrust == true) _playerRC = RectMake(_x - HIT_BOX_WIDTH / 2, _y - HIT_BOX_HEIGHT, HIT_BOX_WIDTH, HIT_BOX_HEIGHT - 5);
+	else _playerRC = RectMake(_x - HIT_BOX_WIDTH / 2, _y - HIT_BOX_HEIGHT, HIT_BOX_WIDTH, HIT_BOX_HEIGHT);
 	if (KEYMANAGER->isOnceKeyDown('R'))
 	{
 		if (_isDead == true) SCENEMANAGER->changeScene("GameTitleScene");
@@ -153,11 +154,11 @@ void player1::render()
 
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
-		//Rectangle(getMemDC(),
-		//	CAMERAMANAGER->getX(_playerRC.left),
-		//	CAMERAMANAGER->getY(_playerRC.top),
-		//	CAMERAMANAGER->getX(_playerRC.right),
-		//	CAMERAMANAGER->getY(_playerRC.bottom));
+		Rectangle(getMemDC(),
+			CAMERAMANAGER->getX(_playerRC.left),
+			CAMERAMANAGER->getY(_playerRC.top),
+			CAMERAMANAGER->getX(_playerRC.right),
+			CAMERAMANAGER->getY(_playerRC.bottom));
 		Rectangle(getMemDC(),
 			CAMERAMANAGER->getX(_attackRC.left),
 			CAMERAMANAGER->getY(_attackRC.top),
