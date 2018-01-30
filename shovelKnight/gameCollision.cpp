@@ -258,11 +258,6 @@ void gameCollision::PlayerAndEnemy()
 		{
 			_player->setDamagePlayer();
 		}
-		if (_enemy->getVEnemy()[i]->getEnemyType() == ENEMY_DRAGON &&
-			IntersectRect(&temp, &_player->getAttackRC(), &_enemy->getVEnemy()[i]->getBoss1TrunkRect()))
-		{
-			_player->setDamagePlayer();
-		}
 
 		if (_enemy->getVEnemy()[i]->getEnemyType() == ENEMY_DRAGON)
 		{
@@ -327,7 +322,23 @@ void gameCollision::PlayerAndSkill()
 						_skill->getVSkill()[i]->isOut(_skill->getVSkill()[i]);
 						_player->setDamagePlayer();
 					}
-					if (_skill->getVSkill()[i]);
+				}
+
+				if (IntersectRect(
+					&rc,
+					&_player->getAttackRC(),
+					&_skill->getVSkill()[i]->getRect()))
+				{
+					if (_skill->getVSkill()[i]->getSkillType() == SKILL_TYPE_BUBBLE)
+					{
+						_skill->getVSkill()[i]->goOut(_skill->getVSkill()[i]);
+					}
+					else if (_skill->getVSkill()[i]->getSkillType() == SKILL_TYPE_DARKKNIGHT_FIREBALL)
+					{
+						_skill->getVSkill()[i]->setIsHavePlayer(SKILL_DAMAGE_ENEMY);
+						_skill->getVSkill()[i]->setIsRight(!_skill->getVSkill()[i]->getIsRight());
+						_skill->getVSkill()[i]->goLoop(_skill->getVSkill()[i]);
+					}
 				}
 			}
 

@@ -102,6 +102,7 @@ public:
 
 	static void goLoopL(void* obj);
 	static void goLoopR(void* obj);
+	static void goLoop(void* obj);
 	static void goOut(void* obj);
 	static void isOut(void* obj);
 };
