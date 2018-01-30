@@ -241,23 +241,23 @@ void HealtyGuy::update()
 
 
 
-	if (!_dialogue && _isCollisionPlayer)
-	{
-		//인덱스값으로 다이얼로그 벡터에 있는 값을 빼낸다
-
-		DIALOGUEMANAGER->setScript(_vDialog2[_idx], 255, 255, 255);
-
-		_idx += 1;
-
-		if (_idx >= _vDialog.size())	_idx = 0;
-		_dialogue = true;
-		//	if (_idx >= _vDialog2.size())
-	
-	}
-	else if(!_isCollisionPlayer)
-	{
-		_dialogue = false;
-	}
+	//if (!_dialogue && _isCollisionPlayer)
+	//{
+	//	//인덱스값으로 다이얼로그 벡터에 있는 값을 빼낸다
+	//
+	//	DIALOGUEMANAGER->setScript(_vDialog2[_idx], 255, 255, 255);
+	//
+	//	_idx += 1;
+	//
+	//	if (_idx >= _vDialog.size())	_idx = 0;
+	//	_dialogue = true;
+	//	//	if (_idx >= _vDialog2.size())
+	//
+	//}
+	//else if(!_isCollisionPlayer)
+	//{
+	//	_dialogue = false;
+	//}
 
 	if (KEYMANAGER->isOnceKeyDown('O'))
 	{
