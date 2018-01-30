@@ -106,7 +106,7 @@ void HealtyGuy::isCollision(bool collision)
 					if (_money >= 1000)				//1000원보다 돈이 많다면
 					{
 						_minusMoney -= 1000;						//플레이어 골드에서 1000원을 감소하고
-						_setMaxHp += 2;
+						//_setMaxHp += 2;
 						_stock = 1;						//한번 구매했으니까 stock을 1로 반환해준다.
 					}
 					if (_money < 1000)						//플레이어 골드가 1000원보다 작다면
@@ -123,7 +123,7 @@ void HealtyGuy::isCollision(bool collision)
 					{
 
 						_minusMoney -= 3000;				//플레이어 골드에서 1000원을 감소하고
-						_setMaxHp += 2;
+						//_setMaxHp += 2;
 						_stock = 2;							//한번 구매했으니까 stock을 1로 반환해준다.
 					}
 					if (_money < 3000)						//플레이어 골드가 1000원보다 작다면
@@ -189,8 +189,8 @@ void HealtyGuy::render()
 	}
 	if (_textOut)
 	{
-		TTTextOut(500, 300, "플레이어돈", _money);
-		TTTextOut(500, 200, "플레이어최대체력", _setMaxHp);
+		TTTextOut(300, 300, "플레이어돈", _money);
+		TTTextOut(300, 200, "플레이어최대체력", _setMaxHp);
 	}
 }
 

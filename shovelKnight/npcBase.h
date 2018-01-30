@@ -112,6 +112,7 @@ public:
 	//void setIsCollision(bool isCollision) { _isCollisionNpc = isCollision; }
 
 	virtual void isCollision(bool collision) = 0;
+	bool getIsCollisionNPC() { return _isCollisionNpc; }
 
 
 	//===========================================¤¸¤µÇÕ´Ï´Ù========================================

@@ -66,9 +66,6 @@
     <Filter Include="playGround\gamePlayScene\npc">
       <UniqueIdentifier>{56dd8e94-02fb-425e-8128-04c76446db9f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\gamePlayScene\gameObject">
-      <UniqueIdentifier>{fc873b2c-4004-44a2-b595-1a796971b79b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="playGround\gamePlayScene\item">
       <UniqueIdentifier>{609807eb-42ee-4226-a274-87d6ba362ce1}</UniqueIdentifier>
     </Filter>
@@ -210,12 +207,6 @@
     <ClInclude Include="npcBase.h">
       <Filter>playGround\gamePlayScene\npc</Filter>
     </ClInclude>
-    <ClInclude Include="gameObjectBase.h">
-      <Filter>playGround\gamePlayScene\gameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="gameObjectManager.h">
-      <Filter>playGround\gamePlayScene\gameObject</Filter>
-    </ClInclude>
     <ClInclude Include="itemManager.h">
       <Filter>playGround\gamePlayScene\item</Filter>
     </ClInclude>
@@ -272,9 +263,6 @@
     </ClInclude>
     <ClInclude Include="TTUtils.h">
       <Filter>2DGameFramework\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="dirtBlock.h">
-      <Filter>playGround\gamePlayScene\gameObject</Filter>
     </ClInclude>
     <ClInclude Include="stageManager.h">
       <Filter>playGround\gamePlayScene\stageManager</Filter>
@@ -356,15 +344,6 @@
     </ClInclude>
     <ClInclude Include="bossBlackKnight.h">
       <Filter>playGround\gamePlayScene\enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="checkPoint.h">
-      <Filter>playGround\gamePlayScene\gameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="dirtPile.h">
-      <Filter>playGround\gamePlayScene\gameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="tresureBox.h">
-      <Filter>playGround\gamePlayScene\gameObject</Filter>
     </ClInclude>
     <ClInclude Include="frontObjectManager.h">
       <Filter>playGround\gamePlayScene\stageManager</Filter>
@@ -464,12 +443,6 @@
     <ClCompile Include="npcBase.cpp">
       <Filter>playGround\gamePlayScene\npc</Filter>
     </ClCompile>
-    <ClCompile Include="gameObjectBase.cpp">
-      <Filter>playGround\gamePlayScene\gameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="gameObjectManager.cpp">
-      <Filter>playGround\gamePlayScene\gameObject</Filter>
-    </ClCompile>
     <ClCompile Include="itemManager.cpp">
       <Filter>playGround\gamePlayScene\item</Filter>
     </ClCompile>
@@ -520,9 +493,6 @@
     </ClCompile>
     <ClCompile Include="TTUtils.cpp">
       <Filter>2DGameFramework\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="dirtBlock.cpp">
-      <Filter>playGround\gamePlayScene\gameObject</Filter>
     </ClCompile>
     <ClCompile Include="stageManager.cpp">
       <Filter>playGround\gamePlayScene\stageManager</Filter>
@@ -607,15 +577,6 @@
     </ClCompile>
     <ClCompile Include="bossBlackKnight.cpp">
       <Filter>playGround\gamePlayScene\enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="checkPoint.cpp">
-      <Filter>playGround\gamePlayScene\gameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="dirtPile.cpp">
-      <Filter>playGround\gamePlayScene\gameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="tresureBox.cpp">
-      <Filter>playGround\gamePlayScene\gameObject</Filter>
     </ClCompile>
     <ClCompile Include="frontObjectManager.cpp">
       <Filter>playGround\gamePlayScene\stageManager</Filter>

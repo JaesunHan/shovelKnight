@@ -155,19 +155,23 @@ void gameCollision::PlayerMeetNPC()
 		_player->setMoney(_store->getVNpc()[i]->getMinusMoney());
 		_store->getVNpc()[i]->setMinusMoney(0);
 
-		_player->setMaxHP(_store->getVNpc()[i]->getMaxHp());
-		_store->getVNpc()[i]->setMaxHp(0);
+		//_store->getVNpc()[i]->setMaxHp(0);
+		//_player->setMaxHP(_store->getVNpc()[i]->getMaxHp()+2);
 		
 
 
 		if (IntersectRect(
 			&temp, 
 			&_player->getPlayerRC(), 
-			&_store->getVNpc()[i]->getRect()))
+			&_store->getVNpc()[i]->getRect()) && !(_store->getVNpc()[i]->getIsCollisionNPC()) )
 
 		{
 			_store->getVNpc()[i]->isCollision(true);
 			_playerMeetNPC = true;
+			_player->setMaxHP(2);
+			_store->getVNpc()[i]->setMaxHp(_player->getMaxHP());
+
+
 		}
 		else
 		{

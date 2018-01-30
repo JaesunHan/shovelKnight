@@ -15,7 +15,6 @@ gamePlayScene::~gamePlayScene()
 HRESULT gamePlayScene::init()
 {
 	_enemy = new enemyManager;
-	_gameObject = new gameObjectManager;
 	_item = new itemManager;
 	_Store = new StoreManager;
 	_skill = new skillManager;
@@ -26,7 +25,6 @@ HRESULT gamePlayScene::init()
 	_object = new frontObjectManager;
 
 	_gameCollision->getEmemyMemoryAdress(_enemy);
-	_gameCollision->getGameObjectMemoryAdress(_gameObject);
 	_gameCollision->getItemMemoryAdress(_item);
 	_gameCollision->getStoreMemoryAdress(_Store);
 	_gameCollision->getSkillMemoryAdress(_skill);
@@ -41,7 +39,6 @@ HRESULT gamePlayScene::init()
 	_object->setStageManagerMemoryAddressLink(_stage);
 
 	_enemy->init();
-	_gameObject->init();
 	_item->init();
 	_Store->init();
 	_skill->init();
@@ -58,7 +55,6 @@ HRESULT gamePlayScene::init()
 void gamePlayScene::release()
 {
 	_enemy->release();
-	_gameObject->release();
 	_item->release();
 	_Store->release();
 	_skill->release();
@@ -73,7 +69,6 @@ void gamePlayScene::update()
 {
 
 	_stage->update();
-	_gameObject->update();
 	_item->update();
 	_enemy->update();
 	_player->update();
@@ -90,7 +85,6 @@ void gamePlayScene::render()
 
 	_stage->render();
 	_Store->render();
-	_gameObject->render();
 	_enemy->render();
 	_player->render();
 	_object->render();

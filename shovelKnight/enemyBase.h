@@ -10,6 +10,8 @@ enum ENEMYSTATUS
 {
 	ENEMY_LEFT_IDLE,
 	ENEMY_RIGHT_IDLE,
+	ENEMY_LEFT_SMILE,
+	ENEMY_RIGHT_SMILE,
 	ENEMY_LEFT_MOVE,
 	ENEMY_RIGHT_MOVE,
 	ENEMY_LEFT_BACK_MOVE,
@@ -93,7 +95,13 @@ protected:
 	int _delayCount;                //hit 지연시간 카운트
 
 	int _patternTypeNum;            //패턴타입
+	int _frameCount;                //상태별 프레임 카운트
 
+	bool _isDialogueEnd;
+	bool _isAniPlayEnd;
+	int _patternTrun;
+	int _patternCount;
+	bool _isFight;
 
 	
 
@@ -116,6 +124,8 @@ public:
 	virtual void enemyInitSet() = 0;
 	virtual void enemyPattern(int _patternTypeNum) = 0;
 	virtual void move() = 0;
+	virtual void attackCollisionRect();
+
 	bool isPlayerFind(float enemyX, int distance);
 
 	//==================================== Start 게터 세터 작성하기===================================
