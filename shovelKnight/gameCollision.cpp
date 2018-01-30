@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "gameCollision.h"
 
 
@@ -40,22 +40,22 @@ void gameCollision::update()
 	PlayerAndEnemy();
 	PlayerAndSkill();
 
-	if (KEYMANAGER->isOnceKeyDown('F'))
-	{
-		_skill->Fire(SKILL_FIRE_DARKKNIGHT_LEFT, SKILL_TYPE_DARKKNIGHT_FIREBALL, WINSIZEX / 2 - 30, WINSIZEY / 2 - 30);
+	//if (KEYMANAGER->isOnceKeyDown('F'))
+	//{
+	//	_skill->Fire(SKILL_FIRE_DARKKNIGHT_RIGHT, /SKILL_TYPE_DARKKNIGHT_FIREBALL, /30, WINSIZEY / 2 - 30);
+	//
+	//}
 
-	}
-	
 	//collisionPlayerMapRight();
 	//collisionPlayerMapLeft();
 	//collisionPlayerMapDown(); 
 	//collisionPlayerMapUp();
 	//collisionPlayerInAir();
 
-	//ÇÃ·¹ÀÌ¾î¿Í ½ºÅ³ÀÇ Ãæµ¹	 
-	//Àû°ú ½ºÅ³ÀÇ Ãæµ¹
-	//ÇÃ·¹ÀÌ¾î¿Í itemÀÇ Ãæµ¹
-	//ÇÃ·¹ÀÌ¾î¿Í ½ºÅ³ÀÇ Ãæµ¹
+	//í”Œë ˆì´ì–´ì™€ ìŠ¤í‚¬ì˜ ì¶©ëŒ	 
+	//ì ê³¼ ìŠ¤í‚¬ì˜ ì¶©ëŒ
+	//í”Œë ˆì´ì–´ì™€ itemì˜ ì¶©ëŒ
+	//í”Œë ˆì´ì–´ì™€ ìŠ¤í‚¬ì˜ ì¶©ëŒ
 
 }
 
@@ -66,12 +66,12 @@ void gameCollision::render()
 
 void gameCollision::enemyDeadAndAttack()
 {
-	//¸ó½ºÅÍ¿¡ µû¶ó Á×´Â°Ô ´Ù¸£¹Ç·Î ½ºÀ§Ä¡·Î ³ª´®
+	//ëª¬ìŠ¤í„°ì— ë”°ë¼ ì£½ëŠ”ê²Œ ë‹¤ë¥´ë¯€ë¡œ ìŠ¤ìœ„ì¹˜ë¡œ ë‚˜ëˆ”
 
 
 
-	//µå·¡°ïÀº ¸Ó¸®¸¸ °ø°Ý
-	//µå·¹°ï µ¥³ª´Â ÆøÆÈÀÌÆåÆ® ¿©·¯¹ø, Ä«¿îÆ®·Î Àû¿ë
+	//ë“œëž˜ê³¤ì€ ë¨¸ë¦¬ë§Œ ê³µê²©
+	//ë“œë ˆê³¤ ë°ë‚˜ëŠ” í­íŒ”ì´íŽ™íŠ¸ ì—¬ëŸ¬ë²ˆ, ì¹´ìš´íŠ¸ë¡œ ì ìš©
 	for (int i = 0; i != _enemy->getVEnemy().size(); ++i)
 	{
 		switch (_enemy->getVEnemy()[i]->getEnemyType())
@@ -210,11 +210,11 @@ void gameCollision::enemyDeadAndAttack()
 void gameCollision::PlayerMeetNPC()
 {
 	RECT temp;
-	for (int i = 0; i < _store->getVNpc().size(); ++i)
+	for (int i = 0; i != _store->getVNpc().size(); ++i)
 	{
 
 		//_store->getVNpc()[i]->setSkillUnlockLv(_player->getSkillUnlockLv());
-		//layer->setSkillUnlockLv(_store->getVNpc()[i]->getSkillUnlockLv());
+		//_player->setSkillUnlockLv(_store->getVNpc()[i]->getSkillUnlockLv());
 
 		//_store->getVNpc()[i]->setMoney(_player->getMoney());
 		//_player->setMoney(_store->getVNpc()[i]->getMinusMoney());
@@ -222,43 +222,46 @@ void gameCollision::PlayerMeetNPC()
 
 		//_store->getVNpc()[i]->setMaxHp(0);
 		//_player->setMaxHP(_store->getVNpc()[i]->getMaxHp()+2);
-		
+
+
 
 		/*bool interRect = IntersectRect(
-			&temp,
-			&_player->getPlayerRC(),
-			&_store->getVNpc()[i]->getRect());
+		&temp,
+		&_player->getPlayerRC(),
+		&_store->getVNpc()[i]->getRect());
 		bool checkcollision = (_store->getVNpc()[i]->getIsCollisionNPC());*/
 		if (IntersectRect(
-			&temp, 
-			&_player->getPlayerRC(), 
-			&_store->getVNpc()[i]->getRect()) && !(_store->getVNpc()[i]->getIsCollisionNPC()) )
+			&temp,
+			&_player->getPlayerRC(),
+			&_store->getVNpc()[i]->getRect())
+			&& !(_store->getVNpc()[i]->getIsCollisionNPC()))
 
 		{
 			_store->getVNpc()[i]->isCollision(true);
 			_playerMeetNPC = true;
-
-			//Çï½º°¡ÀÌ
+			//_player->setMaxHP(2);
+			//_store->getVNpc()[i]->setMaxHp(_player->getMaxHP());
+			//ï¿½ï½ºï¿½ï¿½ï¿½ï¿½
 			if (_store->getVNpc()[i]->getNpcType() == HEALTYGUY)
 			{
-				//¼ÒÁö±ÝÀÌ 1000¿øº¸´Ù Å©¸é
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1000ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½
 				if (_player->getMoney() >= 1000)
 				{
-					//1000¿ø °¨¼ÒÇÏ°í 
+					//1000ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ 
 					_player->setMoney(-1000);
-					//TTTextOut(400, 400, "ÇÃ·¹ÀÌ¾îµ·", _player->getMoney());
-					//ÃÖ´ëÃ¼·Â 2Áõ°¡
+					//TTTextOut(400, 400, "ï¿½Ã·ï¿½ï¿½Ì¾îµ·", _player->getMoney());
+					//ï¿½Ö´ï¿½Ã¼ï¿½ï¿½ 2ï¿½ï¿½ï¿½ï¿½
 					_player->setMaxHP(2);
 					_player->setHP(_player->getMaxHP());
-					//TTTextOut(400, 500, "ÇÃ·¹ÀÌ¾îÃ¼·Â", _player->getMaxHP());
+					//TTTextOut(400, 500, "ï¿½Ã·ï¿½ï¿½Ì¾ï¿½Ã¼ï¿½ï¿½", _player->getMaxHP());
 				}
 				if (_player->getMoney() < 1000)
 				{
-				
+
 				}
 			}
 
-			//¸ÅÁ÷°É 
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 			if (_store->getVNpc()[i]->getNpcType() == MAGICGIRL)
 			{
 				if (_player->getMoney() >= 1000)
@@ -272,14 +275,13 @@ void gameCollision::PlayerMeetNPC()
 				}
 			}
 
-			//¹Ùµå³ªÀÌÆ®
+			//ï¿½Ùµå³ªï¿½ï¿½Æ®
 			if (_store->getVNpc()[i]->getNpcType() == BARDKNIGHT)
 			{
 				if (_player->getMoney() >= 1000)
 				{
 					_player->setMoney(-1000);
 				}
-
 			}
 		}
 		else
@@ -298,6 +300,13 @@ void gameCollision::PlayerAndEnemy()
 		_enemy->getVEnemy()[i]->getPlayerStatus(_player->getPlayerAction());
 
 		RECT temp;
+		if (_enemy->getVEnemy()[i]->getEnemyType() == ENEMY_SKELETON)
+		{
+			if (IntersectRect(&temp, &_player->getPlayerRC(), &_enemy->getVEnemy()[i]->getAttackRect()))
+			{
+				_player->setDamagePlayer();
+			}
+		}
 
 		if (IntersectRect(&temp, &_player->getPlayerRC(), &_enemy->getVEnemy()[i]->getRect()))
 		{
@@ -333,20 +342,16 @@ void gameCollision::PlayerAndEnemy()
 			}
 		}
 
-		
+
 	}
-}
-
-void gameCollision::EnemyAction()
-{
-
 }
 
 void gameCollision::PlayerAndSkill()
 {
-	if (_skill->getVSkill().size())
+	for (int i = 0; i != _skill->getVSkill().size(); ++i)
 	{
-		for (int i = 0; i != _skill->getVSkill().size(); ++i)
+		if (_skill->getVSkill()[i]->getSkillStats() != SKILL_STATS_START
+			&& _skill->getVSkill()[i]->getSkillStats() != SKILL_STATS_OUT)
 		{
 			RECT rc;
 			if (_skill->getVSkill()[i]->getIsHavePlayer() == SKILL_DAMAGE_PLAYER
@@ -394,14 +399,19 @@ void gameCollision::PlayerAndSkill()
 				{
 					if (IntersectRect(&rc, &_enemy->getVEnemy()[j]->getRect(), &_skill->getVSkill()[i]->getRect()))
 					{
-						_skill->getVSkill()[i]->goOut(_skill->getVSkill()[i]);
-						_enemy->getVEnemy()[i]->setEnemyDamage();
+						if (_skill->getVSkill()[i]->getSkillType() == SKILL_TYPE_BUBBLE)
+						{
+							_skill->getVSkill()[i]->goOut(_skill->getVSkill()[i]);
+							_enemy->getVEnemy()[j]->setEnemyDamage();
+						}
+						else
+						{
+							_skill->getVSkill()[i]->isOut(_skill->getVSkill()[i]);
+							_enemy->getVEnemy()[j]->setEnemyDamage();
+						}
 					}
 				}
-
 			}
-
-
 		}
 	}
 }

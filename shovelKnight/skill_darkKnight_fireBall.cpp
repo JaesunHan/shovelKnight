@@ -51,6 +51,11 @@ void skill_darkKnight_fireBall::update()
 
 void skill_darkKnight_fireBall::fire(SKILL_FIRE charType, float x, float y)
 {
+
+	_img = IMAGEMANAGER->findImage("image/skill/darkKnight_fireBall");
+	_imgWidth = _img->getFrameWidth();
+	_imgHeight = _img->getFrameHeight();
+
 	skillBase::fire(charType, x, y);
 
 	{
@@ -102,11 +107,6 @@ void skill_darkKnight_fireBall::fire(SKILL_FIRE charType, float x, float y)
 	int fireBallLoopL[] = { 4, 5, 6, 7 };
 	KEYANIMANAGER->addArrayFrameAnimation(_loopNameL, "image/skill/darkKnight_fireBall", fireBallLoopL, 4, 8, true);
 
-
-	_img = IMAGEMANAGER->findImage("image/skill/darkKnight_fireBall");
-	_imgWidth = _img->getFrameWidth();
-	_imgHeight = _img->getFrameHeight();
-	reRect();
 
 	int variable = 20;
 
