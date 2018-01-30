@@ -214,13 +214,13 @@ void playerBase::pixelCollision()
 		{
 			for (int i = 0; i < 10; ++i)
 			{
-				color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right, _y + i);
+				color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.right, _playerRC.bottom + i);
 				R = GetRValue(color);
 				G = GetGValue(color);
 				B = GetBValue(color);
 				if ((R == 0 && G == 255 && B == 0) || (R == 0 && G == 0 && B == 255))
 				{
-					_y += i;
+					_y = _playerRC.bottom + i;
 					_jumpPower = 0;
 					_jumpCounter = 0;
 					_jumpKeyDown = false;
@@ -228,13 +228,13 @@ void playerBase::pixelCollision()
 					_state = ONLAND;
 					break;
 				}
-				color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left, _y + i);
+				color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _playerRC.left, _playerRC.bottom + i);
 				R = GetRValue(color);
 				G = GetGValue(color);
 				B = GetBValue(color);
 				if ((R == 0 && G == 255 && B == 0) || (R == 0 && G == 0 && B == 255))
 				{
-					_y += i;
+					_y = _playerRC.bottom + i;
 					_jumpPower = 0;
 					_jumpCounter = 0;
 					_jumpKeyDown = false;
@@ -242,13 +242,13 @@ void playerBase::pixelCollision()
 					_state = ONLAND;
 					break;
 				}
-				color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), (_playerRC.right + _playerRC.left) / 2, _y + i);
+				color = GetPixel(IMAGEMANAGER->findImage("bgMap")->getMemDC(), (_playerRC.right + _playerRC.left) / 2, _playerRC.bottom + i);
 				R = GetRValue(color);
 				G = GetGValue(color);
 				B = GetBValue(color);
 				if ((R == 0 && G == 255 && B == 0) || (R == 0 && G == 0 && B == 255))
 				{
-					_y += i;
+					_y = _playerRC.bottom + i;
 					_jumpPower = 0;
 					_jumpCounter = 0;
 					_jumpKeyDown = false;

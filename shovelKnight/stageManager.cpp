@@ -23,7 +23,7 @@ HRESULT stageManager::init()
 	_mapLoaded = false;
 	_transition = false;
 
-	_mapNum = 2;
+	_mapNum = 1;
 
 	_loopX1 = 0;
 	_loopX2 = 100;
@@ -304,9 +304,21 @@ void stageManager::loadData()
 		{
 			char monsterNum[128];
 			wsprintf(monsterNum, "monster%d", i + 1);
-			_EM->setEnemy(INIDATA->loadDataInterger(monsterINIFile, monsterNum, "type"),
-				INIDATA->loadDataInterger(monsterINIFile, monsterNum, "destX"),
-				INIDATA->loadDataInterger(monsterINIFile, monsterNum, "destY"));
+			int type = INIDATA->loadDataInterger(monsterINIFile, monsterNum, "type");
+			if (type == 2)
+			{
+				_EM->setEnemy(INIDATA->loadDataInterger(monsterINIFile, monsterNum, "type"),
+					INIDATA->loadDataInterger(monsterINIFile, monsterNum, "destX"),
+					INIDATA->loadDataInterger(monsterINIFile, monsterNum, "destY"),
+					INIDATA->loadDataInterger(monsterINIFile, monsterNum, "pattern"));
+			}
+			else
+			{
+				_EM->setEnemy(INIDATA->loadDataInterger(monsterINIFile, monsterNum, "type"),
+					INIDATA->loadDataInterger(monsterINIFile, monsterNum, "destX"),
+					INIDATA->loadDataInterger(monsterINIFile, monsterNum, "destY"));
+			}
+			
 		}
 
 		_FOM->setMapNumber(_mapNum);
