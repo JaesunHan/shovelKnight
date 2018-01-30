@@ -72,4 +72,3 @@ public:
 	stageManager();
 	~stageManager();
 };
-

@@ -2,6 +2,7 @@
 #include "frontObjectManager.h"
 #include "playerManager.h"
 #include "stageManager.h"
+#include "gamePlayUI.h"
 
 
 frontObjectManager::frontObjectManager()
@@ -309,9 +310,14 @@ void frontObjectManager::objectInteraction()
 						RECT temp;
 						if (IntersectRect(&temp, &_PM->getPlayerRC(), &_vObj[_mapNum - 2][i].rc))
 						{
-
-
-
+							char* filename = "playerList";
+							char subjectName[256];
+							wsprintf(subjectName, "player%d", _GPUI->getPlayerIdx());
+							addNsaveINTDataInINIFile(filename, subjectName, "MaxHP", _GPUI->getMaxLife());
+							addNsaveINTDataInINIFile(filename, subjectName, "HP", _GPUI->getLife());
+							addNsaveINTDataInINIFile(filename, subjectName, "Mana", _GPUI->getMana());
+							addNsaveINTDataInINIFile(filename, subjectName, "Money", _GPUI->getGold());
+							
 							_vObj[_mapNum - 2][i].isDestroyed = true;
 						}
 					}
@@ -334,4 +340,11 @@ void frontObjectManager::objectInteraction()
 			}
 		}
 	}
+}
+void frontObjectManager::addNsaveINTDataInINIFile(char* fileName, char subjectName[256], char title[256], int data)
+{
+	char str[128];
+	wsprintf(str, "%d", data);
+	INIDATA->addData(subjectName, title, str);
+	INIDATA->iniSave(fileName);
 }

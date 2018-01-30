@@ -7,7 +7,7 @@ struct tagIniData
 	const char* subject;	//亲格			炼款
 	const char* title;		//家力格			公仿
 	const char* body;		//家力格狼 蔼	97
-};
+}; 
 
 class iniDataManager : public singletonBase<iniDataManager>
 {
