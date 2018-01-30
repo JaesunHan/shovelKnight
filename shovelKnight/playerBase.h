@@ -45,6 +45,7 @@ class stageManager;
 class gameCollision;
 class skillManager;
 class gamePlayUI;
+class frontObjectManager;
 
 class playerBase : public gameNode
 {
@@ -92,6 +93,7 @@ protected :
 	gameCollision* _GC;
 	skillManager* _skillM;
 	gamePlayUI* _GPU;
+	frontObjectManager* _FOM;
 
 public:
 	playerBase();
@@ -110,6 +112,7 @@ public:
 	void hangPixelDetectDown();
 	void frameCounter(float frameMax, float counterMax);
 	void invincibilityCount();
+	void attackReaction();
 
 
 	inline float getPlayerX() { return _x; }
@@ -138,6 +141,7 @@ public:
 	inline void setGameCollisinMemoryAddressLink(gameCollision* gc) { _GC = gc; }
 	inline void setSkillManagerMemoryAddressLink(skillManager* skillm) { _skillM = skillm; }
 	inline void setGamePlayUIMemoryAddressLink(gamePlayUI* gpu) { _GPU = gpu; }
+	inline void setFrontObjectManagerMemoryAddressLink(frontObjectManager* fom) { _FOM = fom; }
 	inline void setPause(bool pause) { _pause = pause; }
 	inline RECT getPlayerRC() { return _playerRC; }
 	inline RECT getAttackRC() { return _attackRC; }

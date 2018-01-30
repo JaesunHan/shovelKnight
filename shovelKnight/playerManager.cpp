@@ -3,6 +3,7 @@
 #include "stageManager.h"
 #include "gameCollision.h"
 #include "skillManager.h"
+#include "frontObjectManager.h"
 #include "gamePlayUI.h"
 
 playerManager::playerManager()
@@ -22,6 +23,7 @@ HRESULT playerManager::init()
 	_p1->setGameCollisinMemoryAddressLink(_GC);
 	_p1->setSkillManagerMemoryAddressLink(_skillM);
 	_p1->setGamePlayUIMemoryAddressLink(_GPU);
+	_p1->setFrontObjectManagerMemoryAddressLink(_FOM);
 
 	return S_OK;
 }

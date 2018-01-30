@@ -18,8 +18,10 @@ HRESULT frontObjectManager::init()
 {
 	IMAGEMANAGER->addImage("grassLarge", ".\\image\\object\\grassLarge.bmp", 32, 16, true, RGB(255, 0, 255), false);
 	IMAGEMANAGER->addImage("grassSmall", ".\\image\\object\\grassSmall.bmp", 16, 16, true, RGB(255, 0, 255), false);
+	//IMAGEMANAGER->addImage("cliffTreeLeft", )
 	IMAGEMANAGER->addFrameImage("dirtBlockLarge", ".\\image\\object\\dirtBlockLarge.bmp", 320, 64, 5, 1, true, RGB(255, 0, 255), false);
 	IMAGEMANAGER->addFrameImage("dirtPile", ".\\image\\object\\dirtPile.bmp", 165, 90, 5, 6, true, RGB(255, 0, 255), false);
+	IMAGEMANAGER->addFrameImage("bubble", ".\\image\\object\\bubble.bmp", 148, 74, 4, 2, true, RGB(255, 0, 255), false);
 	loadData();
 	return S_OK;
 }
@@ -31,7 +33,7 @@ void frontObjectManager::release()
 
 void frontObjectManager::update() 
 {
-	objectInteraction();
+
 }
 
 void frontObjectManager::render() 

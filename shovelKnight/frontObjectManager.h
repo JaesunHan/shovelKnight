@@ -11,8 +11,8 @@ enum OBJECTTYPE
 	platform,
 	ladder,
 	spikeTrap,
-	dirtPile
-
+	dirtPile,
+	bubble
 };
 
 struct tagOBJECT

@@ -4,6 +4,7 @@
 #include "gameCollision.h"
 #include "skillManager.h"
 #include "gamePlayUI.h"
+#include "frontObjectManager.h"
 
 playerBase::playerBase()
 {
@@ -530,5 +531,13 @@ void playerBase::invincibilityCount()
 			_invincibility = false;
 			_invincibilityCounter = 0;
 		}
+	}
+}
+
+void playerBase::attackReaction()
+{
+	if (_action == ATTACK || _downwardThrust == true)
+	{
+		_FOM->objectInteraction();
 	}
 }

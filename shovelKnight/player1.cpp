@@ -59,6 +59,7 @@ void player1::update()
 		pixelCollision();
 		control2();
 		attack();
+		attackReaction();
 		//invincibilityCount();
 		CAMERAMANAGER->setSingleFocus(_x, _y, WINSIZEX);
 	}
