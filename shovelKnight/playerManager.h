@@ -32,6 +32,7 @@ public:
 	inline void setY(float y) { _p1->setPlayerY(y); }
 	inline int	getMaxHP() { return _p1->getPlayerMaxHP(); }
 	inline void setMaxHP(int increaseHP) { _p1->setPlayerMaxHP(increaseHP); }
+	inline void setHP(int maxHp) { _p1->setPlayerHp(maxHp); }
 	inline int	getMaxMP() { return _p1->getPlayerMaxMP(); }
 	inline void setMaxMP(int increaseMP) { _p1->setPlayerMaxMP(increaseMP); }
 	inline int	getMoney() { return _p1->getMoney(); }

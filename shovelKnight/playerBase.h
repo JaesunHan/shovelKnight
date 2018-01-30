@@ -121,6 +121,7 @@ public:
 	inline void setPlayerX(float x) { _x = x; }
 	inline float getPlayerY() { return _y; }
 	inline void setPlayerY(float y) { _y = y; }
+	inline void setPlayerHp(int maxHp) { _currentHP = maxHp; }
 	inline int	getPlayerMaxHP() { return _maxHP; }
 	inline void setPlayerMaxHP(int increaseHP) { _maxHP += increaseHP; }
 	inline int	getPlayerMaxMP() { return _maxMP; }

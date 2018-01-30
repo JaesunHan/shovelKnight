@@ -130,20 +130,10 @@ void BardKnight::isCollision(bool collision)
 			//soundChange();
 			//텍스트 아웃으로 "너 이거 살래? Yes or No(bool값<-변수 하나 추가해야함 1.25)
 			//아래는 Yes 선택했을때의 함수
-		
-		
-			
-
 			//_textOut = true;
-			
-			
 			
 			_npcStatus = NPCTALK;
 
-			if(_branch1)
-			{
-				
-			}
 			//if (KEYMANAGER->isOnceKeyDown('O'))				//O눌렀을때
 			//{
 			//	//TTTextOut(300, 300, "으앙충돌", 0);
@@ -316,7 +306,6 @@ void BardKnight::update()
 		_branch2 = true;
 		_branch1 = false;
 	}
-
 
 	if (_branch1)
 	{

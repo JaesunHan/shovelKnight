@@ -244,8 +244,8 @@ void gameCollision::PlayerMeetNPC()
 					//TTTextOut(400, 400, "플레이어돈", _player->getMoney());
 					//최대체력 2증가
 					_player->setMaxHP(2);
+					_player->setHP(_player->getMaxHP());
 					//TTTextOut(400, 500, "플레이어체력", _player->getMaxHP());
-
 				}
 				if (_player->getMoney() < 1000)
 				{
