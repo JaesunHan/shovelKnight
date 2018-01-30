@@ -33,9 +33,13 @@ enum NPCSTATUS			//NPC 상태
 //7. 이걸 어떻게 구현하지.....
 
 
+class playerManager;
+
 class npcBase : public gameNode
 {
 protected:
+
+	playerManager * _pm;
 	image* _img;			// NPC 이미지
 	image* _img2;			// NPC 이미지2
 	string _imgKeyString;	//이미지 매니저에 등록할 이미지 키갑
@@ -53,7 +57,7 @@ protected:
 	bool _isCollisionNpc;		//플레이어와 충돌했는가? true : 그렇다, false : 아니다
 	bool _isAppear;			//등장할때니? 아니니? (맵에서 등장하는지 아닌지 체크)
 
-
+	bool _dialogue = false;			//
 	int _stock;				//몇번 구매했는지 확인하는 변수
 	bool _buyYesorNo;		//상점 열었을때 살래말래?
 	bool _isReturn;			//엔터 눌렀느냐
@@ -77,11 +81,17 @@ protected:
 	typedef vector<string> vDialog2;
 	typedef vector<string>::iterator viDialog2;
 
+	typedef vector<string> vDialog3;
+	typedef vector<string>::iterator viDialog3;
+
 	vDialog _vDialog;									//npc벡터
 	viDialog _viDialog;									//npc벡터이터레이터
 
 	vDialog2 _vDialog2;									//npc대화벡터2
 	viDialog _viDialog2;								//npc대화벡터2
+
+	vDialog3 _vDialog3;									//npc대화벡터3
+	viDialog _viDialog3;								//npc대화벡터3
 
 public:
 	npcBase();
@@ -123,7 +133,7 @@ public:
 	virtual void isCollision(bool collision) = 0;
 	bool getIsCollisionNPC() { return _isCollisionNpc; }
 
-
+	inline void playerSetMMemoryAddressLink(playerManager* pm) { _pm = pm; }
 	//===========================================ㅈㅅ합니다========================================
 
 	int _skillUnlockLv;

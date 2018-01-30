@@ -35,7 +35,8 @@ void gameCollision::release()
 void gameCollision::update()
 {
 	enemyDeadAndAttack();
-	if (KEYMANAGER->isOnceKeyDown('Q') || _playerMeetNPC) PlayerMeetNPC();
+	//if (KEYMANAGER->isOnceKeyDown('Q') || _playerMeetNPC) 
+	PlayerMeetNPC();
 	PlayerAndEnemy();
 	PlayerAndSkill();
 
@@ -209,7 +210,7 @@ void gameCollision::enemyDeadAndAttack()
 void gameCollision::PlayerMeetNPC()
 {
 	RECT temp;
-	for (int i = 0; i != _store->getVNpc().size(); ++i)
+	for (int i = 0; i < _store->getVNpc().size(); ++i)
 	{
 
 		//_store->getVNpc()[i]->setSkillUnlockLv(_player->getSkillUnlockLv());
@@ -223,11 +224,11 @@ void gameCollision::PlayerMeetNPC()
 		//_player->setMaxHP(_store->getVNpc()[i]->getMaxHp()+2);
 		
 
-		bool interRect = IntersectRect(
+		/*bool interRect = IntersectRect(
 			&temp,
 			&_player->getPlayerRC(),
 			&_store->getVNpc()[i]->getRect());
-		bool checkcollision = (_store->getVNpc()[i]->getIsCollisionNPC());
+		bool checkcollision = (_store->getVNpc()[i]->getIsCollisionNPC());*/
 		if (IntersectRect(
 			&temp, 
 			&_player->getPlayerRC(), 

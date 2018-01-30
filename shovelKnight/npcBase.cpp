@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "npcBase.h"
+#include "playerManager.h"
 
 
 npcBase::npcBase()

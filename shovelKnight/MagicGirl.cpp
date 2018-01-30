@@ -79,12 +79,12 @@ HRESULT MagicGirl::init()
 	DIALOGUEMANAGER->setScriptWindow(_testScript);
 
 
-	_vDialog.push_back("스킬을 바꾸고 싶으신가요?"); //0번
-	_vDialog.push_back("바꾸려면 O키를 안바꾸려면 P키를누르세요");//1번
-	_vDialog.push_back("스킬을 변경해드렸어요");//2번
+	_vDialog3.push_back("스킬을 바꾸고 싶으신가요?"); //0번
+	_vDialog3.push_back("바꾸려면 O키를 안바꾸려면 P키를누르세요");//1번
+	_vDialog3.push_back("스킬을 변경해드렸어요");//2번
 
 									  //분기선택
-	_vDialog2.push_back("카악 퉤");//0번
+	//_vDialog2.push_back("카악 퉤");//0번
 
 	_textOut = false;
 
@@ -237,14 +237,14 @@ void MagicGirl::update()
 
 	if (_isCollisionPlayer)
 	{
-		DIALOGUEMANAGER->update();
+		
 	}
 
 	if (KEYMANAGER->isOnceKeyDown(VK_RETURN) && _isCollisionPlayer)
 	{
 		//인덱스값으로 다이얼로그 벡터에 있는 값을 빼낸다
 
-		DIALOGUEMANAGER->setScript(_vDialog[_idx], 255, 255, 255);
+		DIALOGUEMANAGER->setScript(_vDialog3[_idx], 255, 255, 255);
 
 		_idx += 1;
 
@@ -256,24 +256,10 @@ void MagicGirl::update()
 
 	if (KEYMANAGER->isOnceKeyDown('O'))
 	{
-		_branch1 = true;
-		_branch2 = false;
+		//DIALOGUEMANAGER->setScript(_vDialog3[2], 255, 255, 255);
 	}
 	if (KEYMANAGER->isOnceKeyDown('P'))
 	{
-		_branch2 = true;
-		_branch1 = false;
-	}
-
-
-	if (_branch1)
-	{
-		DIALOGUEMANAGER->setScript(_vDialog[2], 255, 255, 255);
-		_branch1 = false;
-	}
-	if (_branch2)
-	{
-		DIALOGUEMANAGER->setScript(_vDialog2[0], 255, 255, 255);
-		_branch2 = false;
+		//DIALOGUEMANAGER->setScript(_vDialog3[0], 255, 255, 255);
 	}
 }

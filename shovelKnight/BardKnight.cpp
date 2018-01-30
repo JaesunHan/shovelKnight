@@ -90,7 +90,7 @@ HRESULT BardKnight::init()
 	_vDialog.push_back("배경음악을 바꿔주겠네");//2번
 	
 	//분기선택
-	_vDialog2.push_back("배경음악을 바꾸고 싶으면 언제든 말을 걸도록 하게");//0번
+	//_vDialog2.push_back("배경음악을 바꾸고 싶으면 언제든 말을 걸도록 하게");//0번
 	
 
 	_idx = 0;
@@ -121,6 +121,8 @@ void BardKnight::isCollision(bool collision)
 		{
 			_isCollisionPlayer = collision;
 			
+			
+			soundChange();
 			//_idx = 0;
 		
 			//if (_isReturn)
@@ -188,15 +190,13 @@ void BardKnight::isCollision(bool collision)
 
 void BardKnight::soundChange()
 {
-	if (_isChange)
-	{
-		SOUNDMANAGER->stop("GamePlayBGM");
-		if (!SOUNDMANAGER->isPlaySound("BardKnightChange1"))
-		{
-			SOUNDMANAGER->play("BardKnightChange1", 0.3f);
 
-		}
+	SOUNDMANAGER->stop("GamePlayBGM");
+	if (!SOUNDMANAGER->isPlaySound("BardKnightChange1"))
+	{
+		SOUNDMANAGER->play("BardKnightChange1", 0.3f);
 	}
+	
 }
 
 void BardKnight::bardKnightImageControl()
@@ -279,10 +279,9 @@ void BardKnight::update()
 	//콜리션 상태일 때만 업데이트 돈다.
 	if(_isCollisionPlayer)
 	{
-		DIALOGUEMANAGER->update();
 	}
-	bool enterkey = KEYMANAGER->isOnceKeyDown(VK_SPACE);
-	if (enterkey && _isCollisionPlayer)
+	
+	if (KEYMANAGER->isOnceKeyDown(VK_SPACE) && _isCollisionPlayer)
 	{
 		//인덱스값으로 다이얼로그 벡터에 있는 값을 빼낸다
 	
@@ -290,35 +289,16 @@ void BardKnight::update()
 			
 			_idx += 1;
 			
-
-		
 		if (_idx >= _vDialog.size())	_idx = 0;
 	//	if (_idx >= _vDialog2.size())  
 	}
 
 	if (KEYMANAGER->isOnceKeyDown('O'))
 	{
-		soundChange();
-		_branch1 = true;
-		_branch2 = false;
+		//DIALOGUEMANAGER->setScript(_vDialog[2], 255, 255, 255);
 	}
 	if (KEYMANAGER->isOnceKeyDown('P'))
 	{
-		_branch2 = true;
-		_branch1 = false;
-	}
-
-	if (_branch1)
-	{
-		_isChange = true;
-		DIALOGUEMANAGER->setScript(_vDialog[2], 255, 255, 255);
-		_branch1 = false;
-		
-		
-	}
-	if (_branch2)
-	{
-		DIALOGUEMANAGER->setScript(_vDialog2[0], 255, 255, 255);
-		_branch2 = false;
+		//DIALOGUEMANAGER->setScript(_vDialog2[0], 255, 255, 255);
 	}
 }
