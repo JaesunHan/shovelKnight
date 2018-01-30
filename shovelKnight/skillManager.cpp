@@ -18,19 +18,19 @@ HRESULT skillManager::init()
 		skillBase* sk;
 		switch (i)
 		{
-		case SKILL_BUBBLE:
+		case SKILL_TYPE_BUBBLE:
 			sk = new skill_Bubble;
 			break;
-		case SKILL_DARKKNIGHT_FIREBALL:
+		case SKILL_TYPE_DARKKNIGHT_FIREBALL:
 			sk = new skill_darkKnight_fireBall;
 			break;
-		case SKILL_DIRTBLOCKFX:
+		case SKILL_TYPE_DIRTBLOCKFX:
 			sk = new skill_dirtBlockFx;
 			break;
-		case SKILL_FIREBALL:
+		case SKILL_TYPE_FIREBALL:
 			sk = new skill_fireBall;
 			break;
-		case SKILL_ENEMYDEADFX:
+		case SKILL_TYPE_ENEMYDEADFX:
 			sk = new skill_enemyDeadFx;
 			break;
 		}
@@ -117,24 +117,24 @@ void skillManager::render()
 	}
 }
 
-void skillManager::Fire(SKILL_FIRE chartype, SKILL skill, float x, float y)
+void skillManager::Fire(SKILL_FIRE chartype, SKILL_TYPE skill, float x, float y)
 {
 	skillBase* sk;
 	switch (skill)
 	{
-	case SKILL_BUBBLE:
+	case SKILL_TYPE_BUBBLE:
 		sk = new skill_Bubble;
 		break;
-	case SKILL_DARKKNIGHT_FIREBALL:
+	case SKILL_TYPE_DARKKNIGHT_FIREBALL:
 		sk = new skill_darkKnight_fireBall;
 		break;
-	case SKILL_DIRTBLOCKFX:
+	case SKILL_TYPE_DIRTBLOCKFX:
 		sk = new skill_dirtBlockFx;
 		break;
-	case SKILL_FIREBALL:
+	case SKILL_TYPE_FIREBALL:
 		sk = new skill_fireBall;
 		break;
-	case SKILL_ENEMYDEADFX:
+	case SKILL_TYPE_ENEMYDEADFX:
 		sk = new skill_enemyDeadFx;
 		break;
 	}
@@ -147,6 +147,6 @@ void skillManager::Fire(SKILL_FIRE chartype, SKILL skill, float x, float y)
 
 if (KEYMANAGER->isOnceKeyDown('Z'))
 {
-Fire(SKILL_FIRE_CENTER, SKILL_FIREBALL, WINSIZEX / 2, WINSIZEY / 2);
+Fire(SKILL_FIRE_CENTER, SKILL_TYPE_FIREBALL, WINSIZEX / 2, WINSIZEY / 2);
 }
 */

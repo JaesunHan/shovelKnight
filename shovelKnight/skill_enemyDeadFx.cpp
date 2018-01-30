@@ -51,6 +51,8 @@ void skill_enemyDeadFx::fire(SKILL_FIRE charType, float x, float y)
 
 		char str7[128];
 
+		_skillType = SKILL_TYPE_ENEMYDEADFX;
+
 		itoa(num, str7, 10);
 
 		strcat(str6, str7);

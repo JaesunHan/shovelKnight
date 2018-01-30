@@ -66,6 +66,8 @@ void skill_fireBall::fire(SKILL_FIRE charType, float x, float y)
 		str2 = "skillFireBallLoop";
 		str3 = "skillFireBallOut";
 
+		_skillType = SKILL_TYPE_FIREBALL;
+
 		int num = 0;
 
 		char* str4 = LPSTR_To_String(str1);

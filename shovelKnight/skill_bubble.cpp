@@ -33,7 +33,7 @@ void skill_Bubble::update()
 	switch (_stats)
 	{
 	case SKILL_STATS_LOOP_L:
-		if (_startX - 200 > _x)
+		if (_startX - 70 > _x)
 		{
 			_y -= speed / 2;
 		}
@@ -87,7 +87,7 @@ void skill_Bubble::fire(SKILL_FIRE charType, float x, float y)
 	KEYANIMANAGER->addArrayFrameAnimation(_loopNameL, "image/skill/bubble", fireBallLoop, 4, 8, true);
 
 	int fireBallOut[] = { 4, 5 };
-	KEYANIMANAGER->addArrayFrameAnimation(_outName, "image/skill/bubble", fireBallOut, 2, 3, false, isOut, this);
+	KEYANIMANAGER->addArrayFrameAnimation(_outName, "image/skill/bubble", fireBallOut, 2, 16, false, isOut, this);
 
 	_img = IMAGEMANAGER->findImage("image/skill/bubble");
 	_imgWidth = _img->getFrameWidth();
@@ -96,6 +96,7 @@ void skill_Bubble::fire(SKILL_FIRE charType, float x, float y)
 
 	_ani = KEYANIMANAGER->findAnimation(_loopNameL);
 	_stats = SKILL_STATS_LOOP_L;
+	_skillType = SKILL_TYPE_BUBBLE;
 
 	_isRight = false;
 	_isFire = true;

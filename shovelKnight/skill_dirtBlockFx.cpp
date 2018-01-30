@@ -52,6 +52,8 @@ void skill_dirtBlockFx::fire(SKILL_FIRE charType, float x, float y)
 
 		char* str6 = LPSTR_To_String(str3);
 
+		_skillType = SKILL_TYPE_DIRTBLOCKFX;
+
 		char str7[128];
 
 		itoa(num, str7, 10);
