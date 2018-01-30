@@ -79,15 +79,16 @@ HRESULT HealtyGuy::init()
 	DIALOGUEMANAGER->setScriptWindow(_testScript);
 
 
-	_vDialog.push_back("음식은 곧 체력이라고 친구!");
-	_vDialog.push_back("음식을 먹으려면 O키를, 아니면 P키를 누르게");
-	_vDialog.push_back("체력이 증가하는게 느껴지지 않는가. 하하하하!");
+	_vDialog2.push_back("음식은 곧 체력이라고 친구!");
+	_vDialog2.push_back("음식을 먹으려면 O키를, 아니면 P키를 누르게");
+	_vDialog2.push_back("체력이 증가하는게 느껴지지 않는가. 하하하하!");
 
 	//분기선택
-	_vDialog2.push_back("음식을 먹고 싶으면 언제든 말을 걸도록 하게!");
+	//_vDialog2.push_back("음식을 먹고 싶으면 언제든 말을 걸도록 하게!");
 
 	_idx = 0;
-
+	_branch1 = false;
+	_branch2 = false;
 	//_setMaxHp = 8;
 	return S_OK;
 }
@@ -202,7 +203,7 @@ void HealtyGuy::render()
 		}
 	}
 	//콜리전 상태일때만 다이어로그 출력
-	if (_isCollisionPlayer)
+	if (_dialogue)
 	{
 		DIALOGUEMANAGER->render(getMemDC(), 0, 0, 800, 96);
 	}
@@ -235,21 +236,37 @@ void HealtyGuy::update()
 {
 	npcBase::update();
 	HealtyGuyImageControl();
-	if (_isCollisionPlayer)
-	{
-		DIALOGUEMANAGER->update();
-	}
-	if (KEYMANAGER->isOnceKeyDown(VK_RETURN) && _isCollisionPlayer)
+
+	//if ()
+
+
+
+	if (!_dialogue && _isCollisionPlayer)
 	{
 		//인덱스값으로 다이얼로그 벡터에 있는 값을 빼낸다
 
-		DIALOGUEMANAGER->setScript(_vDialog[_idx], 255, 255, 255);
+		DIALOGUEMANAGER->setScript(_vDialog2[_idx], 255, 255, 255);
 
 		_idx += 1;
 
-
-
 		if (_idx >= _vDialog.size())	_idx = 0;
-		//	if (_idx >= _vDialog2.size())  
+		_dialogue = true;
+		//	if (_idx >= _vDialog2.size())
+	
 	}
+	else if(!_isCollisionPlayer)
+	{
+		_dialogue = false;
+	}
+
+	if (KEYMANAGER->isOnceKeyDown('O'))
+	{
+	//DIALOGUEMANAGER->setScript(_vDialog[2], 255, 255, 255);
+	}
+	if (KEYMANAGER->isOnceKeyDown('P'))
+	{
+		//DIALOGUEMANAGER->setScript(_vDialog2[0], 255, 255, 255);
+	}
+
+	
 }

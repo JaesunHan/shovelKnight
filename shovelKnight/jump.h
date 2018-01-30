@@ -17,6 +17,7 @@ private:
 	float _startY;
 
 	bool _isJumping;
+	float _jumpHeight;
 
 	//ÇÈ¼¿ ÄÝ¸®Á¯
 	pixelCollision* _pixelC;
@@ -33,6 +34,6 @@ public:
 	void jumping(float* x, float* y, float power, float gravity);
 
 	bool getIsJumping(void) { return _isJumping; }
-	float getJumpPower() { return _jumpPower; }
+	float getJumpHeight() { return _jumpHeight; }
 
 };

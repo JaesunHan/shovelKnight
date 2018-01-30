@@ -217,7 +217,6 @@ void soundMenu::draw(HDC hdc)
 
 void soundMenu::effectVolumeControl()
 {
-
 	_effectVol = _rcEffectVolumeButton.left - _rcEffectVolume.left;
 	_eV = _effectVol / 100;
 	if (_eV <= 0)	_eV = 0;

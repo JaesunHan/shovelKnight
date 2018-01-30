@@ -124,6 +124,7 @@ public:
 	inline void setPlayerHp(int maxHp) { _currentHP = maxHp; }
 	inline int	getPlayerMaxHP() { return _maxHP; }
 	inline void setPlayerMaxHP(int increaseHP) { _maxHP += increaseHP; }
+	inline void setPlayerMP(int mp) { _currentMP = mp; }
 	inline int	getPlayerMaxMP() { return _maxMP; }
 	inline void setPlayerMaxMP(int increaseMP) { _maxMP += increaseMP; }
 	inline int	getMoney() { return _money; }

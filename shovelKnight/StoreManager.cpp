@@ -33,7 +33,8 @@ HRESULT StoreManager::init()
 		_vNpc.push_back(npc);
 	}
 
-	
+	_vNpc[1]->playerSetMMemoryAddressLink(_pm);
+	_vNpc[2]->playerSetMMemoryAddressLink(_pm);
 	//_isCollisionNpc = false;						//처음에는 콜리전이 false세팅.
 
 	return S_OK;

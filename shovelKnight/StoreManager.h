@@ -28,7 +28,7 @@ private:
 	vNPC _vNpc;									//npc벡터
 	viNPC _viNpc;								//npc벡터이터레이터
 
-	//playerManager* _pm;							//플레이어매니저 할당
+	playerManager* _pm;							//플레이어매니저 할당
 	//
 	//
 	//
@@ -68,6 +68,6 @@ public:
 	vector <npcBase*>::iterator getViNpc() { return _viNpc; }
 
 	//플레이어 셋 메모리 어드레스 링크
-	//inline void playerSetMMemoryAddressLink(playerManager* pm) { _pm = pm; }
+	inline void playerSetMMemoryAddressLink(playerManager* pm) { _pm = pm; }
 };
 

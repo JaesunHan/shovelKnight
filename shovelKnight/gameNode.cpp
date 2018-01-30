@@ -79,6 +79,7 @@ void gameNode::update(void)
 {
 	SOUNDMANAGER->update();
 	KEYANIMANAGER->update();
+	DIALOGUEMANAGER->update();
 }
 
 void gameNode::render(void)
