@@ -3,6 +3,7 @@
 #include "playerManager.h"
 #include "StoreManager.h"
 #include "frontObjectManager.h"
+#include "enemyManager.h"
 #include <vector>
 
 

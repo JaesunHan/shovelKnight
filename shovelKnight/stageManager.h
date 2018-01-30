@@ -5,6 +5,7 @@
 class playerManager;
 class StoreManager;
 class frontObjectManager;
+class enemyManager;
 
 struct tagMAPTRANSITION
 {
@@ -48,6 +49,7 @@ private:
 	playerManager* _PM;
 	StoreManager* _storeM;
 	frontObjectManager* _FOM;
+	enemyManager* _EM;
 public:
 
 	HRESULT init();
@@ -63,6 +65,7 @@ public:
 	inline void setPlayerManagerMemoryAddressLink(playerManager* pm) { _PM = pm; }
 	inline void setStoreManagerMemoryAddressLink(StoreManager* sm) { _storeM = sm; }
 	inline void setFrontObjectManagerMemoryAddressLink(frontObjectManager* object) { _FOM = object; }
+	inline void setEnemyManagerMemoryAddressLink(enemyManager* em) { _EM = em; }
 	inline void setLayer2LoopX(float loopx) { _loopX2 += loopx; }
 
 
