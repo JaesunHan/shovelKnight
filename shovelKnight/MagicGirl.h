@@ -32,7 +32,7 @@ public:
 	int _fireBallPrice;								//얼마에 팔건지 가격 세팅용
 	int _thunderBoltPrice;							//썬더볼트 얼마니
 	int _bubblePrice;								//버블스킬 얼마니
-	
+	int _idx;										//벡터사용용 인덱스
 	//==========팔렸는지 확인용 변수들==========//
 	int _stock;										//몇번이나 상점에서 구매했는지 확인 변수
 	bool _isSellFireBall;							//파이어볼 팔렸는지

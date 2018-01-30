@@ -117,7 +117,7 @@ void MagicGirl::isCollision(bool collision)
 				{
 					if (_money >= 1000)				//1000원보다 돈이 많다면
 					{
-						_minusMoney -= 1000;						//플레이어 골드에서 1000원을 감소하고
+						//_minusMoney -= 1000;						//플레이어 골드에서 1000원을 감소하고
 						_skillUnlockLv += 1;						//플레이어 스킬을 1로 바꿔준다 (파이어볼)
 						_stock = 1;									//한번 구매했으니까 stock을 1로 반환해준다.
 					}
