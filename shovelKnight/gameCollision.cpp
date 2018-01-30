@@ -163,12 +163,12 @@ void gameCollision::PlayerMeetNPC()
 		if (IntersectRect(
 			&temp, 
 			&_player->getPlayerRC(), 
-			&_store->getVNpc()[i]->getRect()))
+			&_store->getVNpc()[i]->getRect()) && !(_store->getVNpc()[i]->getIsCollisionNPC()) )
 
 		{
 			_store->getVNpc()[i]->isCollision(true);
 			_playerMeetNPC = true;
-			_player->setMaxHP(_player->getMaxHP() + 2);
+			_player->setMaxHP(2);
 			_store->getVNpc()[i]->setMaxHp(_player->getMaxHP());
 
 
