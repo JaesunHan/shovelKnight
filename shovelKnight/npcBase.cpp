@@ -36,6 +36,8 @@ HRESULT npcBase::init()
 	//_isAppear = appaear;
 	_minusMoney = 0;
 
+	_branch1 = false;
+	_branch2 = false;
 	return S_OK;
 }
 void npcBase::release()

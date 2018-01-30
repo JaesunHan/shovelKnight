@@ -34,7 +34,7 @@ public:
 	bool _isSellDragonTail;							//용꼬리 팔렸니
 	//bool _isCollisionNpc;								//NPC와 충돌
 	bool _textOut;									//텍스트 아웃 테스트용
-
+	bool _isCollisionPlayer;
 	//==========스킬 스토어 관련 함수===============//
 	void sellHpItem();								//스킬 파는 함수 
 	

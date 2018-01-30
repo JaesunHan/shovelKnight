@@ -213,11 +213,11 @@ void gameCollision::PlayerMeetNPC()
 	{
 
 		//_store->getVNpc()[i]->setSkillUnlockLv(_player->getSkillUnlockLv());
-		_player->setSkillUnlockLv(_store->getVNpc()[i]->getSkillUnlockLv());
+		//layer->setSkillUnlockLv(_store->getVNpc()[i]->getSkillUnlockLv());
 
-		_store->getVNpc()[i]->setMoney(_player->getMoney());
-		_player->setMoney(_store->getVNpc()[i]->getMinusMoney());
-		_store->getVNpc()[i]->setMinusMoney(0);
+		//_store->getVNpc()[i]->setMoney(_player->getMoney());
+		//_player->setMoney(_store->getVNpc()[i]->getMinusMoney());
+		//_store->getVNpc()[i]->setMinusMoney(0);
 
 		//_store->getVNpc()[i]->setMaxHp(0);
 		//_player->setMaxHP(_store->getVNpc()[i]->getMaxHp()+2);
@@ -232,10 +232,50 @@ void gameCollision::PlayerMeetNPC()
 		{
 			_store->getVNpc()[i]->isCollision(true);
 			_playerMeetNPC = true;
-			_player->setMaxHP(2);
-			_store->getVNpc()[i]->setMaxHp(_player->getMaxHP());
 
+			//헬스가이
+			if (_store->getVNpc()[i]->getNpcType() == HEALTYGUY)
+			{
+				//소지금이 1000원보다 크면
+				if (_player->getMoney() >= 1000)
+				{
+					//1000원 감소하고 
+					_player->setMoney(-1000);
+					//TTTextOut(400, 400, "플레이어돈", _player->getMoney());
+					//최대체력 2증가
+					_player->setMaxHP(2);
+					//TTTextOut(400, 500, "플레이어체력", _player->getMaxHP());
 
+				}
+				if (_player->getMoney() < 1000)
+				{
+				
+				}
+			}
+
+			//매직걸 
+			if (_store->getVNpc()[i]->getNpcType() == MAGICGIRL)
+			{
+				if (_player->getMoney() >= 1000)
+				{
+					_player->setMoney(-1000);
+					_player->setSkillUnlockLv(1);
+				}
+				if (_player->getMoney() < 1000)
+				{
+
+				}
+			}
+
+			//바드나이트
+			if (_store->getVNpc()[i]->getNpcType() == BARDKNIGHT)
+			{
+				if (_player->getMoney() >= 1000)
+				{
+					_player->setMoney(-1000);
+				}
+
+			}
 		}
 		else
 		{

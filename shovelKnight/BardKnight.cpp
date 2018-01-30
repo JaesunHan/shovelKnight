@@ -78,15 +78,20 @@ HRESULT BardKnight::init()
 	DIALOGUEMANAGER->setScriptWindow(_testScript);
 	
 	
+
 	//_testScript1 = new image;
 	//_testScript1 = IMAGEMANAGER->addImage("scriptWindow", "./image/UI/Script_window.bmp", 0, 0, 800, 96, true, RGB(255, 0, 255));
 	//DIALOGUEMANAGER->setScript("사려면 O키를 안사려면 K키를누르게",255,255,255);
 	
 	_isCollisionPlayer = false;
 	
-	_vDialog.push_back("힘세고 좋은 아침, 묻는다면 나는 바드나이트 음악을 사겠나?");
-	_vDialog.push_back("사려면 O키를 안사려면 K키를누르게");
-
+	_vDialog.push_back("힘세고 좋은 아침, 묻는다면 나는 바드나이트 배경음악을 바꾸겠나?"); //0번
+	_vDialog.push_back("바꾸려면 O키를 안바꾸려면 P키를누르게");//1번
+	_vDialog.push_back("배경음악을 바꿔주겠네");//2번
+	
+	//분기선택
+	_vDialog2.push_back("배경음악을 바꾸고 싶으면 언제든 말을 걸도록 하게");//0번
+	
 
 	_idx = 0;
 	_isChange = false;
@@ -131,12 +136,14 @@ void BardKnight::isCollision(bool collision)
 
 			//_textOut = true;
 			
-
-			_isChange = true;
+			
 			
 			_npcStatus = NPCTALK;
 
-			soundChange();
+			if(_branch1)
+			{
+				
+			}
 			//if (KEYMANAGER->isOnceKeyDown('O'))				//O눌렀을때
 			//{
 			//	//TTTextOut(300, 300, "으앙충돌", 0);
@@ -191,11 +198,14 @@ void BardKnight::isCollision(bool collision)
 
 void BardKnight::soundChange()
 {
-	SOUNDMANAGER->stop("GamePlayBGM");
-	if (!SOUNDMANAGER->isPlaySound("BardKnightChange1"))
+	if (_isChange)
 	{
-		SOUNDMANAGER->play("BardKnightChange1", 0.3f);
-		
+		SOUNDMANAGER->stop("GamePlayBGM");
+		if (!SOUNDMANAGER->isPlaySound("BardKnightChange1"))
+		{
+			SOUNDMANAGER->play("BardKnightChange1", 0.3f);
+
+		}
 	}
 }
 
@@ -234,16 +244,20 @@ void BardKnight::render()
 				CAMERAMANAGER->getX(_rc.right),
 				CAMERAMANAGER->getY(_rc.bottom));
 		}
+
+		
+
 		//콜리션 상태일 때만 다이어로그 출력
 		if (_isCollisionPlayer)
 		{
 			DIALOGUEMANAGER->render(getMemDC(), 0, 0, 800, 96);
 		}
+		
 
 
 		if (_textOut == true)
 		{
-			TTTextOut(500, 100, "바드나이트에서플레이어돈", _money);
+			//TTTextOut(500, 100, "바드나이트에서플레이어돈", _money);
 			
 		}
 	}
@@ -256,7 +270,7 @@ void BardKnight::draw()
 	{
 	case NPCIDLE: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
 		break;
-	case NPCTALK: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim2, _rc.left, _rc.top);
+	case NPCTALK: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim2, _rc.left, _rc.top-10);
 		break;
 	case NPCUNDERATTACKED:
 		break;
@@ -280,9 +294,41 @@ void BardKnight::update()
 	if (KEYMANAGER->isOnceKeyDown(VK_RETURN) && _isCollisionPlayer)
 	{
 		//인덱스값으로 다이얼로그 벡터에 있는 값을 빼낸다
-		DIALOGUEMANAGER->setScript(_vDialog[_idx], 255, 255, 255);
-		//_isReturn = true;
-		_idx += 1;	
+	
+			DIALOGUEMANAGER->setScript(_vDialog[_idx], 255, 255, 255);
+			
+			_idx += 1;
+			
+
+		
 		if (_idx >= _vDialog.size())	_idx = 0;
+	//	if (_idx >= _vDialog2.size())  
+	}
+
+	if (KEYMANAGER->isOnceKeyDown('O'))
+	{
+		soundChange();
+		_branch1 = true;
+		_branch2 = false;
+	}
+	if (KEYMANAGER->isOnceKeyDown('P'))
+	{
+		_branch2 = true;
+		_branch1 = false;
+	}
+
+
+	if (_branch1)
+	{
+		_isChange = true;
+		DIALOGUEMANAGER->setScript(_vDialog[2], 255, 255, 255);
+		_branch1 = false;
+		
+		
+	}
+	if (_branch2)
+	{
+		DIALOGUEMANAGER->setScript(_vDialog2[0], 255, 255, 255);
+		_branch2 = false;
 	}
 }

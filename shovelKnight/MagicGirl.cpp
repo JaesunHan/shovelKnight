@@ -73,9 +73,26 @@ HRESULT MagicGirl::init()
 	KEYANIMANAGER->start("매직걸아이들");
 	KEYANIMANAGER->start("매직걸인사");
 
+
+	_testScript = new image;
+	_testScript = IMAGEMANAGER->addImage("scriptWindow", "./image/UI/Script_window.bmp", 0, 0, 800, 96, true, RGB(255, 0, 255));
+	DIALOGUEMANAGER->setScriptWindow(_testScript);
+
+
+	_vDialog.push_back("스킬을 바꾸고 싶으신가요?"); //0번
+	_vDialog.push_back("바꾸려면 O키를 안바꾸려면 P키를누르세요");//1번
+	_vDialog.push_back("스킬을 변경해드렸어요");//2번
+
+									  //분기선택
+	_vDialog2.push_back("카악 퉤");//0번
+
 	_textOut = false;
 
+
+
+	_idx = 0;
 	_skillUnlockLv = 0;
+	_isCollisionPlayer = false;
 	return S_OK;
 }
 
@@ -182,10 +199,16 @@ void MagicGirl::render()
 				CAMERAMANAGER->getY(_rc.bottom));
 		}
 	}
+
+	if (_isCollisionPlayer)
+	{
+		DIALOGUEMANAGER->render(getMemDC(), 0, 0, 800, 96);
+	}
+	
 	if (_textOut)
 	{
-		TTTextOut(500, 400, "매직걸에서플레이어돈", _money);
-		TTTextOut(500, 300, "스킬", _skillUnlockLv);
+		//TTTextOut(500, 400, "매직걸에서플레이어돈", _money);
+		//TTTextOut(500, 300, "스킬", _skillUnlockLv);
 	}
 }
 
@@ -196,7 +219,7 @@ void MagicGirl::draw()
 	{
 	case NPCIDLE: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
 		break;
-	case NPCTALK: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim2, _rc.left, _rc.top);
+	case NPCTALK: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim2, _rc.left, _rc.top-3);
 		break;
 	case NPCUNDERATTACKED:
 		break;
@@ -211,4 +234,46 @@ void MagicGirl::update()
 {
 	npcBase::update();
 	magicGirlImageControl();
+
+	if (_isCollisionPlayer)
+	{
+		DIALOGUEMANAGER->update();
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(VK_RETURN) && _isCollisionPlayer)
+	{
+		//인덱스값으로 다이얼로그 벡터에 있는 값을 빼낸다
+
+		DIALOGUEMANAGER->setScript(_vDialog[_idx], 255, 255, 255);
+
+		_idx += 1;
+
+
+
+		if (_idx >= _vDialog.size())	_idx = 0;
+		//	if (_idx >= _vDialog2.size())  
+	}
+
+	if (KEYMANAGER->isOnceKeyDown('O'))
+	{
+		_branch1 = true;
+		_branch2 = false;
+	}
+	if (KEYMANAGER->isOnceKeyDown('P'))
+	{
+		_branch2 = true;
+		_branch1 = false;
+	}
+
+
+	if (_branch1)
+	{
+		DIALOGUEMANAGER->setScript(_vDialog[2], 255, 255, 255);
+		_branch1 = false;
+	}
+	if (_branch2)
+	{
+		DIALOGUEMANAGER->setScript(_vDialog2[0], 255, 255, 255);
+		_branch2 = false;
+	}
 }

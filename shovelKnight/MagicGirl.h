@@ -41,6 +41,7 @@ public:
 	//bool _isCollisionNpc;								//NPC와 충돌
 	bool _textOut;									//텍스트 아웃 테스트용
 	int _count;										//카운트 체크용
+	bool _isCollisionPlayer;
 	//==========스킬 스토어 관련 함수===============//
 	void sellSkill();								//스킬 파는 함수 
 	void stockCount();								//스톡에 따라 판매하는 스킬 정리 함수

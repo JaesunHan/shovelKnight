@@ -58,6 +58,9 @@ protected:
 	bool _buyYesorNo;		//상점 열었을때 살래말래?
 	bool _isReturn;			//엔터 눌렀느냐
 
+	bool _branch1;			//대사분기1
+	bool _branch2;			//대사분기2
+
 	//===============다이얼로그 변수==================//
 	image* _testScript;		
 	image* _testScript1;
@@ -71,8 +74,14 @@ protected:
 	typedef vector<string> vDialog;
 	typedef vector<string>::iterator viDialog;
 
+	typedef vector<string> vDialog2;
+	typedef vector<string>::iterator viDialog2;
+
 	vDialog _vDialog;									//npc벡터
 	viDialog _viDialog;									//npc벡터이터레이터
+
+	vDialog2 _vDialog2;									//npc대화벡터2
+	viDialog _viDialog2;								//npc대화벡터2
 
 public:
 	npcBase();

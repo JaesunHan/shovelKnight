@@ -73,8 +73,21 @@ HRESULT HealtyGuy::init()
 	KEYANIMANAGER->start("헬스가이아이들");
 	KEYANIMANAGER->start("헬스가이굿");
 
+	_testScript = new image;
+	_testScript = IMAGEMANAGER->addImage("scriptWindow", "./image/UI/Script_window.bmp", 0, 0, 800, 96, true, RGB(255, 0, 255));
+	DIALOGUEMANAGER->setScriptWindow(_testScript);
 
-	_setMaxHp = 8;
+
+	_vDialog.push_back("음식은 곧 체력이라고 친구!");
+	_vDialog.push_back("음식을 먹으려면 O키를, 아니면 P키를 누르게");
+	_vDialog.push_back("체력이 증가하는게 느껴지지 않는가. 하하하하!");
+
+	//분기선택
+	_vDialog2.push_back("음식을 먹고 싶으면 언제든 말을 걸도록 하게!");
+
+	_idx = 0;
+
+	//_setMaxHp = 8;
 	return S_OK;
 }
 
@@ -92,59 +105,59 @@ void HealtyGuy::isCollision(bool collision)
 		{
 			//텍스트 아웃으로 "너 이거 살래? Yes or No(bool값<-변수 하나 추가해야함 1.25)
 			//아래는 Yes 선택했을때의 함수
-		
+			_isCollisionPlayer = collision;
 			_textOut = true;
 			
 			_npcStatus = NPCTALK;
 			//if (KEYMANAGER->isOnceKeyDown('O'))				//O눌렀을때
 			//{
 				//TTTextOut(300, 300, "으앙충돌", 0);
-			if (KEYMANAGER->isOnceKeyDown('2'))
-			{
-				if (!_stock)					//한번도 상점에서 구매를 하지 않았으면(stock =0)
-				{
-					if (_money >= 1000)				//1000원보다 돈이 많다면
-					{
-						_minusMoney -= 1000;						//플레이어 골드에서 1000원을 감소하고
-						//_setMaxHp += 2;
-						_stock = 1;						//한번 구매했으니까 stock을 1로 반환해준다.
-					}
-					if (_money < 1000)						//플레이어 골드가 1000원보다 작다면
-					{
-						//str = str4;
-					}
+			//if (KEYMANAGER->isOnceKeyDown('2'))
+			//{
+			//	if (!_stock)					//한번도 상점에서 구매를 하지 않았으면(stock =0)
+			//	{
+			//		if (_money >= 1000)				//1000원보다 돈이 많다면
+			//		{
+			//			_minusMoney -= 1000;						//플레이어 골드에서 1000원을 감소하고
+			//			//_setMaxHp += 2;
+			//			_stock = 1;						//한번 구매했으니까 stock을 1로 반환해준다.
+			//		}
+			//		if (_money < 1000)						//플레이어 골드가 1000원보다 작다면
+			//		{
+			//			//str = str4;
+			//		}
 
 
-				}
+			//	}
 
-				if (_stock == 1)							//한번도 상점에서 구매를 하지 않았으면
-				{
-					if (_money >= 3000)						//3000원보다 돈이 많다면
-					{
+			//	if (_stock == 1)							//한번도 상점에서 구매를 하지 않았으면
+			//	{
+			//		if (_money >= 3000)						//3000원보다 돈이 많다면
+			//		{
 
-						_minusMoney -= 3000;				//플레이어 골드에서 1000원을 감소하고
-						//_setMaxHp += 2;
-						_stock = 2;							//한번 구매했으니까 stock을 1로 반환해준다.
-					}
-					if (_money < 3000)						//플레이어 골드가 1000원보다 작다면
-					{
-						//str = str4;
-					}
+			//			_minusMoney -= 3000;				//플레이어 골드에서 1000원을 감소하고
+			//			//_setMaxHp += 2;
+			//			_stock = 2;							//한번 구매했으니까 stock을 1로 반환해준다.
+			//		}
+			//		if (_money < 3000)						//플레이어 골드가 1000원보다 작다면
+			//		{
+			//			//str = str4;
+			//		}
 
-				}
-				//}
-				else
-				{
-					_textOut = false;
-				}
-			}
-			if (KEYMANAGER->isOnceKeyDown('P'))
-			{
+			//	}
+			//	//}
+			//	else
+			//	{
+			//		_textOut = false;
+			//	}
+			//}
+			//if (KEYMANAGER->isOnceKeyDown('P'))
+			//{
 
-			}
-			//NO했을때는 텍스트 아웃으로
-			//"어 그...그래? 안녕 ㅃㅃ " 다이얼로그 출력 ㅃㅃ
-			//_isCollisionNpc == false;
+			//}
+			////NO했을때는 텍스트 아웃으로
+			////"어 그...그래? 안녕 ㅃㅃ " 다이얼로그 출력 ㅃㅃ
+			////_isCollisionNpc == false;
 
 		}
 		
@@ -187,10 +200,17 @@ void HealtyGuy::render()
 				CAMERAMANAGER->getY(_rc.bottom));
 		}
 	}
+	//콜리전 상태일때만 다이어로그 출력
+	if (_isCollisionPlayer)
+	{
+		DIALOGUEMANAGER->render(getMemDC(), 0, 0, 800, 96);
+	}
+	
+	
 	if (_textOut)
 	{
-		TTTextOut(300, 300, "플레이어돈", _money);
-		TTTextOut(300, 200, "플레이어최대체력", _setMaxHp);
+		//TTTextOut(300, 300, "플레이어돈", _money);
+		//TTTextOut(300, 200, "플레이어최대체력", _setMaxHp);
 	}
 }
 
@@ -201,7 +221,7 @@ void HealtyGuy::draw()
 	{
 	case NPCIDLE: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
 		break;
-	case NPCTALK: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim2, _rc.left, _rc.top);
+	case NPCTALK: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim2, _rc.left, _rc.top-20);
 		break;
 	case NPCUNDERATTACKED:
 		break;
@@ -214,4 +234,21 @@ void HealtyGuy::update()
 {
 	npcBase::update();
 	HealtyGuyImageControl();
+	if (_isCollisionPlayer)
+	{
+		DIALOGUEMANAGER->update();
+	}
+	if (KEYMANAGER->isOnceKeyDown(VK_RETURN) && _isCollisionPlayer)
+	{
+		//인덱스값으로 다이얼로그 벡터에 있는 값을 빼낸다
+
+		DIALOGUEMANAGER->setScript(_vDialog[_idx], 255, 255, 255);
+
+		_idx += 1;
+
+
+
+		if (_idx >= _vDialog.size())	_idx = 0;
+		//	if (_idx >= _vDialog2.size())  
+	}
 }
