@@ -25,6 +25,11 @@ HRESULT playerManager::init()
 	_p1->setGamePlayUIMemoryAddressLink(_GPU);
 	_p1->setFrontObjectManagerMemoryAddressLink(_FOM);
 
+	//_p1->setPlayerHp(_GPU->getLife());
+	//_p1->setPlayerMaxHP(_GPU->getMaxLife());
+	//_p1->setPlayerMP(_GPU->getMana());
+	//_p1->setMoney(_GPU->getGold());
+
 	return S_OK;
 }
 

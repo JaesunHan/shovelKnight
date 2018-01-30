@@ -44,10 +44,11 @@ HRESULT gamePlayScene::init()
 	_item->init();
 	_Store->init();
 	_skill->init();
+	_gamePlayUI->init();
 	_player->init();
 	_gameCollision->init();
 	_stage->init();
-	_gamePlayUI->init();
+	//_gamePlayUI->init();
 	_object->init();
 	
 	_object->setGamePlayUIMemoryAddressLink(_gamePlayUI);
