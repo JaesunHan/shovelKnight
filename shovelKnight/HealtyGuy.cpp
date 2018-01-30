@@ -35,7 +35,7 @@ HRESULT HealtyGuy::init()
 
 	//NPC 이미지
 	_img = IMAGEMANAGER->addFrameImage(_imgKeyString, _imgFileName, 70, 47, 2, 1, true, RGB(255, 0, 255), false);											// NPC 이미지
-	IMAGEMANAGER->addFrameImage("HealtyGuyGood", "./image/npc/healthGuyGood.bmp", 168, 67, 4, 1, true, RGB(255, 0, 255), false);
+	IMAGEMANAGER->addFrameImage("HealtyGuyGood", "./image/npc/healthGuyGood1.bmp", 168, 90, 4, 1, true, RGB(255, 0, 255), false);
 	IMAGEMANAGER->addFrameImage("HealtyGuyCook", "./image/npc/healthGuyBackCook.bmp", 897, 43, 23, 1, true, RGB(255, 0, 255), false);
 
 
