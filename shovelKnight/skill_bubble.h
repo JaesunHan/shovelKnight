@@ -15,8 +15,4 @@ public:
 	virtual void update();
 
 	virtual void fire(SKILL_FIRE charType, float x, float y);
-
-	static void* isOut(void* obj);
-
-	void asd() {};
 };

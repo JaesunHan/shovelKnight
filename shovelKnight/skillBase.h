@@ -17,8 +17,17 @@ enum SKILL_REACTION
 enum SKILL_FIRE
 {
 	SKILL_FIRE_CENTER,
-	SKILL_FIRE_DRAGON,
-	SKILL_FIRE_DARKKNIGHT,
+	SKILL_FIRE_DRAGON_LEFT,
+	SKILL_FIRE_DARKKNIGHT_LEFT,
+	SKILL_FIRE_DARKKNIGHT_RIGHT,
+};
+
+enum SKILL_DAMAGE
+{
+	SKILL_DAMAGE_NONE,
+	SKILL_DAMAGE_PLAYER,
+	SKILL_DAMAGE_PLAYER_AND_ENEMY,
+	SKILL_DAMAGE_ENEMY,
 };
 
 class skillBase
@@ -42,7 +51,17 @@ protected:
 
 	float _saveX;
 
-	bool _isHavePlayer;
+	SKILL_DAMAGE _skillWhoDamage;
+
+protected:
+	char* getStartName() { return _startName; }
+	char* getLoopNameL() { return _loopNameL; }
+	char* getOutName() { return _outName; }
+
+	void setStartName(char* str) { _startName = str; }
+	void setLoopNameL(char* str) { _loopNameL = str; }
+	void setOutName(char* str) { _outName = str; }
+	virtual void reRect();
 
 public:
 	skillBase();
@@ -54,27 +73,23 @@ public:
 	virtual void render();
 
 	virtual void fire(SKILL_FIRE charType, float x, float y);
-	virtual void reRect();
 
 	virtual bool getIsFire() { return _isFire; }
 	virtual void setIsFire(bool fire) { _isFire = fire; }
 
-	virtual void reAction(SKILL_REACTION reaction);
+	virtual bool getIsRight() { return _isRight; }
+	virtual void setIsRight(bool right) { _isRight = right; }
 
-	char* getStartName() { return _startName; }
-	char* getLoopName() { return _loopNameL; }
-	char* getOutName() { return _outName; }
+	virtual SKILL_DAMAGE getIsHavePlayer() { return _skillWhoDamage; }
+	virtual void setIsHavePlayer(SKILL_DAMAGE re) { _skillWhoDamage = re; }
 
-	void setStartName(char* str) { _startName = str; }
-	void setLoopName(char* str) { _loopNameL = str; }
-	void setOutName(char* str) { _outName = str; }
+	virtual void setPlusSaveX(float x) { _saveX += x; }
 
-	virtual void goOut() {
-		_ani = KEYANIMANAGER->findAnimation(_outName);
-		_stats = SKILL_STATS_OUT;
-		_ani->start();
-	}
+	virtual RECT getRect() { return _rc; }
 
-	void asd(float a) {};
+	static void goLoopL(void* obj);
+	static void goLoopR(void* obj);
+	static void goOut(void* obj);
+	static void isOut(void* obj);
 };
 

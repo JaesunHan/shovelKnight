@@ -99,13 +99,6 @@ void skill_Bubble::fire(SKILL_FIRE charType, float x, float y)
 
 	_isRight = false;
 	_isFire = true;
+	_skillWhoDamage = SKILL_DAMAGE_PLAYER;
 	_ani->start();
-}
-
-void * skill_Bubble::isOut(void * obj)
-{
-	skill_Bubble* f = (skill_Bubble*)obj;
-	f->_isFire = false;
-
-	return NULL;
 }

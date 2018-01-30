@@ -84,13 +84,5 @@ void skill_dirtBlockFx::fire(SKILL_FIRE charType, float x, float y)
 	_isFire = true;
 	_ani->start();
 
-}
-
-void * skill_dirtBlockFx::isOut(void * obj)
-{
-	skill_dirtBlockFx* k = (skill_dirtBlockFx*)obj;
-
-	k->_isFire = false;
-
-	return NULL;
+	_skillWhoDamage = SKILL_DAMAGE_NONE;
 }

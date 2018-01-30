@@ -47,12 +47,32 @@ void skillBase::reRect()
 	_rc = RectMakeCenter(_x, _y, _imgWidth, _imgHeight);
 }
 
-void skillBase::reAction(SKILL_REACTION reaction)
+void skillBase::goLoopL(void * obj)
 {
-	switch (reaction)
-	{
-	case SKILL_REACTION_DELETE:
-		_isFire = false;
-		break;
-	}
+	skillBase* f = (skillBase*)obj;
+	f->_ani = KEYANIMANAGER->findAnimation(f->_loopNameL);
+	f->_stats = SKILL_STATS_LOOP_L;
+	f->_ani->start();
+}
+
+void skillBase::goLoopR(void * obj)
+{
+	skillBase* f = (skillBase*)obj;
+	f->_ani = KEYANIMANAGER->findAnimation(f->_loopNameL);
+	f->_stats = SKILL_STATS_LOOP_R;
+	f->_ani->start();
+}
+
+void skillBase::goOut(void* obj)
+{
+	skillBase* k = (skillBase*)obj;
+	k->_ani = KEYANIMANAGER->findAnimation(k->_outName);
+	k->_stats = SKILL_STATS_OUT;
+	k->_ani->start();
+}
+
+void skillBase::isOut(void* obj)
+{
+	skillBase* k = (skillBase*)obj;
+	k->_isFire = false;
 }
