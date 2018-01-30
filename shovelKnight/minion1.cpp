@@ -75,6 +75,7 @@ HRESULT minion1::init(float x, float y)
 	_x = x;
 	_y = y;
 	_patternTypeNum = ENEMY_BASIC;
+
 	enemyInitSet();
 
 	return S_OK;
@@ -95,16 +96,12 @@ HRESULT minion1::init(float x, float y, int patternType)
 
 void minion1::update()
 {
-	if (_status != ENEMY_LEFT_HIT && _status != ENEMY_RIGHT_HIT)
-	{
-		_previousStatus = _status; //직전 에너미 상태 저장
-	}
 
 	//상태값에 따른 에니메이션 및 움직임
 	move();
 
 	//에너미 패턴 설정
-	enemyPattern(_patternTypeNum);
+	//enemyPattern(_patternTypeNum);
 
 	//============================================================= 픽셀충돌: 바닥충돌	
 	_pixelC->pixelCollisonY(_rc);  //바닥상태 검출
@@ -129,16 +126,17 @@ void minion1::update()
 	{
 		if (_direction)  //현상태가 오른쪽이면
 		{
-			_status = ENEMY_RIGHT_MOVE;
+			_status = ENEMY_LEFT_MOVE;
 		}
 		else            //현상태가 왼쪽이면
 		{
-			_status = ENEMY_LEFT_MOVE;
+			_status = ENEMY_RIGHT_MOVE;
 		}
 
 		_pixelC->setDirectionChange(false);  //초기화
 	}
 	//=============================================================
+
 
 
 	//데미지 설정

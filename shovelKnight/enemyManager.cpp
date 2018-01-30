@@ -16,7 +16,6 @@ HRESULT enemyManager::init()
 
 
 
-
 	return S_OK;
 }
 
