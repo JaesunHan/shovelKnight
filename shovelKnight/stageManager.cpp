@@ -294,6 +294,7 @@ void stageManager::loadData()
 		}
 
 		_FOM->setMapNumber(_mapNum);
+		_FOM->mapColoring();
 		_mapLoaded = true;
 	}
 }

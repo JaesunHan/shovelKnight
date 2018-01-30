@@ -10,17 +10,23 @@ enum OBJECTTYPE
 	dirtBlockSmall,
 	platform,
 	ladder,
-	spikeTrap
+	spikeTrap,
+	dirtPile
 
 };
 
 struct tagOBJECT
 {
 	image* img;
+	RECT rc;
 	int type;
 	int x;
 	int y;
+	int frameX;
+	int count;
+	int durability;
 	bool isPresent;
+	bool isDestroyed;
 };
 
 class playerManager;
@@ -47,6 +53,8 @@ public:
 	void render();
 
 	void loadData();
+	void mapColoring();
+	void objectInteraction();
 
 	inline void setPlayerManagerMemoryAddressLink(playerManager* pm) { _PM = pm; }
 	inline void setStageManagerMemoryAddressLink(stageManager* sm) { _SM = sm; }
