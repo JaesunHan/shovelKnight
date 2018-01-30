@@ -2,7 +2,6 @@
 #include "gameNode.h"
 
 #include "enemyManager.h"
-#include "gameObjectManager.h"
 #include "itemManager.h"
 #include "StoreManager.h"
 #include "skillManager.h"
@@ -23,7 +22,6 @@ private:
 	string _sceneName;				//씬매니저에 등록할 씬 이름
 
 	enemyManager* _enemy;
-	gameObjectManager* _gameObject;
 	itemManager* _item;
 	StoreManager* _Store;					//npcManager->StoreManager수정했습니다.^_^v -괴도재환 01.25
 	skillManager* _skill;
