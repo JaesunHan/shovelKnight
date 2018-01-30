@@ -81,12 +81,6 @@ void skill_enemyDeadFx::fire(SKILL_FIRE charType, float x, float y)
 	_isFire = true;
 	_ani->start();
 
-}
+	_skillWhoDamage = SKILL_DAMAGE_NONE;
 
-void * skill_enemyDeadFx::isOut(void * obj)
-{
-	skill_enemyDeadFx* f = (skill_enemyDeadFx*)obj;
-	f->_isFire = false;
-
-	return NULL;
 }

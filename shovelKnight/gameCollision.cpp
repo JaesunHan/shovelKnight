@@ -14,11 +14,16 @@ gameCollision::~gameCollision()
 HRESULT gameCollision::init()
 {
 	_playerMeetNPC = false;
+
 	_countDragonEffect = 0;
 	_dragonTime = 0;
-
 	_countDragonAttackEffect;
 	_dragonAttackTime;
+
+	_countDarkknightEffect = 0;
+	_darkknightTime = 0;
+	_countDarkknightAttackEffect;
+	_darkknightAttackTime;
 
 	return S_OK;
 }
@@ -117,8 +122,12 @@ void gameCollision::enemyDead()
 
 				if (_dragonAttackTime > 0.25f && _countDragonAttackEffect != 0)
 				{
-					if(_countDragonAttackEffect == 2) _skill->Fire(SKILL_FIRE_DRAGON, SKILL_BUBBLE, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY()+20);
-					else _skill->Fire(SKILL_FIRE_DRAGON, SKILL_BUBBLE, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
+					if (_countDragonAttackEffect == 2)
+					{
+						_skill->Fire(SKILL_FIRE_DRAGON_LEFT, SKILL_BUBBLE, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY() + 20);
+						_skill->getVSkill()[_skill->getVSkill().size() - 1]->setPlusSaveX(-20);
+					}
+					else _skill->Fire(SKILL_FIRE_DRAGON_LEFT, SKILL_BUBBLE, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
 					_countDragonAttackEffect--;
 					_dragonAttackTime -= 0.25;
 				}
@@ -134,8 +143,42 @@ void gameCollision::enemyDead()
 				_enemy->getVEnemy()[i]->getStatus() == ENEMY_RIGHT_DEAD ||
 				_enemy->getVEnemy()[i]->getIsDeadVanish())
 			{
-				
-				_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX, _enemy->getVEnemy()[i]->getX(), _enemy->getVEnemy()[i]->getY());
+				_darkknightTime += TIMEMANAGER->getElapsedTime();
+
+				while (_darkknightTime > 0.2f)
+				{
+					_darkknightTime -= 0.2f;
+					++_countDarkknightEffect;
+				}
+
+				if (_countDarkknightEffect > 0)
+				{
+					RECT rc3 = _enemy->getVEnemy()[i]->getRect();
+					_skill->Fire(SKILL_FIRE_CENTER, SKILL_ENEMYDEADFX,
+						RND->getFromFloatTo(rc3.left, rc3.right),
+						RND->getFromFloatTo(rc3.top, rc3.top + ((rc3.top + rc3.bottom) / 6)));
+					--_countDarkknightEffect;
+				}
+			}
+
+			if (_enemy->getVEnemy()[i]->getStatus() == ENEMY_LEFT_ATTACK)
+			{
+				_darkknightAttackTime += TIMEMANAGER->getElapsedTime();
+
+				if (_darkknightAttackTime > 1.f && _countDarkknightAttackEffect != 0)
+				{
+
+					_skill->Fire(SKILL_FIRE_DARKKNIGHT_LEFT, SKILL_DARKKNIGHT_FIREBALL,
+						_enemy->getVEnemy()[i]->getX(),
+						_enemy->getVEnemy()[i]->getY());
+					_countDarkknightAttackEffect--;
+					_darkknightAttackTime -= 1.f;
+				}
+			}
+			else
+			{
+				_countDarkknightAttackEffect = 1;
+				_darkknightAttackTime = 0;
 			}
 			break;
 		}
@@ -240,4 +283,28 @@ void gameCollision::EnemyAction()
 
 void gameCollision::PlayerAndSkill()
 {
+	for (int i = 0; i != _skill->getVSkill().size(); ++i)
+	{
+		RECT rc;
+		if (_skill->getVSkill()[i]->getIsHavePlayer() == SKILL_DAMAGE_PLAYER
+			|| _skill->getVSkill()[i]->getIsHavePlayer() == SKILL_DAMAGE_PLAYER_AND_ENEMY
+			&& IntersectRect(&rc, &_player->getPlayerRC(), &_skill->getVSkill()[i]->getRect()))
+		{
+			_skill->getVSkill()[i]->goOut;
+			_player->setDamagePlayer();
+		}
+		for (int j = 0; j != _enemy->getVEnemy().size(); ++j)
+		{
+			if (_skill->getVSkill()[i]->getIsHavePlayer() == SKILL_DAMAGE_PLAYER
+				|| _skill->getVSkill()[i]->getIsHavePlayer() == SKILL_DAMAGE_PLAYER_AND_ENEMY
+				&& IntersectRect(&rc, &_enemy->getVEnemy()[j]->getRect(), &_skill->getVSkill()[i]->getRect()))
+			{
+				_skill->getVSkill()[i]->goOut;
+				_enemy->getVEnemy()[i]->setEnemyDamage();
+			}
+			
+		}
+
+
+	}
 }

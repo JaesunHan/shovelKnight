@@ -114,6 +114,9 @@ void skill_fireBall::fire(SKILL_FIRE charType, float x, float y)
 	_isFire = true;
 	_ani->start();
 
+	//어따쓰지
+	_skillWhoDamage = SKILL_DAMAGE_NONE;
+
 }
 
 void * skill_fireBall::goLoop(void* obj)

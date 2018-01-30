@@ -37,19 +37,11 @@ void skill_darkKnight_fireBall::update()
 	case SKILL_STATS_LOOP_L:
 		if (!_isRight) _x -= speed;
 		reRect();
-		if (getDistance(_x, 0, _saveX, 0) > 100)
-		{
-			isOut(this);
-		}
 		break;
 
 	case SKILL_STATS_LOOP_R:
 		if (_isRight) _x += speed;
 		reRect();
-		if (getDistance(_x, 0, _saveX, 0) > 100)
-		{
-			isOut(this);
-		}
 		break;
 	case SKILL_STATS_OUT:
 		break;
@@ -62,23 +54,29 @@ void skill_darkKnight_fireBall::fire(SKILL_FIRE charType, float x, float y)
 	skillBase::fire(charType, x, y);
 
 	{
-		string str2;
-		str2 = "skillFireBallLoop";
+		switch (charType)
+		{
+		case SKILL_FIRE_DARKKNIGHT_LEFT:
+			_isRight = false;
+			break;
+		case SKILL_FIRE_DARKKNIGHT_RIGHT:
+			_isRight = true;
+			break;
+		}
+
 
 		int num = 0;
-
-		char* str5 = LPSTR_To_String(str2);
-
 		char str7[128];
 
 		itoa(num, str7, 10);
+		char* str5 = "skillFireBallLoop";
 
 		strcat(str5, str7);
 
 
 		while (KEYANIMANAGER->findAnimation(str5) != NULL)
 		{
-			str5 = LPSTR_To_String(str2);
+			str5 = LPSTR_To_String("skillFireBallLoop");
 			++num;
 			itoa(num, str7, 10);
 			strcat(str5, str7);
@@ -87,8 +85,6 @@ void skill_darkKnight_fireBall::fire(SKILL_FIRE charType, float x, float y)
 		char* str0 = new char[strlen(str5) + 1];
 
 		strcpy(str0, str5);
-
-		_isRight = RND->getInt(2);
 		char* str9;
 		str9 = "R";
 		strcat(str5, str9);
@@ -112,27 +108,24 @@ void skill_darkKnight_fireBall::fire(SKILL_FIRE charType, float x, float y)
 	_imgHeight = _img->getFrameHeight();
 	reRect();
 
+	int variable = 20;
 
 	if (_isRight)
 	{
 		_ani = KEYANIMANAGER->findAnimation(_loopNameR);
 		_stats = SKILL_STATS_LOOP_R;
+		_x += variable;
 	}
 	else
 	{
 		_ani = KEYANIMANAGER->findAnimation(_loopNameL);
 		_stats = SKILL_STATS_LOOP_L;
+		_x -= variable;
 	}
 
 
 	_isFire = true;
 	_ani->start();
-}
 
-void * skill_darkKnight_fireBall::isOut(void * obj)
-{
-	skill_darkKnight_fireBall* f = (skill_darkKnight_fireBall*)obj;
-	f->_isFire = false;
-
-	return NULL;
+	_skillWhoDamage = SKILL_DAMAGE_PLAYER;
 }

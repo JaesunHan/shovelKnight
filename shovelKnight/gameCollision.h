@@ -23,6 +23,12 @@ private:
 	int _countDragonAttackEffect;
 	float _dragonAttackTime;
 
+	int _countDarkknightEffect;
+	float _darkknightTime;
+	int _countDarkknightAttackEffect;
+	float _darkknightAttackTime;
+	
+
 public:
 	gameCollision();
 	~gameCollision();
