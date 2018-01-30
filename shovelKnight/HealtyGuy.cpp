@@ -189,8 +189,8 @@ void HealtyGuy::render()
 	}
 	if (_textOut)
 	{
-		TTTextOut(500, 300, "플레이어돈", _money);
-		TTTextOut(500, 200, "플레이어최대체력", _setMaxHp);
+		TTTextOut(300, 300, "플레이어돈", _money);
+		TTTextOut(300, 200, "플레이어최대체력", _setMaxHp);
 	}
 }
 
