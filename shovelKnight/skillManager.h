@@ -8,15 +8,6 @@
 
 #define EFFECTNUM 5
 
-enum SKILL
-{
-	SKILL_BUBBLE,
-	SKILL_DARKKNIGHT_FIREBALL,
-	SKILL_DIRTBLOCKFX,
-	SKILL_FIREBALL,
-	SKILL_ENEMYDEADFX,
-};
-
 class skillManager
 {
 private:
