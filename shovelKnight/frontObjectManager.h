@@ -12,13 +12,16 @@ enum OBJECTTYPE
 	ladder,
 	spikeTrap,
 	dirtPile,
-	bubble
+	bubble,
+	cliffTreeLeft,
+	checkPoint
 };
 
 struct tagOBJECT
 {
 	image* img;
 	RECT rc;
+	RECT detectRC;
 	int type;
 	int x;
 	int y;

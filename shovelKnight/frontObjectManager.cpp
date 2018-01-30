@@ -19,9 +19,11 @@ HRESULT frontObjectManager::init()
 	IMAGEMANAGER->addImage("grassLarge", ".\\image\\object\\grassLarge.bmp", 32, 16, true, RGB(255, 0, 255), false);
 	IMAGEMANAGER->addImage("grassSmall", ".\\image\\object\\grassSmall.bmp", 16, 16, true, RGB(255, 0, 255), false);
 	IMAGEMANAGER->addImage("ladder", ".\\image\\object\\ladder.bmp", 16, 16, true, RGB(255, 0, 255), false);
+	IMAGEMANAGER->addImage("cliffTreeLeft", ".\\image\\object\\cliffTreeLeft.bmp", 16, 16, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("dirtBlockLarge", ".\\image\\object\\dirtBlockLarge.bmp", 320, 64, 5, 1, true, RGB(255, 0, 255), false);
 	IMAGEMANAGER->addFrameImage("dirtPile", ".\\image\\object\\dirtPile.bmp", 165, 90, 5, 6, true, RGB(255, 0, 255), false);
 	IMAGEMANAGER->addFrameImage("bubble", ".\\image\\object\\bubble.bmp", 148, 74, 4, 2, true, RGB(255, 0, 255), false);
+	IMAGEMANAGER->addFrameImage("checkPoint", ".\\image\\object\\checkPoint.bmp", 245, 53, 7, 1, true, RGB(255, 0, 255), false);
 	loadData();
 	return S_OK;
 }
@@ -47,6 +49,7 @@ void frontObjectManager::render()
 				if (_vObj[_mapNum - 2][i].type == 2) CAMERAMANAGER->frameRenderObject(getMemDC(), _vObj[_mapNum - 2][i].img, _vObj[_mapNum - 2][i].x, _vObj[_mapNum - 2][i].y, _vObj[_mapNum - 2][i].frameX, 0);
 				else if (_vObj[_mapNum - 2][i].type == 7) CAMERAMANAGER->frameRenderObject(getMemDC(), _vObj[_mapNum - 2][i].img, _vObj[_mapNum - 2][i].x, _vObj[_mapNum - 2][i].y + 1, _vObj[_mapNum - 2][i].frameX, _vObj[_mapNum - 2][i].durability);
 				else if (_vObj[_mapNum - 2][i].type == 8) CAMERAMANAGER->frameRenderObject(getMemDC(), _vObj[_mapNum - 2][i].img, _vObj[_mapNum - 2][i].rc.left, _vObj[_mapNum - 2][i].rc.top, 0, 0);
+				else if (_vObj[_mapNum - 2][i].type == 10) CAMERAMANAGER->frameRenderObject(getMemDC(), _vObj[_mapNum - 2][i].img, _vObj[_mapNum - 2][i].x, _vObj[_mapNum - 2][i].y, _vObj[_mapNum - 2][i].frameX, 0);
 				else
 				{
 					CAMERAMANAGER->renderObject(getMemDC(), _vObj[_mapNum - 2][i].img, _vObj[_mapNum - 2][i].x, _vObj[_mapNum - 2][i].y);
@@ -59,7 +62,7 @@ void frontObjectManager::render()
 void frontObjectManager::loadData()
 {
 	TCHAR key[255];
-	for (int i = 0; i < 3; ++i)
+	for (int i = 0; i < 4; ++i)
 	{
 		char fileName[128];
 		wsprintf(fileName, "object00%d", i + 2);
@@ -97,6 +100,13 @@ void frontObjectManager::loadData()
 				tempObject.frameX = 0;
 				tempObject.count = 0;
 				tempObject.durability = 0;
+				tempObject.isDestroyed = false;
+			}
+			if (tempObject.type == 10)
+			{
+				tempObject.rc = RectMake(tempObject.x, tempObject.y, 35, 53);
+				tempObject.frameX = 0;
+				tempObject.count = 0;
 				tempObject.isDestroyed = false;
 			}
 			tempObject.isPresent = true;
@@ -230,6 +240,35 @@ void frontObjectManager::objectInteraction()
 						_vObj[_mapNum - 2][i].rc = RectMake(_vObj[_mapNum - 2][i].x, _vObj[_mapNum - 2][i].y, 37, 37);
 						_vObj[_mapNum - 2][i].count = 0;
 						_vObj[_mapNum - 2][i].isDestroyed = false;
+					}
+				}
+				if (_vObj[_mapNum - 2][i].type == 10)
+				{
+					if (_vObj[_mapNum - 2][i].isDestroyed == false)
+					{
+						RECT temp;
+						if (IntersectRect(&temp, &_PM->getPlayerRC(), &_vObj[_mapNum - 2][i].rc))
+						{
+
+
+
+							_vObj[_mapNum - 2][i].isDestroyed = true;
+						}
+					}
+					if (_vObj[_mapNum - 2][i].isDestroyed == true)
+					{
+						_vObj[_mapNum - 2][i].count++;
+						if (_vObj[_mapNum - 2][i].count > 5)
+						{
+							_vObj[_mapNum - 2][i].count = 0;
+							_vObj[_mapNum - 2][i].frameX++;
+							if (_vObj[_mapNum - 2][i].frameX > 6)
+							{
+								_vObj[_mapNum - 2][i].frameX = 0;
+								_vObj[_mapNum - 2][i].count = 0;
+								_vObj[_mapNum - 2][i].isDestroyed = false;
+							}
+						}
 					}
 				}
 			}

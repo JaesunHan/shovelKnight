@@ -166,20 +166,7 @@ public:
 			}
 		}
 	}
-	inline void setDamagePlayer() 
-	{ 
-		if (_invincibility == false)
-		{
-			_jumpPower = 3;
-			_state = INAIR;
-			_counter = 0;
-			_currentHP--;
-			//_GPU->setLife(_currentHP);
-			_isDamaged = true;
-			_invincibilityCounter = 0;
-			_invincibility = true;
-		}
-	}
+	void setDamagePlayer();
 	
 };
 
