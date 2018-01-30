@@ -60,7 +60,7 @@ HRESULT gameMenuScene::init()
 	//스크립트 테스트 용
 	_testScript = new image;
 	_testScript = IMAGEMANAGER->addImage("scriptWindow", "./image/UI/Script_window.bmp", 0, 0, 800, 96, true, RGB(255, 0, 255));
-	//DIALOGUEMANAGER->setScriptNScriptWindow("this is test Script ", _testScript, 255, 255, 255);
+	//DIALOGUEMANAGER->setScriptWindow(_testScript);
 	//INI 데이터 파일 읽어오기
 	loadPlayerListData();
 
@@ -75,13 +75,13 @@ void gameMenuScene::update()
 	{
 		--_pSlotIdx;
 		if (_pSlotIdx <= 0)	_pSlotIdx = 0;
-		//DIALOGUEMANAGER->setScriptNScriptWindow("this is test Script "+_pSlotIdx, _testScript, 255, 255, 255);
+		//DIALOGUEMANAGER->setScriptNScriptWindow("this is test Script ", _testScript, 255, 255, 255);
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 	{
 		++_pSlotIdx;
 		if (_pSlotIdx >= MAXPLAYERLIST - 1)	_pSlotIdx = MAXPLAYERLIST - 1;
-		//DIALOGUEMANAGER->setScriptNScriptWindow("this is test Script 5", _testScript, 255, 255, 255);
+		//DIALOGUEMANAGER->setScriptNScriptWindow("카아아ㅏ악 퉤", _testScript, 255, 255, 255);
 	}
 
 	//타겟 박스가 현재 가리키는 리스트에 값이 존재하지 않으면 캐릭터 생성화면 객체를 업데이트
