@@ -232,7 +232,7 @@ void skeleton::draw()
 
 	if (KEYMANAGER->isOnceKeyDown(VK_TAB))
 	{
-
+		Rectangle(getMemDC(), CAMERAMANAGER->getX(_attackRc.left), CAMERAMANAGER->getY(_attackRc.top), CAMERAMANAGER->getX(_attackRc.right), CAMERAMANAGER->getY(_attackRc.bottom));
 	}
 
 

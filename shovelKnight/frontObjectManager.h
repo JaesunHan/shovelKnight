@@ -34,7 +34,7 @@ struct tagOBJECT
 
 class playerManager;
 class stageManager;
-
+class gamePlayUI;
 class frontObjectManager : public gameNode
 {
 private:
@@ -46,6 +46,7 @@ private:
 
 	playerManager* _PM;
 	stageManager* _SM;
+	gamePlayUI* _GPUI;
 public:
 	frontObjectManager();
 	~frontObjectManager();
@@ -62,5 +63,10 @@ public:
 	inline void setPlayerManagerMemoryAddressLink(playerManager* pm) { _PM = pm; }
 	inline void setStageManagerMemoryAddressLink(stageManager* sm) { _SM = sm; }
 	inline void setMapNumber(int number) { _mapNum = number; }
+
+	inline void setGamePlayUIMemoryAddressLink(gamePlayUI* gpui) { _GPUI = gpui; }
+
+	void addNsaveINTDataInINIFile(char* fileName, char subjectName[256], char title[256], int data);
+	
 };
 

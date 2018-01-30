@@ -147,6 +147,7 @@ void soundMenu::update()
 				effectVolumeControl();
 				SOUNDMANAGER->play("effectSelect", _eV, false);
 				_effectSoundRectButtonX += 10;
+				
 			}
 		}
 		if (_indexSoundRc == 2)
@@ -219,12 +220,24 @@ void soundMenu::effectVolumeControl()
 
 	_effectVol = _rcEffectVolumeButton.left - _rcEffectVolume.left;
 	_eV = _effectVol / 100;
+	if (_eV <= 0)	_eV = 0;
+	if (_eV >= 1.0f)	_eV = 1.0f;
 	SOUNDMANAGER->setEffectVolume(_eV);
+	char volumeTxt[126];
+	sprintf(volumeTxt, "%3.3f", _eV);
+	INIDATA->addData("EffectSound", "Volume", volumeTxt);
+	INIDATA->iniSave("SoundInfo");
 }
 
 void soundMenu::bgmVolumeControl()
 {
 	_bgmVol = _bmgVolume.left - _bgmVolumeButton.left;
 	_bV = _bgmVol / 100;
+	if (_bV <= 0)	_bV = 0;
+	if (_bV >= 1.0f)	_bV = 1.0f;
 	SOUNDMANAGER->setMusicVolume(_bV);
+	char volumeTxt[126];
+	sprintf(volumeTxt, "%3.3f", _bV);
+	INIDATA->addData("BackgroundSound", "Volume", volumeTxt);
+	INIDATA->iniSave("SoundInfo");
 }
