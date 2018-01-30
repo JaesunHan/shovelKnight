@@ -48,6 +48,9 @@ void enemyBase::render()
 			CAMERAMANAGER->getX(_rc.right), CAMERAMANAGER->getY(_rc.bottom));
 
 		CAMERAMANAGER->renderMap(getMemDC(), IMAGEMANAGER->findImage("bgMap"));
+
+		Rectangle(getMemDC(), CAMERAMANAGER->getX(_attackRc.left), CAMERAMANAGER->getY(_attackRc.top),
+			CAMERAMANAGER->getX(_attackRc.right), CAMERAMANAGER->getY(_attackRc.bottom));
 	}
 
 	//자식클래스에 있는 draw() 이던지, 아니면 부모클래스에 있는 draw() 던지 하나는 출력된다.
