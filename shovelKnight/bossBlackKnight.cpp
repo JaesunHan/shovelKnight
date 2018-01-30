@@ -64,10 +64,10 @@ void bossBlackKnight::enemyInitSet()
 	KEYANIMANAGER->addArrayFrameAnimation("darkKnightLeftAttackFire", "darkKnight", leftAttackFire, 4, 5, false);
 
 	int rightHit[] = { 70, 71, 72, 73, 74, 75, 76 };
-	KEYANIMANAGER->addArrayFrameAnimation("darkKnightRightHit", "darkKnight", rightHit, 7, 8, false);
+	KEYANIMANAGER->addArrayFrameAnimation("darkKnightRightHit", "darkKnight", rightHit, 7, 5, false);
 
 	int leftHit[] = { 77, 78, 79, 80, 81, 82, 83 };
-	KEYANIMANAGER->addArrayFrameAnimation("darkKnightLeftHit", "darkKnight", leftHit, 7, 8, false);
+	KEYANIMANAGER->addArrayFrameAnimation("darkKnightLeftHit", "darkKnight", leftHit, 7, 5, false);
 
 	int rightDead[] = { 84, 85, 86, 87, 88 };
 	KEYANIMANAGER->addArrayFrameAnimation("darkKnightRightDead", "darkKnight", rightDead, 5, 6, false);
@@ -135,11 +135,6 @@ HRESULT bossBlackKnight::init(float x, float y, int patternType)
 
 void bossBlackKnight::update()					 
 {
-	if (_status != ENEMY_LEFT_HIT && _status != ENEMY_RIGHT_HIT)
-	{
-		_previousStatus = _status; //직전 에너미 상태 저장
-	}
-
 
 	//상태값에 따른 에니메이션 및 움직임
 	move();
@@ -220,7 +215,6 @@ void bossBlackKnight::update()
 		{
 			_isHitDelayTime = false;
 			_isHit = false;
-			_patternTrun = 0;
 		}
 	}
 
@@ -247,8 +241,11 @@ void bossBlackKnight::draw()
 {
 
 	CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left - 29, _rc.top - 6);
+	
+    TTTextOut(CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_y - 30), "패턴", _patternTrun);
+	TTTextOut(CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_y - 20), "패턴카운트", _patternCount);
+	TTTextOut(CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_y - 10), "점프카운트", _jumpCount);
 
-	//TTTextOut(CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_y - 30), "패턴", _patternTrun);
 }
 
 void bossBlackKnight::move()
@@ -359,7 +356,7 @@ void bossBlackKnight::move()
 			//움직임: 뒤로 점핑
 			if (_jump->getIsJumping())
 			{
-				if (_rc.left > 5)
+				if (_rc.left > 10)
 				{
 					_speed = BLACKKNIGHTSPEED * 3;
 					_speed -= 0.4;
@@ -368,7 +365,7 @@ void bossBlackKnight::move()
 				_jump->update();
 			}
 
-			if (_frameCount % 30 == 0)
+			if (_frameCount % 10 == 0)
 			{
 				_isAniPlayEnd = true;
 				_frameCount = 1;
@@ -386,7 +383,7 @@ void bossBlackKnight::move()
 			//움직임: 뒤로 점핑
 			if (_jump->getIsJumping())
 			{
-				if (_rc.right < WINSIZEX - 5)
+				if (_rc.right < WINSIZEX - 10)
 				{
 					_speed = BLACKKNIGHTSPEED * 3;
 					_speed -= 0.4;
@@ -395,7 +392,7 @@ void bossBlackKnight::move()
 				_jump->update();
 			}
 
-			if (_frameCount % 30 == 0)
+			if (_frameCount % 10 == 0)
 			{
 				_isAniPlayEnd = true;
 				_frameCount = 1;
@@ -429,7 +426,7 @@ void bossBlackKnight::move()
 			if (!_anim->isPlay())
 			{
 				_anim->start();
-				_jump->jumping(&_x, &_y, 10.0f, 0.7f);
+				_jump->jumping(&_x, &_y, 12.0f, 0.7f);
 			}
 
 			//움직임: 뒤로 점핑
@@ -439,21 +436,25 @@ void bossBlackKnight::move()
 			}
 
 			//움직임: 전진
-			if (_frameCount <= 5)
+
+			if (_frameCount % 20 == 0)
 			{
-				if (_rc.left < 10)
+				if (_rc.left > 10)
 				{
-					_speed = BLACKKNIGHTSPEED * 10;
+					_speed = BLACKKNIGHTSPEED * 5;
 					_speed -= 0.4;
 					_x -= _speed;
 				}
 			}
 
-			if (_frameCount % 60 == 0)
+
+			if (_frameCount % 40 == 0)
 			{
 				_isAniPlayEnd = true;
 				_frameCount = 1;
+				_jumpCount--;
 			}
+
 		break;
 		case ENEMY_RIGHT_JUMP_ATTACK:
 			_frameCount++;
@@ -461,7 +462,7 @@ void bossBlackKnight::move()
 			if (!_anim->isPlay())
 			{
 				_anim->start();
-				_jump->jumping(&_x, &_y, 10.0f, 0.7f);
+				_jump->jumping(&_x, &_y, 12.0f, 0.7f);
 			}
 
 			//움직임: 뒤로 점핑
@@ -471,20 +472,22 @@ void bossBlackKnight::move()
 			}
 
 			//움직임: 전진
-			if (_frameCount <= 5)
+			if (_frameCount % 20 == 0)
 			{
 				if (_rc.right < WINSIZEX - 10)
 				{
-					_speed = BLACKKNIGHTSPEED * 10;
+					_speed = BLACKKNIGHTSPEED * 5;
 					_speed -= 0.4;
 					_x += _speed;
 				}
 			}
 
-			if (_frameCount % 60 == 0)
+
+			if (_frameCount % 40 == 0)
 			{
 				_isAniPlayEnd = true;
 				_frameCount = 1;
+				_jumpCount--;
 			}
 		break;
 		case ENEMY_LEFT_FIRE_ATTACK:
@@ -586,14 +589,12 @@ void bossBlackKnight::move()
 				{
 					_isDeadVanish = true;
 					_vanishTime = 1;
+					_isAniPlayEnd = true;
+					_frameCount = 1;
 				}
 			}
 			
-			if (_frameCount % DEADCOUNT == 0)
-			{
-				_isAniPlayEnd = true;
-				_frameCount = 1;
-			}
+
 		break;
 		case ENEMY_RIGHT_DEAD:
 			_frameCount++;
@@ -622,15 +623,12 @@ void bossBlackKnight::move()
 				if (_vanishTime % DEADCOUNT == 0)
 				{
 					_isDeadVanish = true;
+					_isAniPlayEnd = true;
 					_vanishTime = 1;
+					_frameCount = 1;
 				}
 			}
 
-			if (_frameCount % DEADCOUNT == 0)
-			{
-				_isAniPlayEnd = true;
-				_frameCount = 1;
-			}
 		break;
 	}
 
@@ -664,19 +662,13 @@ void bossBlackKnight::enemyPattern(int _patternTypeNum)
 
 						if (isPlayerFind(_x, 70))
 						{
-							_patternTrun = 2;
-						}
-						else
-						{
-							if (isPlayerFind(_x, 100))
-							{
-								_patternTrun = 1;
-							}
+							_patternTrun = 1;
+							_patternCount++;
 						}
 
 					break;
 					case 1:
-						if (isPlayerFind(_x, 50))
+						if (isPlayerFind(_x, 60))
 						{
 							if (_direction)
 							{
@@ -699,43 +691,42 @@ void bossBlackKnight::enemyPattern(int _patternTypeNum)
 							}
 						}
 
-						_patternTrun = 0;
+						if (isPlayerFind(_x, 150))
+						{
+							if (_playerStatus == 2)
+							{
+								_patternTrun = 2;
+								_patternCount++;
+							}
+						}
+	
+					break;
+					case 2:
+
+						if (_direction)
+						{
+							_status = ENEMY_RIGHT_BACK_MOVE;
+						}
+						else
+						{
+							_status = ENEMY_LEFT_BACK_MOVE;
+						}
+
 
 						if (_patternCount > 7)
 						{
-							_patternTrun = 3;
-							_patternCount = 0;
-						}
-					break;
-					case 2:
-						if (isPlayerFind(_x, 50))
-						{
-							if (_direction)
-							{
-								_status = ENEMY_RIGHT_BACK_MOVE;
-							}
-							else
-							{
-								_status = ENEMY_LEFT_BACK_MOVE;
-							}
-						}
-
-						if (_isHitDelayTime)
-						{
-							_patternTrun = 2;
+							_patternTrun = 6;
+							_patternCount++;
 						}
 						else
 						{
 							_patternTrun = 3;
+							_patternCount++;
 						}
-			
-						if (_patternCount > 7)
-						{
-							_patternTrun = 6;
-							_patternCount = 0;
-						}
+
 					break;
 					case 3:
+
 						if (_direction)
 						{
 							_status = ENEMY_RIGHT_SMILE;
@@ -745,12 +736,17 @@ void bossBlackKnight::enemyPattern(int _patternTypeNum)
 							_status = ENEMY_LEFT_SMILE;
 						}
 
-						_patternTrun = 0;
+
+						_patternTrun = 4;
+						_patternCount++;
+					
 					break;
 					case 4:
-						if (_isHitDelayTime || _jumpCount < 0)
+
+						if (_jumpCount <= 0)
 						{
-							_patternTrun = 5;
+							_patternTrun = 6;
+							_patternCount++;
 
 							_jumpCount = 4;
 						}
@@ -764,37 +760,11 @@ void bossBlackKnight::enemyPattern(int _patternTypeNum)
 							{
 								_status = ENEMY_LEFT_JUMP_ATTACK;
 							}
-
-							_jumpCount--;
 						}
+
 					break;
 					case 5:
-						if (_direction)  //플레이어가 오른쪽에 있고
-						{
-							if (_x < 30)  //화면 좌측 끝에 오면
-							{
-								_status = ENEMY_RIGHT_SMILE;
-
-								_patternTrun = 0;
-							}
-							else if (_x <= WINSIZEX / 2)  //화면 좌측에 있다면
-							{
-								_status = ENEMY_LEFT_MOVE;
-							}
-						}
-						else  //플레이어가 왼쪽에 있고
-						{
-							if (_x > WINSIZEX - 30)  //화면 우측 끝에 오면
-							{
-								_status = ENEMY_LEFT_SMILE;
-
-								_patternTrun = 0;
-							}
-							else if (_x > WINSIZEX / 2)  //화면 우측에 있다면
-							{
-								_status = ENEMY_RIGHT_MOVE;
-							}
-						}
+	
 
 					break;
 					case 6:
@@ -808,11 +778,12 @@ void bossBlackKnight::enemyPattern(int _patternTypeNum)
 						}
 
 						_patternTrun = 0;
+						_patternCount = 0;
 					break;
 				}
 
 				_isAniPlayEnd = false;
-				_patternCount++;
+				
 			}
 		break;
 		case ENEMY_PATROL:
