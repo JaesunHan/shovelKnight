@@ -97,6 +97,8 @@ public:
 
 	virtual SKILL_TYPE getSkillType() { return _skillType; }
 
+	virtual SKILL_STATS getSkillStats() { return _stats; }
+
 	virtual RECT getRect() { return _rc; }
 
 	virtual string getLoopNameL() { return _loopNameL; }

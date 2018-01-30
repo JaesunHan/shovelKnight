@@ -350,61 +350,65 @@ void gameCollision::PlayerAndSkill()
 {
 	for (int i = 0; i != _skill->getVSkill().size(); ++i)
 	{
-		RECT rc;
-		if (_skill->getVSkill()[i]->getIsHavePlayer() == SKILL_DAMAGE_PLAYER
-			|| _skill->getVSkill()[i]->getIsHavePlayer() == SKILL_DAMAGE_PLAYER_AND_ENEMY)
+		if (_skill->getVSkill()[i]->getSkillStats() != SKILL_STATS_START
+			&& _skill->getVSkill()[i]->getSkillStats() != SKILL_STATS_OUT)
 		{
-			if (IntersectRect(
-				&rc,
-				&_player->getPlayerRC(),
-				&_skill->getVSkill()[i]->getRect()))
+			RECT rc;
+			if (_skill->getVSkill()[i]->getIsHavePlayer() == SKILL_DAMAGE_PLAYER
+				|| _skill->getVSkill()[i]->getIsHavePlayer() == SKILL_DAMAGE_PLAYER_AND_ENEMY)
 			{
-				if (_skill->getVSkill()[i]->getSkillType() == SKILL_TYPE_BUBBLE)
-				{
-					_skill->getVSkill()[i]->goOut(_skill->getVSkill()[i]);
-					_player->setDamagePlayer();
-				}
-				else
-				{
-					_skill->getVSkill()[i]->isOut(_skill->getVSkill()[i]);
-					_player->setDamagePlayer();
-				}
-			}
-
-			if (IntersectRect(
-				&rc,
-				&_player->getAttackRC(),
-				&_skill->getVSkill()[i]->getRect()))
-			{
-				if (_skill->getVSkill()[i]->getSkillType() == SKILL_TYPE_BUBBLE)
-				{
-					_skill->getVSkill()[i]->goOut(_skill->getVSkill()[i]);
-				}
-				else if (_skill->getVSkill()[i]->getSkillType() == SKILL_TYPE_DARKKNIGHT_FIREBALL)
-				{
-					_skill->getVSkill()[i]->setIsHavePlayer(SKILL_DAMAGE_ENEMY);
-					_skill->getVSkill()[i]->setIsRight(!_skill->getVSkill()[i]->getIsRight());
-					_skill->getVSkill()[i]->goLoop(_skill->getVSkill()[i]);
-				}
-			}
-		}
-
-		for (int j = 0; j != _enemy->getVEnemy().size(); ++j)
-		{
-			if ((_skill->getVSkill()[i]->getIsHavePlayer() == SKILL_DAMAGE_ENEMY
-				|| _skill->getVSkill()[i]->getIsHavePlayer() == SKILL_DAMAGE_PLAYER_AND_ENEMY))
-			{
-				if (IntersectRect(&rc, &_enemy->getVEnemy()[j]->getRect(), &_skill->getVSkill()[i]->getRect()))
+				if (IntersectRect(
+					&rc,
+					&_player->getPlayerRC(),
+					&_skill->getVSkill()[i]->getRect()))
 				{
 					if (_skill->getVSkill()[i]->getSkillType() == SKILL_TYPE_BUBBLE)
 					{
 						_skill->getVSkill()[i]->goOut(_skill->getVSkill()[i]);
-						_enemy->getVEnemy()[j]->setEnemyDamage();
+						_player->setDamagePlayer();
 					}
 					else
 					{
 						_skill->getVSkill()[i]->isOut(_skill->getVSkill()[i]);
-						_enemy->getVEnemy()[j]->setEnemyDamage();
+						_player->setDamagePlayer();
+					}
+				}
+
+				if (IntersectRect(
+					&rc,
+					&_player->getAttackRC(),
+					&_skill->getVSkill()[i]->getRect()))
+				{
+					if (_skill->getVSkill()[i]->getSkillType() == SKILL_TYPE_BUBBLE)
+					{
+						_skill->getVSkill()[i]->goOut(_skill->getVSkill()[i]);
+					}
+					else if (_skill->getVSkill()[i]->getSkillType() == SKILL_TYPE_DARKKNIGHT_FIREBALL)
+					{
+						_skill->getVSkill()[i]->setIsHavePlayer(SKILL_DAMAGE_ENEMY);
+						_skill->getVSkill()[i]->setIsRight(!_skill->getVSkill()[i]->getIsRight());
+						_skill->getVSkill()[i]->goLoop(_skill->getVSkill()[i]);
+					}
+				}
+			}
+
+			for (int j = 0; j != _enemy->getVEnemy().size(); ++j)
+			{
+				if ((_skill->getVSkill()[i]->getIsHavePlayer() == SKILL_DAMAGE_ENEMY
+					|| _skill->getVSkill()[i]->getIsHavePlayer() == SKILL_DAMAGE_PLAYER_AND_ENEMY))
+				{
+					if (IntersectRect(&rc, &_enemy->getVEnemy()[j]->getRect(), &_skill->getVSkill()[i]->getRect()))
+					{
+						if (_skill->getVSkill()[i]->getSkillType() == SKILL_TYPE_BUBBLE)
+						{
+							_skill->getVSkill()[i]->goOut(_skill->getVSkill()[i]);
+							_enemy->getVEnemy()[j]->setEnemyDamage();
+						}
+						else
+						{
+							_skill->getVSkill()[i]->isOut(_skill->getVSkill()[i]);
+							_enemy->getVEnemy()[j]->setEnemyDamage();
+						}
 					}
 				}
 			}
