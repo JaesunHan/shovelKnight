@@ -281,7 +281,8 @@ void BardKnight::update()
 	{
 		DIALOGUEMANAGER->update();
 	}
-	if (KEYMANAGER->isOnceKeyDown(VK_RETURN) && _isCollisionPlayer)
+	bool enterkey = KEYMANAGER->isOnceKeyDown(VK_SPACE);
+	if (enterkey && _isCollisionPlayer)
 	{
 		//인덱스값으로 다이얼로그 벡터에 있는 값을 빼낸다
 	

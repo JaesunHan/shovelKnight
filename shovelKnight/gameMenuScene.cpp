@@ -60,7 +60,7 @@ HRESULT gameMenuScene::init()
 	//스크립트 테스트 용
 	_testScript = new image;
 	_testScript = IMAGEMANAGER->addImage("scriptWindow", "./image/UI/Script_window.bmp", 0, 0, 800, 96, true, RGB(255, 0, 255));
-	DIALOGUEMANAGER->setScriptNScriptWindow("this is test Script ", _testScript, 255, 255, 255);
+	//DIALOGUEMANAGER->setScriptNScriptWindow("this is test Script ", _testScript, 255, 255, 255);
 	//INI 데이터 파일 읽어오기
 	loadPlayerListData();
 

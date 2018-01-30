@@ -223,7 +223,11 @@ void gameCollision::PlayerMeetNPC()
 		//_player->setMaxHP(_store->getVNpc()[i]->getMaxHp()+2);
 		
 
-
+		bool interRect = IntersectRect(
+			&temp,
+			&_player->getPlayerRC(),
+			&_store->getVNpc()[i]->getRect());
+		bool checkcollision = (_store->getVNpc()[i]->getIsCollisionNPC());
 		if (IntersectRect(
 			&temp, 
 			&_player->getPlayerRC(), 
