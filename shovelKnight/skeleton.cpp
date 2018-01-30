@@ -230,10 +230,7 @@ void skeleton::draw()
 		CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left - 19, _rc.top - 9);
 	}
 
-	if (KEYMANAGER->isOnceKeyDown(VK_TAB))
-	{
-		Rectangle(getMemDC(), CAMERAMANAGER->getX(_attackRc.left), CAMERAMANAGER->getY(_attackRc.top), CAMERAMANAGER->getX(_attackRc.right), CAMERAMANAGER->getY(_attackRc.bottom));
-	}
+
 
 
 }

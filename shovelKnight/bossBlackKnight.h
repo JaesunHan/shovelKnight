@@ -9,7 +9,8 @@
 class bossBlackKnight : public enemyBase
 {
 private:
-
+	bool _jumpStop;
+	int _frameX, _frameY;
 
 public:
 	bossBlackKnight();

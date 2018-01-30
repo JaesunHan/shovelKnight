@@ -26,6 +26,12 @@ void enemyManager::release()
 
 void enemyManager::update()
 {
+	if (KEYMANAGER->isOnceKeyDown('9'))
+	{
+		setEnemy(ENEMY_BLACKKNIGHT, 350, 120);
+	}
+
+
 
 	//============================================================================ Àû Ä«¸Þ¶ó ¾Æ¿ô ¼Ò¸ê
 	for (int i = 0; i < _vEnemy.size(); i++)
@@ -202,11 +208,11 @@ void enemyManager::stageEnemySet(int stageNum)
 	{
 		//setEnemy(ENEMY_BEETO, 300, 200);
 		//setEnemy(ENEMY_BLORB, 350, 200);
-		setEnemy(ELEMY_DRAKE, 300, 150, ENEMY_LEFT_FOWARD);
-		setEnemy(ELEMY_DRAKE, 200, 200, ENEMY_PATROL);
-		setEnemy(ENEMY_SKELETON, 350, 120);
+		//setEnemy(ELEMY_DRAKE, 300, 150, ENEMY_LEFT_FOWARD);
+		//setEnemy(ELEMY_DRAKE, 200, 200, ENEMY_PATROL);
+		//setEnemy(ENEMY_SKELETON, 350, 120);
 		//setEnemy(ENEMY_DRAGON, 400, 179.5);
-		setEnemy(ENEMY_BLACKKNIGHT, 350, 120);
+		//setEnemy(ENEMY_BLACKKNIGHT, 350, 120);
 	}
 	if (_enemyIsOn[1])  //stage2
 	{
