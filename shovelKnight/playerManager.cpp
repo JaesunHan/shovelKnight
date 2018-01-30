@@ -40,6 +40,10 @@ void playerManager::release()
 void playerManager::update()
 {
 	_p1->update();
+	_p1->setPlayerHp(_GPU->getLife());
+	_p1->setPlayerMaxHP(_GPU->getMaxLife());
+	_p1->setPlayerMP(_GPU->getMana());
+	_p1->setMoney(_GPU->getGold());
 }
 
 void playerManager::render()
