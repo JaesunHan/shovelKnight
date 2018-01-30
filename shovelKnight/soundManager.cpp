@@ -89,8 +89,8 @@ void soundManager::release()
 
 	//메모리 지워준다
 	//배열이므로
-	SAFE_DELETE(_channel);
-	SAFE_DELETE(_sound);
+	ZeroMemory(_channel, sizeof(_channel));
+	ZeroMemory(_sound, sizeof(_sound));
 
 	//마지막으로 FMOD 사운드 시스템 닫아줌
 	if (_system != NULL)
