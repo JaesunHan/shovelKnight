@@ -523,3 +523,9 @@ void skeleton::enemyPattern(int _patternTypeNum)
 	}
 
 }
+
+
+void skeleton::attackCollisionRect()
+{
+
+}
