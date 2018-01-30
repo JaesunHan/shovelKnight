@@ -49,6 +49,8 @@ HRESULT gamePlayScene::init()
 	_stage->init();
 	_gamePlayUI->init();
 	_object->init();
+	
+	_object->setGamePlayUIMemoryAddressLink(_gamePlayUI);
 
 
 	return S_OK;
