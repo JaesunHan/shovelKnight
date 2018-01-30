@@ -205,7 +205,6 @@ void playerBase::control()
 
 void playerBase::pixelCollision()
 {
-	HDC hdc = IMAGEMANAGER->findImage("bgMap")->getMemDC();
 	COLORREF color, color2, color3;
 	int R, G, B, R2, G2, B2, R3, G3, B3;
 	if (_state != HANG)

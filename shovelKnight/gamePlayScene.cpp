@@ -87,8 +87,8 @@ void gamePlayScene::render()
 	_stage->render();
 	_Store->render();
 	_enemy->render();
-	_player->render();
 	_object->render();
+	_player->render();
 	_item->render();
 	_skill->render();
 	_gameCollision->render();

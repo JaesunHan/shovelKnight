@@ -60,7 +60,7 @@ void player1::update()
 		control2();
 		attack();
 		attackReaction();
-		//invincibilityCount();
+		invincibilityCount();
 		CAMERAMANAGER->setSingleFocus(_x, _y, WINSIZEX);
 	}
 	if (_currentHP <= 0 && _isDead == false)

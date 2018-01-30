@@ -196,7 +196,7 @@ void MagicGirl::draw()
 	{
 	case NPCIDLE: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
 		break;
-	case NPCTALK: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim2, _rc.left, _rc.top-3);
+	case NPCTALK: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim2, _rc.left, _rc.top);
 		break;
 	case NPCUNDERATTACKED:
 		break;

@@ -35,7 +35,7 @@ HRESULT HealtyGuy::init()
 
 	//NPC 이미지
 	_img = IMAGEMANAGER->addFrameImage(_imgKeyString, _imgFileName, 70, 47, 2, 1, true, RGB(255, 0, 255), false);											// NPC 이미지
-	IMAGEMANAGER->addFrameImage("HealtyGuyGood", "./image/npc/healthGuyGood.bmp", 168, 67, 4, 1, true, RGB(255, 0, 255), false);
+	IMAGEMANAGER->addFrameImage("HealtyGuyGood", "./image/npc/healthGuyGood1.bmp", 168, 90, 4, 1, true, RGB(255, 0, 255), false);
 	IMAGEMANAGER->addFrameImage("HealtyGuyCook", "./image/npc/healthGuyBackCook.bmp", 897, 43, 23, 1, true, RGB(255, 0, 255), false);
 
 
@@ -158,13 +158,12 @@ void HealtyGuy::HealtyGuyImageControl()
 	{
 	case NPCIDLE:
 		_anim = KEYANIMANAGER->findAnimation("헬스가이아이들");		//NPC 애니메이션
-												//KEYANIMANAGER->start("매직걸아이들");
+															//KEYANIMANAGER->start("매직걸아이들");
 		break;
 
 	case NPCTALK:
 		_img = IMAGEMANAGER->findImage("HealtyGuyGood");
 		_anim2 = KEYANIMANAGER->findAnimation("헬스가이굿");		//NPC 애니메이션
-	
 															//KEYANIMANAGER->start("매직걸인사");
 		break;
 
@@ -179,8 +178,7 @@ void HealtyGuy::render()
 	if (_isAppear == true)
 	{
 		draw();
-		TTTextOut(400, 400, "헬스가이X좌표", _x);
-		TTTextOut(400, 600, "헬스가이y좌표", _y);
+
 		if (KEYMANAGER->isToggleKey(VK_TAB))
 		{
 			Rectangle(getMemDC(), CAMERAMANAGER->getX(_rc.left),
@@ -202,13 +200,9 @@ void HealtyGuy::draw()
 	switch (_npcStatus)
 	{
 	case NPCIDLE: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
-		
 		break;
-	case NPCTALK: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim2, _rc.left, _rc.top-20);
-		//TTTextOut(400, 400, "헬스가이X좌표", _x);
-		TTTextOut(400, 600, "헬스가이y좌표", _y);
+	case NPCTALK: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim2, _rc.left, _rc.top);
 		break;
-
 	case NPCUNDERATTACKED:
 		break;
 	default: CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left, _rc.top);
