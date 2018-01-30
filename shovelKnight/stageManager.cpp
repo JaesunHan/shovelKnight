@@ -21,7 +21,11 @@ HRESULT stageManager::init()
 {
 	_mapLoaded = false;
 	_transition = false;
-	_mapNum = 2;
+<<<<<<< HEAD
+	_mapNum = 1;
+=======
+	_mapNum = 4;
+>>>>>>> 38d5574cfcbf45c208a039d4cead1446acfc1362
 	_loopX1 = 0;
 	_loopX2 = 100;
 	_cameraX = 200;

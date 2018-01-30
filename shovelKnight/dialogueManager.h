@@ -1,6 +1,11 @@
 #pragma once
 #include "singletonBase.h"
 
+#include <iostream>
+#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+
+using namespace std;
+
 enum LANGUAGE
 {
 	LANGUAGE_DEFAULT = 1,
@@ -12,6 +17,8 @@ class dialogueManager : public singletonBase<dialogueManager>
 private:
 	vector<string>			 _vString;
 	vector<string>::iterator _vStringIter;
+
+	float _time;
 
 	int _dialogueTime;
 	int _elapsedTime;
@@ -36,7 +43,7 @@ public:
 	inline void setDialogueTime(float dt) { _dialogueTime = dt; }
 
 	//타임 구하는 함수
-	time_t getTime();
+	//time_t getTime();
 	dialogueManager();
 	~dialogueManager();
 };
