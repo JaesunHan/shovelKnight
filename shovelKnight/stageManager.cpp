@@ -23,7 +23,7 @@ HRESULT stageManager::init()
 	_mapLoaded = false;
 	_transition = false;
 
-	_mapNum = 5;
+	_mapNum = 1;
 
 	_loopX1 = 0;
 	_loopX2 = 100;
@@ -206,6 +206,8 @@ void stageManager::loadData()
 		wsprintf(iniDir, ".\\map00%d.ini", _mapNum);
 		char txtDir[128];
 		wsprintf(txtDir, "map00%d.txt", _mapNum);
+		char monsterINIFile[128];
+		wsprintf(monsterINIFile, "monsterLocation00%d", _mapNum);
 		_maxLayer = INIDATA->loadDataInterger(mapName, "imageTotal", "maxNum");
 		int maxTile = INIDATA->loadDataInterger(mapName, "tileTotal", "maxNum");
 		int maxTransition = INIDATA->loadDataInterger(mapName, "transitionTotal", "maxNum");
@@ -294,6 +296,17 @@ void stageManager::loadData()
 		for (int i = 0; i < vTemp.size(); ++i)
 		{
 			_vTileNum.push_back(atoi(vTemp[i].c_str()));
+		}
+
+		_EM->removeAllEnemy();
+		int maxMonster = INIDATA->loadDataInterger(monsterINIFile, "monsterTotal", "maxNum");
+		for (int i = 0; i < maxMonster; ++i)
+		{
+			char monsterNum[128];
+			wsprintf(monsterNum, "monster%d", i + 1);
+			_EM->setEnemy(INIDATA->loadDataInterger(monsterINIFile, monsterNum, "type"),
+				INIDATA->loadDataInterger(monsterINIFile, monsterNum, "destX"),
+				INIDATA->loadDataInterger(monsterINIFile, monsterNum, "destY"));
 		}
 
 		_FOM->setMapNumber(_mapNum);
