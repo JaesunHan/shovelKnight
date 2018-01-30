@@ -77,7 +77,7 @@ void enemyManager::render()
 
 //======================================================================================== 에너미 셋팅 start
 //                          에네미 종류          X좌표         Y좌표        
-void enemyManager::setEnemy(ENEMYTYPE enemyType, float enemyX, float enemyY)
+void enemyManager::setEnemy(int enemyType, float enemyX, float enemyY)
 {
 	enemyBase* minion;
 
@@ -127,7 +127,7 @@ void enemyManager::setEnemy(ENEMYTYPE enemyType, float enemyX, float enemyY)
 }
 
 //                          에네미 종류          X좌표         Y좌표         움직임 패턴   
-void enemyManager::setEnemy(ENEMYTYPE enemyType, float enemyX, float enemyY, int patternType)
+void enemyManager::setEnemy(int enemyType, float enemyX, float enemyY, int patternType)
 {
 	enemyBase* minion;
 

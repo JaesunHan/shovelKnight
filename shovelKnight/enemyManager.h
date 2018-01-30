@@ -41,8 +41,8 @@ public:
 
 	//========================================= Start 미니언 셋팅 ========================================
 
-	void setEnemy(ENEMYTYPE enemyType, float enemyX, float enemyY);
-	void setEnemy(ENEMYTYPE enemyType, float enemyX, float enemyY, int patternType);
+	void setEnemy(int enemyType, float enemyX, float enemyY);
+	void setEnemy(int enemyType, float enemyX, float enemyY, int patternType);
 	void removeEnemy(int arrNum);
 	void removeAllEnemy();
 

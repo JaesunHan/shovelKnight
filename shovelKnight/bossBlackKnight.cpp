@@ -446,13 +446,50 @@ void bossBlackKnight::move()
 				}
 			}
 
+			switch (_anim->getNowPlayIndex())
+			{
+			case 0:  //뛰기전
+				if (_jump->getJumpPower() <= 11)
+				{
+					_anim->pause();
+				}
+				else _anim->start();
+				break;
+			case 1:  //도약중
+				if (_jump->getJumpPower() <= 9)
+				{
+					_anim->pause();
+				}
+				else _anim->start();
+				break;
+			case 2:  //최고점 직전
+				if (_jump->getJumpPower() <= 4)
+				{
+					_anim->pause();
+				}
+				else _anim->start();
+				break;
+			case 3:  //최고점
+				if (_jump->getJumpPower() <= 0)
+				{
+					_anim->pause();
+				}
+				else _anim->start();
+				break;
+			case 4:  //내려찍기
+				if (_jump->getJumpPower() <= 0)
+				{
+					_anim->pause();
+				}
+				if (!_jump->getIsJumping()) _status = ENEMY_RIGHT_IDLE;
+				break;
+			}
 
 			if (_frameCount % 50 == 0)
 			{
 				_isAniPlayEnd = true;
 				_frameCount = 1;
 				_jumpCount--;
-				_status = ENEMY_LEFT_IDLE;
 			}
 
 			cout << _frameCount << endl;
@@ -483,26 +520,42 @@ void bossBlackKnight::move()
 				}
 			}
 
-			if (_anim->getNowPlayIndex() == 0 && _jump->getJumpPower() <= 2)
-			{
-				_anim->pause();
-			}
 			switch (_anim->getNowPlayIndex())
 			{
-				case 0:  //삽을 
-
+				case 0:  //뛰기전
+					if (_jump->getJumpPower() <= 11)
+					{
+						_anim->pause();
+					}
+					else _anim->start();
 				break;
-				case 1:
-
+				case 1:  //도약중
+					if (_jump->getJumpPower() <= 9)
+					{
+						_anim->pause();
+					}
+					else _anim->start();
 				break;
-				case 2:
-
+				case 2:  //최고점 직전
+					if (_jump->getJumpPower() <= 4)
+					{
+						_anim->pause();
+					}
+					else _anim->start();
 				break;
-				case 3:
-
+				case 3:  //최고점
+					if (_jump->getJumpPower() <= 0)
+					{
+						_anim->pause();
+					}
+					else _anim->start();
 				break;
-				case 4:
-
+				case 4:  //내려찍기
+					if (_jump->getJumpPower() <= 0)
+					{
+						_anim->pause();
+					}
+					if (!_jump->getIsJumping()) _status = ENEMY_RIGHT_IDLE;
 				break;
 			}
 
@@ -513,7 +566,6 @@ void bossBlackKnight::move()
 				_isAniPlayEnd = true;
 				_frameCount = 1;
 				_jumpCount--;
-				_status = ENEMY_RIGHT_IDLE;
 			}
 		break;
 		case ENEMY_LEFT_FIRE_ATTACK:
