@@ -1,9 +1,6 @@
 #pragma once
 #include "singletonBase.h"
 
-#include <iostream>
-#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
-
 using namespace std;
 
 enum LANGUAGE

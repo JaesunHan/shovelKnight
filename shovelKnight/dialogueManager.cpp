@@ -35,12 +35,6 @@ void dialogueManager::update()
 		return;
 	}
 
-	//일정 시간 간격으로 
-	cout << "====================================" << endl;
-	cout << "_time*100 : " << _time*100 << endl;
-	cout << "(_time*100) % _dialogueTime : " << (int)(_time*100) % _dialogueTime << endl;
-	cout << "_cnt : " << _cnt << endl;
-	cout << "====================================" << endl;
 	_time = TIMEMANAGER->getWorldTime();
 
 	if ((int)(_time*100) % _dialogueTime == 0)
