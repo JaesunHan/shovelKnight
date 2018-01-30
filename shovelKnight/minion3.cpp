@@ -219,8 +219,7 @@ void minion3::move()
 				_x -= _speed;
 				_isHitPlay = true;
 			}
-
-			if (!_anim->isPlay() && _isHitPlay)
+			else
 			{
 				_jumpCount++;  //에니메이션 플레이 여유타임
 				if (_jumpCount % HITCOUNT == 0)
@@ -261,9 +260,6 @@ void minion3::move()
 			if (!_anim->isPlay() && !_isDead)
 			{
 				_anim->start();
-				_speed = DRAKESPEED * 5;
-				_speed -= 0.1;
-				_x += _speed;
 				_isDead = true;
 			}
 
@@ -286,9 +282,6 @@ void minion3::move()
 			if (!_anim->isPlay() && !_isDead)
 			{
 				_anim->start();
-				_speed = DRAKESPEED * 5;
-				_speed -= 0.1;
-				_x -= _speed;
 				_isDead = true;
 			}
 

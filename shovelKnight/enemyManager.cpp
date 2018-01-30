@@ -13,18 +13,9 @@ enemyManager::~enemyManager()
 
 HRESULT enemyManager::init()
 {
-	//==================================== 에너미 스테이지 셋팅 초기화
-	for (int i = 0; i < 4; ++i)
-	{
-		_enemyIsOn[i] = false;
-	}
-	_stagSetNum = 99;
-	//====================================
 
-	_stagSetNum = 2;
-	//==================================== 적 생성
-	stageEnemySet(_stagSetNum);
-	//====================================
+
+
 
 	return S_OK;
 }
@@ -36,12 +27,6 @@ void enemyManager::release()
 
 void enemyManager::update()
 {
-	//============================================================================ 적 respawn
-	//if ()
-	//{
-	//	stageEnemySet(_stagSetNum);
-	//}
-
 
 	//============================================================================ 적 카메라 아웃 소멸
 	for (int i = 0; i < _vEnemy.size(); i++)
@@ -197,6 +182,15 @@ void enemyManager::removeEnemy(int arrNum)
 	_vEnemy.erase(_vEnemy.begin() + arrNum);
 }
 
+void enemyManager::removeAllEnemy()
+{
+	for (int i= 0; i < _vEnemy.size(); ++i)
+	{
+		SAFE_DELETE(_vEnemy[i]);
+		_vEnemy.erase(_vEnemy.begin() + i);
+	}
+}
+
 void enemyManager::stageEnemySet(int stageNum)
 { 
 	//예외처리
@@ -209,9 +203,9 @@ void enemyManager::stageEnemySet(int stageNum)
 	{
 		//setEnemy(ENEMY_BEETO, 300, 200);
 		//setEnemy(ENEMY_BLORB, 350, 200);
-		//setEnemy(ELEMY_DRAKE, 300, 150, ENEMY_LEFT_FOWARD);
-		//setEnemy(ELEMY_DRAKE, 200, 200, ENEMY_PATROL);
-		//setEnemy(ENEMY_SKELETON, 350, 120);
+		setEnemy(ELEMY_DRAKE, 300, 150, ENEMY_LEFT_FOWARD);
+		setEnemy(ELEMY_DRAKE, 200, 200, ENEMY_PATROL);
+		setEnemy(ENEMY_SKELETON, 350, 120);
 		//setEnemy(ENEMY_DRAGON, 400, 179.5);
 		setEnemy(ENEMY_BLACKKNIGHT, 350, 120);
 	}

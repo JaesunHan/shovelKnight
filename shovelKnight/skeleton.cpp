@@ -230,6 +230,11 @@ void skeleton::draw()
 		CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left - 19, _rc.top - 9);
 	}
 
+	if (KEYMANAGER->isOnceKeyDown(VK_TAB))
+	{
+
+	}
+
 
 }
 	
@@ -297,11 +302,23 @@ void skeleton::move()
 			_anim = KEYANIMANAGER->findAnimation("skeletonLeftAttack");
 			if (!_anim->isPlay()) _anim->start();
 
+			if (_anim->getNowPlayIndex() == 1)
+			{
+				_attackRc = RectMakeCenter(_rc.left - 15, _rc.top + 13, 9, 6);
+			}
+			else _attackRc = RectMakeCenter(0, 0, 0, 0);
+
 		break;
 		case ENEMY_RIGHT_ATTACK:
 
 			_anim = KEYANIMANAGER->findAnimation("skeletonRightAttack");
 			if (!_anim->isPlay()) _anim->start();
+
+			if (_anim->getNowPlayIndex() == 1)
+			{
+				_attackRc = RectMakeCenter(_rc.right + 16, _rc.top + 13, 14, 6);
+			}
+			else _attackRc = RectMakeCenter(0, 0, 0, 0);
 
 		break;
 		case ENEMY_RIGHT_HIT:

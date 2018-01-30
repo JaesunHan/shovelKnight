@@ -61,7 +61,7 @@ protected:
 	ENEMYSTATUS _previousStatus;    //에너미 이전상태
 	ENEMYTYPE _enemyType;			//에너미타입
 
-	RECT _attackRect;               //공격 렉트
+	RECT _attackRc;					 //공격 렉트
 	RECT _rc;						//혹시 사용하게될지도 모를 렉트(충돌용)
 	RECT _ImageRc;                  //보스1이미지렉트
 	RECT _trunkRc;                  //보스1충돌렉트: 몸통
@@ -143,6 +143,7 @@ public:
 
 	//렉트 게터
 	inline RECT getRect() { return _rc; }
+	inline RECT getAttackRect() { return _attackRc; }
 
 	//적 상태 접근자 & 설정자
 	ENEMYSTATUS getStatus() { return _status; }   	

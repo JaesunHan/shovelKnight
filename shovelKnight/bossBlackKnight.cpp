@@ -239,7 +239,7 @@ void bossBlackKnight::update()
 
 void bossBlackKnight::draw()
 {
-
+	
 	CAMERAMANAGER->aniRenderObject(getMemDC(), _img, _anim, _rc.left - 29, _rc.top - 6);
 	
     TTTextOut(CAMERAMANAGER->getX(_rc.left), CAMERAMANAGER->getY(_y - 30), "패턴", _patternTrun);
@@ -421,7 +421,7 @@ void bossBlackKnight::move()
 			}
 		break;
 		case ENEMY_LEFT_JUMP_ATTACK:
-
+			_frameCount++;
 			_anim = KEYANIMANAGER->findAnimation("darkKnightLeftJumpAttack");
 			if (!_anim->isPlay())
 			{
@@ -436,25 +436,26 @@ void bossBlackKnight::move()
 			}
 
 			//움직임: 전진
-
-			if (_frameCount % 20 == 0)
+			if (_frameCount % 5 == 0)
 			{
 				if (_rc.left > 10)
 				{
-					_speed = BLACKKNIGHTSPEED * 5;
+					_speed = BLACKKNIGHTSPEED;
 					_speed -= 0.4;
 					_x -= _speed;
 				}
 			}
 
 
-			if (_frameCount % 40 == 0)
+			if (_frameCount % 50 == 0)
 			{
 				_isAniPlayEnd = true;
 				_frameCount = 1;
 				_jumpCount--;
+				_status = ENEMY_LEFT_IDLE;
 			}
 
+			cout << _frameCount << endl;
 		break;
 		case ENEMY_RIGHT_JUMP_ATTACK:
 			_frameCount++;
@@ -465,29 +466,54 @@ void bossBlackKnight::move()
 				_jump->jumping(&_x, &_y, 12.0f, 0.7f);
 			}
 
-			//움직임: 뒤로 점핑
+			//움직임: 점핑
 			if (_jump->getIsJumping())
 			{
 				_jump->update();
 			}
 
 			//움직임: 전진
-			if (_frameCount % 20 == 0)
+			if (_frameCount % 5 == 0)
 			{
 				if (_rc.right < WINSIZEX - 10)
 				{
-					_speed = BLACKKNIGHTSPEED * 5;
+					_speed = BLACKKNIGHTSPEED;
 					_speed -= 0.4;
 					_x += _speed;
 				}
 			}
 
+			if (_anim->getNowPlayIndex() == 0 && _jump->getJumpPower() <= 2)
+			{
+				_anim->pause();
+			}
+			switch (_anim->getNowPlayIndex())
+			{
+				case 0:  //삽을 
 
-			if (_frameCount % 40 == 0)
+				break;
+				case 1:
+
+				break;
+				case 2:
+
+				break;
+				case 3:
+
+				break;
+				case 4:
+
+				break;
+			}
+
+			cout << _jump->getJumpPower() << endl;
+
+			if (_frameCount % 50 == 0)
 			{
 				_isAniPlayEnd = true;
 				_frameCount = 1;
 				_jumpCount--;
+				_status = ENEMY_RIGHT_IDLE;
 			}
 		break;
 		case ENEMY_LEFT_FIRE_ATTACK:
@@ -754,11 +780,32 @@ void bossBlackKnight::enemyPattern(int _patternTypeNum)
 						{
 							if (_direction)
 							{
-								_status = ENEMY_RIGHT_JUMP_ATTACK;
+								if (_status == ENEMY_RIGHT_IDLE)
+								{
+									if (isPlayerFind(_x, 200))
+									{
+										_status = ENEMY_RIGHT_MOVE;
+									}
+								}
+								else
+								{
+									_status = ENEMY_RIGHT_JUMP_ATTACK;
+								}
 							}
 							else
 							{
-								_status = ENEMY_LEFT_JUMP_ATTACK;
+								if (_status == ENEMY_RIGHT_IDLE)
+								{
+									if (isPlayerFind(_x, 200))
+									{
+										_status = ENEMY_LEFT_MOVE;
+									}
+								}
+								else
+								{
+									_status = ENEMY_LEFT_JUMP_ATTACK;
+								}
+								
 							}
 						}
 

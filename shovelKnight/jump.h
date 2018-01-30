@@ -33,5 +33,6 @@ public:
 	void jumping(float* x, float* y, float power, float gravity);
 
 	bool getIsJumping(void) { return _isJumping; }
+	float getJumpPower() { return _jumpPower; }
 
 };
