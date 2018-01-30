@@ -47,6 +47,7 @@ public:
 	inline int getPlayerAction() { return _p1->getPlayerAction(); }
 	inline void setDamagePlayer() { _p1->setDamagePlayer(); }
 	inline void setPlayerReaction() { _p1->setAttackReaction(); }
+	inline void setPlayerPlatformInteractionLR(int speed) { _p1->setPlatformMovementLR(speed); }
 	inline RECT getPlayerRC() { return _p1->getPlayerRC(); }
 	inline RECT getAttackRC() { return _p1->getAttackRC(); }
 

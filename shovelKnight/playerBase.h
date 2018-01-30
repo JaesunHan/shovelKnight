@@ -113,6 +113,8 @@ public:
 	void frameCounter(float frameMax, float counterMax);
 	void invincibilityCount();
 	void attackReaction();
+	void setDamagePlayer();
+	void setPlatformMovementLR(int speed);
 
 
 	inline float getPlayerX() { return _x; }
@@ -166,7 +168,6 @@ public:
 			}
 		}
 	}
-	void setDamagePlayer();
 	
 };
 

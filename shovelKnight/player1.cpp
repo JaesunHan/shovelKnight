@@ -42,6 +42,7 @@ HRESULT player1::init()
 	IMAGEMANAGER->addFrameImage("Damaged", ".\\image\\shovelKnight\\shovelKnightDamaged.bmp", 40, 76, 1, 2, true, RGB(255, 0, 255), true);
 	IMAGEMANAGER->addFrameImage("Hanging", ".\\image\\shovelKnight\\shovelKnightClimb.bmp", 48, 76, 2, 2, true, RGB(255, 0, 255), true);
 
+
 	return S_OK;
 }
 

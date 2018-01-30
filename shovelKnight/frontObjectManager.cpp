@@ -20,6 +20,7 @@ HRESULT frontObjectManager::init()
 	IMAGEMANAGER->addImage("grassSmall", ".\\image\\object\\grassSmall.bmp", 16, 16, true, RGB(255, 0, 255), false);
 	IMAGEMANAGER->addImage("ladder", ".\\image\\object\\ladder.bmp", 16, 16, true, RGB(255, 0, 255), false);
 	IMAGEMANAGER->addImage("cliffTreeLeft", ".\\image\\object\\cliffTreeLeft.bmp", 16, 16, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("platform", ".\\image\\object\\platform.bmp", 48, 16, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("dirtBlockLarge", ".\\image\\object\\dirtBlockLarge.bmp", 320, 64, 5, 1, true, RGB(255, 0, 255), false);
 	IMAGEMANAGER->addFrameImage("dirtPile", ".\\image\\object\\dirtPile.bmp", 165, 90, 5, 6, true, RGB(255, 0, 255), false);
 	IMAGEMANAGER->addFrameImage("bubble", ".\\image\\object\\bubble.bmp", 148, 74, 4, 2, true, RGB(255, 0, 255), false);
@@ -47,6 +48,7 @@ void frontObjectManager::render()
 			if (_vObj[_mapNum - 2][i].isPresent == true)
 			{
 				if (_vObj[_mapNum - 2][i].type == 2) CAMERAMANAGER->frameRenderObject(getMemDC(), _vObj[_mapNum - 2][i].img, _vObj[_mapNum - 2][i].x, _vObj[_mapNum - 2][i].y, _vObj[_mapNum - 2][i].frameX, 0);
+				else if (_vObj[_mapNum - 2][i].type == 4) CAMERAMANAGER->renderObject(getMemDC(), _vObj[_mapNum - 2][i].img, _vObj[_mapNum - 2][i].rc.left, _vObj[_mapNum - 2][i].rc.top);
 				else if (_vObj[_mapNum - 2][i].type == 7) CAMERAMANAGER->frameRenderObject(getMemDC(), _vObj[_mapNum - 2][i].img, _vObj[_mapNum - 2][i].x, _vObj[_mapNum - 2][i].y + 1, _vObj[_mapNum - 2][i].frameX, _vObj[_mapNum - 2][i].durability);
 				else if (_vObj[_mapNum - 2][i].type == 8) CAMERAMANAGER->frameRenderObject(getMemDC(), _vObj[_mapNum - 2][i].img, _vObj[_mapNum - 2][i].rc.left, _vObj[_mapNum - 2][i].rc.top, 0, 0);
 				else if (_vObj[_mapNum - 2][i].type == 10) CAMERAMANAGER->frameRenderObject(getMemDC(), _vObj[_mapNum - 2][i].img, _vObj[_mapNum - 2][i].x, _vObj[_mapNum - 2][i].y, _vObj[_mapNum - 2][i].frameX, 0);
@@ -85,6 +87,15 @@ void frontObjectManager::loadData()
 				tempObject.frameX = 0;
 				tempObject.count = 0;
 				tempObject.isDestroyed = false;
+			}
+			if (tempObject.type == 4)
+			{
+				tempObject.rc = RectMake(tempObject.x, tempObject.y, 48, 16);
+				tempObject.detectRC.left = INIDATA->loadDataInterger(fileName, dataName, "left");
+				tempObject.detectRC.top = INIDATA->loadDataInterger(fileName, dataName, "top");
+				tempObject.detectRC.right = INIDATA->loadDataInterger(fileName, dataName, "right");
+				tempObject.detectRC.bottom = INIDATA->loadDataInterger(fileName, dataName, "bottom");
+				tempObject.isDestroyed = true;
 			}
 			if (tempObject.type == 7)
 			{
@@ -184,6 +195,55 @@ void frontObjectManager::objectInteraction()
 								_vObj[_mapNum - 2][i].isPresent = false;
 							}
 							_vObj[_mapNum - 2][i].count = 0;
+						}
+					}
+				}
+				if (_vObj[_mapNum - 2][i].type == 4)
+				{
+					HPEN newPen = CreatePen(PS_SOLID, 1, RGB(255, 0, 255));
+					HPEN oldPen = (HPEN)SelectObject(IMAGEMANAGER->findImage("bgMap")->getMemDC(), newPen);
+					HBRUSH newBrush = CreateSolidBrush(RGB(255, 0, 255));
+					HBRUSH oldBrush = (HBRUSH)SelectObject(IMAGEMANAGER->findImage("bgMap")->getMemDC(), newBrush);
+
+					Rectangle(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _vObj[_mapNum - 2][i].rc.left, _vObj[_mapNum - 2][i].rc.top, _vObj[_mapNum - 2][i].rc.right, _vObj[_mapNum - 2][i].rc.bottom);
+
+					SelectObject(IMAGEMANAGER->findImage("bgMap")->getMemDC(), oldBrush);
+					SelectObject(IMAGEMANAGER->findImage("bgMap")->getMemDC(), oldPen);
+					if (_vObj[_mapNum - 2][i].detectRC.left > _vObj[_mapNum - 2][i].rc.left) _vObj[_mapNum - 2][i].isDestroyed = true;
+					if (_vObj[_mapNum - 2][i].detectRC.right < _vObj[_mapNum - 2][i].rc.right) _vObj[_mapNum - 2][i].isDestroyed = false;
+					if (_vObj[_mapNum - 2][i].isDestroyed == true)
+					{
+						_vObj[_mapNum - 2][i].rc.right++;
+						_vObj[_mapNum - 2][i].rc.left++;
+					}
+					if (_vObj[_mapNum - 2][i].isDestroyed == false)
+					{
+						_vObj[_mapNum - 2][i].rc.right--;
+						_vObj[_mapNum - 2][i].rc.left--;
+					}
+					newPen = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
+					oldPen = (HPEN)SelectObject(IMAGEMANAGER->findImage("bgMap")->getMemDC(), newPen);
+					newBrush = CreateSolidBrush(RGB(0, 255, 0));
+					oldBrush = (HBRUSH)SelectObject(IMAGEMANAGER->findImage("bgMap")->getMemDC(), newBrush);
+
+					Rectangle(IMAGEMANAGER->findImage("bgMap")->getMemDC(), _vObj[_mapNum - 2][i].rc.left, _vObj[_mapNum - 2][i].rc.top, _vObj[_mapNum - 2][i].rc.right, _vObj[_mapNum - 2][i].rc.bottom);
+
+					SelectObject(IMAGEMANAGER->findImage("bgMap")->getMemDC(), oldBrush);
+					DeleteObject(newBrush);
+					DeleteObject(oldBrush);
+					SelectObject(IMAGEMANAGER->findImage("bgMap")->getMemDC(), oldPen);
+					DeleteObject(newPen);
+					DeleteObject(oldPen);
+					RECT temp;
+					if (IntersectRect(&temp, &_PM->getPlayerRC(), &_vObj[_mapNum - 2][i].detectRC))
+					{
+						if (_vObj[_mapNum - 2][i].isDestroyed == true)
+						{
+							_PM->setPlayerPlatformInteractionLR(1);
+						}
+						if (_vObj[_mapNum - 2][i].isDestroyed == false)
+						{
+							_PM->setPlayerPlatformInteractionLR(-1);
 						}
 					}
 				}

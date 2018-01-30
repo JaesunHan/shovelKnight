@@ -555,3 +555,11 @@ void playerBase::setDamagePlayer()
 		_invincibility = true;
 	}
 }
+
+void playerBase::setPlatformMovementLR(int speed)
+{
+	if (_state == ONLAND)
+	{
+		_x += speed;
+	}
+}
