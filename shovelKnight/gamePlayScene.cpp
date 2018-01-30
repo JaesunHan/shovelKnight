@@ -26,7 +26,6 @@ HRESULT gamePlayScene::init()
 	_object = new frontObjectManager;
 
 	_gameCollision->getEmemyMemoryAdress(_enemy);
-	_gameCollision->getGameObjectMemoryAdress(_gameObject);
 	_gameCollision->getItemMemoryAdress(_item);
 	_gameCollision->getStoreMemoryAdress(_Store);
 	_gameCollision->getSkillMemoryAdress(_skill);
